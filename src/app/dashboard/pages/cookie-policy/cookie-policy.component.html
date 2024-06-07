@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+<div class="wrapper container">
+    <app-back-button></app-back-button>
+
+    <div class="title">Cookie Policy</div>
+
+    <div class="content2">
+        <ol>
+            <li *ngFor="let d of datas;" class="content3">
+                <div class="ul-li-title">{{ d?.title }}</div>
+                <ol type="a">
+                    <li *ngFor="let c of d?.content">
+                        <div class="li-title">{{ c?.title }}</div>
+                        <div class="content" *ngFor="let n of c?.content">
+                            - {{ n?.name }}
+                        </div>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+    </div>
+
+    <div class="bottom-text">By using V-Hospitality, users acknowledge that they have read, understood, and agreed to
+        the terms outlined in this Cookie Policy.</div>
+</div>
+
+<app-footer></app-footer>

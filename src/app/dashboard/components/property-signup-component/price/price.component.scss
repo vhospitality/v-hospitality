@@ -1,0 +1,20 @@
+@import "../../../../../assets/css/styles/property-signup.scss";
+
+.wrapper {
+  .form {
+    .form-field {
+      .full-width {
+        width: 100%;
+
+        .currency {
+          color: var(--gray-900);
+          font-family: var(--mark-font);
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+}

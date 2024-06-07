@@ -1,0 +1,56 @@
+<div class="wrapper container-desktop">
+    <div class="header">
+        <div class="text">{{ title || 'Explore collections' }}</div>
+        <button type="button" (click)="redirect('collection')" class="ripple-button">
+            <span>View all Properties</span>
+            <img class="header-img" src="assets/icons/white-arrow-right.svg" alt="arrow"/>
+        </button>
+    </div>
+
+    <div *ngIf="datas.length < 1 && datas2.length < 1">
+        <app-no-data-message [message]="errorMessage"></app-no-data-message>
+    </div>
+
+    <div class="carousel3" *ngIf="datas2.length > 0">
+        <div *ngFor="let n of datas2"><p-skeleton height="300px" width="340px"></p-skeleton></div>
+    </div>
+
+    <div class="carousel2" *ngIf="datas.length > 0">
+        <!-- <p-galleria [value]="datas" [autoPlay]="true" [circular]="true" [numVisible]="4" [responsiveOptions]="responsiveOptions" [(activeIndex)]="activeIndex"> 
+            <ng-template pTemplate="thumbnail" let-item>
+
+                <img (click)="redirect('collection', item)" [defaultImage]="dafaultImage" [lazyLoad]="item?.image" loading="eager" [decode]="true" [useSrcset]="true" [alt]="item?.name"/>
+
+                <div (click)="redirect('collection', item)" class="carousel-card">
+                    <div class="carousel-card2" [pTooltip]="item?.name" tooltipPosition="top">
+                        <div>{{ item?.name }}</div>
+                        <img src="assets/icons/arrow-side-up.svg" alt=""/>
+                    </div>
+                </div>
+
+            </ng-template>
+        </p-galleria> -->
+        <p-carousel [value]="datas" [circular]="true" [numVisible]="4" [responsiveOptions]="responsiveOptions" autoPlayInterval="5000">
+            <ng-template let-datas pTemplate="item">
+                <img class="image" (click)="redirect('collection', datas)" [defaultImage]="dafaultImage" [lazyLoad]="datas?.image" loading="eager" [decode]="true" [alt]="datas?.name"/>
+
+                <div (click)="redirect('collection', datas)" class="carousel-card cursor-pointer">
+                    <div class="carousel-card2" [pTooltip]="datas?.name" tooltipPosition="top">
+                        <div>{{ datas?.name }}</div>
+                        <img src="assets/icons/arrow-side-up.svg" alt=""/>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
+        
+    </div>
+
+    <!-- <div class="buttons">
+        <button type="button" mat-button (click)="prev()">
+            <img src="assets/icons/arrow-left.svg" alt=""/>
+        </button>
+        <button type="button" mat-button (click)="next()">
+            <img src="assets/icons/arrow-right.svg" alt=""/>
+        </button>
+    </div> -->
+</div>

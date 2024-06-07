@@ -1,0 +1,45 @@
+<div class="wrapper">
+
+    <div class="title-container">
+        <div class="title">Enter your property details</div>
+    </div>
+
+    <div class="error-message" *ngIf="error">{{ error }}</div>
+
+    <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm">
+
+        <div class="form-field">
+            <div class="label">Apartment title</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="title" type="text"
+                    placeholder="Short titles work best, you can always change it later">
+                <mat-error>{{formErrors.title}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Description</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <textarea rows="3" matInput formControlName="description"
+                    placeholder="e. g.Spectacular views of Jabi Lake"></textarea>
+                <mat-error>{{formErrors.description}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Apartment size in square feet (Optional)</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="apartment_size" type="number" min="1"
+                    placeholder="e.g. 144 Square feet">
+                <mat-error>{{formErrors.apartment_size}}</mat-error>
+            </mat-form-field>
+        </div>
+
+    </form>
+
+    <div class="loader22" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <!-- <div class="loader-orange" *ngIf="loading"></div> -->
+    </div>
+
+</div>

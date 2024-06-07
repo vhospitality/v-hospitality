@@ -1,0 +1,43 @@
+<app-header></app-header>
+
+<div class="wrapper container">
+
+    <app-back-button></app-back-button>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="image">
+                <img [defaultImage]="dafaultImage" [lazyLoad]="data?.pictures" [decode]="true" [alt]="data?.title" />
+            </div>
+
+            <div class="title">{{ data?.title }}</div>
+
+            <div class="sub-title truncate2">{{ data?.description }}</div>
+
+            <div class="date">{{ data?.check_in | date }} - {{ data?.check_out | date }} • {{ data?.total_guests }}
+                guests</div>
+            <hr>
+
+            <div class="other">
+                <div>Total</div>
+                <div>{{ data?.total | currency:'NGN'}}</div>
+            </div>
+
+            <div class="submit-p">
+                <button type="submit" [routerLink]="['/bookings']" class="submit ripple-button">
+                    <span>View bookings</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="title animate__animated animate__pulse">Your request is pending</div>
+            <div class="desc">Your booking is currently pending. Once your booking has been accepted by the<span
+                    style="font-weight: 600;"> Host</span>, a payment link will be forwarded to you via email. Thank
+                you.</div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

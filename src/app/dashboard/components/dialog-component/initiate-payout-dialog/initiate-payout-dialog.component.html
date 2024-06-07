@@ -1,0 +1,73 @@
+<div class="wrapper">
+    <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-field">
+            <div class="label">Account Name</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="name" type="text">
+                <mat-error>{{formErrors.name}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Bank</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="bank" type="text">
+                <mat-error>{{formErrors.bank}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Account Number</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="account_number" type="tel">
+                <mat-error>{{formErrors.account_number}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Account balance</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="balance" type="number">
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Amount</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="amount" type="number" placeholder="Input amount to pay out." min="50">
+                <mat-error>{{formErrors.amount}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Transfer Fee</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="fee" type="number">
+                <mat-error>{{formErrors.fee}}</mat-error>
+            </mat-form-field>
+            <div style="font-size: 0.8rem; line-height: 1rem;">You will receive {{ feedbackForm.value.amount | currency:
+                'NGN'
+                }} naira into your account and a transfer fee of {{
+                this.calculateTransferFee(feedbackForm.value.amount) }} naira will be added,
+                making the total amount <span> {{ feedbackForm.value.amount +
+                this.calculateTransferFee(feedbackForm.value.amount) | currency: 'NGN'
+                }} naira.</span></div>
+        </div>
+
+        <div class="submit-p">
+            <button type="submit" class="submit ripple-button" [disabled]="fform.form.invalid || disabled === true">
+                <span *ngIf="!loading">Payout {{ feedbackForm.value.amount | currency: 'NGN'
+                    }}</span>
+                <div *ngIf="loading" class="loader-white"></div>
+            </button>
+        </div>
+
+        <div class="continue">
+            <button class="ripple-button white-button" type="button" (click)="closeDialog()">
+                <span>Cancel</span>
+            </button>
+        </div>
+
+    </form>
+</div>

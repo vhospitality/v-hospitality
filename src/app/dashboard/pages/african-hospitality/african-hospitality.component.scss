@@ -1,0 +1,186 @@
+.wrapper {
+  width: 100%;
+
+  .wrapper-container {
+    background: var(--white);
+    padding-top: 45px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    width: 100%;
+    transition: all 0.4s ease-in-out;
+    // 'background-image': 'linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(\''+ item.imgName + '\')'}"
+  }
+
+  .center-container {
+    .discover {
+      color: var(--black);
+      text-align: center;
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 1.6px;
+      margin-bottom: 12px;
+    }
+
+    .africa {
+      color: var(--black);
+      text-align: center;
+      font-family: var(--display-font);
+      font-size: 4.5rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 90px;
+      letter-spacing: -1.44px;
+    }
+  }
+
+  .form {
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    ::ng-deep .p-calendar-w-btn {
+      width: 270px;
+      height: 44px;
+    }
+
+    app-select {
+      width: 350px;
+      height: 44px;
+    }
+
+    ::ng-deep .p-inputtext {
+      width: 300px;
+      height: 44px;
+    }
+
+    ::ng-deep .p-dropdown .p-dropdown-label {
+      width: 268px;
+      height: 42px;
+    }
+
+    .date-p {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      grid-gap: 10px;
+
+      .start {
+        border: 2px solid #d0d5dd;
+        width: 135px;
+        height: 48px;
+        padding: 10px;
+        text-align: center;
+        color: var(--black-text);
+        font-family: var(--mark-font);
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        line-height: normal;
+      }
+    }
+
+    ::ng-deep .p-overlay.p-component {
+      padding: unset !important;
+      border: unset;
+    }
+  }
+
+  .submit {
+    height: 44px;
+    color: var(--white);
+    font-family: var(--mark-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    border: 1px solid var(--orange-text);
+    background: var(--orange-text);
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    border-radius: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 1230px) {
+  .wrapper {
+    .wrapper-container {
+      padding: 30px 20px;
+    }
+
+    .form {
+      flex-direction: column;
+
+      ::ng-deep .p-calendar-w-btn {
+        width: 300px;
+        height: 60px;
+        margin-bottom: 12px;
+      }
+
+      ::ng-deep .p-inputtext {
+        height: 60px;
+        margin-bottom: 12px;
+      }
+
+      app-select {
+        width: 300px;
+        margin-bottom: 12px;
+      }
+
+      ::ng-deep .select-trigger {
+        height: 60px;
+      }
+
+      ::ng-deep .p-dropdown .p-dropdown-label {
+        width: 300px;
+        height: 60px;
+      }
+
+      ::ng-deep .p-dropdown {
+        width: 300px;
+        margin-bottom: 12px;
+      }
+
+      .submit {
+        height: 60px;
+        width: 300px;
+        margin-top: 17px;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .wrapper {
+    .center-container {
+      .africa {
+        font-size: 4rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .wrapper {
+    .wrapper-container {
+      padding: 70px 15px;
+    }
+
+    .center-container {
+      .discover {
+        margin-bottom: unset;
+      }
+    }
+  }
+}

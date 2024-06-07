@@ -1,0 +1,9 @@
+<div class="my-google-map" id="map" *ngIf="apiLoaded">
+    <google-map [options]="mapOptions" [height]="data?.size?.height || null" [width]="data?.size?.width || null">
+        <map-marker
+          *ngFor="let spot of spots" (mapClick)="shareLocation(spot)"
+          [position]="{ lat: spot.lat, lng: spot.lng }"
+          [options]="mapOptions"
+        ></map-marker>
+    </google-map>
+</div>

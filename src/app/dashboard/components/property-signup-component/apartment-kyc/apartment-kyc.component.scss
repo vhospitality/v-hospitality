@@ -1,0 +1,153 @@
+@import "../../../../../assets/css/styles/property-signup.scss";
+
+.wrapper {
+  .drag-drop {
+    border: 2px dashed var(--gray-200);
+    background: var(--base-white);
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 40px;
+    padding: 20px;
+
+    img {
+      margin-bottom: 15px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    div {
+      color: #475467;
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 4px;
+
+      span {
+        color: var(--primary-700);
+        font-weight: 700;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  input {
+    display: none;
+  }
+
+  #fileDropRef {
+    display: none;
+  }
+
+  .files-list {
+    margin-top: 1.5rem;
+    margin-bottom: 30px;
+    position: relative;
+
+    .single-file.loading {
+      animation: tilt-shaking 0.5s linear infinite;
+    }
+
+    @keyframes tilt-shaking {
+      0% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(1deg);
+      }
+      50% {
+        transform: rotate(0eg);
+      }
+      75% {
+        transform: rotate(-1deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    .single-file.green {
+      border: 3px solid var(--success-700);
+    }
+
+    .single-file {
+      display: flex;
+      padding: 1rem;
+      justify-content: space-between;
+      align-items: top;
+      grid-gap: 10px;
+      border: 1px solid var(--primary-600);
+      margin-bottom: 1rem;
+
+      .file-icon {
+        svg {
+          border-radius: 6px;
+        }
+      }
+
+      .delete {
+        display: flex;
+        margin-left: 0.5rem;
+        cursor: pointer;
+        align-self: flex-end;
+      }
+
+      .percentage {
+        color: var(--gray-700);
+        font-family: var(--mark-font);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        margin-right: 15px;
+      }
+
+      display: flex;
+      flex-grow: 1;
+
+      .name {
+        color: var(--gray-700);
+        font-family: var(--mark-font);
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+        overflow-wrap: break-word;
+        word-break: break-all;
+        word-wrap: break-word;
+      }
+
+      .size {
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: var(--gray-600);
+        font-family: var(--mark-font);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+      }
+
+      .info {
+        width: 100%;
+      }
+    }
+
+    .small-img {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      img {
+        width: 1rem !important;
+        height: 1rem !important;
+      }
+    }
+  }
+}

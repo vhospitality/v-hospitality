@@ -1,0 +1,15 @@
+@import "../../../../../assets/css/styles/property-signup.scss";
+
+.wrapper {
+  .form {
+    .form-field {
+      .full-width {
+        width: 100%;
+
+        textarea {
+          resize: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<div class="select-label">
+  <!-- <ng-container *ngIf="value; else content"></ng-container> -->
+  <div class="title-p">
+    <div class="title">
+      <div class="desc">{{ value?.gender }} </div>
+      <div class="desc2">{{ value?.desc }}</div>
+    </div>
+
+    <div class="icons">
+      <button mat-icon-button (click)="addOrMinus('minus', value?.id)">
+        <img src="assets/icons/decre-button.svg" alt=""/>
+      </button>
+
+      <div>{{ value?.total }}</div>
+
+      <button mat-icon-button (click)="addOrMinus('add', value?.id)">
+        <img src="assets/icons/incre-button.svg" alt=""/>
+      </button>
+    </div>
+    
+  </div>
+  <hr>
+  <ng-template #content>
+    <ng-content></ng-content>
+  </ng-template>
+</div>

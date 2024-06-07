@@ -1,0 +1,78 @@
+/* devanagari */
+@font-face {
+  font-family: "Mark Pro";
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("/assets/css/font/mark-font/MarkPro-Hairline.otf") format("truetype");
+}
+
+/* devanagari */
+@font-face {
+  font-family: "Mark Pro";
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("/assets/css/font/mark-font/MarkPro-Thin.otf") format("truetype");
+}
+
+/* devanagari */
+@font-face {
+  font-family: "Mark Pro";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/assets/css/font/mark-font/MarkPro-ExtraLight.otf") format("truetype");
+}
+/* devanagari */
+@font-face {
+  font-family: "Mark Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/css/font/mark-font/MarkPro-Light.otf") format("truetype");
+}
+/* devanagari */
+@font-face {
+  font-family: "Mark Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/css/font/mark-font/MarkPro-Regular.otf") format("truetype");
+}
+
+/* devanagari */
+@font-face {
+  font-family: "Mark Pro";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/css/font/mark-font/MarkPro-Book.otf") format("truetype");
+}
+
+/* devanagari */
+@font-face {
+  font-family: "Mark Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/css/font/mark-font/MarkPro-Medium.otf") format("truetype");
+}
+
+/* devanagari */
+@font-face {
+  font-family: "Mark Pro";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/assets/css/font/mark-font/MarkPro-Bold.otf") format("truetype");
+}
+
+/* devanagari */
+@font-face {
+  font-family: "Mark Pro";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/assets/css/font/mark-font/MarkPro-Black.otf") format("truetype");
+}

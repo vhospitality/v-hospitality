@@ -1,0 +1,131 @@
+.wrapper {
+  margin-top: 64px;
+  margin-bottom: 30px;
+
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    grid-gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 64px;
+
+    .title-details {
+      .title {
+        color: var(--black-text);
+        font-family: var(--display-font);
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 38px;
+      }
+
+      .desc {
+        color: #475467;
+        font-family: var(--mark-font);
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+      }
+    }
+
+    .ripple-button {
+      border: 1px solid #d0d5dd;
+      background: var(--white);
+      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #344054;
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 24px;
+      height: 44px;
+    }
+  }
+
+  .cards::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 10px;
+  }
+
+  .cards::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: var(--primary-200);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .cards::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-200);
+  }
+
+  .cards::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #eaebef;
+  }
+
+  .cardss {
+    display: flex;
+    justify-content: left;
+    align-items: top;
+    grid-gap: 3rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    .card {
+      display: flex;
+      justify-content: left;
+      align-items: top;
+      grid-gap: 12px;
+      margin-bottom: 20px;
+
+      .profile {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+      }
+
+      .name-details {
+        width: 300px;
+
+        .name {
+          margin-bottom: 3px;
+          color: #344054;
+          font-family: var(--mark-font);
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 20px;
+        }
+
+        .date {
+          margin-bottom: 5px;
+          color: #344054;
+          font-family: var(--mark-font);
+          font-size: 0.975rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 20px;
+        }
+
+        .desc {
+          color: #344054;
+          font-family: var(--mark-font);
+          font-size: 0.975rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          // overflow: hidden;
+          // -webkit-box-orient: vertical;
+          // -webkit-line-clamp: 4;
+          // display: -webkit-box;
+          margin-top: 12px;
+        }
+      }
+    }
+  }
+}

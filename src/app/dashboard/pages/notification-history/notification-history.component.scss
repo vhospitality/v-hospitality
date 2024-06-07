@@ -1,0 +1,109 @@
+@import "../../../../assets/css/styles/account-page.scss";
+
+.account-wrapper {
+  .title {
+    font-size: 1.5rem !important;
+
+    .read {
+      text-decoration: underline;
+      color: var(--black-text);
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 30px;
+    }
+  }
+
+  .account-container {
+    .cards {
+      .custom-overlay {
+        height: 100vh;
+        overflow-y: scroll;
+
+        .notification {
+          margin-bottom: 8px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          span:nth-child(1) {
+            color: var(--black-text);
+            font-family: var(--mark-font);
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 30px;
+          }
+        }
+
+        .notify-container {
+          display: flex;
+          justify-content: left;
+          align-items: top;
+          grid-gap: 12px;
+          border-bottom: 1px solid #eaecf0;
+          padding-bottom: 1rem;
+          padding-top: 1rem;
+
+          .avatar {
+            img {
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+            }
+          }
+
+          .message {
+            .title {
+              display: flex;
+              justify-content: space-between;
+              align-items: top;
+              grid-gap: 10px;
+              margin-bottom: 6px;
+
+              div {
+                color: #344054;
+                font-family: var(--mark-font);
+                font-size: 1rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 20px;
+                text-transform: capitalize;
+
+                span {
+                  color: #475467;
+                  font-family: var(--mark-font);
+                  font-size: 0.7rem;
+                  font-style: normal;
+                  font-weight: 500;
+                  line-height: 18px;
+                  margin-left: 5px;
+                }
+              }
+
+              img {
+                width: 10px;
+                height: 10px;
+              }
+            }
+
+            .desc {
+              color: #475467;
+              font-family: var(--mark-font);
+              font-size: 0.875rem;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 20px;
+
+              span {
+                color: var(--orange-text);
+                font-weight: 700;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

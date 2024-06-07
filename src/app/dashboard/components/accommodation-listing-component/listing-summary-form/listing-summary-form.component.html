@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <div class="price truncate">
+        <span>{{ data?.listing?.price_per_night | currency:'NGN'}}</span>
+        <span>per night</span>
+    </div>
+
+    <div class="other">
+        <div>₦{{ data?.listing?.price_per_night }} x {{ getNumberOfNight() || data?.listing?.minimum_nights }} nights
+        </div>
+        <div>{{ data?.listing?.price_per_night * (getNumberOfNight() || data?.listing?.minimum_nights) |
+            currency:'NGN'}}</div>
+    </div>
+
+</div>

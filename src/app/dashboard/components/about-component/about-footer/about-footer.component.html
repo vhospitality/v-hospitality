@@ -1,0 +1,75 @@
+<div class="wrapper" id="contact">
+    <div class="contact-text">Contact Us</div>
+    <div class="get-in-touch">Get in touch</div>
+    <div class="love">We’d love to hear from you. Please fill out this form.</div>
+
+    <div class="contact-container">
+        <div class="contact">
+            <img src="assets/icons/email-message.svg" alt="" />
+            <div class="title">Email</div>
+            <div class="sub-title">Our friendly team is here to help.</div>
+            <a (click)="redirect('mailto:Support@v-hospitality.com')" style="cursor: pointer;"
+                class="text">Support@v-hospitality.com</a>
+        </div>
+        <!--  -->
+        <div class="contact">
+            <img src="assets/icons/email-message.svg" alt="" />
+            <div class="title">Phone</div>
+            <div class="sub-title">Monday-Sunday from 8am to 5pm.</div>
+            <a (click)="redirect('tel:+2349029921966')" style="cursor: pointer;" class="text">+2349029921966</a>
+        </div>
+    </div>
+
+    <div class="form-container">
+
+        <form novalidate="novalidate" [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+            <div class="flex">
+                <!-- name -->
+                <div>
+                    <p>First name</p>
+                    <input type="text" matInput formControlName="firstname" minlength="3" required
+                        placeholder="Firstname" /><br>
+                    <mat-error>{{formErrors.firstname}}</mat-error>
+                </div>
+                <!-- firstname -->
+                <div>
+                    <p>Last name</p>
+                    <input type="text" matInput formControlName="lastname" minlength="3" required
+                        placeholder="Lastname" /><br>
+                    <mat-error>{{formErrors.lastname}}</mat-error>
+                </div>
+            </div>
+            <!-- email -->
+            <div class="form-field">
+                <p>Phone number</p>
+                <input matInput formControlName="phone" appInputRestriction="integer" type="tel" minlength="5" required
+                    placeholder="Phone number" /><br>
+                <mat-error>{{formErrors.phone}}</mat-error>
+            </div>
+            <!-- phone -->
+            <div class="form-field">
+                <p>Email</p>
+                <input type="email" matInput formControlName="email" email required placeholder="E-mail" /><br>
+                <mat-error>{{formErrors.email}}</mat-error>
+            </div>
+            <!-- message -->
+            <div class="form-field">
+                <p>Message</p>
+                <textarea rows="7" matInput formControlName="message" placeholder="Tell us your feedback"
+                    required></textarea><br>
+                <mat-error>{{formErrors.message}}</mat-error>
+            </div>
+
+            <!-- submit -->
+            <div class="submit-button">
+                <button type="submit" mat-button class="submit" [disabled]="disabled === true || fform.form.invalid">
+                    <span *ngIf="!loading">Send message</span>
+                    <div *ngIf="loading" class="loader-p">
+                        <div class="loader"></div>
+                    </div>
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>

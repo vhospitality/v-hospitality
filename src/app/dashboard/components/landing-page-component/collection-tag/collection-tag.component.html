@@ -1,0 +1,41 @@
+<div class="wrapper">
+
+    <div class="collection-p">
+        <div class="collections" *ngIf="datas2.length == 0">
+            <div class="collect cursor-pointer" (click)="chooseCollection()" [class.active]="'all' === active">
+                <div class="name">All</div>
+            </div>
+
+            <div *ngFor="let a of collections;" class="collect cursor-pointer"
+                (click)="chooseCollection(a?.name, a?.uuid)" [class.active]="a?.uuid === active">
+                <div class="name">{{ a?.name }}</div>
+            </div>
+        </div>
+
+        <div class="collections" *ngIf="datas2.length > 0">
+            <div *ngFor="let a of datas2;" class="collect">
+                <p-skeleton height="50px" width="70px" borderRadius="5px"></p-skeleton>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: right; align-items: center; grid-gap: 1rem;">
+            <button class="ripple-button ripple-button2" (click)="clear()" *ngIf="show">
+                Clear
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                </svg>
+            </button>
+            <button class="ripple-button" (click)="openDialog()">
+                Filter
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+</div>

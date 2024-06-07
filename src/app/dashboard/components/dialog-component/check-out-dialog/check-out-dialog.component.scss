@@ -1,0 +1,25 @@
+.wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .text {
+    margin-bottom: 20px;
+    color: var(--gray-600);
+    font-family: var(--mark-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  .submit {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .continue {
+    margin-top: 12px;
+  }
+}

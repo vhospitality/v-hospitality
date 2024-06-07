@@ -1,0 +1,70 @@
+<div class="wrapper">
+
+    <div *ngIf="loadingCards" style="margin-bottom: 30px;">
+        <div *ngFor="let s of [1, 2]">
+            <p-skeleton height="60px" width="100%"></p-skeleton>
+            <p></p>
+        </div>
+    </div>
+
+    <div class="flex-container">
+
+        <form class="form">
+
+            <div class="form-container">
+
+                <div *ngIf="!loadingCards && cards?.length <= 0">
+                    <app-no-data-message [message]="errorMessage"></app-no-data-message>
+                </div>
+
+                <div *ngIf="!loadingCards && cards?.length > 0">
+                    <div class="flex-form2 cursor-pointer" style="width: 100%" *ngFor="let card of cards; let i=index"
+                        (click)="activeCard=card" [class.active]="activeCard?.uuid === card?.uuid">
+                        <div class="card2" style="width: 100%">
+                            <div class="card-image">
+                                <div class="img">
+                                    <img *ngIf="removeWhiteSpace(card?.card_type) === 'master'"
+                                        src="assets/icons/master-card.svg" alt="">
+                                    <img *ngIf="removeWhiteSpace(card?.card_type) === 'visa'"
+                                        src="assets/icons/visa-card.svg" alt="">
+                                </div>
+
+                                <div class="card-details">
+                                    <div class="set-default">
+                                        <div class="edit">{{ card?.bank }}</div>
+                                    </div>
+                                    <div class="card-num">**** **** **** {{ card?.last_four_digits }}</div>
+                                    <div class="exp">Expiry {{ card?.expiry_month }}/{{ card?.expiry_year }}</div>
+                                </div>
+                            </div>
+
+                            <div class="small-img">
+                                <img *ngIf="activeCard?.uuid !== card?.uuid" src="assets/icons/null-check.svg" alt="">
+                                <img *ngIf="activeCard?.uuid === card?.uuid" src="assets/icons/orange-check.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit-p">
+                <button type="button" class="submit ripple-button orange-button" (click)="onSubmit()"
+                    [disabled]="disabled === true || cards?.length <= 0">
+                    <span *ngIf="!loading">Pay {{ card?.total || card?.price | currency:'NGN' }}</span>
+                    <div *ngIf="loading" class="loader-white"></div>
+                </button>
+
+                <button (click)="payWithPaystack()" type="button" class="submit ripple-button orange-button">
+                    <span>Pay {{ card?.total || card?.price | currency:'NGN' }} with new card</span>
+                </button>
+            </div>
+
+            <div>
+                <button class="ripple-button white-button submit" type="button" (click)="closeDialog()">
+                    <span>Cancel</span>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

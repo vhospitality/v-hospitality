@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <div class="email-icon">
+        <img src="assets/icons/email-message.svg" alt=""/>
+    </div>
+
+    <div class="check-text">Check your phone</div>
+
+    <div class="desc">We sent a verification link to</div>
+
+    <div class="email-text">{{ data?.email || 'olivia@vhospitalitymanagement' }}</div>
+
+    <div class="code-button" (click)="next()">
+        <button class="ripple-button">Enter code manually</button>
+    </div>
+
+    <div class="back">
+        <button mat-button (click)="back()">
+            <img src="assets/icons/arrow-left.svg" alt=""/>
+            <span>Back</span>
+        </button>
+    </div>
+</div>

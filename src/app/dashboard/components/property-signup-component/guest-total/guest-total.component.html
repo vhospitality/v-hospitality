@@ -1,0 +1,30 @@
+<div class="title-container">
+  <div class="title">How many people can stay here?</div>
+</div>
+
+<div class="error-message" *ngIf="error">{{ error }}</div>
+
+<div class="increment-wrapper">
+
+    <div class="card" *ngFor="let value of selectOption;">
+        <div class="text">
+            <div class="title">{{ value?.name }}</div>
+        </div>
+        <div class="icons">
+            <button mat-icon-button (click)="addOrMinus('minus', value?.id)">
+              <img src="assets/icons/decre-button.svg" alt=""/>
+            </button>
+      
+            <div>{{ value?.total }}</div>
+      
+            <button mat-icon-button (click)="addOrMinus('add', value?.id)">
+              <img src="assets/icons/incre-button.svg" alt=""/>
+            </button>
+        </div>
+    </div>
+
+    <div class="loader22" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+      <!-- <div class="loader-orange" *ngIf="loading"></div> -->
+    </div>
+</div>

@@ -1,0 +1,13 @@
+@import "../../../../assets/css/styles/accommodation-details.scss";
+
+::ng-deep .p-galleria-mask {
+  overflow: auto;
+}
+
+.ripple-button {
+  background: var(--primary-600) !important;
+
+  span {
+    color: var(--base-white) !important;
+  }
+}

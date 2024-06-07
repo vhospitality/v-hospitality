@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<div class="wrapper container-desktop">
+
+    <app-back-button></app-back-button>
+
+    <div class="faqs-container">
+        <div class="faqs-card">
+            <div class="support-text">Support</div>
+            <div class="faq-text">FAQs</div>
+            <div class="faq-desc">
+                Need something cleared up? Here are our most frequently asked questions.
+            </div>
+
+            <div class="custom-search">
+                <form class="search-form-header">
+                    <button class="ripple-button" type="button">
+                        <img src="assets/icons/search-lg.svg" alt="" />
+                    </button>
+                    <input #input name="search" type="text" placeholder="Search">
+                </form>
+            </div>
+        </div>
+
+        <div class="faqs-card2">
+
+            <div class="skeleton-loader" *ngIf="loadingfaq">
+                <div style="margin-bottom: 32px;" *ngFor="let i of [1, 2, 3]">
+                    <p-skeleton width="100%" height="2rem" borderRadius="10px"></p-skeleton>
+                    <p></p>
+                    <p-skeleton width="100%" height="6rem" borderRadius="10px"></p-skeleton>
+                </div>
+            </div>
+
+            <p-accordion *ngIf="!loadingfaq && faqs" [activeIndex]="0" expandIcon="pi pi-plus-circle"
+                collapseIcon="pi pi-minus-circle">
+                <p-accordionTab *ngFor="let f of faqs;" header="{{ f?.question }}">
+                    <p [innerHTML]="f?.answer | escapeHtml"></p>
+                </p-accordionTab>
+            </p-accordion>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

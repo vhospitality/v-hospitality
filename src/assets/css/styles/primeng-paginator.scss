@@ -1,0 +1,63 @@
+.p-paginator {
+  background: unset;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+  color: var(--black-text);
+  text-align: center;
+  font-family: var(--mark-font);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  background: unset;
+  margin-left: 3px;
+  margin-right: 3px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  color: var(--black-text);
+  background: rgba(239, 94, 23, 0.2);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page:hover {
+  color: var(--black-text);
+  background: rgba(239, 94, 23, 0.2);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.p-paginator .p-dropdown {
+  display: none;
+}
+
+.p-paginator .p-paginator-current {
+  color: var(--black-text);
+  text-align: center;
+  font-family: var(--mark-font);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+// .p-component-overlay {
+//   background-color: rgba(3, 133, 65, 0.1);
+// }
+
+// .p-paginator-next,
+// .p-paginator-last,
+// .p-paginator-first,
+// .p-paginator-prev,
+// .p-paginator-current {
+//   width: 40px;
+//   height: 40px;
+// }

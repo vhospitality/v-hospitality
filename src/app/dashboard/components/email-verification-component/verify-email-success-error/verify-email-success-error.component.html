@@ -1,0 +1,16 @@
+<div class="wrapper">
+    <div class="email-icon">
+        <img src="assets/icons/success-icon.svg" alt=""/>
+    </div>
+
+    <div class="check-text" *ngIf="!data?.password">Email verified</div>
+    <div class="check-text" *ngIf="data?.password">Password reset</div>
+
+    <div class="desc" *ngIf="data?.password">Your password has been successfully reset. Click below to log in magically.</div>
+    <div class="desc" *ngIf="!data?.password">Your email has been successfully confirmed. Click below to log in magically.</div>
+
+    <div class="code-button" (click)="openDialog(data, 'login2')">
+        <button class="ripple-button">Continue</button>
+    </div>
+
+</div>

@@ -1,0 +1,170 @@
+<app-header></app-header>
+
+<div class="wrapper container" *ngIf="!listingDetails">
+
+    <div class="details">
+        <div class="title-p">
+            <div class="title">
+                <p-skeleton width="70%" height="2rem"></p-skeleton>
+            </div>
+
+            <p-skeleton width="10rem" height="2rem"></p-skeleton>
+        </div>
+
+        <p></p>
+        <p-skeleton width="40%" height="2rem"></p-skeleton>
+    </div>
+
+    <div class="carousel2">
+        <p-skeleton width="100%" height="30rem"></p-skeleton>
+    </div>
+    <hr>
+
+    <div class="cards">
+        <div class="card">
+            <p></p>
+            <p-skeleton width="100%" height="25rem"></p-skeleton>
+            <p></p>
+        </div>
+        <div class="card">
+            <p></p>
+            <p-skeleton width="100%" height="25rem"></p-skeleton>
+            <p></p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="house-rules" style="margin-top: 40px; margin-bottom: 40px;">
+        <div class="rules">
+            <p-skeleton width="20rem" height="2rem"></p-skeleton>
+            <p></p>
+            <p-skeleton width="15rem" height="2rem"></p-skeleton>
+        </div>
+        <p></p>
+        <p></p>
+        <p-skeleton width="70%" height="2rem"></p-skeleton>
+        <p></p>
+        <p></p>
+        <p-skeleton width="70%" height="2rem"></p-skeleton>
+        <p></p>
+        <p></p>
+        <p-skeleton width="70%" height="2rem"></p-skeleton>
+    </div>
+
+    <hr>
+
+    <div class="hosts" style="margin-top: 40px;">
+        <p></p>
+        <p></p>
+        <div class="host">
+            <p-skeleton width="15rem" height="2rem"></p-skeleton>
+            <p></p>
+            <p-skeleton width="10rem" height="2rem"></p-skeleton>
+        </div>
+        <p></p>
+        <p></p>
+        <p-skeleton width="100%" height="20rem"></p-skeleton>
+    </div>
+
+</div>
+
+
+<div class="wrapper container" *ngIf="listingDetails">
+
+    <div class="details">
+        <div class="title-p">
+            <div class="title">{{ listingDetails?.title }}</div>
+
+            <button type="button" (click)="submitForApproval()" class="ripple-button orange-button">
+                <div class="loader-orange" *ngIf="loading"></div>
+                <span *ngIf="!loading">Submit for review</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="carousel2">
+        <div class="image-container2">
+            <p-carousel [value]="listingDetails?.pictures" [numVisible]="1" [numScroll]="1" [circular]="true"
+                [showIndicators]="true" autoPlayInterval="5000">
+                <ng-template let-product pTemplate="item" let-ri="rowIndex">
+                    <div class="carousel-image">
+                        <img (click)="imageClick(listingDetails?.pictures, product?.uuid);"
+                            [defaultImage]="dafaultImage" [lazyLoad]="product?.url" [decode]="true" alt="" />
+                        <i (click)="imageClick(listingDetails?.pictures, product?.uuid);" class="pi pi-eye"></i>
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+
+        <div>
+            <div class="image-container">
+                <div class="first-image-bg">
+                    <img class="accommodation-image"
+                        (click)="imageClick(listingDetails?.pictures, listingDetails?.pictures[0]?.uuid);"
+                        [defaultImage]="dafaultImage" [lazyLoad]="listingDetails?.pictures[0]?.url" [decode]="true"
+                        alt="" />
+
+                    <i (click)="imageClick(listingDetails?.pictures, listingDetails?.pictures[0]?.uuid);"
+                        class="pi pi-eye"></i>
+                </div>
+                <div class="second-image-bg">
+                    <div class="accommodation-div"><img class="accommodation-image"
+                            (click)="imageClick(listingDetails?.pictures, listingDetails?.pictures[1]?.uuid);"
+                            [defaultImage]="dafaultImage" [lazyLoad]="listingDetails?.pictures[1]?.url" [decode]="true"
+                            alt="" />
+
+                        <i (click)="imageClick(listingDetails?.pictures, listingDetails?.pictures[1]?.uuid);"
+                            class="pi pi-eye"></i>
+                    </div>
+                    <div class="accommodation-div"><img class="accommodation-image"
+                            (click)="imageClick(listingDetails?.pictures, listingDetails?.pictures[2]?.uuid);"
+                            [defaultImage]="dafaultImage" [lazyLoad]="listingDetails?.pictures[2]?.url" [decode]="true"
+                            alt="" />
+
+                        <i (click)="imageClick(listingDetails?.pictures, listingDetails?.pictures[2]?.uuid);"
+                            class="pi pi-eye"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p-galleria [value]="listingDetails?.pictures" [(activeIndex)]="activeIndex" [circular]="true"
+            [(visible)]="displayBasic" [responsiveOptions]="responsiveOptions" [numVisible]="9" [circular]="true"
+            [fullScreen]="true" [showItemNavigators]="true">
+
+            <ng-template pTemplate="item" let-item>
+                <img class="dialogImage" [defaultImage]="dafaultImage" [lazyLoad]="item?.url" [decode]="true" alt="" />
+            </ng-template>
+
+            <ng-template pTemplate="thumbnail" let-item>
+                <div>
+                    <img class="dialogImage2" [defaultImage]="dafaultImage" [lazyLoad]="item?.url" [decode]="true"
+                        alt="" />
+                </div>
+            </ng-template>
+        </p-galleria>
+
+    </div>
+    <hr>
+
+
+    <div class="cards">
+        <div class="card"><app-accommodation-detail-detail [data]="listingDetails"></app-accommodation-detail-detail>
+        </div>
+        <div class="card"><app-listing-summary-form [data]="{listing: listingDetails}"></app-listing-summary-form></div>
+    </div>
+    <hr>
+
+    <div class="house-rules">
+        <div class="rules"><app-accommodation-detail-rules [data]="listingDetails"></app-accommodation-detail-rules>
+        </div>
+    </div>
+    <hr>
+
+    <app-accommodation-details-map [data]="listingDetails"></app-accommodation-details-map>
+    <hr>
+
+</div>
+
+<app-footer></app-footer>

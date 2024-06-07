@@ -1,0 +1,40 @@
+.wrapper {
+  img {
+    margin-bottom: 16px;
+  }
+
+  .thankyou {
+    color: var(--black-text);
+    font-family: var(--mark-font);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  .sub-title {
+    color: #475467;
+    font-family: var(--mark-font);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 4px;
+  }
+
+  .submit-p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .submit {
+    background: var(--orange-text);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    margin-top: 32px;
+  }
+}

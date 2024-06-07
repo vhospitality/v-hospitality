@@ -1,0 +1,23 @@
+.wrapper {
+  margin-top: 64px;
+  margin-bottom: 64px;
+
+  .title {
+    color: var(--black-text);
+    font-family: var(--display-font);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
+  }
+
+  .desc {
+    color: #475467;
+    font-family: var(--mark-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 64px;
+  }
+}

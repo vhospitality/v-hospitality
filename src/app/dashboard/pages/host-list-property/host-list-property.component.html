@@ -1,0 +1,186 @@
+<app-header></app-header>
+
+<div class="wrapper container-desktop">
+
+    <app-back-button></app-back-button>
+
+    <div class="title">{{ subType === 'subscription' ? 'Plans tailored to elevate your hosting experience' : 'Host your home on V-Hospitality' }}</div>
+    <div class="sub-title">Enhance your Property’s Visibility and Earn More!</div>
+
+    <div class="switch-cards" *ngIf="subType === 'subscription'">
+        <button mat-button class="switch-card" (click)="changeActiveBilling('monthly');" [class.active]="activeBilling==='monthly'">Monthly billing</button>
+        <button mat-button class="switch-card" (click)="changeActiveBilling('annually');" [class.active]="activeBilling==='annually'">Annual billing</button>
+    </div>
+
+    <div class="sub-center" *ngIf="subType !== 'subscription'">
+        <button (click)="createListing()" class="ripple-button orange-button">Get started with V - Hospitality</button>
+    </div>
+
+    <div class="subscription-cards2" *ngIf="subType !== 'subscription'">
+        <div class="subscription-card3">
+            <div class="title">Welcome to V-Hospitality: Where Your Property Becomes a Destination!</div>
+            <div class="description">Are you a property owner looking to make the most of your real estate investment? Do you have an extra space, a cozy cottage, a luxurious villa, or an urban apartment that's sitting idle? Look no further! V-Hospitality is your gateway to turning your property into a lucrative source of income while providing travelers with unforgettable experiences.</div>
+            <div class="sub-title">Perks of listing your property on V-Hospitality.</div>
+
+            <div class="features">
+                <div class="feature" *ngFor="let f of feature1">
+                    <img src="assets/icons/check-icon.svg" alt="">
+                    {{ f?.name }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="subscription-cards3" *ngIf="subType !== 'subscription'">
+        <div class="subscription-card4">
+            <div class="title">DOCUMENTS NEEDED.</div>
+            <div class="description">What you need to get started as a Host.</div>
+
+            <div class="features">
+                <div class="feature2" *ngFor="let f of feature2">
+                    <div class="break-word titlee">
+                        <img src="assets/icons/check-icon.svg" alt="">
+                        <div class="name">{{ f?.name }}</div>
+                    </div>
+                    <ul *ngIf="f?.sub">
+                        <li *ngFor="let a of f?.sub">{{ a?.name }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="subscription-card4">
+            <div class="title">SUBSCRIPTION MODEL</div>
+            <div class="description">The plans available for you to take advantage of.</div>
+
+            <div class="features">
+                <div class="feature" *ngFor="let f of feature3">
+                    <img src="assets/icons/check-icon.svg" alt="">
+                    {{ f?.name }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="subscriptions.length < 1 && loaderSubscription.length < 1 && subType === 'subscription'">
+        <app-no-data-message [message]="errorMessage"></app-no-data-message>
+    </div>
+
+    <div class="subscription-cards" *ngIf="subType === 'subscription'">
+
+        <div class="subscription-card" *ngFor="let l of loaderSubscription;">
+            <div class="first-card">
+                <div>
+                    <div class="title">
+                        <p-skeleton width="10rem" height="2rem" borderRadius="10px"></p-skeleton>
+                    </div>
+                    <p></p>
+                    <div class="sub-title">
+                        <p-skeleton height="6rem" borderRadius="10px"></p-skeleton>
+                    </div>
+                </div>
+                <div class="price-p">
+                    <span class="price"><p-skeleton height="2rem" borderRadius="10px"></p-skeleton></span>
+                </div>
+            </div>
+
+            <div class="second-card">
+                <div>
+                    <div class="title2"><p-skeleton width="10rem" borderRadius="10px"></p-skeleton></div>
+                    <div class="sub-title2"><p-skeleton width="80%" borderRadius="10px"></p-skeleton></div>
+                    <div class="features">
+                    <div class="feature2" *ngFor="let i of [1, 2, 3]">
+                        <div><p-skeleton shape="circle" size="1.5rem"></p-skeleton></div>
+                        <div><p-skeleton width="90%" borderRadius="10px"></p-skeleton></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="third-card">
+                <div><p-skeleton width="100%" height="3rem" borderRadius="10px"></p-skeleton></div>
+            </div>
+        </div>
+
+        <!--  -->
+        <div class="subscription-card" *ngFor="let sub of subscriptions;">
+            <div class="first-card">
+                <div>
+                    <div class="title">{{ sub?.name }} <span *ngIf="sub?.badge">{{sub?.badge}}</span></div>
+                    <div class="sub-title">{{ sub?.description }}</div>
+                </div>
+                <div class="price-p">
+                    <span class="price">₦{{ sub?.price | number:'1.0-0' }}</span>
+                    <span class="tag" *ngIf="activeBilling==='monthly'">per month</span>
+                    <span class="tag" *ngIf="activeBilling==='annually'">per year</span>
+                </div>
+            </div>
+
+            <div class="second-card">
+                <div>
+                    <div class="title2">FEATURES</div>
+                    <div class="sub-title2">{{ sub?.subFeatureTitle || 'Everything in our premium plus....' }}</div>
+                    <div class="features">
+                    <div class="feature" [innerHTML]="sub?.features | escapeHtml"></div>
+                </div>
+                </div>
+            </div>
+
+            <div class="third-card" *ngIf="this.userData && this.userData?.subscription?.subscription !== sub?.uuid">
+                <button
+                    (click)="startProcess(sub?.uuid, sub)"
+                    id="paymentForm"
+                    type="button"
+                    [disabled]="this.userData && this.userData?.subscription?.is_active === 1 && this.userData?.subscription?.subscription_type?.toLowerCase() !== 'freemium' && sub?.name?.toLowerCase() === 'freemium'"
+                    class="submit ripple-button orange-button" [class.upgrade]="this.userData?.subscription?.is_active === 1">
+                        <span *ngIf="loading !== sub?.uuid" >Subscribe</span>
+                        <div *ngIf="loading === sub?.uuid" class="loader-white"></div>
+                </button>
+            </div>            
+
+            <div class="third-card" *ngIf="this.userData && this.userData?.subscription?.subscription === sub?.uuid &&
+                this.userData?.subscription?.is_active === 1">
+                <button
+                    type="button"
+                    class="submit ripple-button orange-button"
+                    (click)="startProcess(sub?.uuid, sub)">
+                        Add Your Property
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="faqs-container">
+        <div class="faqs-card">
+            <div class="support-text">Support</div>
+            <div class="faq-text">FAQs</div>
+            <div class="faq-desc">
+                We hope these FAQs address any questions you may have. 
+                If you need further clarification or have any additional inquiries,
+                our support team is ready to assist you. Feel free to reach out to us, and we'll be happy to help!
+            </div>
+        </div>
+
+        <div class="faqs-card2">
+
+            <div class="skeleton-loader" *ngIf="loadingfaq">
+                <div style="margin-bottom: 32px;" *ngFor="let i of [1, 2, 3]">
+                    <p-skeleton width="100%" height="2rem" borderRadius="10px"></p-skeleton>
+                    <p></p>
+                    <p-skeleton width="100%" height="6rem" borderRadius="10px"></p-skeleton>
+                </div>
+            </div>
+
+            <p-accordion *ngIf="!loadingfaq" [activeIndex]="0" expandIcon="pi pi-plus-circle" collapseIcon="pi pi-minus-circle">
+                <p-accordionTab *ngFor="let f of faqs;" header="{{ f?.question }}">
+                    <p [innerHTML]="f?.answer | escapeHtml"></p>
+                </p-accordionTab>
+            </p-accordion>
+        </div>
+    </div>
+
+</div>
+
+<app-footer></app-footer>

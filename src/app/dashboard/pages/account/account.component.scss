@@ -1,0 +1,43 @@
+@import "../../../../assets/css/styles/account-page.scss";
+
+.warnint-text {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  background: var(--primary-50);
+  border: 2px solid var(--primary-600);
+  padding: 1rem;
+
+  .warning {
+    .w-title {
+      color: var(--primary-800);
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .w-desc {
+      color: var(--primary-800);
+      font-family: var(--mark-font);
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.25rem;
+    }
+  }
+
+  button {
+    color: var(--white);
+    font-family: var(--mark-font);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.25rem;
+    margin-top: 10px;
+    margin-top: 1rem;
+    border-radius: unset;
+    background-color: var(--primary-600);
+  }
+}

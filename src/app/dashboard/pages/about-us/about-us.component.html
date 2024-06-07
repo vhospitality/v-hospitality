@@ -1,0 +1,61 @@
+<app-header></app-header>
+
+<div class="wrapper">
+    <div class="wrapper">
+
+        <div class="wrapper-container">
+            <div>
+                <div class="center-container">
+                    <div class="discover animate__animated animate__pulse">DISCOVER THE TRUE ESSENCE OF</div>
+                    <div class="africa animate__animated animate__pulse">Hospitality</div>
+                </div>
+
+                <div class="form">
+                    <div>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-map-marker"></i>
+                            <input type="text" #addresstext pInputText [(ngModel)]="value" placeholder="Destination" />
+                        </span>
+                    </div>
+
+                    <div>
+                        <p-calendar [(ngModel)]="checkinDate" [minDate]="minimumDate" selectionMode="range"
+                            dateFormat="M dd, y" [readonlyInput]="true" [showIcon]="true"
+                            placeholder="Check in - Check out">
+                            <ng-template pTemplate="footer">
+                                <hr>
+                                <div class="date-p" *ngIf="checkinDate">
+                                    <div class="start">{{ checkinDate[0] | date:'mediumDate' }}</div>
+                                    <div>-</div>
+                                    <div class="start">{{ checkinDate[1] | date:'mediumDate' }}</div>
+                                </div>
+                            </ng-template>
+                        </p-calendar>
+                    </div>
+
+                    <div>
+                        <app-select>
+                            <app-select-option *ngFor="let option of selectOption;"
+                                [value]="option"></app-select-option>
+                        </app-select>
+                    </div>
+
+                    <div>
+                        <button type="button" pButton class="submit ripple-button" (click)="search()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <app-about></app-about>
+    <app-product></app-product>
+    <div #contact><app-list-property-background></app-list-property-background></div>
+    <!-- <div #blog><app-blog></app-blog></div> -->
+    <div><app-about-footer></app-about-footer></div>
+</div>
+
+<app-footer></app-footer>

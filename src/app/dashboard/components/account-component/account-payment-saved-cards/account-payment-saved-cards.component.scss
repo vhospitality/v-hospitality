@@ -1,0 +1,125 @@
+@import "../../../../../assets/css/styles/account-page.scss";
+
+.wrapper {
+  justify-content: left !important;
+}
+
+.form-container {
+  grid-gap: 32px !important;
+  justify-content: left !important;
+}
+
+.flex-form2 {
+  padding: 16px;
+  width: 550px;
+  margin-bottom: 16px;
+  border: 2px solid #eaecf0;
+  background: var(--white);
+  transition: all 0.3s ease-in-out;
+}
+
+.active,
+.flex-form2:hover {
+  border: 2px solid var(--orange-text);
+  background: #fcdfd1;
+
+  .card-image {
+    .card-num {
+      color: #8f380e !important;
+    }
+
+    .exp {
+      color: #ef5e17 !important;
+    }
+
+    .set-default {
+      .set {
+        color: #f16e2e !important;
+      }
+    }
+  }
+}
+
+.card2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+  width: 100% !important;
+
+  .card-image {
+    display: flex;
+    justify-content: left;
+    align-items: top;
+    grid-gap: 12px;
+    width: 100%;
+
+    .card-details {
+      .card-num {
+        color: #344054;
+        font-family: var(--mark-font);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+      }
+
+      .exp {
+        color: #475467;
+        font-family: var(--mark-font);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+      }
+
+      .set-default {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        grid-gap: 12px;
+        margin-top: 8px;
+
+        .set {
+          color: #475467;
+          font-family: var(--mark-font);
+          font-size: 0.875rem;
+          font-style: normal;
+          font-weight: 700;
+        }
+
+        .edit {
+          color: #bf4b12;
+          font-family: var(--mark-font);
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  .small-img {
+    img {
+      width: 16px !important;
+      height: 16px !important;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .flex-form2 {
+    width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-container,
+  .flex-container {
+    display: unset !important;
+    width: 100%;
+  }
+
+  .flex-form2 {
+    width: 100%;
+  }
+}

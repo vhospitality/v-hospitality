@@ -1,0 +1,58 @@
+<div class="wrapper">
+
+    <div class="header">
+        <app-chat-header [currentUser]="currentUser" [listingDetails]="listingDetails"></app-chat-header>
+    </div>
+
+    <div class="messages" #target2>
+
+        <div *ngIf="!loading && messages.length === 0">
+            <app-no-data-message [message]="errorMessage"></app-no-data-message>
+        </div>
+
+
+        <div *ngIf="loading && messages.length === 0" class="loader-orange"
+            style="height: 30px; width: 30px; margin-top: 40px; margin-left: auto; margin-right: auto;"></div>
+
+        <div *ngIf="!loading && messages.length > 0">
+            <div class="message" *ngFor="let message of messages;" [class.active]="message?.sender === userData?.uuid">
+                <div class="message-details-p">
+                    <div></div>
+                    <div class="message-details">
+                        <div>
+                            <div class="profile">
+                                <div class="date truncate">{{ message?.createdAt | dateAgo }}</div>
+                            </div>
+
+                            <div class="info" [class.is-typing]="message?.is_typing">
+                                <span *ngIf="!message?.is_typing">{{ message?.message }}</span>
+
+                                <div *ngIf="message?.is_typing && message?.me" class="loader">
+                                    <div class="bubble"></div>
+                                    <div class="bubble"></div>
+                                    <div class="bubble"></div>
+                                </div>
+
+                                <div *ngIf="message?.is_typing && !message?.me" class="loader">
+                                    <div class="bubble2"></div>
+                                    <div class="bubble2"></div>
+                                    <div class="bubble2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div #target style="color: white;">dwdew</div>
+    </div>
+
+    <div class="message-text">
+        <textarea placeholder="Send a message" (keyup)="$event.keyCode === 13 && sendMessage()" (focus)="onFocus()"
+            cols="30" rows="3" name="message" [(ngModel)]="message" #input></textarea>
+        <div class="send-message">
+            <button type="button" (click)="sendMessage()" class="submit ripple-button">Send</button>
+        </div>
+    </div>
+</div>

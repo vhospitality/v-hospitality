@@ -1,0 +1,32 @@
+.spine {
+  height: 354px;
+
+  .text {
+    color: var(--gray-600);
+    font-family: var(--mark-font);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    transform: rotate(-90deg);
+  }
+
+  .chart {
+    height: 354px;
+  }
+
+  .year {
+    div {
+      color: var(--gray-600);
+      font-family: var(--mark-font);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+
+      svg {
+        margin-right: 8px;
+      }
+    }
+  }
+}

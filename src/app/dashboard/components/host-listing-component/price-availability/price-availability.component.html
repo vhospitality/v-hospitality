@@ -1,0 +1,85 @@
+<div class="wrapper">
+
+    <div class="flex-container">
+        <div class="title-container">
+            <div>
+            </div>
+
+            <div class="buttons">
+                <button class="ripple-button edit" *ngIf="!editable" (click)="edit()">
+                    Edit
+                </button>
+                <button class="ripple-button edit" *ngIf="editable" (click)="cancel()">
+                    Cancel
+                </button>
+                <button class="ripple-button save" form="ngForm" (click)="onSubmit()" *ngIf="editable">            
+                    <span *ngIf="!loading">Save</span>
+                    <div *ngIf="loading" class="loader-white"></div>
+                </button>
+            </div>
+        </div>
+    
+        <form class="form" novalidate [formGroup]="feedbackForm" id="ngForm" #fform="ngForm">
+
+            <div class="form-container">
+                <div class="label-p">Set your price</div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <div class="label">Price per night</div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <button mat-button type="button" class="currency" matSuffix>NGN</button>
+                            <input matInput formControlName="price" type="number">
+                            <mat-error>{{formErrors.price}}</mat-error>
+                            <mat-hint>{{ feedbackForm?.value?.price | number: '1.0-0' }}</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-container">
+                <div class="label-p">How long can guests stay?</div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <div class="label">Min</div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <input matInput formControlName="min" type="number" placeholder="1 Night">
+                            <mat-error>{{formErrors.min}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <div class="label-p"></div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <div class="label">Max</div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <input matInput formControlName="max" type="number" placeholder="365 Nights">
+                            <mat-error>{{formErrors.max}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <!--  -->
+
+    <div class="buttons2">
+        <button class="ripple-button edit" *ngIf="!editable" (click)="editable = true">
+            Edit
+        </button>
+        <button class="ripple-button edit" *ngIf="editable" (click)="editable = false">
+            Cancel
+        </button>
+        <button class="ripple-button save" form="ngForm"  (click)="onSubmit()" *ngIf="editable">            
+            <span *ngIf="!loading">Save</span>
+            <div *ngIf="loading" class="loader-white"></div>
+        </button>
+    </div>
+</div>
+

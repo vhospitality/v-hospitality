@@ -1,0 +1,44 @@
+<div class="wrapper">
+
+    <div class="title-container">
+        <div class="title">Set your price</div>
+    </div>
+
+    <div class="error-message" *ngIf="error">{{ error }}</div>
+
+    <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm">
+
+        <div class="form-field">
+            <div class="label">Price per Night</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="price" type="number" min="50">
+                <mat-error>{{formErrors.price}}</mat-error>
+                <mat-hint>{{ feedbackForm?.value?.price | number: '1.0' }}</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <!-- <div class="form-field">
+            <div class="label">Cleaning fee (Optional)</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="cleaning" type="number">
+                <mat-hint>{{ feedbackForm?.value?.cleaning | number: '1.0-0' }}</mat-hint>
+            </mat-form-field>
+        </div> -->
+
+        <!-- <div class="form-field">
+            <div class="label">Occupancy taxes and fees</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <button mat-button type="button" class="currency" matSuffix>NGN</button>
+                <input matInput formControlName="tax" type="number">
+                <mat-error>{{formErrors.tax}}</mat-error>
+                <mat-hint>{{ feedbackForm?.value?.tax | number: '1.0-0' }}</mat-hint>
+            </mat-form-field>
+        </div> -->
+
+    </form>
+
+    <div class="loader22" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <!-- <div class="loader-orange" *ngIf="loading"></div> -->
+    </div>
+</div>

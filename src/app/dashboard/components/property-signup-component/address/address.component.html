@@ -1,0 +1,68 @@
+<div class="wrapper">
+
+    <div class="title-container">
+        <div class="title">Enter your address</div>
+    </div>
+
+    <div class="error-message" *ngIf="error">{{ error }}</div>
+
+    <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm">
+
+        <!-- <div class="form-field">
+            <div class="label">Street address</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="address" type="text">
+                <mat-error>{{formErrors.address}}</mat-error>
+            </mat-form-field>
+        </div> -->
+
+        <!-- <div class="form-field">
+            <div class="label">Apt, suite, etc. (if applicable)</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="suite" type="text">
+                <mat-error>{{formErrors.suite}}</mat-error>
+            </mat-form-field>
+        </div> -->
+
+        <!-- <div class="form-field">
+            <div class="label">State</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-select matInput formControlName="state">
+                    <mat-option [value]="d?.name" *ngFor="let d of states">{{ d?.name }}</mat-option>
+                </mat-select>
+                <mat-error>{{formErrors.state}}</mat-error>
+            </mat-form-field>
+        </div> -->
+
+        <div class="form-field">
+            <div class="label">Address</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input
+                  matInput
+                  formControlName="city"
+                    #addresstext
+                  >
+                <mat-error>{{formErrors.city}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- <div class="form-field">
+            <div class="label">ZIP code</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="zip" type="number">
+                <mat-error>{{formErrors.zip}}</mat-error>
+            </mat-form-field>
+        </div> -->
+    </form>
+
+    <div>
+        <div class="map" *ngIf="map">
+            <app-map [data]="{size: {height: '360px', width: '100%'}, geo: map}"></app-map>
+        </div>
+    </div>
+
+    <div class="loader22" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <!-- <div class="loader-orange" *ngIf="loading"></div> -->
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="wrapper">
+    <div class="title">{{ listingDetails?.listing?.title }}</div>
+    
+    <div class="profile">
+        <img [defaultImage]="defaultImage" [lazyLoad]="currentUser?.profile_picture" [decode]="true" alt=""/>
+        <div class="name">
+            <div>User</div>
+            <div>{{ currentUser?.first_name }} {{ currentUser?.last_name }}</div>
+        </div>
+    </div>
+
+    <!-- <div class="view-detail-p">
+        <button type="button" class="view-detail ripple-button">View detail</button>
+    </div> -->
+</div>

@@ -1,0 +1,29 @@
+<div class="wrapper">
+
+    <div class="sub-title">Please state below your reason for declining a guest’s booking.</div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="border cursor-pointer" 
+            *ngFor="let q of questions; let i=index" [class.active]="q?.id === currentId?.id" (click)="currentId=q">
+                <img *ngIf="q?.id !== currentId?.id" src="assets/icons/null-check.svg" alt="">
+                <img *ngIf="q?.id === currentId?.id" src="assets/icons/orange-check.svg" alt="">
+                <div>{{ q?.name }}</div>
+            </div>
+        </div>
+    </div>  
+    
+    <div class="submit-p">
+        <button type="button" class="submit ripple-button orange-button" (click)="onSubmit()">
+            <span *ngIf="!loading">Decline Booking</span>
+            <div *ngIf="loading" class="loader-orange"></div>
+        </button>
+    </div>
+
+    <div class="continue">
+        <button class="ripple-button white-button submit" type="button" (click)="closeDialog()">
+            <span>Cancel</span>
+        </button>
+    </div>
+
+</div>

@@ -1,0 +1,99 @@
+<app-header></app-header>
+
+<div class="wrapper container">
+    <app-back-button></app-back-button>
+
+    <div class="title-container">
+        <div class="title">Leave feedback for your guest</div>
+        <div class="desc">Before you submit, make sure to review the details.</div>
+    </div>
+    <hr>
+
+    <div class="cards">
+        <div class="card">
+            <div class="text-container">
+                <img class="profile" [defaultImage]="dafaultImage" [lazyLoad]="data?.profile_picture" [decode]="true"
+                    alt="" />
+                <div class="name-container">
+                    <div class="name">{{ data?.first_name }} {{ data?.last_name }}</div>
+                    <div class="desc">{{ data?.check_in | date }}, {{ data?.check_out | date }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm" id="ngForm">
+
+                <div class="form-field">
+                    <div class="label">Has your guest checked out?</div>
+
+                    <mat-radio-group matInput formControlName="guest_checked_out">
+                        <mat-radio-button [value]="false">
+                            No
+                        </mat-radio-button>
+                        <mat-radio-button [value]="true">
+                            Yes
+                        </mat-radio-button>
+                    </mat-radio-group>
+
+                    <mat-error>{{ formErrors.guest_checked_out }}</mat-error>
+                </div>
+
+                <div class="form-field">
+                    <div class="label">Describe Your Experience</div>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <textarea matInput formControlName="description" rows="3" matInput
+                            placeholder="What was it like to host these guests?"></textarea>
+                        <mat-error>{{ formErrors.description }}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-field">
+                    <div class="label">Private Guest Feedback</div>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <textarea matInput formControlName="description2" rows="3" matInput
+                            placeholder="Thank your guests for visiting or offer some tips to help them improve for their next trip."></textarea>
+                        <mat-error>{{ formErrors.description2 }}</mat-error>
+                    </mat-form-field>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="cards">
+        <div class="card">
+            <div class="sub-title">How would you rate these?</div>
+        </div>
+        <div class="card">
+            <div class="rating">
+                <div class="rating-text">Cleanliness</div>
+                <div><p-rating [(ngModel)]="cleanValue"></p-rating></div>
+            </div>
+
+            <!-- <div class="rating">
+                <div class="rating-text">Expectation</div>
+                <div><p-rating [(ngModel)]="expectationValue"></p-rating></div>
+            </div> -->
+
+            <div class="rating">
+                <div class="rating-text">Communication</div>
+                <div><p-rating [(ngModel)]="comunicationValue"></p-rating></div>
+            </div>
+
+            <div class="rating">
+                <div class="rating-text">Observance of House Rules</div>
+                <div><p-rating [(ngModel)]="rulesValue"></p-rating></div>
+            </div>
+
+            <div style="margin-top: 24px;">
+                <button type="button" (click)="onSubmit()" form="ngForm" class="ripple-button orange-button">
+                    <div *ngIf="!loading">Submit feedback</div>
+                    <div *ngIf="loading" class="loader-white"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,63 @@
+// .p-accordion
+//   .p-accordion-header:not(.p-disabled).p-highlight
+//   .p-accordion-header-link {
+//   background: unset;
+//   border-color: unset;
+//   border: unset;
+//   border-radius: unset;
+//   box-shadow: unset;
+// }
+
+// .p-accordion .p-accordion-header .p-accordion-header-link {
+//   background: unset;
+//   border-color: unset;
+//   border: unset;
+//   border-radius: unset;
+//   box-shadow: unset;
+// }
+
+.p-accordion .p-accordion-tab {
+  // border-radius: none;
+  box-shadow: unset;
+  // border: 1px solid var(--black);
+}
+
+.p-accordion-header-text {
+  color: var(--gray-900);
+  font-family: var(--mark-font);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  margin-left: 10px;
+}
+
+.p-accordion p {
+  color: var(--gray-600);
+  font-family: var(--mark-font);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: 20px;
+}
+
+// .p-accordion .p-accordion-content {
+//   background: unset;
+//   border-color: unset;
+//   border: unset;
+//   border-radius: unset;
+//   box-shadow: unset;
+// }
+
+.p-accordion .p-accordion-tab.p-accordion-tab-active .p-accordion-toggle-icon {
+  color: var(--gray-900);
+  font-size: 16px;
+}
+
+.p-accordion
+  .p-accordion-tab:not(.p-accordion-tab-active)
+  .p-accordion-toggle-icon {
+  color: var(--gray-400);
+  font-size: 16px;
+}

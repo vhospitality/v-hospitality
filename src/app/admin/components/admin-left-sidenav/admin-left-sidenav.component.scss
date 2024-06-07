@@ -1,0 +1,21 @@
+mat-sidenav-container {
+  min-height: 100vh;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+::ng-deep .mat-drawer-backdrop.mat-drawer-shown {
+  background: rgba(79, 86, 101, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+
+.sidenav {
+  width: 312px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--blue);
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border: 1px solid var(--orange);
+}

@@ -1,0 +1,35 @@
+<div class="wrapper">
+
+    <div class="flex-container">
+        <div class="title-container">
+            <div>
+                <div class="title">Payment methods</div>
+                <div class="desc">When you make a booking you can save your cards and it will appear here.</div>
+            </div>
+
+            <div class="buttons" *ngIf="actionType === 'add'">
+                <button class="ripple-button edit" type="button" (click)="actionType = 'save';">
+                    Cancel
+                </button>
+                <button type="button" class="ripple-button save" form="ngForm" (click)="onSubmit()">
+                    <span *ngIf="!loading">Save</span>
+                    <div *ngIf="loading" class="loader-white"></div>
+                </button>
+            </div>
+        </div>
+
+        <app-account-payment-form *ngIf="actionType === 'add'"></app-account-payment-form>
+        <app-account-payment-saved-cards *ngIf="actionType === 'save'"></app-account-payment-saved-cards>
+
+    </div>
+
+    <div class="buttons2" *ngIf="actionType === 'add'">
+        <button type="button" class="ripple-button edit" (click)="actionType = 'save'">
+            Cancel
+        </button>
+        <button type="button" class="ripple-button save" form="ngForm" (click)="onSubmit()">
+            <span *ngIf="!loading">Save</span>
+            <div *ngIf="loading" class="loader-white"></div>
+        </button>
+    </div>
+</div>

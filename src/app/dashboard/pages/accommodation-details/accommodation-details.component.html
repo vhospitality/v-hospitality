@@ -1,0 +1,248 @@
+<app-header></app-header>
+
+
+<div class="wrapper container" *ngIf="!listingDetails">
+
+    <app-back-button></app-back-button>
+
+    <div class="details">
+        <div class="title-p">
+            <div class="title">
+                <p-skeleton width="70%" height="2rem"></p-skeleton>
+            </div>
+
+            <p-skeleton width="10rem" height="2rem"></p-skeleton>
+        </div>
+
+        <p></p>
+        <p-skeleton width="40%" height="2rem"></p-skeleton>
+    </div>
+
+    <div class="carousel2">
+        <p-skeleton width="100%" height="30rem"></p-skeleton>
+    </div>
+
+    <hr>
+
+    <div class="cards">
+        <div class="card">
+            <p></p>
+            <p-skeleton width="100%" height="25rem"></p-skeleton>
+            <p></p>
+        </div>
+        <div class="card">
+            <p></p>
+            <p-skeleton width="100%" height="25rem"></p-skeleton>
+            <p></p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="house-rules" style="margin-top: 40px; margin-bottom: 40px;">
+        <div class="rules">
+            <p-skeleton width="20rem" height="2rem"></p-skeleton>
+            <p></p>
+            <p-skeleton width="15rem" height="2rem"></p-skeleton>
+        </div>
+        <p></p>
+        <p></p>
+        <p-skeleton width="70%" height="2rem"></p-skeleton>
+        <p></p>
+        <p></p>
+        <p-skeleton width="70%" height="2rem"></p-skeleton>
+        <p></p>
+        <p></p>
+        <p-skeleton width="70%" height="2rem"></p-skeleton>
+    </div>
+
+    <hr>
+
+    <div class="hosts" style="margin-top: 40px;">
+        <p></p>
+        <p></p>
+        <div class="host">
+            <p-skeleton width="15rem" height="2rem"></p-skeleton>
+            <p></p>
+            <p-skeleton width="10rem" height="2rem"></p-skeleton>
+        </div>
+        <p></p>
+        <p></p>
+        <p-skeleton width="100%" height="20rem"></p-skeleton>
+    </div>
+
+</div>
+
+
+<div class="wrapper container" *ngIf="listingDetails">
+
+    <div class="top-listing">
+        <app-back-button></app-back-button>
+
+        <button type="button" mat-button (click)="addWishlist(listingDetails?.uuid)" *ngIf="isLogin"
+            class="ripple-button2" [class.active]="newAddedWishlist.includes(listingDetails?.uuid)">
+
+            <div class="loader-orange" *ngIf="wishlists.includes(listingDetails?.uuid)"></div>
+
+            <svg *ngIf="!wishlists.includes(listingDetails?.uuid)" width="20" height="20" viewBox="0 0 20 20"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M9.99462 4.27985C8.32849 2.332 5.55011 1.80804 3.46257 3.59168C1.37503 5.37532 1.08113 8.35748 2.72049 10.467C4.08351 12.2209 8.20847 15.9201 9.56041 17.1174C9.71166 17.2513 9.78729 17.3183 9.8755 17.3446C9.9525 17.3676 10.0367 17.3676 10.1137 17.3446C10.2019 17.3183 10.2776 17.2513 10.4288 17.1174C11.7808 15.9201 15.9057 12.2209 17.2687 10.467C18.9081 8.35748 18.6501 5.35656 16.5267 3.59168C14.4032 1.8268 11.6607 2.332 9.99462 4.27985Z"
+                    stroke="#EF5E17" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+            <span *ngIf="!wishlists.includes(listingDetails?.uuid)">{{ newAddedWishlist.includes(listingDetails?.uuid) ?
+                'Remove from wishlist' : 'Add to Wishlist' }} </span>
+        </button>
+    </div>
+
+    <div class="details">
+        <div class="title-p">
+            <div class="title">{{ listingDetails?.title }}</div>
+        </div>
+
+        <div class="review">
+            <img src="assets/icons/star-icon.svg" alt="marker" />
+            <div class="rating">{{ listingDetails?.reviews_score }}</div>
+            <div class="total-review">{{ listingDetails?.reviews_count }} review{{ listingDetails?.reviews_count > 1 ?
+                's' : '' }}</div>
+        </div>
+    </div>
+
+    <div class="carousel2">
+        <div class="image-container2">
+            <p-carousel [value]="listingDetails?.pictures" [numVisible]="1" [numScroll]="1" [circular]="true"
+                [showIndicators]="true" autoPlayInterval="5000">
+                <ng-template let-product pTemplate="item" let-ri="rowIndex">
+
+                    <div class="carousel-image" [ngStyle]="{ 'background-image': 'url(' + dafaultImage + ')' }"
+                        [ngClass]="{ placeholder: true, 'placeholder-loaded': isLoadedList.includes(product?.uuid) }">
+                        <img (click)="imageClick(listingDetails?.pictures, product?.uuid);" [src]="product?.url"
+                            loading="lazy" priority fetchpriority="high" loading="eager" alt="" />
+                    </div>
+
+                </ng-template>
+            </p-carousel>
+        </div>
+
+        <div>
+            <div class="image-container">
+                <div class="first-image-bg" [ngStyle]="{ 'background-image': 'url(' + dafaultImage + ')' }"
+                    [ngClass]="{ placeholder: true, 'placeholder-loaded': isLoadedList.includes(listingDetails?.pictures[0]?.uuid) }">
+                    <img class="accommodation-image"
+                        (click)="imageClick(listingDetails?.pictures, listingDetails?.pictures[0]?.uuid);"
+                        [src]="listingDetails?.pictures[0]?.url" (load)="onImageLoad(listingDetails?.pictures[0]?.uuid)"
+                        loading="lazy" priority fetchpriority="high" loading="eager" alt="" />
+                </div>
+
+                <div class="second-image-bg">
+                    <div class="accommodation-div" [ngStyle]="{ 'background-image': 'url(' + dafaultImage + ')' }"
+                        [ngClass]="{ placeholder: true, 'placeholder-loaded': isLoadedList.includes(listingDetails?.pictures[1]?.uuid) }">
+
+                        <img class="accommodation-image"
+                            (click)="imageClick(listingDetails?.pictures, listingDetails?.pictures[1]?.uuid);"
+                            [src]="listingDetails?.pictures[1]?.url"
+                            (load)="onImageLoad(listingDetails?.pictures[1]?.uuid)" loading="lazy" priority
+                            fetchpriority="high" loading="eager" alt="" />
+                    </div>
+
+                    <div class="accommodation-div" [ngStyle]="{ 'background-image': 'url(' + dafaultImage + ')' }"
+                        [ngClass]="{ placeholder: true, 'placeholder-loaded': isLoadedList.includes(listingDetails?.pictures[1]?.uuid) }">
+
+                        <img class="accommodation-image"
+                            (click)="imageClick(listingDetails?.pictures, listingDetails?.pictures[2]?.uuid);"
+                            [src]="listingDetails?.pictures[2]?.url"
+                            (load)="onImageLoad(listingDetails?.pictures[2]?.uuid)" loading="lazy" priority
+                            fetchpriority="high" loading="eager" alt="" />
+
+                        <div class="group">
+                            <p-avatarGroup>
+                                <p-avatar
+                                    (click)="imageClick(listingDetails?.pictures, listingDetails?.pictures[2]?.uuid);"
+                                    label="+{{listingDetails?.pictures?.length > 3 ? listingDetails?.pictures?.length - 3 : listingDetails?.pictures?.length}}"
+                                    shape="circle" size="large"
+                                    [style]="{ 'background-color': 'var(--primary-color)', color: 'white' }"></p-avatar>
+                            </p-avatarGroup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <p-galleria [value]="listingDetails?.pictures" [(activeIndex)]="activeIndex" [circular]="true"
+            [(visible)]="displayBasic" [responsiveOptions]="responsiveOptions" [numVisible]="9" [circular]="true"
+            [fullScreen]="true" [showItemNavigators]="true">
+
+            <ng-template pTemplate="item" let-item>
+                <img class="dialogImage" [defaultImage]="dafaultImage" [lazyLoad]="item?.url" [decode]="true" alt="" />
+            </ng-template>
+
+            <ng-template pTemplate="thumbnail" let-item>
+                <div>
+                    <img class="dialogImage2" [defaultImage]="dafaultImage" [lazyLoad]="item?.url" [decode]="true"
+                        alt="" />
+                </div>
+            </ng-template>
+        </p-galleria>
+
+    </div>
+
+    <div class="sharing">
+        <div class="sharing-text2">Listing Details</div>
+
+        <div class="sharing-buttons">
+            <!-- <div>
+                <div class="sharing-text">Share this listing</div>
+            </div> -->
+
+            <div class="sharing-button22">
+                <share-buttons theme="modern-dark" [include]="['copy', 'facebook', 'twitter', 'whatsapp']"
+                    [showIcon]="false" [showIcon]="true" [showText]="true" [url]="getUrl()"
+                    [description]="listingDetails?.title" twitterAccount="thevhospitality" class="pt-5">
+                </share-buttons>
+            </div>
+        </div>
+    </div>
+
+    <div class="cards">
+        <div class="card"><app-accommodation-detail-detail [data]="listingDetails"></app-accommodation-detail-detail>
+        </div>
+        <div class="card"><app-accommodation-detail-form [data]="listingDetails"></app-accommodation-detail-form></div>
+    </div>
+    <hr>
+
+    <div class="hosts">
+        <div class="host">
+            <app-accommodation-detail-host [data]="
+                {host: {first_name: listingDetails?.host?.first_name, 
+                last_name: listingDetails?.host?.last_name,
+                pictures: listingDetails?.host?.pictures, 
+                uuid:  listingDetails?.host?.uuid }, 
+                uuid: listingDetails?.uuid, 
+                title: listingDetails?.title}">
+            </app-accommodation-detail-host>
+        </div>
+    </div>
+    <hr>
+
+    <div class="house-rules">
+        <div class="rules"><app-accommodation-detail-rules [data]="listingDetails"></app-accommodation-detail-rules>
+        </div>
+    </div>
+    <hr>
+
+    <app-accommodation-details-map [data]="listingDetails"></app-accommodation-details-map>
+    <hr>
+
+    <app-accommodation-details-review [data]="
+        {host: {first_name: listingDetails?.host?.first_name, 
+        last_name: listingDetails?.host?.last_name,
+        pictures: listingDetails?.host?.pictures }, 
+        uuid: listingDetails?.uuid, 
+        title: listingDetails?.title}">
+    </app-accommodation-details-review>
+
+</div>
+
+<app-footer></app-footer>

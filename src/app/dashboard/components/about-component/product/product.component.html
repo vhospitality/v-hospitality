@@ -1,0 +1,33 @@
+<div class="wrapper container">
+    <div class="title">WHAT WE DO</div>
+    <div class="sub-title">Product/Services</div>
+
+    <div class="content">
+        <div class="image">
+            <img src="assets/images/office.png" loading="lazy" alt="image">
+        </div>
+        <div class="consultancy">
+            <div class="title2">Consultancy</div>
+
+            <div class="lists" *ngFor="let list of lists">
+                <img src="assets/icons/check-icon.svg" loading="lazy" alt="image">
+                <span class="break-word">{{ list?.name }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content2">
+        <div class="consultancy">
+            <div class="title2">Software Solutions</div>
+
+            <div class="lists" *ngFor="let list of lists2">
+                <img src="assets/icons/check-icon.svg" loading="lazy" alt="image">
+                <span class="break-word">{{ list?.name }}</span>
+            </div>
+        </div>
+
+        <div class="image" style="width: 100%;">
+            <img src="assets/images/map.png" loading="lazy" alt="image">
+        </div>
+    </div>
+</div>

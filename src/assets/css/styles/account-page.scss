@@ -1,0 +1,468 @@
+.account-wrapper {
+  padding-top: 48px;
+  padding-bottom: 48px;
+
+  .title {
+    color: var(--black-text);
+    font-family: var(--display-font);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
+    margin-bottom: 24px;
+  }
+
+  .account-container {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+
+    .buttons {
+      div {
+        margin-bottom: 10px;
+
+        button.active {
+          background: #fcdfd1;
+          color: #bf4b12;
+        }
+
+        button {
+          background: var(--white);
+          padding: 1.2rem 12px;
+          color: #667085;
+          font-family: var(--mark-font);
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 800;
+          line-height: 20px;
+          border-radius: unset;
+          text-align: left;
+          width: 22rem;
+          display: flex;
+          justify-content: left;
+          align-items: center;
+        }
+      }
+    }
+
+    .cards {
+      margin-left: 50px;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .account-wrapper {
+    .account-container {
+      flex-direction: column;
+
+      .cards {
+        margin-top: 32px;
+        margin-left: unset;
+        width: 100%;
+      }
+    }
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+.wrapper {
+  .flex-container {
+    .title-container {
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: top;
+      grid-gap: 20px;
+
+      .title {
+        margin-bottom: 10px;
+        color: var(--black-text);
+        font-family: var(--display-font);
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 38px;
+      }
+
+      .desc {
+        color: #475467;
+        font-family: var(--mark-font);
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+      }
+    }
+
+    .form {
+      margin-top: 20px;
+
+      ::ng-deep .mat-mdc-text-field-wrapper {
+        height: 46px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+      .form-container-middle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        grid-gap: 50px;
+      }
+
+      .form-container2 {
+        border-bottom: 1px solid var(--gray-200);
+        padding-bottom: 32px;
+      }
+
+      .form-container {
+        align-items: top;
+        grid-gap: 64px;
+      }
+
+      .form-container,
+      .form-container-middle {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        .icons {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          grid-gap: 20px;
+
+          div {
+            color: #344054;
+            text-align: center;
+            font-family: var(--mark-font);
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 24px;
+          }
+
+          button {
+            padding: 1px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+              height: 35px;
+              width: 35px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+        }
+
+        .label-p {
+          color: #344054;
+          font-family: var(--mark-font);
+          font-size: 17px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 20px;
+        }
+
+        .add-card {
+          button {
+            margin-bottom: 20px;
+            color: #475467;
+            font-family: var(--mark-font);
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 20px;
+            vertical-align: middle;
+
+            svg {
+              vertical-align: middle;
+              margin-right: 8px;
+            }
+
+            span {
+              vertical-align: middle;
+            }
+          }
+        }
+
+        mat-icon {
+          color: var(--gray-700);
+        }
+
+        .label-p2 {
+          .title {
+            color: var(--gray-900);
+            font-family: var(--mark-font);
+            font-size: 17px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 20px;
+            margin-bottom: 20px;
+          }
+
+          .title2 {
+            color: var(--gray-700);
+            font-family: var(--mark-font);
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 20px;
+          }
+
+          .sub-title {
+            color: var(--gray-600);
+            font-family: var(--mark-font);
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            margin-top: 3px;
+            text-transform: capitalize;
+          }
+        }
+
+        .flex-form3 {
+          margin-left: 28.5%;
+        }
+
+        .flex-form4 {
+          margin-left: -7%;
+          position: relative;
+
+          .placeholder {
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+
+          .image-loaded {
+            opacity: 1;
+          }
+
+          .placeholder-loaded {
+            filter: none;
+          }
+
+          .edit-button {
+            position: absolute;
+            bottom: 10px;
+            right: 0px;
+            font-size: 20px;
+            color: var(--orange-text);
+            background: var(--primary-100);
+          }
+
+          img {
+            width: 94px !important;
+            height: 94px !important;
+          }
+        }
+
+        .flex-form2,
+        .flex-form3,
+        .flex-form4 {
+          display: block !important;
+          align-items: top !important;
+
+          img {
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+          }
+        }
+
+        .flex-form,
+        .flex-form2 {
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          grid-gap: 24px;
+
+          mat-form-field.half-width {
+            width: 244px !important;
+          }
+
+          mat-form-field.full-width {
+            width: 512px !important;
+          }
+
+          mat-form-field.half-width2 {
+            width: 263px !important;
+          }
+
+          mat-form-field.half-widthh {
+            width: 384px !important;
+          }
+
+          mat-form-field.full-widthh {
+            width: 519px !important;
+          }
+
+          mat-form-field.half-width22 {
+            width: 112px !important;
+          }
+        }
+
+        .action-button {
+          display: flex;
+          justify-content: right;
+          align-items: center;
+          height: 35px;
+
+          .cancel {
+            color: #475467;
+            font-family: var(--mark-font);
+            font-size: 0.8rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 20px;
+          }
+
+          .update {
+            color: #bf4b12;
+            font-family: var(--mark-font);
+            font-size: 0.8rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .buttons2 {
+    display: none !important;
+  }
+
+  .buttons,
+  .buttons2 {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    flex-wrap: nowrap;
+    height: 100px;
+
+    .edit {
+      border: 1px solid #d0d5dd;
+      background: var(--white);
+      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #344054;
+    }
+
+    .save {
+      background: var(--orange-text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 12px;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    .flex-container {
+      .form {
+        .form-container {
+          .flex-form3 {
+            margin-left: -7%;
+          }
+
+          .flex-form4 {
+            margin-left: -10%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    .flex-container {
+      .title-container {
+        flex-wrap: wrap;
+      }
+
+      .form {
+        margin-top: 29px;
+
+        .form-container {
+          display: unset;
+          grid-gap: 20px;
+
+          .label-p,
+          .label-p2 {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+          }
+
+          .flex-form4 {
+            .edit-button {
+              position: absolute;
+              right: unset;
+            }
+          }
+
+          .flex-form,
+          .flex-form2,
+          .flex-form3,
+          .flex-form4 {
+            display: unset;
+            margin-left: unset;
+
+            .form-field {
+              margin-bottom: 20px;
+            }
+
+            mat-form-field.half-width {
+              width: 100% !important;
+            }
+
+            mat-form-field.full-width {
+              width: 100% !important;
+            }
+
+            mat-form-field.half-width2 {
+              width: 100% !important;
+            }
+
+            mat-form-field.half-widthh {
+              width: 100% !important;
+            }
+
+            mat-form-field.full-widthh {
+              width: 100% !important;
+            }
+
+            mat-form-field.half-width22 {
+              width: 100% !important;
+            }
+          }
+        }
+      }
+    }
+
+    .buttons2 {
+      display: flex !important;
+    }
+  }
+}

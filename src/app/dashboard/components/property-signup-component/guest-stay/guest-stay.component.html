@@ -1,0 +1,32 @@
+<div class="wrapper">
+
+    <div class="title-container">
+        <div class="title">How long can guests stay?</div>
+    </div>
+
+    <div class="error-message" *ngIf="error">{{ error }}</div>
+
+    <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm">
+
+        <div class="form-field">
+            <div class="label">Minimum stay</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="min" type="number" min="1" max="365" placeholder="1 Night">
+                <mat-error>{{formErrors.min}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Maximum stay</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="max" type="number" placeholder="365 Nights" min="1" max="365">
+                <mat-error>{{formErrors.max}}</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div class="loader22" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <!-- <div class="loader-orange" *ngIf="loading"></div> -->
+    </div>
+</div>

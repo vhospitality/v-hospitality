@@ -1,0 +1,417 @@
+.wrapper {
+  padding-top: 48px;
+  padding-bottom: 48px;
+
+  .details {
+    .title-p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      grid-gap: 20px;
+      overflow-wrap: break-word;
+      word-break: break-all;
+      word-wrap: break-word;
+
+      .title {
+        color: var(--black-text);
+        font-family: var(--display-font);
+        font-size: 3rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 35px;
+        letter-spacing: -0.96px;
+        width: 70%;
+      }
+
+      .ripple-button {
+        background: var(--white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: unset;
+
+        span {
+          color: var(--black-text);
+          font-family: var(--mark-font);
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 20px;
+        }
+
+        img,
+        svg {
+          margin-right: 8px;
+        }
+      }
+
+      .ripple-button:hover,
+      .ripple-button.active {
+        svg path {
+          fill: var(--orange-text);
+        }
+      }
+    }
+
+    .review {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      grid-gap: 8px;
+      margin-top: 20px;
+
+      .rating {
+        color: var(--black-text);
+        font-family: var(--mark-font);
+        font-size: 1.125rem;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 24px;
+      }
+
+      .total-review {
+        color: #475467;
+        font-family: var(--mark-font);
+        font-size: 1.125rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px;
+      }
+    }
+  }
+
+  .cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    grid-gap: 96px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    .card:nth-child(1) {
+      width: 60%;
+    }
+
+    .card:nth-child(2) {
+      width: 40%;
+    }
+  }
+
+  .carousel2 {
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    .image-container {
+      height: 470px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 25px;
+      align-items: top;
+
+      .first-image-bg {
+        height: 470px;
+        overflow: hidden;
+        position: relative;
+
+        i {
+          display: none;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          color: var(--orange-text);
+          font-size: 30px;
+        }
+
+        .accommodation-image {
+          border-radius: 3px;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          cursor: pointer;
+        }
+      }
+
+      .second-image-bg {
+        height: 470px;
+
+        .accommodation-div {
+          width: 100%;
+          height: calc(450px / 2);
+          margin-bottom: 20px;
+          overflow: hidden;
+          position: relative;
+
+          i {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--orange-text);
+            font-size: 30px;
+          }
+
+          .group {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            cursor: pointer;
+          }
+
+          .accommodation-image {
+            border-radius: 3px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .image-container2 {
+      display: none;
+    }
+
+    ::ng-deep .p-carousel-container {
+      background: unset;
+      padding: 0px;
+      height: 450px;
+      margin-left: -70px;
+      margin-right: -70px;
+    }
+
+    ::ng-deep .p-carousel-content {
+      overflow: hidden;
+    }
+
+    ::ng-deep .p-carousel .p-carousel-content .p-carousel-prev {
+      left: 70px;
+      background: var(--white);
+      height: 40px;
+      width: 40px;
+      z-index: 10;
+      margin-left: 20px;
+      border-radius: unset;
+    }
+
+    ::ng-deep .p-carousel .p-carousel-content .p-carousel-next {
+      left: -70px;
+      background: var(--white);
+      height: 40px;
+      width: 40px;
+      margin-right: 20px;
+      border-radius: unset;
+    }
+
+    ::ng-deep .p-carousel .p-carousel-content .p-carousel-next {
+      left: -70px;
+      background: var(--white);
+      height: 40px;
+      width: 40px;
+      border-radius: unset;
+      margin-right: 20px;
+    }
+
+    ::ng-deep .p-carousel .p-carousel-indicators {
+      background: var(--white);
+      border-radius: unset;
+      margin-top: -100px;
+      z-index: 10;
+      width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+      height: 45px;
+    }
+
+    ::ng-deep .p-carousel .p-carousel-indicators .p-carousel-indicator button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+
+    ::ng-deep
+      .p-carousel
+      .p-carousel-indicators
+      .p-carousel-indicator.p-highlight
+      button {
+      background-color: var(--black);
+    }
+
+    .carousel-image {
+      height: 450px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+      }
+
+      i {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--orange-text);
+        font-size: 30px;
+      }
+    }
+
+    .carousel-image:hover,
+    .image-container .first-image-bg:hover,
+    .image-container .second-image-bg .accommodation-div:hover {
+      i {
+        display: block;
+      }
+    }
+
+    .carousel-image:hover > img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background-color: #000;
+    }
+
+    .dialogImage {
+      height: 80vh;
+      width: 90%;
+      object-fit: contain;
+    }
+
+    .dialogImage2 {
+      height: 60px;
+      width: 80px;
+      object-fit: cover;
+    }
+  }
+
+  .sharing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 20px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+
+    .sharing-text {
+      color: #667085;
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 24px;
+    }
+
+    .sharing-text2 {
+      color: var(--black-text);
+      font-family: var(--display-font);
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 32px;
+    }
+
+    .sharing-buttons {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      grid-gap: 12px;
+      flex-wrap: wrap;
+
+      .sharing-button22 {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        grid-gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        border: 1px solid #d0d5dd;
+        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-gap: 6px;
+        color: #344054;
+        font-family: var(--mark-font);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+        background: var(--white);
+      }
+    }
+  }
+}
+
+@media (max-width: 968px) {
+  .wrapper {
+    .details {
+      .title-p {
+        .title {
+          width: 100%;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    .cards {
+      display: unset;
+      margin-bottom: unset;
+
+      .card:nth-child(1) {
+        width: 100%;
+        margin-top: 50px;
+      }
+
+      .card:nth-child(2) {
+        width: 60%;
+        margin-bottom: 50px;
+      }
+    }
+  }
+}
+
+@media (max-width: 670px) {
+  .wrapper {
+    .cards {
+      .card:nth-child(2) {
+        width: 100%;
+      }
+    }
+
+    .carousel2 {
+      ::ng-deep .p-carousel-container {
+        height: 400px;
+      }
+
+      .image-container {
+        display: none;
+      }
+
+      .image-container2 {
+        display: block;
+      }
+
+      .carousel-image {
+        height: 400px;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <div class="text">
+        You are currently using the Freemium package subscription which is free and has 8% commission fee. would you
+        like to upgrade to another plan
+        with more perks?
+    </div>
+
+    <div class="submit-p">
+        <button type="button" [disabled]="disabled === true" class="submit ripple-button orange-button"
+            (click)="redirectToSubscription()">
+            <span>Upgrade</span>
+        </button>
+    </div>
+
+    <div class="continue">
+        <button class="ripple-button white-button submit" type="button" (click)="closeDialog()">
+            <span *ngIf="!loading">Continue</span>
+            <div *ngIf="loading" class="loader-white"></div>
+        </button>
+    </div>
+
+</div>

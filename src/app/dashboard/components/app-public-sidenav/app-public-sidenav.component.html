@@ -1,0 +1,19 @@
+<div class="sidenav-container">
+    <app-toast></app-toast>
+    <p-sidebar #publicsidenav [(visible)]="sidebarVisible" fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'">
+
+        <ng-template pTemplate="header">
+            <img class="logo" (click)="sidebarVisible=false" src="assets/icons/logo.svg" alt="" />
+        </ng-template>
+        <ng-template pTemplate="content"><app-app-public-sidenav-list></app-app-public-sidenav-list></ng-template>
+        <ng-template pTemplate="footer"></ng-template>
+
+    </p-sidebar>
+
+    <div class="wrapper">
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

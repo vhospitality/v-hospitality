@@ -1,0 +1,32 @@
+<div class="wrapper">
+
+    <div class="desc" *ngIf="!data?.isEmail">
+        Enter the 4-digit code we just sent to <span>{{ data?.email }}</span> The code will expire in <span>{{ minutes
+            }}:{{ seconds }}</span>.
+    </div>
+
+    <div class="desc" *ngIf="data?.isEmail">
+        We've sent a code to <span>{{ data?.email }}</span> Enter the verification code below to verify your email
+        address. The code will expire in <span>{{ minutes }}:{{ seconds }}</span>.
+    </div>
+
+    <div class="code">
+        <code-input [isCodeHidden]="true" [codeLength]="4" [isCodeHidden]="false"
+            (codeCompleted)="onCodeCompleted($event)" (codeChanged)="onCodeCompleted($event)">
+        </code-input>
+    </div>
+
+    <div class="resend cursor-pointer">
+        <div class="res">Didn’t get a code? </div>
+        <div class="click" *ngIf="!resendLoading" (click)="resendOtp()">Click to resend.</div>
+        <div class="loader-orange" *ngIf="resendLoading"></div>
+    </div>
+
+    <div class="code-button">
+        <button class="ripple-button cancel" type="button" (click)="closeDialog()">Cancel</button>
+        <button class="ripple-button verify" (click)="onSubmit()">
+            <span *ngIf="!loading">Verify</span>
+            <div class="loader-white" *ngIf="loading"></div>
+        </button>
+    </div>
+</div>

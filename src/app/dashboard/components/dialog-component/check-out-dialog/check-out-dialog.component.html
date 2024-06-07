@@ -1,0 +1,19 @@
+<div class="wrapper">
+    <div class="text">
+        By continuing this action, it means you are done using the booked facility. Proceed to check out.
+    </div>  
+    
+    <div class="submit-p">
+        <button type="button" [disabled]="disabled === true" class="submit ripple-button orange-button" (click)="onSubmit()">
+            <span *ngIf="!loading">Proceed to check out</span>
+            <div *ngIf="loading" class="loader-white"></div>
+        </button>
+    </div>
+
+    <div class="continue">
+        <button class="ripple-button white-button submit" type="button" (click)="closeDialog()">
+            <span>Cancel</span>
+        </button>
+    </div>
+
+</div>

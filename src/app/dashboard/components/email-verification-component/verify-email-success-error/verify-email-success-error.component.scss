@@ -1,0 +1,44 @@
+.wrapper {
+  .email-icon {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .check-text {
+    color: var(--black-text);
+    text-align: center;
+    font-family: var(--display-font);
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
+    margin-bottom: 15px;
+  }
+
+  .desc,
+  .email-text {
+    color: #475467;
+    font-family: var(--mark-font);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .code-button {
+    margin-bottom: 32px;
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      background: var(--orange-text);
+      width: 100%;
+    }
+  }
+}

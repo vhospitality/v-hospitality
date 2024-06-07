@@ -1,0 +1,200 @@
+<mat-dialog-content class="mat-typography wrapper" *ngIf="data?.type === 'login' || data?.type === 'login2'">
+    <div class="cancel">
+        <div class="label">{{ requestMessage }}</div>
+        <div class="spacer"></div>
+        <div><button mat-dialog-close type="button" class="ripple-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                </svg>
+            </button></div>
+    </div>
+
+    <div class="dialog-container">
+        <!-- <mat-dialog-content> -->
+        <div class="default" *ngIf="data?.type === 'login2'">
+            <app-dialog-login></app-dialog-login>
+        </div>
+        <div class="default" *ngIf="requestType === 'default' && data?.type !== 'login2'">
+            <app-dialog-signup-phone-email [data]="datas"></app-dialog-signup-phone-email>
+        </div>
+        <div class="default" *ngIf="requestType === 'confirm' && data?.type !== 'login2'">
+            <app-dialog-signup-confirm [data]="datas"></app-dialog-signup-confirm>
+        </div>
+        <div class="default" *ngIf="requestType === 'details' && data?.type !== 'login2'">
+            <app-dialog-signup-details [data]="datas"></app-dialog-signup-details>
+        </div>
+        <div class="default" *ngIf="requestType === 'upload' && data?.type !== 'login2'">
+            <app-dialog-signup-upload [data]="datas"></app-dialog-signup-upload>
+        </div>
+        <div class="default" *ngIf="requestType === 'thankyou' && data?.type !== 'login2'">
+            <app-dialog-signup-thankyou [data]="datas"></app-dialog-signup-thankyou>
+        </div>
+        <!-- </mat-dialog-content> -->
+    </div>
+</mat-dialog-content>
+
+
+<mat-dialog-content class="mat-typography wrapper" *ngIf="data?.type === 'review'">
+    <div class="cancel">
+        <div class="label">
+            <div class="label2">Leave a public review</div>
+            <div class="label3">Write a fair, honest review about {{ data?.data?.listing?.title || data?.data?.title }}
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <div><button mat-dialog-close type="button" class="ripple-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                </svg>
+            </button></div>
+    </div>
+
+    <div class="dialog-container">
+        <!-- <mat-dialog-content> -->
+        <div>
+            <app-review-dialog [review]="data?.data"></app-review-dialog>
+        </div>
+        <!-- </mat-dialog-content> -->
+    </div>
+</mat-dialog-content>
+
+
+<mat-dialog-content class="mat-typography wrapper" *ngIf="data?.type === 'dialog'">
+    <div class="cancel">
+        <div class="label">{{ data?.data?.requestMessage }}</div>
+        <div class="spacer"></div>
+        <div><button mat-dialog-close type="button" class="ripple-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                </svg>
+            </button></div>
+    </div>
+
+    <div class="dialog-container">
+        <!-- <mat-dialog-content> -->
+        <div class="default" *ngIf="data?.data?.requestType === 'success-error'">
+            <app-success-error-dialog [data]="data?.data"></app-success-error-dialog>
+        </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'change-reservation'">
+            <app-host-change-reservation-dialog [data]="data?.data"></app-host-change-reservation-dialog>
+        </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'decline-booking'">
+            <app-decline-reservation-dialog [data]="data?.data"></app-decline-reservation-dialog>
+        </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'filter-dialog'">
+            <app-filter-dialog [data]="data?.data"></app-filter-dialog>
+        </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'identity'">
+            <app-identity-verification [data]="data?.data"></app-identity-verification>
+        </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'upload'">
+            <app-dialog-signup-upload [data]="data?.data"></app-dialog-signup-upload>
+        </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'check-out'">
+            <app-check-out-dialog [data]="data?.data"></app-check-out-dialog>
+        </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'check-in'">
+            <app-check-in [data]="data?.data"></app-check-in>
+        </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'decline'">
+            <app-decline-booking [data]="data?.data"></app-decline-booking>
+        </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'guest-details'">
+            <app-guest-details-dialog [data]="data?.data"></app-guest-details-dialog>
+        </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'upgrade-plan'">
+            <app-plan-upgrade></app-plan-upgrade>
+        </div>
+        <!-- </mat-dialog-content> -->
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-content class="mat-typography wrapper" *ngIf="data?.type === 'payout'">
+    <div class="cancel">
+        <div class="label">Earnings Payout</div>
+        <div class="spacer"></div>
+        <div><button mat-dialog-close type="button" class="ripple-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                </svg>
+            </button></div>
+    </div>
+
+    <div class="dialog-container">
+        <!-- <mat-dialog-content> -->
+        <div>
+            <app-initiate-payout-dialog [payout]="data?.data"></app-initiate-payout-dialog>
+        </div>
+        <!-- </mat-dialog-content> -->
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-content class="mat-typography wrapper" *ngIf="data?.type === 'otp-payout'">
+    <div class="cancel">
+        <div class="label"></div>
+        <div class="spacer"></div>
+        <div><button mat-dialog-close type="button" class="ripple-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                </svg>
+            </button></div>
+    </div>
+
+    <div class="dialog-container">
+        <!-- <mat-dialog-content> -->
+        <div>
+            <app-otp-payout-dialog [payout]="data?.data"></app-otp-payout-dialog>
+        </div>
+        <!-- </mat-dialog-content> -->
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-content class="mat-typography wrapper" *ngIf="data?.type === 'select-card'">
+    <div class="cancel">
+        <div class="label">Select Payment Method</div>
+        <div class="spacer"></div>
+        <div><button mat-dialog-close type="button" class="ripple-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                </svg>
+            </button></div>
+    </div>
+
+    <div class="dialog-container">
+        <div>
+            <app-select-card-dialog [card]="data?.data"></app-select-card-dialog>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-content class="mat-typography wrapper" *ngIf="data?.type === 'card'">
+    <div class="cancel">
+        <div class="label">Pay with existing card</div>
+        <div class="spacer"></div>
+        <div><button mat-dialog-close type="button" class="ripple-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                </svg>
+            </button></div>
+    </div>
+
+    <div class="dialog-container">
+        <div>
+            <app-pay-with-card-dialog [card]="data?.data"></app-pay-with-card-dialog>
+        </div>
+    </div>
+</mat-dialog-content>

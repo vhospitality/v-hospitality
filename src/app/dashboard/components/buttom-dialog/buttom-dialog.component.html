@@ -1,0 +1,16 @@
+<div class="wrapper">
+    <div class="cancel">
+        <div class="label">Are you sure</div>
+        <div class="spacer"></div>
+        <div><button mat-icon-button (click)="close()"><img src="assets/icons/x-close.svg" alt=""/></button></div>
+    </div>
+
+    <div class="detail">
+        You'll be unsubscribing from all marketing emails from V-Hospitality. This includes recommendations, travel inspiration and deals, things to do in your home city, how V-Hospitality works, invites and referrals, surveys and research studies, airbnb for work updates, home hosting tips and promotions and experience hosting tips and promotions.
+    </div>
+
+    <div class="button-container">
+       <div class="cancel-b ripple-button" (click)="close()">Cancel</div>
+       <div class="subscribe ripple-button" (click)="unsubscribe()">Unsubscribe</div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="ngx-mat-tel-input-container">
+  <button type="button" mat-button (click)="op.toggle($event)" class="country-selector" [disabled]="disabled">
+    <span class="country-selector-flag flag" [ngClass]="selectedCountry?.flagClass"></span>
+    <span class="country-selector-code" *ngIf="selectedCountry?.dialCode">+{{ selectedCountry.dialCode }}</span>
+  </button>
+
+  <p-overlayPanel #op>
+    <ng-template pTemplate="content country-search-p">
+
+      <div class="country-search-p">
+        <input *ngIf="enableSearch" class="country-search" [(ngModel)]="searchCriteria" type="text"
+          [placeholder]="searchPlaceholder" (click)="$event.stopPropagation()" />
+
+        <!-- <button type="button" mat-button class="country-list-button" *ngFor="let country of preferredCountriesInDropDown"
+        (click)="onCountrySelect(country, focusable); op.toggle(false)">
+
+        <div class=" icon-wrapper">
+          <div class="flag" [ngClass]="country.flagClass"></div>
+        </div>
+
+        <div class="label-wrapper">
+          {{ country.name }}
+          <span *ngIf="country?.dialCode">+{{ country.dialCode }}</span>
+        </div>
+
+      </button>
+
+      <mat-divider *ngIf="preferredCountriesInDropDown?.length"></mat-divider> -->
+
+        <ng-container *ngFor="let country of allCountries">
+          <button type="button" mat-button class="country-list-button" *ngIf="country | search: searchCriteria"
+            (click)="onCountrySelect(country, focusable); op.toggle(false)">
+            <div class="icon-wrapper">
+              <div class="flag" [ngClass]="country.flagClass"></div>
+            </div>
+            <div class="label-wrapper">
+              {{ country.name }} +{{ country.dialCode }}
+            </div>
+          </button>
+        </ng-container>
+
+      </div>
+    </ng-template>
+  </p-overlayPanel>
+  <!-- <label [for]="focusable.id" class="sr-only">{{label||focusable.id}}</label> -->
+  <input matInput type="tel" autocomplete="off" (blur)="onTouched()" (keypress)="onInputKeyPress($event)"
+    [(ngModel)]="phoneNumber" (ngModelChange)="onPhoneNumberChange()" [errorStateMatcher]="errorStateMatcher"
+    [placeholder]="inputPlaceholder" [disabled]="disabled" [aria-describedby]="describedBy" #focusable />
+</div>

@@ -1,0 +1,265 @@
+<div class="wrapper">
+
+    <div class="flex-container">
+        <div class="title-container">
+            <div>
+                <div class="title">Profile</div>
+                <div class="desc">Update your photo and personal details.</div>
+            </div>
+
+            <div class="buttons">
+                <button class="ripple-button edit" *ngIf="!editable" (click)="edit()">
+                    Edit
+                </button>
+                <button class="ripple-button edit" *ngIf="editable" (click)="editable=false; feedbackForm.disable();">
+                    Cancel
+                </button>
+                <button class="ripple-button save" form="ngForm" (click)="onSubmit()" *ngIf="editable">
+                    <span *ngIf="!loadingProfile">Save</span>
+                    <div *ngIf="loadingProfile" class="loader-white"></div>
+                </button>
+            </div>
+        </div>
+
+        <form *ngIf="loading" class="form">
+            <div class="form-container form-container2" *ngFor="let i of [1, 2, 3, 4]">
+                <div class="label-p"><p-skeleton borderRadius="10px" height="25px" width="250px"></p-skeleton></div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <div class="label"><p-skeleton borderRadius="10px" height="15px" width="200px"></p-skeleton>
+                        </div>
+                        <p-skeleton borderRadius="10px" height="56px" width="300px"></p-skeleton>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form *ngIf="!loading" class="form" novalidate [formGroup]="feedbackForm" id="ngForm" #fform="ngForm">
+
+            <div class="form-container" id="photo">
+                <div class="label-p2">
+                    <div class="title">Your photo</div>
+                    <div class="sub-title">This will be displayed on your profile.</div>
+                </div>
+
+                <div class="flex-form4">
+                    <input style="display: none" type="file" #fileDropRef id="fileDropRef"
+                        (change)="fileBrowseHandler($event)" accept="image/png, image/jpeg" />
+                    <img class="cursor-pointer" [src]="files ? files : userData?.profile_picture"
+                        [defaultImage]="defaultImage" [lazyLoad]="files ? files : userData?.profile_picture"
+                        [decode]="true" [alt]="userData?.first_name" />
+                    <button (click)="fileDropRef.click()" class="edit-button pi pi-pencil" mat-icon-button></button>
+                </div>
+
+                <div class="action-button">
+                    <div *ngIf="editablePicture">
+                        <button mat-button type="button" (click)="editablePicture = false" class="cancel">
+                            <span>Cancel</span>
+                        </button>
+                    </div>
+
+                    <div *ngIf="editablePicture">
+                        <button mat-button class="update" type="button" (click)="updateImage()">
+                            <span *ngIf="!imageLoading">Update</span>
+                            <div *ngIf="imageLoading" class="loader-orange"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <div class="label-p">Legal name</div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <div class="label">First name</div>
+                        <mat-form-field class="half-width" appearance="outline">
+                            <input matInput minlength="3" formControlName="firstName" type="text">
+                            <mat-error>{{formErrors.firstName}}</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="label">Last name</div>
+                        <mat-form-field class="half-width" appearance="outline">
+                            <input matInput minlength="3" formControlName="lastName" type="text">
+                            <mat-error>{{formErrors.lastName}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container" *ngIf="roles?.includes('host')">
+                <div class="label-p"></div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <div class="label">Business name</div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <input matInput minlength="1" formControlName="business_name" type="text">
+                            <mat-error>{{formErrors.business_name}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <hr *ngIf="roles?.includes('host')">
+
+            <div class="form-container" *ngIf="roles?.includes('host')">
+                <div class="label-p"></div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <div class="label">Emergency contact</div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <img style="margin-left: 14px; margin-right: 8px;" matPrefix src="assets/icons/email.svg"
+                                alt="" />
+                            <input matInput formControlName="email2" type="number">
+                            <mat-error>{{formErrors.email2}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <hr *ngIf="roles?.includes('host')">
+
+            <div class="form-container">
+                <div class="label-p">Email address</div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <input matInput formControlName="email" type="email" email>
+                            <mat-error>{{formErrors.email}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container">
+                <div class="label-p">Phone number</div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <input matInput formControlName="phone" type="tel">
+                            <mat-error>{{formErrors.phone}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container">
+                <div class="label-p">Password</div>
+                <div class="flex-form">
+                </div>
+            </div>
+
+            <div class="form-container">
+                <div class="label-p"></div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <div class="label">Current password</div>
+                        <mat-form-field class="full-width" style="width: 100%;" appearance="outline">
+                            <input formControlName="oldPassword" matInput [type]="hide ? 'password' : 'tel'" />
+                            <mat-icon mat-icon-button matSuffix (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">{{hide ? 'visibility_off'
+                                : 'visibility'}}</mat-icon>
+                            <mat-error>{{formErrors.newPassword}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <div class="label-p"></div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <div class="label">New password</div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <input formControlName="newPassword" matInput [type]="hide2 ? 'password' : 'tel'" />
+                            <mat-icon mat-icon-button matSuffix (click)="hide2 = !hide2"
+                                [attr.aria-label]="'Hide2 password'" [attr.aria-pressed]="hide2">{{hide2 ?
+                                'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-error>{{formErrors.newPassword}}</mat-error>
+                        </mat-form-field>
+
+                        <ul class="text-red-400 text-sm" *ngIf="passwordFormField?.dirty">
+                            <li class="block"
+                                [ngClass]="{'text-primary': passwordFormField?.value?.match('^(?=.*[A-Z])')}">At
+                                least one uppercase
+                                letter.</li>
+                            <li class="block"
+                                [ngClass]="{'text-primary': passwordFormField?.value?.match('(?=.*[a-z])')}">At
+                                least one lowercase
+                                letter.</li>
+                            <li class="block"
+                                [ngClass]="{'text-primary': passwordFormField?.value?.match('(.*[0-9].*)')}">At
+                                least one
+                                digit.</li>
+                            <li class="block"
+                                [ngClass]="{'text-primary': passwordFormField?.value?.match('(?=.*[!@#$%^&*])')}">At
+                                least one
+                                special
+                                character.</li>
+                            <li class="block" [ngClass]="{'text-primary': passwordFormField?.value?.match('.{8,}')}">At
+                                least
+                                8 characters
+                                long.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <div class="label-p"></div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <div class="label">Confirm password</div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <input formControlName="confirmPassword" matInput [type]="hide3 ? 'password' : 'tel'" />
+                            <mat-icon mat-icon-button matSuffix (click)="hide3 = !hide3"
+                                [attr.aria-label]="'Hide3 password'" [attr.aria-pressed]="hide3">{{hide3 ?
+                                'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-error>{{formErrors.confirmPassword}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container">
+
+                <div></div>
+
+                <div class="action-button">
+                    <div *ngIf="editable">
+                        <button type="button" (click)="cancel()" mat-button class="cancel">
+                            <span>Cancel</span>
+                        </button>
+                    </div>
+
+                    <div *ngIf="editable">
+                        <button mat-button class="update" type="button" (click)="updatePassword()">
+                            <span *ngIf="!passwordLoading">Update</span>
+                            <div *ngIf="passwordLoading" class="loader-orange"></div>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+
+        </form>
+    </div>
+
+    <!--  -->
+
+    <div class="buttons2">
+        <button class="ripple-button edit" *ngIf="!editable" (click)="editable = true">
+            Edit
+        </button>
+        <button class="ripple-button edit" *ngIf="editable" (click)="editable = false">
+            Cancel
+        </button>
+        <button class="ripple-button save" form="ngForm" (click)="onSubmit()" *ngIf="editable">
+            <span *ngIf="!loadingProfile">Save</span>
+            <div *ngIf="loadingProfile" class="loader-white"></div>
+        </button>
+    </div>
+</div>

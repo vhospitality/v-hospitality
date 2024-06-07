@@ -1,0 +1,73 @@
+<div class="checkbox-wrapper">
+    <div class="title-container">
+        <div class="title">Set your house rules</div>
+        <div class="sub-title">Guests are expected to follow your rules, and can be removed from V-Hospitality if they cause issues.</div>
+    </div>
+
+    <div class="card-container2" *ngIf="loading2">
+        <div>
+            <div class="card cursor-pointer">
+                <p-skeleton width="100%" height="56px" borderRadius="0"></p-skeleton>
+            </div>
+        </div>
+        <div>
+            <div class="card cursor-pointer">
+                <p-skeleton width="100%" height="56px" borderRadius="0"></p-skeleton>
+            </div>
+        </div>
+        <div>
+            <div class="card cursor-pointer">
+                <p-skeleton width="100%" height="56px" borderRadius="0"></p-skeleton>
+            </div>
+        </div>
+        <div>
+            <div class="card cursor-pointer">
+                <p-skeleton width="100%" height="56px" borderRadius="0"></p-skeleton>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div *ngFor="let d of data; let i=index">
+            <div class="card-rule cursor-pointer active">
+                <!-- <mat-checkbox [(ngModel)]="d.value"  (click)="changeActive(d?.name)">{{ d?.name }}</mat-checkbox> -->
+                <span>{{ d?.name || d }}</span>
+                <button type="button" class="remove cursor-pointer" (click)="removeHouseRule(i, d?.name || d)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container2 card-container22" *ngIf="!loading2">
+        <div *ngFor="let d of houseList;">
+            <div class="card cursor-pointer" [class.active]="d.value" (click)="changeActive(d)">
+                <!-- <mat-checkbox [(ngModel)]="d.value"> -->
+                    <img *ngIf="!d?.value" src="assets/icons/null-check.svg" alt="">
+                    <img *ngIf="d?.value" src="assets/icons/orange-check.svg" alt="">
+                    <div>{{ d?.name }}</div>
+                <!-- </mat-checkbox> -->
+            </div>
+        </div>
+    </div>
+
+    <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm">
+
+        <div class="form-field">
+            <div class="label">House rule</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="house" type="text">
+                <mat-error>{{formErrors.house}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <button type="button" class="ripple-button orange-button" (click)="addRule()">Add</button>
+    </form>
+
+    <div class="loader22" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <!-- <div class="loader-orange" *ngIf="loading"></div> -->
+    </div>
+</div>

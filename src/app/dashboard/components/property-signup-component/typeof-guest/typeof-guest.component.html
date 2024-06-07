@@ -1,0 +1,34 @@
+<div class="typeof-guest-wrapper">
+
+    <div class="title-container">
+        <div class="title">What type of place will guests have?</div>
+    </div>
+
+    <div class="error-message" *ngIf="error">{{ error }}</div>
+
+    <div class="flex-form2" *ngFor="let card of cards; let i=index" [class.active]="tagActive===card?.tag" (click)="tagActive=card?.tag">
+        <div class="card2 cursor-pointer">
+            <div class="card-image">
+                <div class="img">
+                    <img src="assets/icons/{{ card?.img }}" alt="">
+                </div>
+
+                <div class="card-details">
+                    <div class="card-num">{{ card?.title }}</div>
+                    <div class="exp">{{ card?.subTitle }}</div>
+                </div>
+            </div>
+
+            <div class="small-img">
+                <img *ngIf="tagActive !== card?.tag" src="assets/icons/null-check.svg" alt="">
+                <img *ngIf="tagActive===card?.tag" src="assets/icons/orange-check.svg" alt="">
+            </div>
+        </div>
+    </div>
+    
+    <div class="loader22" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <!-- <div class="loader-orange" *ngIf="loading"></div> -->
+    </div>
+
+</div>

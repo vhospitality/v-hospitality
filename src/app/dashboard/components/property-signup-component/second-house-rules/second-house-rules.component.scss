@@ -1,0 +1,72 @@
+@import "../../../../../assets/css/styles/property-signup.scss";
+
+.checkbox-wrapper {
+  .card-container22 {
+    .card {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+    }
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+    grid-gap: 10px;
+
+    .card {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+
+      img {
+        margin-right: 12px;
+        vertical-align: middle;
+      }
+    }
+
+    .card-rule {
+      padding: 7px;
+      position: relative;
+
+      span {
+        // text-transform: unset;
+        vertical-align: middle;
+      }
+
+      .remove {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background: var(--error-700);
+        color: var(--base-white);
+        border-radius: 50%;
+        padding: 1px;
+        border: unset;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        svg {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  .form {
+    .form-field {
+      margin-bottom: 30px;
+      margin-top: 30px;
+
+      .full-width {
+        width: 100%;
+      }
+    }
+  }
+}

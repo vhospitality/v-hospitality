@@ -1,0 +1,318 @@
+<div class="header">
+
+    <nav class="nav">
+        <div class="logo cursor-pointer">
+            <img src="assets/icons/logo.svg" [routerLink]="['/home']" alt="" />
+        </div>
+
+        <div class="right-container2">
+            <!-- notification -->
+            <div class="faq noti box" [class.bounce-6]="notify" *ngIf="isLogin">
+                <button *ngIf="hasNotification() === true" pBadge [class.bounce-6]="notify"
+                    (click)="op.toggle($event); removePopUpNotification()" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-bell" viewBox="0 0 16 16">
+                        <path
+                            d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                    </svg>
+                </button>
+
+                <button *ngIf="hasNotification() === false" [class.bounce-6]="notify"
+                    (click)="op.toggle($event); removePopUpNotification()" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-bell" viewBox="0 0 16 16">
+                        <path
+                            d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- message -->
+            <!-- <div class="faq noti box" [class.bounce-6]="notify" *ngIf="isLogin">
+                <button pBadge value="323" (click)="opm.toggle($event);" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-chat-right-dots" viewBox="0 0 16 16">
+                        <path
+                            d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" />
+                        <path
+                            d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                    </svg>
+                </button>
+            </div> -->
+
+            <!-- profile -->
+            <div class="loader" *ngIf="isLogin && loading">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+            </div>
+
+            <div class="faq" *ngIf="isLogin && !loading">
+                <button (click)="op2.toggle($event)" mat-icon-button type="button">
+                    <img [defaultImage]="defaultImage" [lazyLoad]="userData?.profile_picture" [decode]="true"
+                        [errorImage]="defaultImage" [alt]="userData?.first_name" />
+                </button>
+            </div>
+
+            <div>
+                <button mat-icon-button type="button" (click)="openSideBar()">
+                    <svg width="24" height="24" viewbox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.4"
+                            d="M16.0756 2H19.4616C20.8639 2 22.0001 3.14585 22.0001 4.55996V7.97452C22.0001 9.38864 20.8639 10.5345 19.4616 10.5345H16.0756C14.6734 10.5345 13.5371 9.38864 13.5371 7.97452V4.55996C13.5371 3.14585 14.6734 2 16.0756 2Z"
+                            fill="white" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M4.53852 2H7.92449C9.32676 2 10.463 3.14585 10.463 4.55996V7.97452C10.463 9.38864 9.32676 10.5345 7.92449 10.5345H4.53852C3.13626 10.5345 2 9.38864 2 7.97452V4.55996C2 3.14585 3.13626 2 4.53852 2ZM4.53852 13.4655H7.92449C9.32676 13.4655 10.463 14.6114 10.463 16.0255V19.44C10.463 20.8532 9.32676 22 7.92449 22H4.53852C3.13626 22 2 20.8532 2 19.44V16.0255C2 14.6114 3.13626 13.4655 4.53852 13.4655ZM19.4615 13.4655H16.0755C14.6732 13.4655 13.537 14.6114 13.537 16.0255V19.44C13.537 20.8532 14.6732 22 16.0755 22H19.4615C20.8637 22 22 20.8532 22 19.44V16.0255C22 14.6114 20.8637 13.4655 19.4615 13.4655Z"
+                            fill="white" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="right-container">
+
+            <div class="faq" *ngIf="isLogin && !switchGuest">
+                <button [routerLink]="['/host-earnings']" routerLinkActive="active" class="ripple-button" type="button">
+                    <span>Earnings</span>
+                </button>
+            </div>
+
+            <div class="faq" *ngIf="isLogin && switchGuest">
+                <button [routerLink]="['/transaction-history']" routerLinkActive="active" class="ripple-button"
+                    type="button">
+                    <span>Payments</span>
+                </button>
+            </div>
+
+            <div class="faq" *ngIf="isLogin && !switchGuest">
+                <button [routerLink]="['/host-listing']" routerLinkActive="active" class="ripple-button" type="button">
+                    <span>Listing</span>
+                </button>
+            </div>
+
+            <div class="faq">
+                <button [routerLink]="['/host-subscription']" routerLinkActive="active" class="ripple-button"
+                    type="button">
+                    <span>Host your home</span>
+                </button>
+            </div>
+
+            <div class="faq" *ngIf="isLogin && !switchGuest">
+                <button [routerLink]="['/host-reservations']" routerLinkActive="active" class="ripple-button"
+                    type="button">
+                    <span>Reservations</span>
+                </button>
+            </div>
+
+            <div class="faq" *ngIf="isLogin && switchGuest">
+                <button [routerLink]="['/bookings']" routerLinkActive="active" class="ripple-button" type="button">
+                    <span>Bookings</span>
+                </button>
+            </div>
+
+            <!-- settings -->
+            <div class="faq" *ngIf="isLogin">
+                <button routerLinkActive="active" mat-icon-button type="button" [routerLink]="['/account']">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-gear" viewBox="0 0 16 16">
+                        <path
+                            d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                        <path
+                            d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- notification -->
+            <div class="faq noti box" [class.bounce-6]="notify" *ngIf="isLogin">
+                <button *ngIf="hasNotification() === true" pBadge [class.bounce-6]="notify"
+                    (click)="op.toggle($event); removePopUpNotification()" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-bell" viewBox="0 0 16 16">
+                        <path
+                            d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                    </svg>
+                </button>
+
+                <button *ngIf="hasNotification() === false" [class.bounce-6]="notify"
+                    (click)="op.toggle($event); removePopUpNotification()" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-bell" viewBox="0 0 16 16">
+                        <path
+                            d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- message -->
+            <!-- <div class="faq noti box" [class.bounce-6]="notify" *ngIf="isLogin">
+                <button pBadge value="323" (click)="opm.toggle($event);" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-chat-right-dots" viewBox="0 0 16 16">
+                        <path
+                            d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" />
+                        <path
+                            d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                    </svg>
+                </button>
+            </div> -->
+
+            <p-overlayPanel #opm [style]="{'width': '400px'}" [showCloseIcon]="true">
+                <ng-template pTemplate="content content2" style="overflow-y: hidden !important;">
+
+                    <div class="custom-overlay content2" infiniteScroll style="height: 350px;"
+                        [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()"
+                        [scrollWindow]="false">
+
+                        <div class="notification">
+                            <span>New Messages</span>
+                        </div>
+
+                        <div class="notify-container cursor-pointer" *ngFor="let not of notifications; let i=index"
+                            (click)="readNotification(not?.id, i); op.toggle(false)">
+                            <!-- reservation or booking -->
+                            <div class="message">
+                                <div class="title">
+                                    <div>{{ not?.data?.type === 'system' ? 'V-Hospitality' : not?.data?.type ||
+                                        not?.data?.title }} <span>{{ (not?.created_at | dateAgo) }}</span></div>
+                                    <img *ngIf="!not?.read_at" src="assets/icons/green.svg" alt="" />
+                                </div>
+                                <div class="desc">
+                                    {{ not?.data?.descriptions || not?.data?.description || not?.data?.body }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div *ngIf="isLoading" class="loader-orange"
+                            style="margin-top: 30px; margin-bottom: 50px; margin-left: auto; margin-right: auto;"></div>
+                    </div>
+
+                </ng-template>
+            </p-overlayPanel>
+
+            <p-overlayPanel #op [style]="{'width': '400px'}" [showCloseIcon]="true">
+                <ng-template pTemplate="content content2" style="overflow-y: hidden !important;">
+
+                    <div class="custom-overlay content2" infiniteScroll style="height: 350px;"
+                        [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()"
+                        [scrollWindow]="false">
+
+                        <div class="notification">
+                            <span>Notifications</span>
+                        </div>
+
+                        <div class="notify-container cursor-pointer" *ngFor="let not of notifications; let i=index"
+                            (click)="readNotification(not?.id, i); op.toggle(false)">
+                            <!-- reservation or booking -->
+                            <div class="message">
+                                <div class="title">
+                                    <div>{{ not?.data?.type === 'system' ? 'V-Hospitality' : not?.data?.type ||
+                                        not?.data?.title }} <span>{{ (not?.created_at | dateAgo) }}</span></div>
+                                    <img *ngIf="!not?.read_at" src="assets/icons/green.svg" alt="" />
+                                </div>
+                                <div class="desc">
+                                    {{ not?.data?.descriptions || not?.data?.description || not?.data?.body }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div *ngIf="isLoading" class="loader-orange"
+                            style="margin-top: 30px; margin-bottom: 50px; margin-left: auto; margin-right: auto;"></div>
+                    </div>
+
+                    <div class="see-all cursor-pointer" [routerLink]="['/notifications']">See all</div>
+
+                </ng-template>
+            </p-overlayPanel>
+
+            <!-- profile -->
+            <div class="loader" *ngIf="isLogin && loading">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+            </div>
+
+            <!-- desktop -->
+            <div class="faq cursor-pointer" *ngIf="isLogin && !loading">
+                <button (click)="op2.toggle($event)" mat-icon-button type="button">
+                    <img [src]="profileImage || userData?.profile_picture" [defaultImage]="defaultImage"
+                        [lazyLoad]="profileImage || userData?.profile_picture" loading="eager" [errorImage]="defaultImage"
+                        [alt]="userData?.first_name" />
+                </button>
+            </div>
+
+            <p-overlayPanel #op2 [style]="{'width': '400px'}" [showCloseIcon]="true">
+                <ng-template pTemplate="content content2"
+                    style="overflow-y: hidden !important; overflow-x: hidden !important;">
+
+                    <div class="custom-overlay content2" style="height: 320px; overflow-x: hidden !important;">
+                        <div class="account-container-header">
+                            <div class="profile">
+                                <img [src]="userData?.profile_picture" [defaultImage]="defaultImage"
+                                    [lazyLoad]="userData?.profile_picture" [decode]="true" [errorImage]="defaultImage"
+                                    [alt]="userData?.first_name" />
+                                <div>
+                                    {{ userData?.first_name || 'V-Hospitality' }} {{ userData?.last_name }}
+                                    <div>{{ switchGuest ? 'Guest' : ' Host' }}</div>
+                                </div>
+                            </div>
+
+                            <div class="text-container">
+                                <div class="cursor-pointer" routerLinkActive="active" [routerLink]="['/chat']">
+                                    <span>Messages</span>
+                                </div>
+                                <div *ngIf="switchGuest" class="cursor-pointer" [routerLink]="['/bookings']">Bookings
+                                </div>
+                                <div class="cursor-pointer" routerLinkActive="active" [routerLink]="['/wishlist']">
+                                    <span>Wishlist</span>
+                                    <span
+                                        style="margin-left: 5px; background: var(--primary-color); color: var(--white); border-radius: 10px; padding-left: 5px; padding-right: 5px;">{{
+                                        wishlist?.length || 0 | number:'1.0-0' }}</span>
+                                </div>
+                            </div>
+
+                            <div class="text-container">
+                                <div class="card22">
+                                    <div>Switch to {{ switchGuest ? 'Host' : 'Guest' }}</div>
+                                    <p-inputSwitch [(ngModel)]="switchGuest"
+                                        (ngModelChange)="switch($event)"></p-inputSwitch>
+                                </div>
+                            </div>
+
+                            <div class="text-container">
+                                <div *ngIf="!switchGuest" class="cursor-pointer" routerLinkActive="active"
+                                    [routerLink]="['/host-listing']">
+                                    Manage Listings</div>
+                                <div class="cursor-pointer" routerLinkActive="active" [routerLink]="['/account']">
+                                    Account</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <button mat-button style="margin-top: 10px;" class="see-all cursor-pointer"
+                        style="color: var(--primary-color)" (click)="logout(); op2.toggle(false)">Log out</button>
+
+                </ng-template>
+            </p-overlayPanel>
+
+            <div class="faq" *ngIf="!isLogin">
+                <button class="ripple-button" (click)="openDialog('', 'login2')" type="button">
+                    <span>Login</span>
+                </button>
+            </div>
+
+            <div class="signin" *ngIf="!isLogin">
+                <button class="ripple-button" type="button" (click)="openDialog('', 'login')">
+                    <span>Create an account</span>
+                </button>
+            </div>
+
+        </div>
+    </nav>
+
+</div>
+
+<p-messages *ngIf="this.userData?.is_advanced_verified === 0" (click)="verifyAccount()" [(value)]="waringMessages"
+    [enableService]="false" [closable]="true"></p-messages>

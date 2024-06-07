@@ -1,0 +1,12 @@
+@import "../../../../../assets/css/styles/account-page.scss";
+
+.cc-types__img {
+  vertical-align: middle;
+  display: none;
+  filter: sepia(0.3) contrast(1.1) brightness(1.1) grayscale(1);
+}
+
+.cc-types__img--active {
+  filter: none;
+  display: inline-block;
+}

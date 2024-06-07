@@ -1,0 +1,72 @@
+.wrapper {
+  .form {
+    margin-top: 32px;
+
+    .full-width {
+      width: 100%;
+    }
+
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      height: 46px !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .submit-p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .submit {
+      background: var(--orange-text);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .loader-white {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .forget-password {
+    color: #bf4b12;
+    font-family: var(--mark-font);
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .agree {
+    color: #344054;
+    font-family: var(--mark-font);
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 16px;
+    margin-top: 12px;
+
+    span {
+      font-weight: 700;
+      color: #bf4b12;
+    }
+  }
+
+  .continue {
+    button {
+      width: 100%;
+      margin-top: 12px;
+    }
+  }
+}

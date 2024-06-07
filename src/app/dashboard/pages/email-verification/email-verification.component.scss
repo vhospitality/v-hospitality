@@ -1,0 +1,23 @@
+.wrapper {
+  padding: 20px 15px;
+  background: var(--white);
+  margin: 0 auto;
+  width: 400px;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 450px) {
+  .wrapper {
+    width: 100%;
+  }
+}
+
+@media (max-height: 850px) {
+  .wrapper {
+    height: 100%;
+    padding: 100px 15px;
+  }
+}

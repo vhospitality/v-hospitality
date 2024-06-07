@@ -1,0 +1,42 @@
+@import "../../../../../assets/css/styles/property-signup.scss";
+
+.form-field {
+  .full-width {
+    width: 100%;
+  }
+}
+
+.card-container2 {
+  .cursor-pointer {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-radius: 30px;
+  }
+}
+
+.checkbox-wrapper {
+  .category {
+    // display: grid;
+    // grid-template-columns: repeat(2, 1fr);
+    // align-items: top;
+    // grid-gap: 1rem;
+
+    .category2 {
+      margin-bottom: 2rem;
+    }
+
+    .name {
+      color: var(--gray-700);
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      margin-top: 15px;
+      background: var(--gray-100);
+      border: 2px solid var(--gray-500);
+      padding: 1rem;
+    }
+  }
+}

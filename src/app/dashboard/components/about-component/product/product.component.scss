@@ -1,0 +1,143 @@
+.wrapper {
+  padding-bottom: 4rem;
+  margin-top: -5rem;
+
+  .title {
+    color: var(--primary-700);
+    text-align: center;
+    font-family: var(--mark-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+  }
+
+  .sub-title {
+    color: var(--gray-900);
+    text-align: center;
+    font-family: var(--display-font);
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.75rem;
+    letter-spacing: -0.045rem;
+    margin-top: 0.7rem;
+    margin-bottom: 1.7rem;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 4rem;
+    flex-wrap: wrap-reverse;
+    margin-top: 4rem;
+
+    .image {
+      img {
+        width: 100%;
+        height: 35rem;
+      }
+    }
+
+    .consultancy {
+      .title2 {
+        margin-bottom: 2rem;
+        color: var(--gray-900);
+        font-family: var(--display-font);
+        font-size: 1.875rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 2.375rem;
+        text-align: left;
+      }
+
+      .lists {
+        margin-bottom: 1.35rem;
+        margin-left: 20px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+        img {
+          margin-right: 0.75rem;
+        }
+
+        span {
+          color: var(--gray-600);
+          font-family: var(--mark-font);
+          font-size: 1.125rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1.75rem;
+        }
+      }
+    }
+  }
+
+  // content2
+  .content2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 4rem;
+    flex-wrap: wrap;
+    margin-top: 6rem;
+
+    .image {
+      img {
+        width: 100%;
+        height: 50rem;
+      }
+    }
+
+    .consultancy {
+      .title2 {
+        margin-bottom: 2rem;
+        color: var(--gray-900);
+        font-family: var(--display-font);
+        font-size: 1.875rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 2.375rem;
+        text-align: left;
+      }
+
+      .lists {
+        margin-bottom: 1.35rem;
+        margin-left: 20px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+        img {
+          margin-right: 0.75rem;
+        }
+
+        span {
+          color: var(--gray-600);
+          font-family: var(--mark-font);
+          font-size: 1.125rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1.75rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    .content,
+    .content2 {
+      .image {
+        img {
+          height: 20rem;
+        }
+      }
+    }
+  }
+}

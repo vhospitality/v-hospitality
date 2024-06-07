@@ -1,0 +1,152 @@
+<div class="wrapper">
+
+    <div class="flex-container">
+    
+        <form class="form" novalidate [formGroup]="feedbackForm" id="ngForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-container">
+                <div class="label-p">Card details</div>
+                <div>
+                    <div class="flex-form">
+                        <div class="form-field">
+                            <div class="label">Name on card</div>
+                            <mat-form-field class="half-widthh" appearance="outline">
+                                <input matInput formControlName="name" type="text">
+                                <mat-error>{{formErrors.name}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                
+                        <div class="form-field">
+                            <div class="label">Expiry</div>
+                            <mat-form-field class="half-width22" appearance="outline">
+                                <input formControlName="monthYear" type="tel" matInput placeholder="MM/YY" maxlength="5" class="cc-expiry-input" required>
+                                    <mat-error *ngIf="formErrors.monthYear">{{formErrors.monthYear}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="flex-form">
+                        <div class="form-field">
+                            <div class="label">Card number</div>
+                            <mat-form-field class="half-widthh" appearance="outline">
+
+                                <img style="margin-left: 14px; margin-right: 8px; width: 34px; height: 24px;" matPrefix class="cc-types__img cc-types__img--visa" src="assets/icons/cc-types__img--visa.png" alt="">
+                                <img style="margin-left: 14px; margin-right: 8px; width: 34px; height: 24px;" matPrefix class="cc-types__img cc-types__img--mastercard" src="assets/icons/cc-types__img--mastercard.png" alt="">
+                                <img style="margin-left: 14px; margin-right: 8px; width: 34px; height: 24px;" matPrefix class="cc-types__img cc-types__img--disc" src="assets/icons/cc-types__img--disc.png" alt="">
+                                <svg style="margin-left: 14px; margin-right: 8px; width: 34px; height: 24px;" matPrefix class="svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-2-front" viewBox="0 0 16 16">
+                                    <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"/>
+                                    <path d="M2 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+
+                                <input formControlName="cardNumber" matInput type="tel" placeholder="Card Number (12345678912)" maxlength="19" class="cc-number-input" required>
+                                <mat-error>{{formErrors.cardNumber}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                
+                        <div class="form-field">
+                            <div class="label">CVV</div>
+                            <mat-form-field class="half-width22" appearance="outline">
+                                <input formControlName="cvv" type="tel" matInput placeholder="CVV (123)" pattern="[0-9]{3}" maxlength="3" required>
+                                <mat-error *ngIf="formErrors.cvv">{{formErrors.cvv}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-container">
+                <div class="label-p2">
+                    <div class="title">Email address</div>
+                    <div class="sub-title">Invoices will be sent to this email address.</div>
+                </div>
+                <div class="flex-form2">
+                
+                   <div formArrayName="emails" *ngFor="let em of feedbackForm.get('emails').controls; let i = index">
+                        <div [formGroupName]="i">
+                            <div class="form-field">
+                                <mat-form-field class="full-widthh" appearance="outline">
+                                    <img style="margin-left: 14px; margin-right: 8px; height: 20px; width: 20px;" matPrefix src="assets/icons/email.svg" alt=""/>
+                                    <input matInput formControlName="email" [id]="'email' + i" type="email" email>
+                                    <mat-error>{{formErrors.email}}</mat-error>
+                                    <button *ngIf="i !== 0" style="margin-left: 8px; margin-right: 12px;" matSuffix mat-icon-button (click)="removeEmailButtonClick(i)">
+                                        <img style="height: 20px; width: 20px;" src="assets/icons/x-close.svg" alt=""/>
+                                    </button>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                   </div>
+                   
+                    <div class="add-card">
+                        <button mat-button type="button" (click)="addEmailButtonClick()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M9.9974 4.16797V15.8346M4.16406 10.0013H15.8307" stroke="#475467" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Add another</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-container">
+                <div class="label-p">Street address</div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <mat-form-field class="full-widthh" appearance="outline">
+                            <input matInput formControlName="address" type="text">
+                            <mat-error>{{formErrors.address}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-container">
+                <div class="label-p">City</div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <mat-form-field class="full-widthh" appearance="outline">
+                            <input matInput formControlName="city" type="text">
+                            <mat-error>{{formErrors.city}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-container">
+                <div class="label-p">Zip code</div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <mat-form-field class="full-widthh" appearance="outline">
+                            <input matInput formControlName="zip" type="tel">
+                            <mat-error>{{formErrors.zip}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-container">
+                <div class="label-p">Country</div>
+                <div class="flex-form">
+                    <div class="form-field">
+                        <mat-form-field class="full-widthh" appearance="outline">
+                            <mat-select matInput formControlName="country">
+                                <mat-option [value]="c?.id" *ngFor="let c of countries">{{ c?.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>{{formErrors.country}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+    
+        </form>
+    </div>
+</div>

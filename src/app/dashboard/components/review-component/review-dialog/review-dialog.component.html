@@ -1,0 +1,42 @@
+<div class="wrapper">
+
+    <div class="cards">
+        <div class="card">
+            <div class="rating-text">Rating</div>
+        </div>
+        <div class="card">
+            <div class="rating">
+                <div class="p-raing"><p-rating [(ngModel)]="ratingValue"></p-rating></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="rating-text">Description</div>
+        </div>
+
+        <div class="card">
+            <div class="rating">
+                <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="form-field">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <textarea matInput formControlName="message"
+                                placeholder="Write a few sentences about your stay..." required></textarea>
+                            <mat-error>{{ formErrors?.message }}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex">
+        <button type="button" class="ripple-button cancel" (click)="closeDialog()">Cancel</button>
+        <button type="button" class="ripple-button orange-button" (click)="onSubmit()">
+            <div *ngIf="!loading">Add review</div>
+            <div *ngIf="loading" class="loader-white"></div>
+        </button>
+    </div>
+
+</div>

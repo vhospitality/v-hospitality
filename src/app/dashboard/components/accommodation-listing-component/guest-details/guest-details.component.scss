@@ -1,0 +1,90 @@
+.wrapper {
+  margin-top: 64px;
+  margin-bottom: 64px;
+
+  .title {
+    color: var(--black-text);
+    font-family: var(--display-font);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
+  }
+
+  .desc {
+    color: #475467;
+    font-family: var(--mark-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 30px;
+  }
+
+  .host {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 20px;
+
+    .ripple-button {
+      background: var(--primary-700);
+    }
+
+    .text-container {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      grid-gap: 1rem;
+
+      .profile {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+      }
+
+      .name-container {
+        .name {
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          word-wrap: break-word;
+          word-break: break-all;
+          overflow-wrap: break-word;
+          color: var(--black-text);
+          font-family: var(--mark-font);
+          font-size: 1.1rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 10px;
+          margin-bottom: 3px;
+
+          img {
+            height: 30px;
+            width: 30px;
+            margin-left: 5px;
+          }
+        }
+
+        .email {
+          color: var(--primary-700);
+          font-family: var(--mark-font);
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 24px;
+        }
+
+        .phone {
+          color: #475467;
+          font-family: var(--mark-font);
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+}

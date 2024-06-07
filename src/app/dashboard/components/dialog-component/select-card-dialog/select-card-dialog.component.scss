@@ -1,0 +1,60 @@
+.wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .cards {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    grid-gap: 12px;
+    margin-bottom: 20px;
+
+    .card {
+      width: 100%;
+
+      .border.active,
+      .border:hover {
+        border: 2px solid var(--orange-text);
+        background: #fcdfd1;
+
+        div {
+          color: #8f380e;
+        }
+      }
+
+      .border {
+        padding: 16px;
+        border: 2px solid #eaecf0;
+        background: var(--white);
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        margin-bottom: 12px;
+        transition: all 0.3s ease-in-out;
+
+        img {
+          width: 16px;
+          height: 16px;
+          margin-right: 8px;
+        }
+
+        div {
+          color: #344054;
+          font-family: var(--mark-font);
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+
+  .submit {
+    width: 100%;
+  }
+
+  .continue {
+    margin-top: 12px;
+  }
+}

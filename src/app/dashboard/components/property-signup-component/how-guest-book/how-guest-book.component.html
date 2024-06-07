@@ -1,0 +1,43 @@
+<div class="wrapper">
+    <div class="title-container">
+        <div class="title">How guests can book</div>
+        <div class="sub-title">Choose how guests will book your home.</div>
+    </div>
+
+    <div class="error-message" *ngIf="error">{{ error }}</div>
+
+    <div class="card-container">
+        <div class="card">
+            <mat-slide-toggle (click)="toggleBook()" [checked]="book">
+            </mat-slide-toggle>
+            <div>
+                <div class="title">Instant Book</div>
+                <div class="sub-title">When this is on, bookings are accepted automatically. When off, you'll need to
+                    manually accept or decline booking requests.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="title-container" style="margin-top: 3rem;">
+        <div class="title">Guest Verification</div>
+        <div class="sub-title">Choose the type of verification you want your guests to do.</div>
+    </div>
+
+    <div class="card-container">
+        <div class="card">
+            <mat-slide-toggle (click)="toggleVerification()" [checked]="verification">
+            </mat-slide-toggle>
+            <div>
+                <div class="title">Advanced Verification</div>
+                <div class="sub-title">When this is on, guests will be required to have an additional layer of
+                    verification before they will be able to book your apartment on V-Hospitality</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="loader22" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <!-- <div class="loader-orange" *ngIf="loading"></div> -->
+    </div>
+</div>

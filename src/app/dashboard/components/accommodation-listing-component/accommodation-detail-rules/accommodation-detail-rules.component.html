@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <div class="title">House rules</div>
+    <div class="desc">You'll be staying in someone's home, so please treat it with care and respect.</div>
+    <div class="amenities-p">
+        <div class="amenities" *ngFor="let a of data?.house_rules">
+            <!-- <img src="assets/icons/wifi.svg" alt=""/> -->
+            {{ a?.name || a }}
+        </div>
+    </div>
+    <!-- <div class="rules" *ngFor="let r of data?.house_rules">
+        <div class="source">{{r}}</div>
+        <div class="desctination">No pets</div>
+    </div> -->
+</div>

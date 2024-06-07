@@ -1,0 +1,108 @@
+.wrapper {
+  background: var(--white);
+  box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.03),
+    0px 20px 24px -4px rgba(16, 24, 40, 0.08);
+  border-radius: 4px;
+  padding: 24px;
+  width: 100%;
+
+  .price {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    grid-gap: 8px;
+    margin-bottom: 30px;
+
+    span:nth-child(1) {
+      color: var(--black-text);
+      font-family: var(--mark-font);
+      font-size: 25px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 30px;
+    }
+
+    span:nth-child(2) {
+      color: #475467;
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+    }
+  }
+
+  .select {
+    margin-bottom: 32px;
+  }
+
+  .calender {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 24px;
+  }
+
+  ::ng-deep .select-trigger {
+    width: 100%;
+  }
+
+  .submit-p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  .submit {
+    background: var(--orange-text);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .other {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 12px;
+
+    div:nth-child(1) {
+      color: var(--black-text);
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px;
+    }
+
+    div:nth-child(2) {
+      color: #475467;
+      text-align: right;
+      font-family: var(--mark-font);
+      font-size: 0.9rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+    }
+  }
+
+  .total {
+    margin-top: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 12px;
+
+    div {
+      color: var(--black-text);
+      font-family: var(--mark-font);
+      font-size: 1.125rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 24px;
+    }
+  }
+}

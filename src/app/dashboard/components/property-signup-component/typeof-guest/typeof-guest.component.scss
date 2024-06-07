@@ -1,0 +1,70 @@
+@import "../../../../../assets/css/styles/property-signup.scss";
+
+.typeof-guest-wrapper {
+  .flex-form2.active,
+  .flex-form2:hover {
+    .card2 {
+      border: 1px solid var(--orange-text);
+      background: #fcdfd1;
+
+      .card-image {
+        .card-num {
+          color: #8f380e !important;
+        }
+
+        .exp {
+          color: #ef5e17 !important;
+        }
+      }
+    }
+  }
+
+  .flex-form2 {
+    .card2 {
+      position: relative;
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--gray-200);
+      background: var(--base-white);
+      margin-bottom: 12px;
+
+      .card-image {
+        display: flex;
+        justify-content: left;
+        align-items: top;
+        grid-gap: 1rem;
+
+        .card-details {
+          .card-num {
+            color: var(--gray-700);
+            font-family: var(--mark-font);
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 20px;
+          }
+
+          .exp {
+            color: var(--gray-600);
+            font-family: var(--mark-font);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+          }
+        }
+      }
+
+      .small-img {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+
+        img {
+          width: 1rem !important;
+          height: 1rem !important;
+        }
+      }
+    }
+  }
+}

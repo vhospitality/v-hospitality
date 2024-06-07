@@ -1,0 +1,13 @@
+<app-header></app-header>
+
+<div class="wrapper">
+    <div class="default" *ngIf="requestType === 'default'">
+        <app-verify-email [data]="data"></app-verify-email>
+    </div>
+    <div class="otp-form" *ngIf="requestType === 'otp-form'">
+        <app-verify-email-form [data]="data"></app-verify-email-form>
+    </div>
+    <div class="success-error" *ngIf="requestType === 'success-error'">
+        <app-verify-email-success-error [data]="data"></app-verify-email-success-error>
+    </div>
+</div>

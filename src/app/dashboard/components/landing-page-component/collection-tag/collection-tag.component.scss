@@ -1,0 +1,118 @@
+.wrapper {
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--gray-200);
+
+  .collection-p {
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 1.38rem;
+
+    .collections::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+      border-radius: 10px;
+    }
+
+    .collections::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: none;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .collections::-webkit-scrollbar-thumb:hover {
+      background: none;
+    }
+
+    .collections::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background: none;
+    }
+
+    .collections {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      grid-gap: 1.38rem;
+      overflow-y: auto;
+
+      .name {
+        color: #969696;
+        font-family: var(--mark-font);
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1rem;
+        white-space: nowrap;
+      }
+
+      .svg {
+        text-align: center;
+
+        svg path {
+          fill: #969696;
+          color: #969696;
+        }
+
+        span {
+          color: #969696;
+          font-size: 2rem;
+        }
+
+        img {
+          border-radius: 10px;
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      .collect {
+        padding: 12px;
+        border-radius: 10px;
+      }
+
+      .collect.active,
+      .collect:hover {
+        background: #fdf2ee;
+
+        .name {
+          color: #ef5e17;
+        }
+
+        span {
+          color: #ef5e17;
+        }
+      }
+    }
+
+    .ripple-button2 {
+      background: var(--primary-color) !important;
+      color: var(--white) !important;
+
+      svg path {
+        fill: var(--white) !important;
+        color: var(--white) !important;
+      }
+    }
+
+    .ripple-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      grid-gap: 0.5rem;
+      background: var(--white);
+      color: #969696;
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1rem;
+      border: 1px solid var(--gray-300);
+
+      svg path {
+        fill: #969696;
+      }
+    }
+  }
+}

@@ -1,0 +1,89 @@
+.wrapper {
+  .web-cam {
+    width: 100%;
+    height: 100%;
+  }
+
+  .profile-image {
+    margin-bottom: 2rem;
+    height: 150px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    position: relative;
+
+    img,
+    webcam {
+      text-align: center;
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+    }
+
+    button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      color: var(--primary-color);
+      background: var(--primary-100);
+    }
+  }
+
+  .form {
+    margin-top: 32px;
+
+    .full-width {
+      width: 100%;
+    }
+
+    .flex {
+      .flex-form {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 1rem;
+      }
+    }
+
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      height: 46px !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .text-red-400 {
+      margin-top: -1.5rem;
+
+      .block {
+        font-size: 0.85rem;
+        color: var(--error-700);
+
+        &.text-primary {
+          color: var(--success-700);
+        }
+      }
+    }
+
+    .submit-p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .submit {
+      background: var(--orange-text);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .loader-white {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

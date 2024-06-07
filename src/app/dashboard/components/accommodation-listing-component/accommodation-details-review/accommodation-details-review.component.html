@@ -1,0 +1,40 @@
+<div class="wrapper">
+    <div class="title-container">
+        <div class="title-details">
+            <div class="title">Reviews</div>
+            <div class="desc">Guests that have booked {{ data?.title }}.</div>
+        </div>
+        <!--  -->
+        <button *ngIf="data?.host?.uuid !== userData?.uuid && data?.host?.uuid" class="ripple-button"
+            (click)="openDialog(data, 'review')">
+            Add a review
+        </button>
+    </div>
+
+    <div *ngIf="reviews.length == 0 && !loading">
+        <app-no-data-message [message]="errorMessage"></app-no-data-message>
+    </div>
+
+    <div class="cardss" *ngIf="reviews.length == 0 && loading">
+        <div class="card" *ngFor="let i of [0,1,2,3,4]">
+            <p-skeleton size="40px" borderRadius="50%"></p-skeleton>
+            <div class="name-details">
+                <div class="name"><p-skeleton borderRadius="10px" width="150px" height="20px"></p-skeleton></div>
+                <div class="date"><p-skeleton borderRadius="10px" width="100px" height="20px"></p-skeleton></div>
+                <div class="desc"><p-skeleton borderRadius="10px" width="100%" height="150px"></p-skeleton></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cardss" *ngIf="reviews.length > 0 && !loading">
+        <div class="card" *ngFor="let review of reviews;">
+            <img class="profile" [src]="review?.user?.pictures?.length > 0 ? review?.user?.pictures[0] : defaultPicture"
+                alt="image" />
+            <div class="name-details">
+                <div class="name">{{ review?.user?.first_name }}</div>
+                <div class="date">{{ review?.created_at || review?.listing?.created_at | date }}</div>
+                <div class="desc break-word">{{ review?.public_description || review?.listing?.public_description }}</div>
+            </div>
+        </div>
+    </div>
+</div>

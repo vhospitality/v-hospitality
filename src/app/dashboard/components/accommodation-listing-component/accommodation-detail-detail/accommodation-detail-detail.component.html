@@ -1,0 +1,42 @@
+<div class="wrapper">
+    <!-- <div class="title">{{ data?.apt_suite }}</div> -->
+
+    <div class="tags">
+        <div class="tag"> <span>{{ data?.no_of_guests }} Guest{{ data?.no_of_guests > 1 ? 's' : '' }}</span></div>
+
+        <div class="tag"><span>{{ data?.no_of_bedrooms }} Bedroom{{ data?.no_of_bedrooms > 1 ? 's' : '' }}</span></div>
+
+        <div class="tag">Private bathroom: {{ data?.no_of_private_bathroom ? 'Yes' : 'No' }}</div>
+
+        <div class="tag"><span>{{ data?.no_of_beds }} Private bed{{ data?.no_of_beds > 1 ? 's' : '' }}</span></div>
+
+        <div class="tag">Dedicated bathroom: {{ data?.no_of_dedicated_bathroom ? 'Yes' : 'No' }}</div>
+
+        <div class="tag">Shared bathroom: {{ data?.no_of_shared_bathroom ? 'Yes' : 'No' }}</div>
+
+        <div class="tag"><span>{{ data?.no_of_beds }} Private bed{{ data?.no_of_beds > 1 ? 's' : '' }}</span></div>
+
+        <div class="tag"><span>{{ data?.minimum_nights }} Minimum night{{ data?.minimum_nights > 1 ? 's' : '' }}</span>
+        </div>
+
+        <div class="tag"><span>{{ data?.maximum_nights }} Maximum night{{ data?.maximum_nights > 1 ? 's' : '' }}</span>
+        </div>
+    </div>
+    <hr>
+
+    <div class="desc">
+        {{ data?.description }}
+    </div>
+
+    <hr>
+
+    <div class="amenities-text">Amenities</div>
+    <div class="amenities-p">
+        <div class="amenities" *ngFor="let a of data?.amenities">
+            <!-- <img src="assets/icons/wifi.svg" alt=""/> -->
+            <span class="material-symbols-rounded" *ngIf="a?.icon">{{a?.icon}}</span>
+            <!-- <i [class]="a?.icon" aria-hidden="true"></i> -->
+            {{ a?.name }}
+        </div>
+    </div>
+</div>

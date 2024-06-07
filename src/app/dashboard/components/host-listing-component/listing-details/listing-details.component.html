@@ -1,0 +1,233 @@
+<div class="wrapper">
+
+    <div class="flex-container">
+
+        <div class="title-container">
+            <div>
+                <div class="title">Listing Details</div>
+            </div>
+        </div>
+    
+        <form class="form">
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title">Photos</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(7)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title">Listing basics</div>
+                    <div class="title2">Listing title</div>
+                    <div class="sub-title">{{ listingDetails?.propertyDetails?.title }}</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(9)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title2">Listing description</div>
+                    <div class="sub-title">{{ listingDetails?.propertyDetails?.description }}</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(9)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title2">Number of guests</div>
+                </div>
+
+                <div class="icons">
+                    <button mat-icon-button type="button">
+                      <img src="assets/icons/decre-button.svg" alt=""/>
+                    </button>
+
+                    <div>{{ getTotalGuest(listingDetails?.totalGuest) }}</div>
+
+                    <button mat-icon-button type="button">
+                      <img src="assets/icons/incre-button.svg" alt=""/>
+                    </button>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(3)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title">Amenities</div>
+                </div>
+
+                <div class="label-p2">
+                    <div class="sub-title" *ngFor="let a of listingDetails?.amenities">{{ a?.name }}</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(10)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title">House rules</div>
+                </div>
+
+                <div class="label-p2">
+                    <div class="sub-title" *ngFor="let a of listingDetails?.houseRules">{{ a?.name || a }}</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(13)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title2">Location</div>
+                    <div class="sub-title">{{ listingDetails?.address?.address }}</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(5)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title">Property and rooms</div>
+                    <div class="title2">Property type</div>
+                    <div class="sub-title" *ngIf="listingDetails?.placeType === 'entire_place'">Listing type: An entire place</div>
+                    <div class="sub-title" *ngIf="listingDetails?.placeType === 'a_room'">Listing type: A room</div>
+                    <div class="sub-title" *ngIf="listingDetails?.placeType === 'shared_room'">Listing type: A shared room</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(1)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title">Rooms and spaces</div>
+                    <div class="sub-title">Bathrooms: {{ getTotalBedroom(listingDetails?.totalGuest) }}</div>
+                    <div class="sub-title">Bed: {{ getTotalBed(listingDetails?.totalGuest) }}</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(3)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title">Rooms and spaces</div>
+                    <div class="sub-title">Private and attached: {{  getTotalPrivate(listingDetails?.bedroomKind) ? 'Yes' : 'No' }}</div>
+                    <div class="sub-title">Dedicated: {{ getTotalDedicated(listingDetails?.bedroomKind) ? 'Yes' : 'No' }}</div>
+                    <div class="sub-title">Shared: {{ getTotalShared(listingDetails?.bedroomKind) ? 'Yes' : 'No' }}</div>
+                    <div class="sub-title">Guests may share some areas</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(4)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title">How guests can book?</div>
+                    <div class="sub-title">Instant Book: {{  listingDetails?.guestBook ? 'Yes' : 'No' }}</div>
+                    <div class="sub-title">Advanced Verification: {{ listingDetails?.has_advance_verification ? 'Yes' : 'No' }}</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button (click)="edit(6)" mat-button class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="form-container-middle">
+                <div class="label-p2">
+                    <div class="title">Accessibility</div>
+                </div>
+
+                <div class="action-button">
+                    <div>
+                        <button mat-button (click)="edit(1)" class="update" type="button">
+                            <span>Edit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+    
+        </form>
+    </div>
+</div>
+

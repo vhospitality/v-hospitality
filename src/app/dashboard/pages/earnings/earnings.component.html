@@ -1,0 +1,102 @@
+<app-header></app-header>
+
+<div class="wrapper container-desktop">
+
+    <app-back-button></app-back-button>
+
+    <div class="header">
+        <div class="text">Earnings</div>
+    </div>
+
+    <!-- data is present -->
+    <div class="flex-filter-form">
+        <div class="left-filter-form">
+            <button class="ripple-button white-button" type="button" *ngFor="let m of earningsMonth; let i=index"
+                [class.month-active]="m?.month===earningsMonthActive?.month" (click)="selectMonthActive(m)">
+                {{ m?.month }}
+            </button>
+        </div>
+
+        <div class="right-filter-form">
+
+            <form novalidate [formGroup]="feedbackForm" #fform="ngForm">
+                <div class="form-field">
+                    <div class="label22">..</div>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <input type="text" #input matInput formControlName="listing" [matAutocomplete]="auto"
+                            placeholder="Search listings">
+                        <mat-autocomplete #auto="matAutocomplete" matAutocomplete [displayWith]="displayFn">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option"
+                                (onSelectionChange)="loadData(option)">
+                                {{option.title}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <button *ngIf="loadingListing" mat-icon-button matSuffix>
+                            <div class="loader-orange"></div>
+                        </button>
+                        <button mat-icon-button matSuffix (click)="searchListing('')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="earnings-container" *ngIf="loadingStat">
+        <div class="earnings-text">
+            <div class="total-text"><p-skeleton height="20px" width="200px"></p-skeleton></div>
+            <div class="total">
+                <div class="money"><p-skeleton height="50px" width="300px"></p-skeleton></div>
+            </div>
+        </div>
+        <p-skeleton height="400px" width="500px"></p-skeleton>
+    </div>
+
+    <div class="earnings-container" *ngIf="!loadingStat">
+
+        <div>
+            <div class="earnings-text-p">
+                <div class="earnings-text">
+                    <div class="total-text">Withdrawable BALANCE</div>
+                    <div class="total">
+                        <div class="money">{{ userData?.wallet_available_balance || 0 | currency:'NGN' }}</div>
+                    </div>
+
+                </div>
+
+                <div class="earnings-text">
+                    <div class="total-text">TOTAL EARNINGS</div>
+                    <div class="total">
+                        <div class="money">{{ userData?.wallet_ledger_balance || 0 | currency:'NGN' }}</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <button [routerLink]="['/account/payout']" type="button" style="margin-top: 32px;"
+                    class="ripple-button orange-button">Payout</button>
+            </div>
+        </div>
+
+        <div class="chart">
+            <app-line-chart [data]="chartData"></app-line-chart>
+        </div>
+    </div>
+
+    <div class="history-container">
+        <div class="history-text">
+            <div class="history">Transaction history</div>
+        </div>
+
+        <app-earnings-table></app-earnings-table>
+    </div>
+</div>
+
+<app-footer></app-footer>

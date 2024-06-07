@@ -1,0 +1,11 @@
+<div class="wrapper">
+
+    <div class="loader-orange" *ngIf="loading"></div>
+
+    <button type="button" *ngIf="error" class="submit ripple-button orange-button retry" (click)="getRefreshToken()">
+        <span>Retry</span>
+    </button>
+
+    <div id="sumsub-websdk-container"></div>
+
+</div>

@@ -1,0 +1,33 @@
+<div class="wrapper">
+    <div class="email-icon">
+        <img src="assets/icons/email-message.svg" alt=""/>
+    </div>
+
+    <div class="check-text">Check your email or phone number</div>
+
+    <div class="desc">We sent a verification link to</div>
+
+    <div class="email-text">{{ data?.email }}</div>
+
+    <div class="code">
+        <code-input  [isCodeHidden]="true"
+            [codeLength]="4"
+            [isCodeHidden]="false"
+            (codeChanged)="onCodeCompleted($event)"
+            (codeCompleted)="onCodeCompleted($event)">
+        </code-input>
+    </div>
+
+    <div class="code-button" (click)="onSubmit()">
+        <button class="ripple-button">
+            <div *ngIf="!loading">Verify</div>
+            <div class="loader-white" *ngIf="loading"></div>
+        </button>
+    </div>
+
+    <div class="resend cursor-pointer">
+        <div class="res">Didn’t receive the code?</div>
+        <div class="click" *ngIf="!resendLoading" (click)="resendOtp()">Click to resend</div>
+        <div class="loader-orange" *ngIf="resendLoading"></div>
+    </div>
+</div>

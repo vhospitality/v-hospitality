@@ -1,0 +1,24 @@
+<app-header></app-header>
+
+<div class="wrapper container">
+
+    <app-back-button></app-back-button>
+
+    <div class="back" *ngIf="data?.type === 'summary'">
+        <button mat-button type="button" [routerLink]="['/host-listing']">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M15.8333 9.99984H4.16663M4.16663 9.99984L9.99996 15.8332M4.16663 9.99984L9.99996 4.1665"
+                    stroke="#344054" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>View listing</span>
+        </button>
+    </div>
+    <div class="back" *ngIf="data?.type !== 'summary'"></div>
+
+    <div class="cards">
+        <div class="card"><app-booking-right [data]="data"></app-booking-right></div>
+        <div class="card"><app-booking-left [data]="data"></app-booking-left></div>
+    </div>
+</div>
+
+<app-footer></app-footer>

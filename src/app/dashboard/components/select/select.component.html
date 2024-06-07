@@ -1,0 +1,39 @@
+<div
+  class="select-trigger"
+  [ngClass]="{ active: panelOpen, focus: focused }"
+  (click)="open()"
+  cdkOverlayOrigin
+  #origin="cdkOverlayOrigin"
+  #trigger
+>
+  <img src="assets/icons/user-01.svg" alt=""/>
+  
+  <div class="select-value" *ngFor="let data of displayOption2; let i = index">
+    <!-- {{ displayOption ? displayOption.value : "" }} {{ displayOption ? displayOption.value : "" }} -->
+    {{ data?.total }} {{ data?.gender }}<span *ngIf="i < displayOption2.length - 1">, </span>
+  </div>
+
+  <div class="placeholder2" *ngIf="!panelOpen && !displayOption2">Add Guest</div>
+  
+  <div
+    class="select-arrow"
+    [ngClass]="{ 'caret-down': !panelOpen, 'caret-up': panelOpen }"
+  ></div>
+</div>
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayLockPosition
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="panelOpen"
+  [cdkConnectedOverlayWidth]="triggerRect?.width"
+  (backdropClick)="close()"
+  (attach)="onAttach()"
+>
+  <div class="select-panel-wrap" [@selectAnim]>
+    <div class="select-panel" tabindex="-1" role="listbox" #panel>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</ng-template>

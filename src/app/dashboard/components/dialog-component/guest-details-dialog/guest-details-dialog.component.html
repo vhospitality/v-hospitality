@@ -1,0 +1,53 @@
+<div class="wrapper">
+
+    <div class="sub-title">A little about who you will be hosting.</div>
+
+    <div class="left-right">
+        <div class="name">Guest Name</div>
+        <div class="value">{{ data?.data?.extendedProps?.data?.guest_name }}</div>
+    </div>
+
+    <div class="left-right">
+        <div class="name">Email</div>
+        <div class="value">{{ data?.data?.extendedProps?.data?.email }}</div>
+    </div>
+
+    <div class="left-right">
+        <div class="name">Phone Number</div>
+        <div class="value">{{ data?.data?.extendedProps?.data?.phone }}</div>
+    </div>
+
+    <div class="left-right">
+        <div class="name">Stay Duration</div>
+        <div class="value">
+            {{ data?.data?.extendedProps?.data?.check_in | date:'mediumDate' }} - 
+            {{ data?.data?.extendedProps?.data?.check_out | date:'mediumDate' }}
+        </div>
+    </div>
+
+    <div class="left-right">
+        <div class="name">Guests</div>
+        <div class="value">{{ data?.data?.extendedProps?.data?.no_of_guests }}</div>
+    </div>
+
+    <hr>
+
+    <div class="left-right">
+        <div class="name">Reservation Code</div>
+        <div class="value">{{ data?.data?.extendedProps?.data?.booking_code }}</div>
+    </div>
+
+    <div class="left-right">
+        <div class="name">Amount Paid</div>
+        <div class="value">{{ data?.data?.extendedProps?.data?.amount || data?.data?.extendedProps?.data?.initial_amount | currency:'NGN' }}</div>
+    </div>
+
+    <div class="left-right">
+        <div class="name">Verification</div>
+        <div class="value orange">Advanced Verification</div>
+    </div>
+    
+    <div>
+        <button class="ripple-button orange-button" (click)="closeDialog()">Close</button>
+    </div>
+</div>

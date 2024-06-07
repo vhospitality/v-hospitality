@@ -1,0 +1,128 @@
+@import "../../../../../assets/css/styles/account-page.scss";
+
+.form {
+  .form-field {
+    .full-width {
+      width: 474px;
+    }
+  }
+}
+
+.form-container {
+  grid-gap: 5px !important;
+  justify-content: left !important;
+  flex-direction: column;
+}
+
+.flex-form2 {
+  padding: 1rem;
+  width: 550px;
+  margin-bottom: 1rem;
+  border: 2px solid #eaecf0;
+  background: var(--white);
+  transition: all 0.3s ease-in-out;
+}
+
+.active,
+.flex-form2:hover {
+  border: 2px solid var(--orange-text);
+  background: #fcdfd1;
+
+  .card-image {
+    .card-num {
+      color: #8f380e !important;
+    }
+
+    .exp {
+      color: #ef5e17 !important;
+    }
+
+    .set-default {
+      .set {
+        color: #f16e2e !important;
+      }
+    }
+  }
+}
+
+.card2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+  width: 100% !important;
+
+  .card-image {
+    display: flex;
+    justify-content: left;
+    align-items: top;
+    grid-gap: 12px;
+    width: 100%;
+
+    .card-details {
+      .card-num {
+        color: #344054;
+        font-family: var(--mark-font);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+      }
+
+      .exp {
+        color: #475467;
+        font-family: var(--mark-font);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+      }
+
+      .set-default {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        grid-gap: 12px;
+        margin-top: 8px;
+
+        .set {
+          color: #475467;
+          font-family: var(--mark-font);
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+        }
+
+        .edit {
+          color: #bf4b12;
+          font-family: var(--mark-font);
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  .small-img {
+    img {
+      width: 1rem !important;
+      height: 1rem !important;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .flex-form2 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .form {
+    .form-field {
+      .full-width {
+        width: 100%;
+      }
+    }
+  }
+}

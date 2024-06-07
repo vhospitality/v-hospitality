@@ -1,0 +1,79 @@
+<div class="wrapper">
+    <div class="title-container">
+        <div>
+            <div class="title">Set your house rules</div>
+            <div class="desc">Guests are expected to follow your rules, and can be removed from V-Hospitality if they cause issues.</div>
+        </div>
+
+        <div class="buttons">
+            <button class="ripple-button edit" (click)="edit(13)">
+                Edit
+            </button>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div *ngFor="let d of listingDetails?.houseRules;">
+            <div class="card active">
+                <img class="check-img" src="assets/icons/checkbox_base.svg" alt=""/>
+                <span>{{ d?.name || d }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-container">
+        <form class="form" novalidate [formGroup]="feedbackForm" id="ngForm" #fform="ngForm">
+
+            <div class="form-container">
+                <div class="label-p">Check-in time from</div>
+                <mat-form-field class="half-width" appearance="outline">
+                    <input matInput formControlName="checkin" placeholder="Select a time" type="time" step="2">
+                    <button mat-icon-button  matPrefix class="ripple-button" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <g clip-path="url(#clip0_1941_46647)">
+                            <path d="M9.99984 4.99984V9.99984L13.3332 11.6665M18.3332 9.99984C18.3332 14.6022 14.6022 18.3332 9.99984 18.3332C5.39746 18.3332 1.6665 14.6022 1.6665 9.99984C1.6665 5.39746 5.39746 1.6665 9.99984 1.6665C14.6022 1.6665 18.3332 5.39746 18.3332 9.99984Z" stroke="#667085" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_1941_46647">
+                                <rect width="20" height="20" fill="white"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+                    </button>
+                    <mat-error>{{formErrors.checkin}}</mat-error>
+                </mat-form-field>
+            </div>
+    
+
+            <div class="form-container">
+                <div class="label-p">Checkout time</div>
+                <mat-form-field class="half-width" appearance="outline">
+                    <input matInput formControlName="checkout" placeholder="Select a time" type="time" step="2">
+                    <button mat-icon-button matPrefix class="ripple-button" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <g clip-path="url(#clip0_1941_46647)">
+                            <path d="M9.99984 4.99984V9.99984L13.3332 11.6665M18.3332 9.99984C18.3332 14.6022 14.6022 18.3332 9.99984 18.3332C5.39746 18.3332 1.6665 14.6022 1.6665 9.99984C1.6665 5.39746 5.39746 1.6665 9.99984 1.6665C14.6022 1.6665 18.3332 5.39746 18.3332 9.99984Z" stroke="#667085" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_1941_46647">
+                                <rect width="20" height="20" fill="white"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+                    </button>
+                    <mat-error>{{formErrors.checkout}}</mat-error>
+                </mat-form-field>
+            </div>
+
+        </form>
+    </div>
+
+    <hr>
+   
+    <div class="card-container">
+        <button type="button" form="ngForm" (click)="onSubmit()" class="ripple-button orange-button">
+            <span *ngIf="!loading">Save</span>
+            <div *ngIf="loading" class="loader-white"></div>
+        </button>
+    </div>
+</div>

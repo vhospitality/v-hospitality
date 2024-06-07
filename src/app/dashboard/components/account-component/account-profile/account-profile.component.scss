@@ -1,0 +1,14 @@
+@import "../../../../../assets/css/styles/account-page.scss";
+
+.text-red-400 {
+  margin-top: -1.5rem;
+
+  .block {
+    font-size: 0.85rem;
+    color: var(--error-700);
+
+    &.text-primary {
+      color: var(--success-700);
+    }
+  }
+}

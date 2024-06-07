@@ -1,0 +1,116 @@
+<div class="wrapper">
+    <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm">
+
+        <!-- <div class="title">Price Range</div>
+        <div class="flex">
+            <div class="flex-form">
+
+                <mat-form-field class="full-width" appearance="outline">
+                    <input matInput formControlName="min" type="number" placeholder="Minimum price">
+                </mat-form-field>
+                
+                <mat-form-field class="full-width" appearance="outline">
+                    <input matInput formControlName="max" type="number" placeholder="Maximum price">
+                </mat-form-field>
+
+            </div>
+        </div> -->
+
+        <div class="form-field">
+            <div class="label">Location</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input #addresstext matInput formControlName="state" type="text" placeholder="Location">
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Search</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="search" type="text" placeholder="Search">
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Available from</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput [matDatepicker]="datepicker" formControlName="date" placeholder="Available from">
+                <button mat-icon-button (click)="datepicker.open()"  matPrefix class="ripple-button" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M17.5 8.33268H2.5M13.3333 1.66602V4.99935M6.66667 1.66602V4.99935M6.5 18.3327H13.5C14.9001 18.3327 15.6002 18.3327 16.135 18.0602C16.6054 17.8205 16.9878 17.4381 17.2275 16.9677C17.5 16.4329 17.5 15.7328 17.5 14.3327V7.33268C17.5 5.93255 17.5 5.23249 17.2275 4.69771C16.9878 4.2273 16.6054 3.84485 16.135 3.60517C15.6002 3.33268 14.9001 3.33268 13.5 3.33268H6.5C5.09987 3.33268 4.3998 3.33268 3.86502 3.60517C3.39462 3.84485 3.01217 4.2273 2.77248 4.69771C2.5 5.23249 2.5 5.93255 2.5 7.33268V14.3327C2.5 15.7328 2.5 16.4329 2.77248 16.9677C3.01217 17.4381 3.39462 17.8205 3.86502 18.0602C4.3998 18.3327 5.09987 18.3327 6.5 18.3327Z" stroke="#667085" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <mat-datepicker #datepicker>
+                    <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button mat-raised-button matDatepickerApply>Apply</button>
+                    </mat-datepicker-actions>
+                </mat-datepicker>
+            </mat-form-field>
+        </div> 
+    </form>
+
+    <!-- <div class="title">Type of place</div>
+    <div class="select">
+        <div class="toggle" *ngFor="let p of placeType;">
+            <mat-slide-toggle
+                [(ngModel)]="p.value">
+            </mat-slide-toggle>
+            
+            <div>
+                <div class="t">{{ p?.title }}</div>
+                <div class="sub-t">{{ p?.subTitle }}</div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div class="title">Bed Rooms</div>
+    <div class="boxes">
+        <div class="box" [class.active]="bedroomNumber=='1'" (click)="bedroomNumber='1'">1</div>
+        <div class="box" [class.active]="bedroomNumber=='2'" (click)="bedroomNumber='2'">2</div>
+        <div class="box" [class.active]="bedroomNumber=='3'" (click)="bedroomNumber='3'">3</div>
+        <div class="box" [class.active]="bedroomNumber=='4'" (click)="bedroomNumber='4'">4</div>
+        <div class="box" [class.active]="bedroomNumber=='5'" (click)="bedroomNumber='5'">5+</div>
+    </div>
+
+    <div class="title">Bathrooms</div>
+    <div class="boxes">
+        <div class="box" [class.active]="bathroomNumber=='1'" (click)="bathroomNumber='1'">1</div>
+        <div class="box" [class.active]="bathroomNumber=='2'" (click)="bathroomNumber='2'">2</div>
+        <div class="box" [class.active]="bathroomNumber=='3'" (click)="bathroomNumber='3'">3</div>
+        <div class="box" [class.active]="bathroomNumber=='4'" (click)="bathroomNumber='4'">4</div>
+        <div class="box" [class.active]="bathroomNumber=='5'" (click)="bathroomNumber='5'">5+</div>
+    </div> -->
+
+    <!-- <div class="title">Amenities</div>
+    <div class="amenities">
+        <div *ngFor="let d of amenities;">
+            <div class="card cursor-pointer" [class.active]="d.value" (click)="changeActive(d?.uuid)">
+                <img *ngIf="!d?.value" src="assets/icons/null-check.svg" alt="">
+                <img *ngIf="d?.value" src="assets/icons/orange-check.svg" alt="">
+                <div>{{ d?.name }}</div>
+            </div>
+        </div>
+    </div> -->
+
+     <div class="title">Booking options</div>
+    <div class="select">
+        <div class="toggle" *ngFor="let p of bookingOptions;">
+            <mat-slide-toggle
+                [(ngModel)]="p.value">
+            </mat-slide-toggle>
+            
+            <div>
+                <div class="t">{{ p?.title }}</div>
+                <div class="sub-t">{{ p?.subTitle }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="code-button">
+        <button class="ripple-button cancel" type="button" (click)="clearFilter()">Clear</button>
+        <button class="ripple-button verify" (click)="sendForSearch()">
+            <span>Filter</span>
+        </button>
+    </div>
+
+</div>

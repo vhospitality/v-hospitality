@@ -1,0 +1,129 @@
+<div class="wrapper">
+
+    <div class="profile-image">
+        <img [src]="image || 'assets/images/profile.png'" alt="" loading="eager">
+        <button mat-icon-button (click)="visible=true"><i class="material-symbols-rounded">edit</i></button>
+
+        <input style="display: none" type="file" #fileDropRef id="fileDropRef" (change)="fileBrowseHandler($event)"
+            accept="image/png, image/jpeg" />
+        <button (click)="fileDropRef.click()" class="edit-button pi pi-pencil" mat-icon-button></button>
+    </div>
+
+    <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-field">
+            <div class="label">First name*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="firstName" minlength="3" type="text">
+                <mat-error>{{ formErrors.firstName }}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Last name*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="lastName" minlength="3" type="text">
+                <mat-error>{{ formErrors.lastName }}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Phone number*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <ngx-mat-intl-tel-input [preferredCountries]="['ng', 'us']" [enablePlaceholder]="true"
+                    [formControl]="feedbackForm?.controls?.phone" [enableSearch]="true"
+                    [label]="'mobile number'" describedBy="phoneInput" #phone></ngx-mat-intl-tel-input>
+                <mat-error>
+                    {{ feedbackForm?.controls?.phone?.errors?.validatePhoneNumber ? 'Invalid Number' : formErrors.phone
+                    }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Email address*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="email" type="email" email>
+                <mat-error>{{ formErrors.email }}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="flex">
+            <div class="label">Birthday*</div>
+            <div class="flex-form">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-select matInput formControlName="day" placeholder="Day">
+                        <mat-option [value]="d?.day" *ngFor="let d of days">{{ d?.day }}</mat-option>
+                    </mat-select>
+                    <mat-error>{{ formErrors.day }}</mat-error>
+                    <mat-hint>Day</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-select matInput formControlName="month" placeholder="Month">
+                        <mat-option [value]="mon?.viewValue" *ngFor="let mon of months">{{ mon?.value }}</mat-option>
+                    </mat-select>
+                    <mat-error>{{ formErrors.month }}</mat-error>
+                    <mat-hint>Month</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-select matInput formControlName="year" placeholder="Year">
+                        <mat-option [value]="year?.year" *ngFor="let year of years">{{ year?.year }}</mat-option>
+                    </mat-select>
+                    <mat-error>{{ formErrors.year }}</mat-error>
+                    <mat-hint>Year</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="form-field">
+            <div class="label">New password*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input formControlName="newPassword" matInput [type]="hide ? 'password' : 'tel'" required />
+                <mat-icon mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+
+            <ul class="text-red-400 text-sm" *ngIf="passwordFormField?.dirty">
+                <li class="block" [ngClass]="{'text-primary': passwordFormField?.value?.match('^(?=.*[A-Z])')}">At
+                    least one uppercase
+                    letter.</li>
+                <li class="block" [ngClass]="{'text-primary': passwordFormField?.value?.match('(?=.*[a-z])')}">At
+                    least one lowercase
+                    letter.</li>
+                <li class="block" [ngClass]="{'text-primary': passwordFormField?.value?.match('(.*[0-9].*)')}">At
+                    least one
+                    digit.</li>
+                <li class="block" [ngClass]="{'text-primary': passwordFormField?.value?.match('(?=.*[!@#$%^&*])')}">At
+                    least one
+                    special
+                    character.</li>
+                <li class="block" [ngClass]="{'text-primary': passwordFormField?.value?.match('.{8,}')}">At least
+                    8 characters
+                    long.</li>
+            </ul>
+        </div>
+
+        <div class="form-field">
+            <div class="label">Confirm password*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input #passwordWithValidation formControlName="confirmPassword" matInput
+                    [type]="hide2 ? 'password' : 'tel'" required />
+                <mat-icon mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide2 password'"
+                    [attr.aria-pressed]="hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error>{{ formErrors.confirmPassword }}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <password-strength-meter [password]="feedbackForm.value.newPassword" />
+
+        <div class="submit-p">
+            <button type="submit" class="submit ripple-button">
+                <span *ngIf="!loading">Continue to verify identity</span>
+                <div *ngIf="loading" class="loader-white"></div>
+            </button>
+        </div>
+
+    </form>
+</div>

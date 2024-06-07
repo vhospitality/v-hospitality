@@ -1,0 +1,141 @@
+<div class="wrapper">
+
+    <div class="flex-container">
+        <div class="title-container">
+            <div>
+                <div class="title">How you'll get paid</div>
+                <div class="desc">Add at least one payout method so we know where to send your money.</div>
+            </div>
+
+            <div class="buttons" *ngIf="actionType === 'add'">
+                <button class="ripple-button edit" type="button" (click)="cancel()">
+                    Cancel
+                </button>
+                <button type="button" class="ripple-button save" form="ngForm" (click)="onSubmit()">
+                    <span *ngIf="!savingPayout">Save</span>
+                    <div *ngIf="savingPayout" class="loader-white"></div>
+                </button>
+            </div>
+
+            <!-- <div class="buttons" *ngIf="actionType === 'save'">
+                <button type="button" class="ripple-button save" form="ngForm" (click)="initiatePayout()">
+                    <span *ngIf="!savingPayout">Initiate payout</span>
+                    <div *ngIf="savingPayout" class="loader-orange"></div>
+                </button>
+            </div> -->
+        </div>
+
+        <form *ngIf="actionType === 'add'" class="form" novalidate [formGroup]="feedbackForm" id="ngForm"
+            #fform="ngForm">
+
+            <div class="form-field">
+                <div class="label">Bank name</div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <input type="text" matInput formControlName="bankName" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" matAutocomplete [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-hint align="end" *ngIf="loadingBanks && options?.length === 0">Fetching list of
+                        banks...</mat-hint>
+                    <mat-hint align="end" *ngIf="!loadingBanks && options?.length === 0"
+                        (click)="getBankList()">Reload</mat-hint>
+                    <button mat-icon-button matSuffix><img src="assets/icons/caret-down.svg" alt="" /></button>
+                    <mat-error>{{formErrors.bankName}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <div class="label">Account number</div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <input matInput formControlName="accountNumber" type="tel" minlength="10" maxlength="10">
+                    <mat-error>{{formErrors.accountNumber}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <div class="label">Account name</div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <input matInput formControlName="accountName" type="text">
+                    <mat-error>{{formErrors.accountName}}</mat-error>
+                    <mat-hint *ngIf="fetchingDetails">Fetching account details...</mat-hint>
+                    <mat-hint *ngIf="!fetchingDetails">{{ accountDetailsError }}</mat-hint>
+                </mat-form-field>
+            </div>
+        </form>
+
+        <div class="form" *ngIf="loadingPayouts && payouts?.length <= 0">
+            <p-skeleton height="100px" width="100%" borderRadius="10px"></p-skeleton>
+            <p></p>
+            <p-skeleton height="100px" width="100%" borderRadius="10px"></p-skeleton>
+            <p></p>
+            <p-skeleton height="100px" width="100%" borderRadius="10px"></p-skeleton>
+            <p></p>
+            <p-skeleton height="100px" width="100%" borderRadius="10px"></p-skeleton>
+            <p></p>
+        </div>
+
+        <!-- saved cards -->
+        <div class="form" *ngIf="!loadingPayouts && payouts?.length > 0 && actionType === 'save'">
+            <div class="form-container">
+
+                <div class="flex-form2 cursor-pointer" *ngFor="let card of payouts; let i=index"
+                    [class.active]="card?.is_default === 1">
+                    <div class="card2">
+                        <div class="card-image">
+                            <div class="card-details">
+                                <div class="card-num break-word">{{ card?.bank_name }}</div>
+                                <div class="exp break-word">{{ card?.account_name }}</div>
+                                <div class="set-default">
+                                    <button mat-button class="set" type="button" (click)="changeActiveCard(card)">
+                                        <span *ngIf="updatingPayout !== card?.uuid">Set as default</span>
+                                        <div *ngIf="updatingPayout == card?.uuid" class="loader-orange"></div>
+                                    </button>
+                                    <button (click)="deleteCard(card)" mat-button class="edit" type="button">
+                                        <span *ngIf="deletingPayout !== card?.uuid">Delete</span>
+                                        <div *ngIf="deletingPayout == card?.uuid" class="loader-orange"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="small-img">
+                            <img *ngIf="card?.is_default === 0" src="assets/icons/null-check.svg" alt="">
+                            <img *ngIf="card?.is_default === 1" src="assets/icons/orange-check.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="add-card">
+                    <button mat-button type="button" (click)="changeActive('add')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M9.9974 4.16797V15.8346M4.16406 10.0013H15.8307" stroke="#475467"
+                                stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Add new withdrawal account</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- form -->
+    <div>
+        <button *ngIf="payouts?.length === 0 && actionType !== 'add'" (click)="changeActive('add')" type="button"
+            class="ripple-button orange-button">Add payouts</button>
+        <button *ngIf="payouts?.length > 0 && actionType !== 'add'" (click)="initiatePayout()" type="button"
+            class="ripple-button orange-button">Initiate payout</button>
+    </div>
+
+    <div class="buttons2" *ngIf="actionType === 'add'">
+        <button type="button" class="ripple-button edit" (click)="actionType = 'save'">
+            Cancel
+        </button>
+        <button type="button" class="ripple-button save" form="ngForm" (click)="onSubmit()">
+            <span *ngIf="!savingPayout">Save</span>
+            <div *ngIf="savingPayout" class="loader-white"></div>
+        </button>
+    </div>
+</div>

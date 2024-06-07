@@ -1,0 +1,75 @@
+<div class="checkbox-wrapper" *ngIf="data.length <= 0">
+    <div class="title-container">
+        <div class="title">What kind of amenities are available to guests?</div>
+    </div>
+
+    <form class="form">
+
+        <div class="form-field">
+            <div class="label"><p-skeleton width="12rem"></p-skeleton></div>
+            <p></p>
+            <p-skeleton width="100%" height="51px"></p-skeleton>
+        </div>
+    </form>
+
+    <p></p>
+    <div class="card-container2">
+        <div>
+            <div>
+                <p-skeleton width="100%" height="56px" borderRadius="0"></p-skeleton>
+            </div>
+        </div>
+        <div>
+            <div>
+                <p-skeleton width="100%" height="56px" borderRadius="0"></p-skeleton>
+            </div>
+        </div>
+        <div>
+            <div>
+                <p-skeleton width="100%" height="56px" borderRadius="0"></p-skeleton>
+            </div>
+        </div>
+        <div>
+            <div>
+                <p-skeleton width="100%" height="56px" borderRadius="0"></p-skeleton>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="checkbox-wrapper" *ngIf="data.length > 0">
+
+    <div class="title-container">
+        <div class="title">What kind of amenities are available to guests?</div>
+    </div>
+
+    <div class="error-message" *ngIf="error">{{ error }}</div>
+
+    <div class="category">
+        <div *ngFor="let c of data" class="category2">
+            <div class="name">{{ c?.name }}</div>
+            <div class="card-container2">
+                <div *ngFor="let d of c?.amenities">
+                    <div class="card cursor-pointer" [class.active]="selectedUUID.includes(d.uuid)" (click)="changeActive(d?.uuid)">
+                        <!-- <mat-checkbox [(ngModel)]="d.value" (click)="changeActive(d?.uuid)">
+                            <span class="break-word">{{ d?.name }}</span>
+                        </mat-checkbox> -->
+                        <img *ngIf="!selectedUUID.includes(d.uuid)" src="assets/icons/null-check.svg" alt="">
+                        <img *ngIf="selectedUUID.includes(d.uuid)" src="assets/icons/orange-check.svg" alt="">
+                        <div>
+                            <i class="material-symbols-rounded" style="text-transform: lowercase; font-style: normal;" *ngIf="d?.icon">{{d?.icon}}</i>
+                            <span>{{ d?.name }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="loader22" *ngIf="loading">
+        <mat-spinner></mat-spinner>
+        <!-- <div class="loader-orange" *ngIf="loading"></div> -->
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="wrapper">
+    <div class="title">Where you’ll be</div>
+    <div class="desc">{{ data?.street_address }}</div>
+
+    <div class="map" *ngIf="data">
+        <app-map [data]="{geo: [{latitude: data?.latitude, longitude: data?.longitude}], size: {width: '100%', height: '400px'}}"></app-map>
+    </div>
+</div>

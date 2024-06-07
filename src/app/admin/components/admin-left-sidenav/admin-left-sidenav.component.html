@@ -1,0 +1,14 @@
+<ngx-loading-bar [color]="'#5049ed'" height="7px"></ngx-loading-bar>
+<div>
+    <mat-sidenav-container class="sidenav-container">
+
+        <mat-sidenav #sidenav hasBackdrop="false" class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+            <app-admin-left-sidenav-list (PrivatesidenavClose)="sidenav.close()"></app-admin-left-sidenav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+</div>

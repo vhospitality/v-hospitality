@@ -1,0 +1,108 @@
+.wrapper {
+  text-align: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+  .title {
+    color: var(--primary-700);
+    text-align: center;
+    font-family: var(--mark-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+  }
+
+  .sub-title {
+    color: var(--gray-900);
+    text-align: center;
+    font-family: var(--display-font);
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.75rem;
+    letter-spacing: -0.045rem;
+    margin-top: 0.7rem;
+    margin-bottom: 1.7rem;
+  }
+
+  .body {
+    color: var(--gray-600);
+    text-align: center;
+    font-family: var(--mark-font);
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.875rem;
+  }
+
+  .about-container {
+    padding: 5rem 4rem;
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+    background: #221e1f;
+
+    .image {
+      border: 1px solid var(--primary-600);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      width: 100%;
+      transition: all 0.4s ease-in-out;
+      background-image: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.1),
+          rgba(0, 0, 0, 0.1)
+        ),
+        url("/assets/images/container.png");
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      div {
+        padding: 10rem 3rem;
+        color: var(--gray-25);
+        text-align: center;
+        font-family: var(--display-font);
+        font-size: 2.25rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 2.75rem;
+        letter-spacing: -0.045rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 993px) {
+  .wrapper {
+    .about-container {
+      padding: 3rem 2rem;
+
+      .image {
+        div {
+          padding: 6rem 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .wrapper {
+    .about-container {
+      padding: 2rem 1rem;
+
+      .image {
+        div {
+          padding: 4rem 1rem;
+        }
+      }
+    }
+  }
+}

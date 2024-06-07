@@ -1,0 +1,52 @@
+<div class="sidenav-list">
+
+    <div>
+        <button mat-button routerLinkActive="active" [routerLink]="['/home']" class="ripple-button2"
+            (click)="closeSidenav()">Home</button>
+    </div>
+
+    <div *ngIf="isLogin && !switchGuest">
+        <button mat-button class="ripple-button2" routerLinkActive="active" [routerLink]="['/host-earnings']"
+            (click)="closeSidenav()">Earnings</button>
+    </div>
+
+    <div *ngIf="isLogin && switchGuest">
+        <button mat-button class="ripple-button2" routerLinkActive="active" [routerLink]="['/transaction-history']"
+            (click)="closeSidenav()">Payments</button>
+    </div>
+
+    <div *ngIf="isLogin && !switchGuest">
+        <button mat-button class="ripple-button2" routerLinkActive="active" [routerLink]="['/host-listing']"
+            (click)="closeSidenav()">Listing</button>
+    </div>
+
+    <div>
+        <button mat-button class="ripple-button2" routerLinkActive="active" [routerLink]="['/host-subscription']"
+            (click)="closeSidenav()">Host your home</button>
+    </div>
+
+    <div *ngIf="isLogin && !switchGuest">
+        <button mat-button class="ripple-button2" routerLinkActive="active" [routerLink]="['/host-reservations']"
+            (click)="closeSidenav()">Reservations</button>
+    </div>
+
+    <div *ngIf="isLogin && switchGuest">
+        <button mat-button class="ripple-button2" routerLinkActive="active" [routerLink]="['/bookings']"
+            (click)="closeSidenav()">Bookings</button>
+    </div>
+
+
+    <div *ngIf="!isLogin">
+        <button mat-button class="ripple-button2" (click)="closeSidenav(); openDialog('', 'login2')">Login</button>
+    </div>
+
+    <div *ngIf="!isLogin">
+        <button mat-button class="ripple-button2" (click)="closeSidenav(); openDialog('', 'login')">Create an
+            account</button>
+    </div>
+
+    <div *ngIf="isLogin">
+        <button mat-button class="ripple-button2" (click)="closeSidenav(); logout()">Logout</button>
+    </div>
+
+</div>

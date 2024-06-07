@@ -1,0 +1,52 @@
+<div class="wrapper">
+    <div class="title">Meet the guest</div>
+
+    <div class="host">
+        <div class="text-container">
+            <img class="profile" [defaultImage]="defaultImage"
+                [lazyLoad]="data?.user?.pictures?.length > 0 ? data?.user?.pictures[0] : defaultImage" [decode]="true"
+                [alt]="" />
+            <div class="name-container">
+                <div class="name">
+                    {{ data?.user?.first_name }} {{ data?.user?.last_name }}
+                    <img src="assets/icons/tick.svg" alt="check">
+                </div>
+                <!-- <div class="email">{{ data?.user?.email }}</div> -->
+                <!-- <div class="phone">{{ data?.user?.phone }}</div> -->
+            </div>
+        </div>
+
+        <button *ngIf="data?.user?.uuid === userData?.uuid" [matMenuTriggerFor]="menu" type="button" mat-icon-button
+            class="view">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="black">
+                <path
+                    d="M9.99984 10.834C10.4601 10.834 10.8332 10.4609 10.8332 10.0007C10.8332 9.54041 10.4601 9.16732 9.99984 9.16732C9.5396 9.16732 9.1665 9.54041 9.1665 10.0007C9.1665 10.4609 9.5396 10.834 9.99984 10.834Z"
+                    stroke="black" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                    d="M9.99984 5.00065C10.4601 5.00065 10.8332 4.62755 10.8332 4.16732C10.8332 3.70708 10.4601 3.33398 9.99984 3.33398C9.5396 3.33398 9.1665 3.70708 9.1665 4.16732C9.1665 4.62755 9.5396 5.00065 9.99984 5.00065Z"
+                    stroke="black" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                    d="M9.99984 16.6673C10.4601 16.6673 10.8332 16.2942 10.8332 15.834C10.8332 15.3737 10.4601 15.0007 9.99984 15.0007C9.5396 15.0007 9.1665 15.3737 9.1665 15.834C9.1665 16.2942 9.5396 16.6673 9.99984 16.6673Z"
+                    stroke="black" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <button *ngIf="data.status === 'checked_in' && data.payment_status === 'success'" mat-menu-item
+                (click)="openDialog({data: data, requestType: 'check-out', requestMessage: 'Are you sure you want to check out?'})">Check
+                out</button>
+            <button
+                *ngIf="data.status !== 'checked_in' && data.status !== 'checked_out' && data.payment_status === 'success'"
+                mat-menu-item
+                (click)="openDialog({data: data, requestType: 'check-in', requestMessage: 'Are you sure you want to check in?'})">Check
+                in</button>
+            <button
+                *ngIf="data.status !== 'cancelled' && data.status !== 'checked_in' && data.status !== 'checked_out' && data.status !== 'declined'"
+                mat-menu-item
+                (click)="openDialog({data: data, requestType: 'decline', requestMessage: 'Are you sure you want to cancel your booking?'})"><span
+                    style="color: red;">Cancel</span></button>
+        </mat-menu>
+    </div>
+
+
+</div>

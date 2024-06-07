@@ -1,0 +1,39 @@
+<div class="wrapper">
+
+    <div class="image" *ngIf="data?.type !== 'summary'">
+        <img [defaultImage]="dafaultImage" [lazyLoad]="data?.listing?.pictures?.length > 0 ? data?.listing?.pictures[0]?.url : dafaultImage" [decode]="true" [alt]="data?.title"/>
+    </div>
+
+    <div class="image" *ngIf="data?.type === 'summary'">
+        <img [defaultImage]="dafaultImage" [lazyLoad]="data?.photos?.files?.length > 0 ? data?.photos?.files[0]?.url : dafaultImage" [decode]="true" [alt]="data?.title"/>
+    </div>
+
+    <div class="price truncate" *ngIf="data?.type === 'summary'">
+        <span>{{ data?.price?.price | currency:'NGN'}}</span>
+        <span>per night</span>
+    </div>
+
+    <div class="title">{{ data?.listing?.title || data?.propertyDetails?.title }}</div>
+
+    <div class="sub-title truncate2" *ngIf="data?.type === 'summary'">{{ data?.listing?.description || data?.propertyDetails?.description }}</div>
+
+    <div class="date" *ngIf="data?.type !== 'summary'">{{ data?.check_in | date }} - {{ data?.check_out | date }} • {{ data?.total_guests }} guests</div>
+
+    <div class="other" *ngIf="data?.type !== 'summary'">
+        <div>Paid today</div>
+        <div>{{ data?.total | currency:'NGN'}}</div>
+    </div>
+
+    <hr *ngIf="data?.type !== 'summary'">
+
+    <div class="other" *ngIf="data?.type !== 'summary'">
+        <div>Reference code</div>
+        <div>{{ data?.reference }}</div>
+    </div>
+
+    <div class="submit-p" *ngIf="data?.type !== 'summary'">
+        <button type="submit" [routerLink]="['/bookings']" class="submit ripple-button">
+            <span>View bookings</span>
+        </button>
+    </div>
+</div>

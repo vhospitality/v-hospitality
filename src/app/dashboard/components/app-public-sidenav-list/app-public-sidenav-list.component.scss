@@ -1,0 +1,79 @@
+.sidenav-list {
+  margin-top: 50px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  div {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  .ripple-button2 {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--white-text);
+    font-family: var(--mark-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    border-radius: unset;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: 44px;
+    padding: 12px;
+    border: 1px solid var(--black);
+    transition: all 0.3s ease-in-out;
+
+    img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 70px;
+      height: 70px;
+      border: 1px solid #facfb9;
+      border-radius: 50%;
+    }
+  }
+
+  .ripple-button2:hover {
+    border: 1px solid var(--white-text);
+  }
+
+  button {
+    svg path {
+      fill: var(--base-white);
+    }
+
+    img {
+      border: 1px solid #facfb9;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  button:hover {
+    svg path {
+      fill: var(--primary-200);
+    }
+  }
+
+  button.active {
+    svg path {
+      fill: var(--primary-200);
+    }
+  }
+
+  .ripple-button2.active {
+    border: 1px solid var(--white-text);
+  }
+}

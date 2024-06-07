@@ -1,0 +1,131 @@
+<div class="wrapper" *ngIf="!listingDetails">
+    <div class="image">
+        <p-skeleton height="100%" width="100%"></p-skeleton>
+    </div>
+
+    <div class="details">
+
+        <p-skeleton borderRadius="10px" height="15px" width="100%"></p-skeleton>
+
+        <div class="profile">
+            <p-skeleton borderRadius="50%" size="50px" height="50px" width="50px"></p-skeleton>
+            <div class="name">
+                <div><p-skeleton borderRadius="10px" height="10px" width="100px"></p-skeleton></div>
+                <p></p>
+                <div><p-skeleton borderRadius="10px" height="15px" width="150px"></p-skeleton></div>
+            </div>
+        </div>
+
+        <div class="date-p">
+            <div class="date">
+                <div><p-skeleton borderRadius="10px" height="10px" width="90px"></p-skeleton></div>
+                <button class="ripple-button" type="button">
+                    <p-skeleton borderRadius="50%" size="20px" height="20px" width="20px"></p-skeleton>
+                    <span><p-skeleton borderRadius="10px" height="10px" width="70px"></p-skeleton></span>
+                </button>
+            </div>
+
+            <div class="date">
+                <div><p-skeleton borderRadius="10px" height="10px" width="90px"></p-skeleton></div>
+                <button class="ripple-button" type="button">
+                    <p-skeleton borderRadius="50%" size="20px" height="20px" width="20px"></p-skeleton>
+                    <span><p-skeleton borderRadius="10px" height="10px" width="70px"></p-skeleton></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="bedroom-p">
+            <div class="bedroom">
+                <div class="bedroom-title"><p-skeleton borderRadius="10px" height="10px" width="80px"></p-skeleton>
+                </div>
+            </div>
+
+            <div class="bedroom">
+                <div class="bedroom-title"><p-skeleton borderRadius="10px" height="10px" width="80px"></p-skeleton>
+                </div>
+            </div>
+
+            <div class="bedroom">
+                <div class="bedroom-title"><p-skeleton borderRadius="10px" height="10px" width="80px"></p-skeleton>
+                </div>
+            </div>
+        </div>
+
+        <div class="description">
+            <p-skeleton borderRadius="10px" height="100px" width="100%"></p-skeleton>
+        </div>
+
+        <div class="view-detail-p">
+            <button type="button" class="view-detail ripple-button"><p-skeleton borderRadius="10px" height="10px"
+                    width="90px"></p-skeleton></button>
+        </div>
+    </div>
+</div>
+
+
+<div class="wrapper" *ngIf="listingDetails">
+    <div class="image">
+        <img [defaultImage]="defaultImage"
+            [lazyLoad]="listingDetails?.listing?.pictures?.length > 0 ? listingDetails?.listing?.pictures[0]?.url : defaultImage"
+            [decode]="true" alt="" />
+    </div>
+
+    <div class="details">
+
+        <div class="title">{{ listingDetails?.listing?.title }}</div>
+
+        <div class="profile">
+            <img [defaultImage]="defaultImage"
+                [lazyLoad]="listingDetails?.host?.pictures?.length > 0 ? listingDetails?.host?.pictures[0]?.url : defaultImage"
+                [decode]="true" alt="" />
+            <div class="name">
+                <div>Hosted by</div>
+                <div>{{ listingDetails?.host?.first_name }} {{ listingDetails?.host?.last_name }}</div>
+            </div>
+        </div>
+
+        <div class="date-p">
+            <div class="date">
+                <div>Date</div>
+                <button class="ripple-button" type="button">
+                    <img src="assets/icons/calendar.svg" alt="" />
+                    <span>{{ listingDetails?.created_at | date }}</span>
+                </button>
+            </div>
+
+            <div class="date">
+                <div>Guests</div>
+                <button class="ripple-button" type="button">
+                    <img src="assets/icons/user-circle.svg" alt="" />
+                    <span>{{ totalGuest() }} Guests</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="bedroom-p">
+            <div class="bedroom">
+                <div class="bedroom-title">{{ listingDetails?.listing?.no_of_bedrooms }} Bedroom{{
+                    listingDetails?.listing?.no_of_bedrooms > 1 ? 's' : '' }}</div>
+            </div>
+
+            <div class="bedroom">
+                <div class="bedroom-title">{{ listingDetails?.listing?.no_of_beds }} Bed{{
+                    listingDetails?.listing?.no_of_beds > 1 ? 's' : '' }}</div>
+            </div>
+
+            <div class="bedroom">
+                <div class="bedroom-title">{{ totalBathroom() }} Bathroom{{ totalBathroom() > 1 ? 's' : '' }}</div>
+            </div>
+        </div>
+
+        <div class="description">
+            {{ listingDetails?.listing?.description }}
+        </div>
+
+        <div class="view-detail-p">
+            <button type="button" [routerLink]="['/booking-details/']"
+                [queryParams]="{ booking: listingDetails?.uuid, listing: listingDetails?.listing?.uuid }"
+                class="view-detail ripple-button">View detail</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,162 @@
+<div class="wrapper">
+    <div class="title-container">
+        <div>
+            <div class="title">Notification settings</div>
+            <div class="desc">We may still send you important notifications about your account outside of your
+                notification settings.</div>
+        </div>
+
+        <div class="buttons">
+            <button type="button" [disabled]="!touched" class="ripple-button orange-button" (click)="saveNotification()">
+                <span *ngIf="!loadingNotification">Save</span>
+                <div *ngIf="loadingNotification" class="loader-orange"></div>
+            </button>
+        </div>
+    </div>
+
+    <div class="card-container card-container2" *ngIf="loading">
+        <div class="card">
+            <div class="title"><p-skeleton height="15px" width="220px" borderRadius="20px"></p-skeleton></div>
+            <div class="sub-title break-word"><p-skeleton height="15px" borderRadius="20px" width="300px"></p-skeleton>
+            </div>
+        </div>
+        <div>
+            <div class="card2">
+                <p-skeleton height="30px" width="230px" borderRadius="20px"></p-skeleton>
+            </div>
+            <div class="card2">
+                <p-skeleton height="30px" width="230px" borderRadius="20px"></p-skeleton>
+            </div>
+            <div class="card2">
+                <p-skeleton height="30px" width="230px" borderRadius="20px"></p-skeleton>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container card-container2" *ngIf="loading">
+        <div class="card">
+            <div class="title"><p-skeleton height="15px" width="220px" borderRadius="20px"></p-skeleton></div>
+            <div class="sub-title break-word"><p-skeleton height="15px" borderRadius="20px" width="300px"></p-skeleton>
+            </div>
+        </div>
+        <div>
+            <div class="card2">
+                <p-skeleton height="30px" width="230px" borderRadius="20px"></p-skeleton>
+            </div>
+            <div class="card2">
+                <p-skeleton height="30px" width="230px" borderRadius="20px"></p-skeleton>
+            </div>
+            <div class="card2">
+                <p-skeleton height="30px" width="230px" borderRadius="20px"></p-skeleton>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card-container card-container2" *ngIf="loading">
+        <div class="card">
+            <div class="title"><p-skeleton height="15px" width="220px" borderRadius="20px"></p-skeleton></div>
+            <div class="sub-title break-word"><p-skeleton height="15px" borderRadius="20px" width="300px"></p-skeleton>
+            </div>
+        </div>
+        <div>
+            <div class="card2">
+                <p-skeleton height="30px" width="230px" borderRadius="20px"></p-skeleton>
+            </div>
+            <div class="card2">
+                <p-skeleton height="30px" width="230px" borderRadius="20px"></p-skeleton>
+            </div>
+            <div class="card2">
+                <p-skeleton height="30px" width="230px" borderRadius="20px"></p-skeleton>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+    <div class="card-container" *ngIf="!loading">
+        <div class="card">
+            <div class="title">Travel tips and offers</div>
+            <div class="sub-title break-word">Inspire your next trip with personalized recommendations and special
+                offers.</div>
+        </div>
+        <div>
+            <div class="card2">
+                <mat-slide-toggle (click)="touched=true" [(ngModel)]="travelBrowserNotification">
+                    Browser notifications
+                </mat-slide-toggle>
+            </div>
+            <div class="card2">
+                <mat-slide-toggle (click)="touched=true" (click)="touched=true" [(ngModel)]="travelEmailNotification">
+                    Email notifications
+                </mat-slide-toggle>
+            </div>
+            <div class="card2">
+                <mat-slide-toggle (click)="touched=true" [(ngModel)]="travelSmsNotification">
+                    SMS notifications
+                </mat-slide-toggle>
+            </div>
+        </div>
+    </div>
+    <hr *ngIf="!loading">
+
+    <div class="card-container" *ngIf="!loading">
+        <div class="card">
+            <div class="title">V-Hospitality updates</div>
+            <div class="sub-title break-word">Stay up to date on the latest news from V-Hospitality, and let us know how
+                we can improve.</div>
+        </div>
+        <div>
+            <div class="card2">
+                <mat-slide-toggle (click)="touched=true" [(ngModel)]="hospitalityBrowserNotification">
+                    Browser notifications
+                </mat-slide-toggle>
+            </div>
+            <div class="card2">
+                <mat-slide-toggle (click)="touched=true" [(ngModel)]="hospitalityEmailNotification">
+                    Email notifications
+                </mat-slide-toggle>
+            </div>
+            <div class="card2">
+                <mat-slide-toggle (click)="touched=true" [(ngModel)]="hospitalitySmsNotification">
+                    SMS notifications
+                </mat-slide-toggle>
+            </div>
+        </div>
+    </div>
+    <hr *ngIf="!loading">
+
+    <div class="card-container" *ngIf="!loading">
+        <div class="card">
+            <div class="title">Reminders</div>
+            <div class="sub-title break-word">These are notifications to remind you of updates you might have missed.
+            </div>
+        </div>
+        <div>
+            <div class="card2">
+                <mat-slide-toggle (click)="touched=true" [(ngModel)]="reminderBrowserNotification">
+                    Browser notifications
+                </mat-slide-toggle>
+            </div>
+            <div class="card2">
+                <mat-slide-toggle (click)="touched=true" [(ngModel)]="reminderEmailNotification">
+                    Email notifications
+                </mat-slide-toggle>
+            </div>
+            <div class="card2">
+                <mat-slide-toggle (click)="touched=true" [(ngModel)]="reminderSmsNotification">
+                    SMS notifications
+                </mat-slide-toggle>
+            </div>
+        </div>
+    </div>
+    <hr *ngIf="!loading">
+
+    <div class="card-container" *ngIf="!loading">
+        <div>
+            <div class="card">
+                <mat-checkbox class="cursor-pointer" [(ngModel)]="subscribeNotification">Unsubscribe from all marketing
+                    emails</mat-checkbox>
+            </div>
+        </div>
+    </div>
+</div>

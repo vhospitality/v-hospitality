@@ -1,0 +1,61 @@
+.wrapper {
+  .cards {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    align-items: top;
+    grid-gap: 32px;
+
+    .card {
+      width: 100%;
+
+      .rating-text {
+        color: #344054;
+        font-family: var(--mark-font);
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+      .rating {
+        .p-rating {
+          display: flex;
+          justify-content: left;
+          align-items: center;
+        }
+
+        .form {
+          mat-form-field.full-width {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+
+  .flex {
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 12px;
+
+    button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cancel {
+      color: #344054;
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 24px;
+    }
+  }
+}

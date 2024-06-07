@@ -1,0 +1,67 @@
+<app-header></app-header>
+
+<div class="wrapper container">
+
+    <div class="back">
+        <button mat-button type="button" [routerLink]="['/bookings']">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M15.8333 9.99984H4.16663M4.16663 9.99984L9.99996 15.8332M4.16663 9.99984L9.99996 4.1665"
+                    stroke="#344054" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>Back to home</span>
+        </button>
+    </div>
+    <div class="back"></div>
+
+    <div class="cards">
+
+        <div class="card">
+            <svg width="75" height="76" viewBox="0 0 75 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M23.4375 38L32.8125 47.375L51.5625 28.625M68.75 38C68.75 55.2589 54.7589 69.25 37.5 69.25C20.2411 69.25 6.25 55.2589 6.25 38C6.25 20.7411 20.2411 6.75 37.5 6.75C54.7589 6.75 68.75 20.7411 68.75 38Z"
+                    stroke="#039855" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+            <div class="title animate__animated animate__pulse">Checkout complete!</div>
+            <div class="desc">We hope you had a wonderful stay with us at {{ data?.listing?.title }}. As you have now
+                checked out, we would like to take this opportunity to express our gratitude for choosing us for your
+                accommodation needs.</div>
+            <div class="desc">We trust that your time with {{ data?.listing?.title }} was comfortable and enjoyable.
+                Your feedback is valuable us
+                , so if there is anything you feel we could improve upon or if you have any comments to share about
+                your experience, please don't hesitate to let us know.</div>
+        </div>
+
+        <div class="card">
+            <div class="image">
+                <img [defaultImage]="dafaultImage" [lazyLoad]="data?.listing?.pictures" [decode]="true"
+                    [alt]="data?.listing?.title" />
+            </div>
+
+            <div class="price truncate">
+                <span>{{ data?.amount_paid | currency:'NGN'}}</span>
+            </div>
+
+            <div class="title">{{ data?.listing?.title }}</div>
+
+            <div class="sub-title truncate2">{{ data?.listing?.description }}</div>
+
+            <div class="date">{{ data?.check_in | date }} - {{ data?.check_out | date }} • {{ data?.guestTotal }} guests
+            </div>
+            <hr>
+
+            <div class="other">
+                <div>Booking code</div>
+                <div>{{ data?.booking_code }}</div>
+            </div>
+
+            <div class="submit-p">
+                <button type="submit" (click)="feeback()" class="submit ripple-button">
+                    <span>Leave feedback for host</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

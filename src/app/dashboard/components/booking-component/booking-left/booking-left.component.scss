@@ -1,0 +1,27 @@
+.wrapper {
+  img,
+  svg {
+    margin-bottom: 24px;
+  }
+
+  .title {
+    color: var(--black-text);
+    font-family: var(--display-font);
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 60px;
+    letter-spacing: -0.96px;
+    margin-bottom: 24px;
+  }
+
+  .desc {
+    color: #475467;
+    font-family: var(--mark-font);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    margin-bottom: 30px;
+  }
+}

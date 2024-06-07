@@ -1,0 +1,42 @@
+<div class="wrapper">
+    <div class="cards">
+        <div class="card">
+            <div class="border cursor-pointer" *ngFor="let q of questions; let i=index"
+                [class.active]="q?.id === currentId" (click)="currentId=q?.id">
+                <img *ngIf="q?.id !== currentId" src="assets/icons/null-check.svg" alt="">
+                <img *ngIf="q?.id === currentId" src="assets/icons/orange-check.svg" alt="">
+                <div>{{ q?.name }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="submit-p">
+        <button type="button" *ngIf="currentId===1" class="submit ripple-button orange-button"
+            (click)="openDialog(card, 'card')">
+            <span>Proceed to Pay</span>
+        </button>
+
+        <button type="button" *ngIf="currentId===2"
+            class="submit ripple-button orange-button">
+            <span>Proceed to Pay</span>
+        </button>
+        <!-- angular4-paystack
+            [key]="card?.key"
+            [email]="card?.email"
+            [amount]="card?.total"
+            [ref]="card?.type === 'booking' ? ref : ref2"
+            (paymentInit)="paymentInit()"
+            (onClose)="paymentCancel()"
+            (callback)="paymentDone($event)"
+            [metadata]="card?.metadata"
+            [channels]="card?.channels"
+            [currency]="card?.currency" -->
+    </div>
+
+    <div class="continue">
+        <button class="ripple-button white-button submit" type="button" (click)="closeDialog()">
+            <span>Cancel</span>
+        </button>
+    </div>
+
+</div>

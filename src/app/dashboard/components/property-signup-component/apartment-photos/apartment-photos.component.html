@@ -1,0 +1,69 @@
+<div class="wrapper">
+    <div class="title-container">
+        <div class="title">Add some photos of your apartment</div>
+        <div class="sub-title">
+            You'll need 5 photos to get started. You can add more or make changes later.
+            <span style="font-weight: 700;"><br> Your first photo is your cover photo</span>
+        </div>
+    </div>
+
+    <div class="error-message" *ngIf="error">{{ error }}</div>
+
+    <input type="file" class="upload-file-input" #fileDropRef id="fileDropRef" (change)="onFileSelected($event)" #fileUpload
+        accept="image/png, image/jpeg" multiple="multiple"/>
+
+    <div class="drag-drop cursor-pointer" corpImgUpload (fileDropped)="onFileSelected($event)" (click)="fileDropRef.click()">
+        <div><img class="img" src="assets/icons/upload.svg" alt=""/></div>
+        <div>
+            <span>Drag and drop or Click to upload</span>
+        </div>
+        <div>PNG or JPG (max. 3mb)</div>
+    </div>
+
+    <div class="error">{{ errorText }}</div>
+
+    <div *ngIf="image" class="image-container">
+        <img class="img" [defaultImage]="defaultImage" [lazyLoad]="image?.url" [alt]="filename"/>
+    </div>
+
+    <div class="small-image example-list" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+
+        <div class="div cursor-pointer example-box" *ngFor="let m of files; let i=index;" cdkDrag [class.green]="checkIfUploaded(m) === false"
+         (click)="changeActiveImage(m)" [class.active]="activeFilename===m?.url" [class.loading]="currentLoading === m?.url">
+            <img [defaultImage]="defaultImage" [lazyLoad]="m?.url" alt=""/>
+
+            <button *ngIf="currentLoading !== m?.url" type="button" class="delete ripple-button" (click)="m?.serverImage || m?.uuid ? deleteImageFromServer(m, i) : deleteImage(i)">
+                <!-- <span>x</span> -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </button>
+
+            <button *ngIf="checkIfUploaded(m) === false" type="button" mat-icon-button class="retry pi pi-check"></button>
+            <!-- <button *ngIf="currentLoading === m?.url || currentLoading === m?.uuid" type="button" mat-icon-button class="retry">
+                <div class="loader-white"></div>
+            </button> -->
+
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+            <div class="div">
+                <img style="width: 50px; height: 50px; border-radius: 50%;" *cdkDragPreview [defaultImage]="defaultImage" [lazyLoad]="m?.url" alt=""/>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="button">
+        <button class="ripple-button white-button" (click)="fileDropRef.click()" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M9.99999 4.16699V15.8337M4.16666 10.0003H15.8333" stroke="#344054" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+
+    <div class="loader22" *ngIf="currentLoading">
+        <mat-spinner></mat-spinner>
+        <!-- <div class="loader-orange" *ngIf="loading"></div> -->
+    </div>
+
+</div>
+<hr>

@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<div class="wrapper container">
+    <div class="back">
+        <button mat-button type="button" [routerLink]="['/host-listing']">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M15.8333 9.99984H4.16663M4.16663 9.99984L9.99996 15.8332M4.16663 9.99984L9.99996 4.1665" stroke="#344054" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>View listing</span>
+        </button>
+    </div>
+    <div class="back"></div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="image">
+                <img [defaultImage]="dafaultImage" [lazyLoad]="data?.pictures" [decode]="true" [alt]="data?.title"/>
+            </div>
+    
+            <div class="price truncate">
+                <span>{{ data?.price_per_night | currency:'NGN'}}</span>
+                <span>per night</span>
+            </div>
+        
+            <div class="title">{{ data?.title }}</div>
+        
+            <div class="sub-title truncate2">{{ data?.description }}</div>
+        
+            <div class="date">{{ data?.created_at | date }} • {{ data?.no_of_guests }} guests</div>
+        </div>
+
+        <div class="card">
+            <div class="title animate__animated animate__pulse">Rejected Listing</div>
+            <div class="desc">Your listing did not meet the V-Hospitality criteria for home listing and as such your request was rejected. Click below to apply for a resubmission to be listed on V-Hospitality.</div>
+            <div class="desc" [innerHTML]="data?.reason | escapeHtml"></div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

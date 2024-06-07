@@ -1,0 +1,66 @@
+<div class="wrapper">
+
+    <div class="header">
+
+    </div>
+
+    <div class="messages">
+
+        <div *ngIf="!loading && (rooms?.length === 0 || !rooms)">
+            <app-no-data-message [message]="errorMessage"></app-no-data-message>
+        </div>
+
+        <div *ngIf="loading && (rooms?.length === 0 || !rooms)">
+            <div class="message cursor-pointer" *ngFor="let i of [1,2,3,4,5];">
+                <div></div>
+                <div class="message-details">
+                    <div class="profile">
+                        <div class="avatar">
+                            <p-skeleton size="40px" borderRadius="100%" height="40px" width="40px"></p-skeleton>
+                            <div><p-skeleton height="10px" borderRadius="10px" width="150px"></p-skeleton></div>
+                        </div>
+                        <div class="date"><p-skeleton borderRadius="10px" height="10px" width="50px"></p-skeleton></div>
+                    </div>
+                    <div class="info">
+                        <p-skeleton borderRadius="10px" height="70px" width="100%"></p-skeleton>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!loading && rooms?.length > 0">
+            <div class="message cursor-pointer" *ngFor="let room of rooms;" [class.active]="room?._id === active"
+                (click)="changeActive(room)">
+                <div *ngIf="!room?.online"></div>
+                <img *ngIf="room?.online" src="assets/icons/dot.svg" alt="" />
+                <div class="message-details">
+                    <div class="profile">
+                        <div class="avatar">
+                            <img *ngIf="room?.user?.profile_picture" [defaultImage]="defaultImage"
+                                [lazyLoad]="room?.user?.profile_picture" [decode]="true" alt="" />
+
+                            <p-avatar *ngIf="!room?.user?.profile_picture"
+                                [label]="formatName(room?.user?.first_name || 'V', room?.user?.last_name || ' H')"
+                                size="xlarge" [style]="{ 'background-color': '', 
+                                color: '#000000', border: '1px solid var(--primary-200)',
+                                'font-size': '1rem', width: '50px', height: '50px',
+                                'font-family': 'var(--mark-font)', 'font-weight': '700'}" shape="circle">
+                            </p-avatar>
+                            <div class="truncate">{{ room?.user?.first_name }} {{ room?.user?.last_name }}</div>
+                        </div>
+
+                        <div class="date truncate">{{ room?.last_message?.createdAt || room?.updatedAt | dateAgo }}
+                        </div>
+                    </div>
+                    <div class="info truncate2">
+                        <span>{{ room?.last_message?.sender === userData?.uuid ? 'Me: ' : room?.last_message?.receiver
+                            ===
+                            userData?.uuid ? '' : '' }} {{
+                            room?.lastMessage ||
+                            room?.last_message?.message }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

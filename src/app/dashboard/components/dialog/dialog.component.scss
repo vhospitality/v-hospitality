@@ -1,0 +1,49 @@
+.wrapper {
+  margin: 0 auto;
+  width: 450px;
+
+  .cancel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .label,
+    .label2 {
+      color: var(--black-text);
+      font-family: var(--mark-font);
+      font-size: 1.125rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+    }
+
+    .label3 {
+      color: #475467;
+      font-family: var(--mark-font);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px;
+    }
+
+    .spacer {
+      flex: 1 1 auto;
+    }
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      height: 50px;
+      width: 50px;
+    }
+  }
+}
+
+@media (max-width: 580px) {
+  .wrapper {
+    width: 100%;
+  }
+}

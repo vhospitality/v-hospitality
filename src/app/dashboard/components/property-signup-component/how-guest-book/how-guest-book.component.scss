@@ -1,0 +1,31 @@
+@import "../../../../../assets/css/styles/property-signup.scss";
+
+.wrapper {
+  .card-container {
+    .card {
+      display: flex;
+      justify-content: center;
+      align-items: top;
+      grid-gap: 12px;
+
+      .title {
+        margin-bottom: 3px;
+        color: var(--gray-700);
+        font-family: var(--mark-font);
+        font-size: 1.12rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+      }
+
+      .sub-title {
+        color: var(--gray-600);
+        font-family: var(--mark-font);
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<div class="wrapper">
+
+    <img *ngIf="!data?.error" src="assets/icons/success-icon.svg" alt=""/>
+    <img *ngIf="data?.error" src="assets/icons/error-check.png" alt=""/>
+
+    <div *ngIf="!data?.error" class="thankyou">{{ data?.title || data?.data?.title || 'Thank you!' }}</div>
+    <div *ngIf="data?.error" class="thankyou">Opps!</div>
+
+    <div class="sub-title">{{ data?.message || data?.data?.message }}</div>
+
+    <div class="submit-p">
+        <button type="button" *ngIf="data?.type === 'card'" (click)="onSubmit()" class="submit ripple-button">
+            <span class="click" *ngIf="!loading">Save</span>
+            <span class="loader-white" *ngIf="loading"></span>
+        </button>
+    </div>
+
+    <div>
+        <button type="button" style="margin-top: 12px;" (click)="closeDialog()" class="ripple-button white-button">Close</button>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+.wrapper {
+  padding-top: 56px;
+  padding-bottom: 56px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    grid-gap: 20px;
+    margin-bottom: 32px;
+
+    .text {
+      color: var(--black-text);
+      font-family: var(--display-font);
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 44px;
+      letter-spacing: -0.72px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      grid-gap: 12px;
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #d0d5dd;
+
+        span {
+          color: var(--white);
+          font-family: var(--mark-font);
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 24px;
+        }
+
+        .black {
+          color: var(--black-text);
+        }
+
+        svg {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  .form-container {
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    padding: 20px;
+    background: var(--gray-50);
+    grid-gap: 12px;
+    flex-wrap: wrap;
+
+    .full-width {
+      width: 100%;
+    }
+
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      height: 46px !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .action-button {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      grid-gap: 10px;
+
+      .clear {
+        // height: 56px;
+        width: 100px;
+      }
+
+      .search {
+        // height: 56px;
+        width: 100px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .wrapper {
+    .form-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media (max-width: 590px) {
+  .wrapper {
+    .form-container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}

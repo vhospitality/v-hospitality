@@ -1,0 +1,113 @@
+@import "../../../../../assets/css/styles/account-page.scss";
+
+.wrapper {
+  .title-container {
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    grid-gap: 20px;
+
+    .title {
+      margin-bottom: 10px;
+      color: var(--black-text);
+      font-family: var(--display-font);
+      font-size: 1.5rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 38px;
+    }
+
+    .desc {
+      color: #475467;
+      font-family: var(--mark-font);
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+    }
+  }
+
+  .card-container {
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    .card {
+      border-bottom: 1px solid var(--gray-200);
+      padding-top: 24px;
+      padding-bottom: 24px;
+
+      .check-img {
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+
+      .title {
+        margin-bottom: 3px;
+        color: var(--gray-700);
+        font-family: var(--mark-font);
+        font-size: 1.1rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+      }
+
+      .sub-title,
+      span {
+        color: #475467;
+        font-family: var(--mark-font);
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+        vertical-align: middle;
+      }
+    }
+
+    .card2 {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .flex-container {
+    padding-top: 5px;
+
+    .form {
+      .form-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: top;
+        grid-gap: 64px;
+
+        .flex-form {
+          .form-field {
+            .half-width {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    .flex-container {
+      .form {
+        .form-container {
+          grid-template-columns: repeat(1, 1fr);
+          grid-gap: unset;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    .card-container {
+      grid-gap: 20px;
+    }
+  }
+}

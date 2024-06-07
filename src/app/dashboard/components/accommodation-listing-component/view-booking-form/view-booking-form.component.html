@@ -1,0 +1,59 @@
+<div class="wrapper">
+    <div class="price truncate">
+        <span>{{ data?.listing?.price_per_night | currency:'NGN'}}</span>
+        <span>per night</span>
+    </div>
+
+    <div class="calender">
+        <div *ngIf="checkinDate">
+            <div class="label">Check in</div>
+            <p-calendar [(ngModel)]="checkinDate" [disabled]="true" dateFormat="M dd, yy" placeholder="Check in">
+            </p-calendar>
+        </div>
+        <!--  -->
+        <div *ngIf="checkoutDate">
+            <div class="label">Check out</div>
+            <p-calendar [(ngModel)]="checkoutDate" [disabled]="true" dateFormat="M dd, yy" placeholder="Check out">
+            </p-calendar>
+        </div>
+    </div>
+    <p></p>
+
+    <div class="select">
+        <div class="label">Guest</div>
+        <div class="select-p">
+            <div class="select2" *ngFor="let option of selectOption;">{{ option?.total }} {{ option?.gender }}, </div>
+        </div>
+    </div>
+
+    <div class="other">
+        <div>₦{{ data?.listing?.price_per_night }} x {{ getNumberOfNight() }} nights
+        </div>
+        <div>{{ data?.listing?.price_per_night * getNumberOfNight() |
+            currency:'NGN'}}</div>
+    </div>
+
+    <div class="other">
+        <div>Service fee</div>
+        <div>{{ getServiceChargeAmount(data?.listing) | currency:'NGN'}}</div>
+    </div>
+
+    <div class="other">
+        <div>Subtotal</div>
+        <div>{{ data?.listing?.price_per_night * getNumberOfNight() +
+            getServiceChargeAmount(data?.listing) | currency:'NGN' }}</div>
+    </div>
+
+    <hr>
+
+    <div class="other">
+        <div>VAT</div>
+        <div>{{ getTaxAmount(data?.listing) | currency:'NGN'}}</div>
+    </div>
+
+    <div class="total">
+        <div>Total</div>
+        <div>{{ getTotalAmount(data?.listing) |
+            currency:'NGN'}}</div>
+    </div>
+</div>

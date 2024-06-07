@@ -1,0 +1,62 @@
+@import "../../../../assets/css/styles/accommodation-details.scss";
+
+::ng-deep .p-galleria-mask {
+  overflow: auto;
+}
+
+.wrapper {
+  .top-listing {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    flex-wrap: wrap;
+
+    .ripple-button2 {
+      background: var(--white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: unset;
+      border-radius: 3px;
+
+      span {
+        color: var(--black-text);
+        font-family: var(--mark-font);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+        vertical-align: middle;
+      }
+
+      img,
+      svg {
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+    }
+
+    .ripple-button2:hover,
+    .ripple-button2.active {
+      svg path {
+        fill: var(--orange-text);
+      }
+    }
+  }
+
+  .carousel2 {
+    .placeholder {
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 3px;
+    }
+
+    .image-loaded {
+      opacity: 1;
+    }
+
+    .placeholder-loaded {
+      filter: none;
+    }
+  }
+}

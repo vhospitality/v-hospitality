@@ -1,0 +1,174 @@
+/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@include mat.core();
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "material-icons/iconfont/filled.css";
+@import "../node_modules/font-awesome/css/font-awesome";
+@import "material-icons/iconfont/outlined.css";
+@import "./assets/css/font/display-font.css";
+@import "./assets/css/styles/buttons.scss";
+@import "./assets/css/styles/property-signup.scss";
+@import "./assets/css/styles/primeng-table.scss";
+@import "./assets/css/styles/input.scss";
+@import "./assets/css/font/mark-font.css";
+@import "./assets/css/styles/material-form.scss";
+@import "./assets/css/styles/accordion.scss";
+@import "./assets/css/styles/primeng-button.scss";
+@import "./assets/css/styles/search-form.scss";
+@import "./assets/css/styles/primeng-calender.scss";
+@import "./assets/css/styles/primeng-dropdown.scss";
+@import "./assets/css/styles/primeng-paginator.scss";
+@import "@angular/cdk/overlay-prebuilt.css";
+@import "primeicons/primeicons.css";
+
+$custom-colors: (
+  50: #fdece3,
+  100: #facfb9,
+  200: #f7af8b,
+  300: #f48e5d,
+  400: #f1763a,
+  500: #ef5e17,
+  600: #ed5614,
+  700: #eb4c11,
+  800: #e8420d,
+  900: #e43107,
+  A100: #ffffff,
+  A200: #ffdfda,
+  A400: #ffb3a7,
+  A700: #ff9d8d,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$custom-typography: mat.define-typography-config(
+  $font-family: var(--mark-font),
+);
+
+$custom-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette($custom-colors),
+      accent: mat.define-palette($custom-colors),
+      warn: mat.define-palette(mat.$red-palette),
+    ),
+    typography: $custom-typography,
+    density: -3,
+  )
+);
+
+@include mat.all-component-themes($custom-theme);
+
+:root {
+  --white: #ffffff;
+  --display-font: "Wulkan Display";
+  --mark-font: "Mark Pro";
+  --primary-color: #ef5e17;
+  --black: #221e1f;
+  --orange-text: #ef5e17;
+  --black-text: #101828;
+  --black-text-v2: #344054;
+  --black-text-v3: #475467;
+  --black-text-v4: #667085;
+  --black-text-v5: #98a2b3;
+  --black-text-v6: #d0d5dd;
+  --black-text-v7: #eaecf0;
+  --black-text-v8: #f2f4f7;
+  --black-text-v9: #f9fafb;
+  --white-text: #fcfcfd;
+  --base-white: #ffffff;
+  --error-50: #fef3f2;
+  --error-700: #b42318;
+  --gray-25: #fcfcfd;
+  --gray-50: #f9fafb;
+  --gray-100: #f2f4f7;
+  --gray-200: #eaecf0;
+  --gray-300: #d0d5dd;
+  --gray-400: #98a2b3;
+  --gray-500: #667085;
+  --gray-600: #475467;
+  --gray-700: #344054;
+  --gray-900: #101828;
+  --primary-50: #fcdfd1;
+  --primary-100: #facfb9;
+  --primary-200: #f59e74;
+  --primary-600: #ef5e17;
+  --primary-700: #bf4b12;
+  --primary-800: #8f380e;
+  --primary-900: #602609;
+  --success-50: #ecfdf3;
+  --success-700: #027a48;
+}
+
+html,
+body {
+  height: 100%;
+  // scroll-behavior: smooth;
+  background: var(--white);
+  font-family: var(--mark-font) !important;
+  font-weight: 500 !important;
+  font-size: 0.8rem !important;
+  font-style: normal;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Change the background color when text is highlighted  */
+::selection {
+  background-color: var(--primary-50);
+}
+
+/* Define the stop colors */
+#gradient-0 stop[offset="0"] {
+  stop-opacity: 0.25;
+}
+
+#gradient-0 stop[offset="1"] {
+  stop-opacity: 0;
+}
+
+.highcharts-root text {
+  font-family: var(--mark-font);
+  font-size: 15px;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Apply the gradients */
+.highcharts-plot-background {
+  fill: url(#gradient-1);
+}
+
+.highcharts-color-0 {
+  fill: var(--orange-text);
+  stroke: var(--orange-text);
+}
+
+.highcharts-color-0 .highcharts-area {
+  fill-opacity: 1;
+  fill: url(#gradient-0);
+}
+
+.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: var(--orange-text) !important;
+  padding: 1rem;
+}

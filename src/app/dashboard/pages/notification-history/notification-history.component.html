@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<div class="account-wrapper container">
+    <app-back-button></app-back-button>
+
+    <div class="title">
+        Notification History ({{ totalNotification || 0 }})
+        <span style="margin-left: 20px;" class="cursor-pointer read" *ngIf="!isReadNotificationLoading"
+            (click)="readNotification()">Read all</span>
+        <span style="margin-left: 20px;" class="read" *ngIf="isReadNotificationLoading">Loading..</span>
+    </div>
+    <hr>
+
+    <div class="account-container">
+        <div class="buttons"></div>
+
+        <div class="cards">
+
+            <div class="custom-overlay" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500"
+                (scrolled)="onScroll()" [scrollWindow]="false">
+
+                <div class="notify-container cursor-pointer" *ngFor="let not of notifications; let i=index">
+                    <!-- <div class="avatar">
+                        <img *ngIf="not?.data?.type === 'system'" src="assets/icons/v-logo-black.svg" alt="/">
+                        <img [defaultImage]="defaultImage2" [lazyLoad]="not?.data?.listing?.pictures?.length > 0 ? not?.data?.listing?.pictures[0] : defaultImage2" [decode]="true" *ngIf="not?.data?.type !== 'system'"  alt="">
+                    </div> -->
+
+                    <!-- reservation or booking -->
+                    <div class="message">
+                        <div class="title">
+                            <div>{{ not?.data?.type === 'system' ? 'V-Hospitality' : not?.data?.type || not?.data?.title
+                                }} <span>{{ (not?.created_at | dateAgo) }}</span></div>
+                            <img *ngIf="!not?.read_at" src="assets/icons/green.svg" alt="" />
+                        </div>
+                        <div class="desc">
+                            {{ not?.data?.descriptions || not?.data?.description || not?.data?.body }}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div *ngIf="isLoading" class="loader-orange"
+                    style="margin-top: 50px; margin-bottom: 50px; margin-left: auto; margin-right: auto;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

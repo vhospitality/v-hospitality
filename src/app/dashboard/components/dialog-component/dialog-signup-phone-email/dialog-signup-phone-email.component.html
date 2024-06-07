@@ -1,0 +1,58 @@
+<div class="wrapper">
+    <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-field" *ngIf="!email">
+            <div class="label">Phone number*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <ngx-mat-intl-tel-input [preferredCountries]="['ng', 'us']" [enablePlaceholder]="true"
+                    [formControl]="feedbackForm?.controls?.email" [enableSearch]="true" [label]="'mobile number'"
+                    describedBy="phoneInput" #phone></ngx-mat-intl-tel-input>
+                <mat-error>
+                    {{ feedbackForm?.controls?.email?.errors?.validatePhoneNumber ? 'Invalid Number' : formErrors.email
+                    }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field" *ngIf="email">
+            <div class="label">Email address*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="email" type="email" email>
+                <mat-error>{{formErrors.email}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="agree">
+            By pressing Continue, you agree to our <span class="cursor-pointer"
+                (click)="redirectToPolicy('/terms')">User Agreement</span>,
+            <span class="cursor-pointer" (click)="redirectToPolicy('/privacy-policy')">Privacy Policy</span>
+            and <span class="cursor-pointer" (click)="redirectToPolicy('/cookie-policy')">Cookie Policy</span>.
+        </div>
+
+        <div class="submit-p">
+            <button type="submit" class="submit ripple-button">
+                <span *ngIf="!loading">Continue</span>
+                <div *ngIf="loading" class="loader-white"></div>
+            </button>
+
+            <button (click)="openDialog('', 'login2')" type="button" class="ripple-button signup">
+                <span>Login</span>
+            </button>
+        </div>
+
+        <p-divider align="center">
+            <b>OR</b>
+        </p-divider>
+
+        <div class="continue" style="margin-top: 1rem;">
+            <button class="ripple-button" type="button" (click)="email = !email">
+                <img *ngIf="!email" src="assets/icons/email.svg" alt="" />
+                <img *ngIf="email" src="assets/icons/phone.svg" alt="" />
+                <span *ngIf="email">Continue with phone</span>
+                <span *ngIf="!email">Continue with e-mail</span>
+                <span></span>
+            </button>
+        </div>
+
+    </form>
+</div>

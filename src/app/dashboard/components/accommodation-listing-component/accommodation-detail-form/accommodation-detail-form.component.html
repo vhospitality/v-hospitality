@@ -1,0 +1,68 @@
+<div class="wrapper">
+    <div class="price truncate">
+        <span>{{ data?.price_per_night | currency:'NGN'}}</span>
+        <span>per night</span>
+    </div>
+
+    <div class="calender">
+        <div>
+            <div class="label">Check in</div>
+            <p-calendar [disabledDates]="disabledDates" [(ngModel)]="checkinDate" dateFormat="M dd, yy"
+                [minDate]="minimumDate" (ngModelChange)="validateDate()" placeholder="Check in">
+            </p-calendar>
+        </div>
+        <!--  -->
+        <div>
+            <div class="label">Check out</div>
+            <p-calendar [disabledDates]="disabledDates" [(ngModel)]="checkoutDate" dateFormat="M dd, yy"
+                [minDate]="checkinDate || minimumDate" (ngModelChange)="validateDate()" placeholder="Check out">
+            </p-calendar>
+        </div>
+    </div>
+    <mat-error>{{ dateError }}</mat-error>
+    <p></p>
+
+    <div class="select">
+        <div class="label">Guest</div>
+        <app-select>
+            <app-select-option *ngFor="let option of selectOption;" [value]="option"></app-select-option>
+        </app-select>
+        <mat-error>{{ guestError }}</mat-error>
+    </div>
+
+    <div class="other">
+        <div>₦{{ data?.price_per_night }} x {{ getNumberOfNight() || data?.minimum_nights }} nights</div>
+        <div>{{ data?.price_per_night * (getNumberOfNight() || data?.minimum_nights) | currency:'NGN'}}</div>
+    </div>
+
+    <div class="other">
+        <div>Service Fee</div>
+        <div>{{ getServiceChargeAmount(data) | currency:'NGN'}}</div>
+    </div>
+
+    <div class="other">
+        <div>Subtotal</div>
+        <div>{{ (data?.price_per_night * (getNumberOfNight() || data?.minimum_nights)) + getServiceChargeAmount(data) |
+            currency:'NGN'}}</div>
+    </div>
+
+    <hr>
+
+    <div class="other">
+        <div>VAT</div>
+        <div>{{ getTaxAmount(data) | currency:'NGN'}}</div>
+    </div>
+
+    <div class="total">
+        <div>Total</div>
+        <div>{{ getTotalAmount() | currency:'NGN'}}</div>
+    </div>
+
+    <div class="submit-p">
+        <button id="paymentForm" type="submit" class="submit ripple-button" (click)="validateBooking()"
+            [disabled]="loading">
+            <span *ngIf="!loading">{{ data?.is_instant_bookable === 1 ? 'Book now' : 'Request to Book'}}</span>
+            <div *ngIf="loading" class="loader-white"></div>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<app-header></app-header>
+
+<div class="wrapper container">
+    <app-back-button></app-back-button>
+
+    <div class="title-container">
+        <div class="title">Leave feedback for your host</div>
+        <div class="desc">How was your stay at {{ data?.host_first_name }} {{ data?.host_last_name }} place?</div>
+    </div>
+
+    <hr>
+
+    <div class="cards">
+        <div class="card">
+            <div class="sub-title">How was your stay at {{ data?.host_first_name }} {{ data?.host_last_name }} place
+                compare to your expectations?</div>
+        </div>
+        <div class="card">
+            <div class="border cursor-pointer" *ngFor="let q of questions; let i=index"
+                [class.active]="q?.id === currentId?.id" (click)="currentId=q">
+                <img *ngIf="q?.id !== currentId?.id" src="assets/icons/null-check.svg" alt="">
+                <img *ngIf="q?.id === currentId?.id" src="assets/icons/orange-check.svg" alt="">
+                <div>{{ q?.name }}</div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="cards">
+        <div class="card">
+            <div class="sub-title">How would you rate these?</div>
+        </div>
+        <div class="card">
+            <div class="rating">
+                <div class="rating-text">Cleanliness</div>
+                <div><p-rating [(ngModel)]="cleanValue"></p-rating></div>
+            </div>
+
+            <!-- <div class="rating">
+                <div class="rating-text">Expectation</div>
+                <div><p-rating [(ngModel)]="expectationValue"></p-rating></div>
+            </div> -->
+
+            <div class="rating">
+                <div class="rating-text">Communication</div>
+                <div><p-rating [(ngModel)]="comunicationValue"></p-rating></div>
+            </div>
+
+            <div class="rating">
+                <div class="rating-text">Observance of House Rules</div>
+                <div><p-rating [(ngModel)]="rulesValue"></p-rating></div>
+            </div>
+
+            <div style="margin-top: 24px;">
+                <button type="button" (click)="onSubmit()" class="ripple-button orange-button">
+                    <div *ngIf="!loading">Submit feedback</div>
+                    <div *ngIf="loading" class="loader-white"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

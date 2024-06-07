@@ -1,0 +1,65 @@
+<div class="wrapper">
+
+    <div class="flex-container">
+    
+        <form class="form">
+
+            <div class="form-container">
+                <div class="label-p2">
+                    <div class="title">Card details</div>
+                    <div class="sub-title">Select default payment method.</div>
+                </div>
+
+                <div class="flex-form2" style="border: none;" *ngIf="!loading && cards?.length <= 0">
+                    <app-no-data-message [message]="errorMessage"></app-no-data-message>
+                </div>
+
+                <div *ngIf="loading">
+                    <div class="flex-form2" *ngFor="let a of [1,2,3]">
+                        <p-skeleton height="100px" width="100%" borderRadius="10px"></p-skeleton>
+                        <p></p>
+                    </div>
+                </div>
+
+                <div *ngIf="!loading && cards?.length > 0">
+                    <div class="flex-form2 cursor-pointer" *ngFor="let card of cards;">
+                        <div class="card2">
+                            <div class="card-image">
+                                <div class="img">
+                                    <img *ngIf="removeWhiteSpace(card?.card_type) === 'master'" src="assets/icons/master-card.svg" alt="">
+                                    <img *ngIf="removeWhiteSpace(card?.card_type) === 'visa'" src="assets/icons/visa-card.svg" alt="">
+                                </div>
+        
+                                <div class="card-details">
+                                    <div class="set">{{ card?.bank }}</div>
+                                    <div class="card-num">**** **** **** {{ card?.last_four_digits }}</div>
+                                    <div class="exp">Expiry {{ card?.expiry_month }}/{{ card?.expiry_year }}</div>
+                                    <div class="set-default">
+                                        <button (click)="deleteCard(card)" mat-button class="edit" type="button">
+                                            <span *ngIf="deletingCards !== card?.uuid">Delete</span>
+                                            <div *ngIf="deletingCards == card?.uuid" class="loader-orange"></div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="add-card">
+                        <button mat-button type="button" (click)="addCard()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M9.9974 4.16797V15.8346M4.16406 10.0013H15.8307" stroke="#475467" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Add new payment method</span>
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 58px;" (click)="addCard()">
+                        <button class="ripple-button orange-button">Add payment method</button>
+                    </div> -->
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

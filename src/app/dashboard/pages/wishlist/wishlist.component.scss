@@ -1,0 +1,275 @@
+.wrapper {
+  padding-top: 56px;
+
+  .wishlist {
+    color: var(--black-text);
+    font-family: var(--display-font);
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px;
+    letter-spacing: -0.72px;
+    margin-bottom: 20px;
+  }
+
+  .sub-title {
+    color: #475467;
+    font-family: var(--mark-font);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    margin-bottom: 64px;
+  }
+
+  .cards2-p {
+    grid-template-columns: repeat(1, 1fr) !important;
+
+    .cards {
+      display: flex;
+      justify-content: left;
+      align-items: top;
+      grid-gap: 2rem;
+
+      // .image {
+      //   .img {
+      //     height: 300px !important;
+      //   }
+      // }
+    }
+  }
+
+  .card-p,
+  .cards2-p {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: top;
+    grid-gap: 32px;
+
+    .cards {
+      // border: 1px solid #eaecf0;
+      background: var(--white);
+
+      .image {
+        position: relative;
+
+        .img {
+          height: 220px;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+
+        .image-bottom {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          padding: 8px;
+
+          .div {
+            display: flex;
+            justify-content: space-between;
+            align-items: last baseline;
+            grid-gap: 20px;
+
+            .rare {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 2px 8px 2px 6px;
+              background: #fcdfd1;
+
+              img {
+                margin-right: 4px;
+              }
+
+              span {
+                color: #bf4b12;
+                font-family: var(--mark-font);
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.125rem;
+              }
+            }
+
+            .button {
+              margin-bottom: 5px;
+              border-radius: 10px;
+              border: unset;
+              border-radius: unset;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: #fcdfd1;
+              padding: 12px;
+              cursor: pointer;
+              -webkit-tap-highlight-color: transparent;
+              -webkit-touch-callout: none;
+              -webkit-user-select: none;
+              -khtml-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+
+              svg path {
+                fill: var(--orange-text);
+              }
+            }
+          }
+        }
+      }
+
+      .text {
+        // padding: 1rem 1rem 20px 1rem;
+        padding-top: 1rem 0px;
+        margin-bottom: 1rem;
+
+        .truncate {
+          overflow: hidden;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          display: -webkit-box;
+        }
+
+        .price {
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          grid-gap: 8px;
+          margin-bottom: 2px;
+          margin-top: 5px;
+
+          span:nth-child(1) {
+            color: var(--black-text);
+            font-family: var(--mark-font);
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 30px;
+          }
+
+          span:nth-child(2) {
+            color: #475467;
+            font-family: var(--mark-font);
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px;
+            text-transform: capitalize;
+          }
+        }
+
+        .desc-1 {
+          color: #bf4b12;
+          font-family: var(--mark-font);
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 20px;
+          margin-bottom: 2px;
+        }
+
+        .desc-2 {
+          color: var(--black-text);
+          font-family: var(--mark-font);
+          font-size: 1.125rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 28px;
+          margin-bottom: 2px;
+          text-transform: capitalize;
+        }
+
+        .review {
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          grid-gap: 8px;
+          margin-bottom: 2px;
+
+          .rating {
+            color: var(--black-text);
+            font-family: var(--mark-font);
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px;
+          }
+
+          .total-review {
+            color: #475467;
+            font-family: var(--mark-font);
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px;
+          }
+        }
+
+        .location {
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          grid-gap: 8px;
+
+          div {
+            color: #475467;
+            font-family: var(--mark-font);
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 24px;
+            text-transform: capitalize;
+          }
+        }
+      }
+    }
+  }
+
+  .paginator {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .wrapper {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    .wishlist {
+      font-size: 25px;
+    }
+
+    .card-p {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 15px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .wrapper {
+    .cards2-p {
+      .cards {
+        flex-wrap: wrap;
+      }
+    }
+
+    .card-p {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
