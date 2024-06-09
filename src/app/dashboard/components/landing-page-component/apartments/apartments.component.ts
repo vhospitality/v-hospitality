@@ -4,6 +4,7 @@ import {
   isPlatformBrowser,
 } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   HostListener,
   Inject,
@@ -54,7 +55,7 @@ import { ListPropertyBackgroundComponent } from '../list-property-background/lis
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./apartments.component.scss'],
 })
-export class ApartmentsComponent {
+export class ApartmentsComponent implements AfterViewInit {
   @Input() title: any;
   @Input() review: any;
   ratingValue: number = 3;
@@ -80,7 +81,9 @@ export class ApartmentsComponent {
     private service: ToggleNavService,
     private snackBar: MatSnackBar,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {
+  ) {}
+
+  ngAfterViewInit(): void {
     this.isLogin = this.authService.isLoggedIn();
 
     let apartments: any = this.service.getApartmentMessage();

@@ -48,9 +48,7 @@ export class WishlistComponent implements AfterViewInit {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private service: ToggleNavService
-  ) {
-    this.paginateData();
-  }
+  ) {}
 
   paginateData(event?: any) {
     this.datas2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -125,5 +123,6 @@ export class WishlistComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.authService.checkExpired();
+    this.paginateData();
   }
 }

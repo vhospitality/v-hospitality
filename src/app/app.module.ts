@@ -1,11 +1,14 @@
 import { AsyncPipe, DatePipe, provideImageKitLoader } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+} from '@angular/common/http';
 import {
   ModuleWithProviders,
   NgModule,
   Optional,
   SkipSelf,
-  importProvidersFrom,
   isDevMode,
 } from '@angular/core';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
@@ -13,16 +16,18 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { BrowserModule } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
-import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
-import { DEFAULT_PSM_OPTIONS } from 'angular-password-strength-meter/zxcvbn';
 import { initializeApp } from 'firebase/app';
-import { baseUrl } from 'src/environments/environment';
+import { baseUrl } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './global-services/auth.service';
@@ -65,11 +70,11 @@ initializeApp(baseUrl.firebase);
     SeoService,
     DatePipe,
     AsyncPipe,
-    importProvidersFrom(
-      PasswordStrengthMeterModule.forRoot(DEFAULT_PSM_OPTIONS)
-    ),
     provideImageKitLoader(baseUrl.lazyLoadUrl),
-    // provideUserIdleConfig({ idle: 300, timeout: 150, ping: 60 }),
+    SeoService,
+    provideHttpClient(withFetch()),
+    provideClientHydration(),
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })

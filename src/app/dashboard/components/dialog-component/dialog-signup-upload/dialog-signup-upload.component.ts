@@ -16,9 +16,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { DropzoneDirective } from 'src/app/dashboard/directives/dropzone.directive';
-import { baseUrl } from 'src/environments/environment';
+import { baseUrl } from '../../../../../environments/environment';
 import { HttpService } from '../../../../global-services/http.service';
+import { ToggleNavService } from '../../../dashboard-service/toggle-nav.service';
+import { DropzoneDirective } from '../../../directives/dropzone.directive';
 import { ProgressComponent } from '../../progress/progress.component';
 
 @Component({
@@ -74,7 +75,8 @@ export class DialogSignupUploadComponent {
     public sanitizer: DomSanitizer,
     public dialog: MatDialog,
     private httpService: HttpService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private service: ToggleNavService
   ) {
     this.createForm();
   }
@@ -274,6 +276,9 @@ export class DialogSignupUploadComponent {
                         verticalPosition: 'top',
                       }
                     );
+                    this.service.setProfileMessage(undefined);
+                    this.service.profileMessage = undefined;
+                    this.service.sendIsLoginClickEvent();
                     this.dialog.closeAll();
                   },
                   (err) => {

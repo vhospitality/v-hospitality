@@ -31,8 +31,8 @@
             <div class="label">Phone number*</div>
             <mat-form-field class="full-width" appearance="outline">
                 <ngx-mat-intl-tel-input [preferredCountries]="['ng', 'us']" [enablePlaceholder]="true"
-                    [formControl]="feedbackForm?.controls?.phone" [enableSearch]="true"
-                    [label]="'mobile number'" describedBy="phoneInput" #phone></ngx-mat-intl-tel-input>
+                    [formControl]="feedbackForm?.controls?.phone" [enableSearch]="true" [label]="'mobile number'"
+                    describedBy="phoneInput" #phone></ngx-mat-intl-tel-input>
                 <mat-error>
                     {{ feedbackForm?.controls?.phone?.errors?.validatePhoneNumber ? 'Invalid Number' : formErrors.phone
                     }}
@@ -115,8 +115,6 @@
                 <mat-error>{{ formErrors.confirmPassword }}</mat-error>
             </mat-form-field>
         </div>
-
-        <password-strength-meter [password]="feedbackForm.value.newPassword" />
 
         <div class="submit-p">
             <button type="submit" class="submit ripple-button">

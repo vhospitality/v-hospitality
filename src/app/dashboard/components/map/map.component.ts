@@ -1,8 +1,10 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   Component,
+  Inject,
   Input,
   OnInit,
+  PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -35,15 +37,20 @@ export class MapComponent implements OnInit {
 
   spots: any = [];
 
-  constructor(private httpService: HttpService) {
+  constructor(
+    private httpService: HttpService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
     this.apiLoaded = this.httpService.getMapData();
   }
 
   shareLocation(coordinate: any) {
-    (window as any).open(
-      `https://www.google.com/maps/@${coordinate?.lat},${coordinate?.lng},10z?entry=ttu`,
-      '_blank'
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      (window as any).open(
+        `https://www.google.com/maps/@${coordinate?.lat},${coordinate?.lng},10z?entry=ttu`,
+        '_blank'
+      );
+    }
   }
 
   updataMap() {

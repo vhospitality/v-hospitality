@@ -26,9 +26,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // border-bottom: 1px solid var(--primary-900);
     background: var(--black);
-    height: 120px;
+    height: 100px;
     position: fixed;
     top: 0;
     left: 0;
@@ -46,7 +45,7 @@
 
     .logo {
       width: 100px;
-      height: 97px;
+      height: 80px;
       margin-right: 16px;
       display: flex;
       justify-content: space-between;
@@ -76,7 +75,7 @@
 
       img {
         width: 80px;
-        height: 77.6px;
+        height: 60px;
       }
     }
 
@@ -100,7 +99,6 @@
         animation-iteration-count: infinite;
         margin: 0 auto 0 auto;
         transform-origin: bottom;
-        // border: 1px solid var(--primary-200);
         border-radius: 50%;
 
         button {

@@ -10,8 +10,6 @@ import { HttpService } from '../../../../global-services/http.service';
 import { ToggleNavService } from '../../../dashboard-service/toggle-nav.service';
 import { DialogComponent } from '../../dialog/dialog.component';
 
-declare let window: any;
-
 @Component({
   selector: 'app-select-card-dialog',
   standalone: true,
