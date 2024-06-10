@@ -1,10 +1,12 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   EventEmitter,
+  Inject,
   Input,
   Output,
+  PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -31,10 +33,10 @@ import { PaginatorModule } from 'primeng/paginator';
 import { SkeletonModule } from 'primeng/skeleton';
 import { SliderModule } from 'primeng/slider';
 import { Subscription } from 'rxjs';
-import { SeoService } from 'src/app/global-services/seo.service';
 import { baseUrl } from '../../../../environments/environment';
 import { AuthService } from '../../../global-services/auth.service';
 import { HttpService } from '../../../global-services/http.service';
+import { SeoService } from '../../../global-services/seo.service';
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { HeaderComponent } from '../../components/header/header.component';
@@ -118,7 +120,8 @@ export class AccommodationListingComponent implements AfterViewInit {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private datepipe: DatePipe,
-    private seo: SeoService
+    private seo: SeoService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.seo.updateSeoTags({
       title: 'Accommodations' + ' - ' + baseUrl.feDomain,
@@ -357,7 +360,7 @@ export class AccommodationListingComponent implements AfterViewInit {
       this.httpService
         .deleteData(baseUrl.wishlist, `/${wishlistId?.uuid}`)
         .subscribe(
-          (data: any) => {
+          () => {
             this.removeWishlist(uuid);
             this.deleteWishlist(uuid);
 
@@ -368,7 +371,7 @@ export class AccommodationListingComponent implements AfterViewInit {
               verticalPosition: 'top',
             });
           },
-          (err) => {
+          () => {
             this.removeWishlist(uuid);
 
             this.snackBar.open('Failed to delete wishlist item', 'x', {
@@ -389,17 +392,19 @@ export class AccommodationListingComponent implements AfterViewInit {
   }
 
   private getPlaceAutocomplete() {
-    const autocomplete = new google.maps.places.Autocomplete(
-      this.addresstext?.nativeElement,
-      {
-        // componentRestrictions: { country: 'NG' },
-        types: [this.adressType], // 'establishment' / 'address' / 'geocode'
-      }
-    );
-    google.maps.event.addListener(autocomplete, 'place_changed', () => {
-      const place = autocomplete.getPlace();
-      this.invokeEvent(place);
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      const autocomplete = new google.maps.places.Autocomplete(
+        this.addresstext?.nativeElement,
+        {
+          // componentRestrictions: { country: 'NG' },
+          types: [this.adressType], // 'establishment' / 'address' / 'geocode'
+        }
+      );
+      google.maps.event.addListener(autocomplete, 'place_changed', () => {
+        const place = autocomplete.getPlace();
+        this.invokeEvent(place);
+      });
+    }
   }
 
   invokeEvent(place: any) {

@@ -1,5 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import {
+  Component,
+  Inject,
+  Input,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -44,7 +50,8 @@ export class PayWithCardDialogComponent {
     private authService: AuthService,
     private httpService: HttpService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     let cards: any = this.service.getCardsMessage();
     if (cards) {
@@ -68,12 +75,14 @@ export class PayWithCardDialogComponent {
       verticalPosition: 'top',
     });
 
-    window.location.href =
-      this.card?.payment_url ||
-      this.card?.listing?.payment_url ||
-      this.card?.url ||
-      this.card?.data?.url ||
-      this.card?.data;
+    if (isPlatformBrowser(this.platformId)) {
+      window.location.href =
+        this.card?.payment_url ||
+        this.card?.listing?.payment_url ||
+        this.card?.url ||
+        this.card?.data?.url ||
+        this.card?.data;
+    }
   }
 
   getTotalGuest() {

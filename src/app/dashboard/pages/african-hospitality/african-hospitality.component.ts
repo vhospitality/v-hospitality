@@ -1,5 +1,6 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   EventEmitter,
   Inject,
@@ -48,10 +49,9 @@ import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
   ],
   templateUrl: './african-hospitality.component.html',
   encapsulation: ViewEncapsulation.Emulated,
-  // providers: [{ provide: LAZYLOAD_IMAGE_HOOKS, useClass: LazyLoadImageHooks }],
   styleUrls: ['./african-hospitality.component.scss'],
 })
-export class AfricanHospitalityComponent implements OnDestroy {
+export class AfricanHospitalityComponent implements OnDestroy, AfterViewInit {
   @Input() adressType: any;
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
   @ViewChild('addresstext') addresstext: any;
@@ -107,7 +107,20 @@ export class AfricanHospitalityComponent implements OnDestroy {
     private service: ToggleNavService,
     private dialog: MatDialog,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {
+  ) {}
+
+  search() {
+    this.service.setAccommodationMessage({
+      selectOption: this.selectOption,
+      country: this.address,
+      date: this.checkinDate,
+    });
+    this.router.navigate(['/accommodations']);
+  }
+
+  ngAfterViewInit() {
+    this.getPlaceAutocomplete();
+
     this.clickEventSubscription = this.sharedSelect
       .getSelectClickEvent()
       .subscribe((data: any) => {
@@ -152,34 +165,6 @@ export class AfricanHospitalityComponent implements OnDestroy {
         this.sharedSelect.setSelectMessage(this.selectOption);
       });
 
-    const serviceData: any = this.service.getAccommodationMessage() || {};
-
-    // let selectOption = [
-    //   {
-    //     id: 1,
-    //     gender: 'Adults',
-    //     desc: 'Ages 18 or above',
-    //     total:
-    //       serviceData?.selectOption?.find((n: any) => n?.id === 1)?.total || 0,
-    //   },
-    //   {
-    //     id: 2,
-    //     gender: 'Children',
-    //     desc: 'Ages 2 - 17',
-    //     total:
-    //       serviceData?.selectOption?.find((n: any) => n?.id === 2)?.total || 0,
-    //   },
-    //   {
-    //     id: 3,
-    //     gender: 'Infants',
-    //     desc: 'Under 2',
-    //     total:
-    //       serviceData?.selectOption?.find((n: any) => n?.id === 3)?.total || 0,
-    //   },
-    // ];
-
-    // this.selectOption = selectOption;
-
     let selectOption = [
       {
         id: 1,
@@ -203,19 +188,6 @@ export class AfricanHospitalityComponent implements OnDestroy {
 
     this.selectOption = selectOption;
     this.sharedSelect.setSelectMessage(selectOption);
-  }
-
-  search() {
-    this.service.setAccommodationMessage({
-      selectOption: this.selectOption,
-      country: this.address,
-      date: this.checkinDate,
-    });
-    this.router.navigate(['/accommodations']);
-  }
-
-  ngAfterViewInit() {
-    this.getPlaceAutocomplete();
   }
 
   private getPlaceAutocomplete() {

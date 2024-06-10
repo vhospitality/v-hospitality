@@ -130,48 +130,61 @@ export class InitiatePayoutDialogComponent implements OnInit {
     if (feed) {
       return;
     } else {
-      this.loading = true;
-      this.disabled = true;
+      if (
+        this.calculateTransferFee(this.feedbackForm.value.amount) +
+          this.feedbackForm.value.amount >
+        this.userData?.wallet_available_balance
+      ) {
+        this.snackBar.open('Insufficient funds', 'x', {
+          duration: 5000,
+          panelClass: 'error',
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      } else {
+        this.loading = true;
+        this.disabled = true;
 
-      this.httpService
-        .postData(baseUrl.otp, {
-          type: 'withdrawal',
-          amount: this.feedbackForm.value.amount,
-        })
-        .subscribe(
-          (data: any) => {
-            this.loading = false;
-            this.disabled = false;
+        this.httpService
+          .postData(baseUrl.otp, {
+            type: 'withdrawal',
+            amount: this.feedbackForm.value.amount,
+          })
+          .subscribe(
+            (data: any) => {
+              this.loading = false;
+              this.disabled = false;
 
-            this.openDialog(
-              {
-                accountData: this.payout?.data || this.payout,
-                serverData: data?.data,
-                formData: this.feedbackForm.value,
-              },
-              'otp-payout'
-            );
-          },
-          (err) => {
-            this.loading = false;
-            this.disabled = false;
-            this.authService.checkExpired();
-            this.snackBar.open(
-              err?.error?.message ||
-                err?.error?.msg ||
-                err?.error?.detail ||
-                err?.error?.status ||
-                'An error occured!',
-              'x',
-              {
-                duration: 5000,
-                panelClass: 'error',
-                horizontalPosition: 'center',
-                verticalPosition: 'top',
-              }
-            );
-          }
-        );
+              this.openDialog(
+                {
+                  accountData: this.payout?.data || this.payout,
+                  serverData: data?.data,
+                  formData: this.feedbackForm.value,
+                },
+                'otp-payout'
+              );
+            },
+            (err) => {
+              this.loading = false;
+              this.disabled = false;
+              this.authService.checkExpired();
+              this.snackBar.open(
+                err?.error?.message ||
+                  err?.error?.msg ||
+                  err?.error?.detail ||
+                  err?.error?.status ||
+                  'An error occured!',
+                'x',
+                {
+                  duration: 5000,
+                  panelClass: 'error',
+                  horizontalPosition: 'center',
+                  verticalPosition: 'top',
+                }
+              );
+            }
+          );
+      }
     }
   }
 

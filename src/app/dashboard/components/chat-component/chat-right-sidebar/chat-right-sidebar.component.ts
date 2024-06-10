@@ -1,14 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  Input,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SkeletonModule } from 'primeng/skeleton';
 import { Subscription } from 'rxjs';
-import { ToggleNavService } from 'src/app/dashboard/dashboard-service/toggle-nav.service';
 import { baseUrl } from '../../../../../environments/environment';
 import { AuthService } from '../../../../global-services/auth.service';
 import { ChatService } from '../../../../global-services/chat.service';
 import { HttpService } from '../../../../global-services/http.service';
+import { ToggleNavService } from '../../../dashboard-service/toggle-nav.service';
 
 @Component({
   selector: 'app-chat-right-sidebar',
@@ -18,7 +25,7 @@ import { HttpService } from '../../../../global-services/http.service';
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./chat-right-sidebar.component.scss'],
 })
-export class ChatRightSidebarComponent {
+export class ChatRightSidebarComponent implements AfterViewInit {
   @Input() listingDetails: any;
   defaultImage: string = baseUrl.defaultImage;
   loading: boolean = false;
@@ -29,7 +36,8 @@ export class ChatRightSidebarComponent {
     private authService: AuthService,
     private httpService: HttpService,
     private chatService: ChatService,
-    private service: ToggleNavService
+    private service: ToggleNavService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.authService.checkExpired();
 
@@ -74,11 +82,13 @@ export class ChatRightSidebarComponent {
       );
   }
 
-  ngOnInit(): void {
-    this.chatService.getMessage().subscribe((data) => {
-      if (data?.listing) {
-        this.getBookingDetails(data?.listing);
-      }
-    });
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.chatService.getMessage().subscribe((data) => {
+        if (data?.listing) {
+          this.getBookingDetails(data?.listing);
+        }
+      });
+    }
   }
 }
