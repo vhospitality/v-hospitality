@@ -54,18 +54,87 @@ $custom-colors: (
   ),
 );
 
-$custom-typography: mat.define-typography-config(
+$custom-typography: mat.define-typography-level(
   $font-family: var(--mark-font),
+  $font-weight: 400,
+  $font-size: 0.875rem,
+  $letter-spacing: normal,
 );
+
+$my-app-typography: mat.define-typography-config(
+  $font-family: var(--mark-font),
+  $headline-1:
+    mat.define-typography-level(
+      $font-family: var(--mark-font),
+      $font-size: 6rem,
+    ),
+  $headline-2:
+    mat.define-typography-level(
+      $font-family: var(--mark-font),
+      $font-size: 3rem,
+    ),
+  $headline-3:
+    mat.define-typography-level(
+      $font-family: var(--mark-font),
+      $font-size: 2rem,
+      $line-height: 10px,
+    ),
+  $headline-4:
+    mat.define-typography-level(
+      $font-family: var(--mark-font),
+      $font-size: 1.5rem,
+      $line-height: 10px,
+    ),
+  $headline-5:
+    mat.define-typography-level(
+      $font-family: var(--mark-font),
+      $font-size: 1.1rem,
+      $line-height: 10px,
+    ),
+  $headline-6:
+    mat.define-typography-level(
+      $font-family: var(--mark-font),
+      $font-size: 1rem,
+      $line-height: 10px,
+    ),
+  $subtitle-1:
+    mat.define-typography-level(
+      $font-family: var(--mark-font),
+      $font-size: 0.9rem,
+      $line-height: 10px,
+    ),
+  $subtitle-2:
+    mat.define-typography-level(
+      $font-family: var(--mark-font),
+      $font-size: 0.9rem,
+      $line-height: 10px,
+    ),
+  $body-2:
+    mat.define-typography-level(
+      $font-size: 0.875rem,
+    ),
+  $body-1:
+    mat.define-typography-level(
+      $font-size: 0.875rem,
+    ),
+  $button:
+    mat.define-typography-level(
+      $font-size: 0.875rem,
+    ),
+);
+
+$my-primary: mat.define-palette($custom-colors);
+$my-accent: mat.define-palette($custom-colors);
+$my-warn: mat.define-palette(mat.$red-palette);
 
 $custom-theme: mat.define-light-theme(
   (
     color: (
-      primary: mat.define-palette($custom-colors),
-      accent: mat.define-palette($custom-colors),
-      warn: mat.define-palette(mat.$red-palette),
+      primary: mat.define-palette($my-primary),
+      accent: mat.define-palette($my-accent),
+      warn: mat.define-palette($my-warn),
     ),
-    typography: $custom-typography,
+    typography: $my-app-typography,
     density: -3,
   )
 );
@@ -116,11 +185,10 @@ $custom-theme: mat.define-light-theme(
 html,
 body {
   height: 100%;
-  // scroll-behavior: smooth;
   background: var(--white);
   font-family: var(--mark-font) !important;
   font-weight: 500 !important;
-  font-size: 0.8rem !important;
+  font-size: 0.875rem !important;
   font-style: normal;
   box-sizing: border-box;
 }
@@ -171,4 +239,13 @@ body {
 .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--orange-text) !important;
   padding: 1rem;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

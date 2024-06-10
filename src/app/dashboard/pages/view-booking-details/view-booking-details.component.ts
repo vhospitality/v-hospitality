@@ -1,8 +1,14 @@
-import { CommonModule, DOCUMENT, Location } from '@angular/common';
+import {
+  CommonModule,
+  DOCUMENT,
+  Location,
+  isPlatformBrowser,
+} from '@angular/common';
 import {
   AfterViewInit,
   Component,
   Inject,
+  PLATFORM_ID,
   ViewEncapsulation,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,10 +25,10 @@ import { DialogModule } from 'primeng/dialog';
 import { GalleriaModule } from 'primeng/galleria';
 import { SkeletonModule } from 'primeng/skeleton';
 import { Subscription } from 'rxjs';
-import { SeoService } from 'src/app/global-services/seo.service';
 import { baseUrl } from '../../../../environments/environment';
 import { AuthService } from '../../../global-services/auth.service';
 import { HttpService } from '../../../global-services/http.service';
+import { SeoService } from '../../../global-services/seo.service';
 import { AccommodationDetailDetailComponent } from '../../components/accommodation-listing-component/accommodation-detail-detail/accommodation-detail-detail.component';
 import { AccommodationDetailHostComponent } from '../../components/accommodation-listing-component/accommodation-detail-host/accommodation-detail-host.component';
 import { AccommodationDetailRulesComponent } from '../../components/accommodation-listing-component/accommodation-detail-rules/accommodation-detail-rules.component';
@@ -114,6 +120,7 @@ export class ViewBookingDetailsComponent implements AfterViewInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private seo: SeoService,
+    @Inject(PLATFORM_ID) private platformId: Object,
     @Inject(DOCUMENT) private document: Document
   ) {
     this.isLogin = this.authService.isLoggedIn();
@@ -282,12 +289,16 @@ export class ViewBookingDetailsComponent implements AfterViewInit {
   }
 
   getUrl() {
-    return (
-      this.document.location.protocol +
-      '//' +
-      this.document.location.hostname +
-      `/accommodations-details/${this.id?.listing}`
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      return (
+        this.document.location.protocol +
+        '//' +
+        this.document.location.hostname +
+        `/accommodations-details/${this.id?.listing}`
+      );
+    } else {
+      return '';
+    }
   }
 
   imageClick(pictures: any, uuid: any) {
@@ -395,7 +406,7 @@ export class ViewBookingDetailsComponent implements AfterViewInit {
               verticalPosition: 'top',
             });
           },
-          (err) => {
+          () => {
             this.removeWishlist(uuid);
 
             this.snackBar.open('Failed to delete wishlist item', 'x', {
@@ -429,7 +440,7 @@ export class ViewBookingDetailsComponent implements AfterViewInit {
               this.listingDetails?.listing?.title + ' - ' + baseUrl.feDomain,
             image:
               this.listingDetails?.listing?.pictures?.length > 0
-                ? this.listingDetails?.listing?.pictures[0]
+                ? this.listingDetails?.listing?.pictures[0]?.url
                 : undefined,
             description: this.listingDetails?.listing?.description,
           });

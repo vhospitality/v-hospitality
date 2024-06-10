@@ -18,10 +18,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
-import { InputRestrictionDirective } from 'src/app/dashboard/directives/no-special-character.directive';
 import { baseUrl } from '../../../../../environments/environment';
 import { HttpService } from '../../../../global-services/http.service';
 import { ToggleNavService } from '../../../dashboard-service/toggle-nav.service';
+import { InputRestrictionDirective } from '../../../directives/no-special-character.directive';
 import { RequestResetPassword } from '../../../model/form';
 import { NgxMatIntlTelInputComponent } from '../../ngx-material-intl-tel-input/ngx-mat-intl-tel-input.component';
 

@@ -1,11 +1,10 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
   HttpClient,
   HttpEvent,
   HttpEventType,
   HttpHeaders,
 } from '@angular/common/http';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, shareReplay } from 'rxjs';
 import { baseUrl } from '../../environments/environment';
 import { AuthService } from './auth.service';
@@ -16,11 +15,7 @@ import { AuthService } from './auth.service';
 export class HttpService {
   private base_url = baseUrl.server;
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   httpOptions() {
     return {
@@ -96,14 +91,10 @@ export class HttpService {
   }
 
   postImage(endpoint: any, data: any): Observable<number | any> {
-    let headers: any = '';
-
-    if (isPlatformBrowser(this.platformId)) {
-      headers = new HttpHeaders().set(
-        'Authorization',
-        `Bearer ${this.authService.getJwtToken()}`
-      );
-    }
+    let headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${this.authService.getJwtToken()}`
+    );
 
     return this.http
       .post(this.base_url + endpoint, data, {
@@ -120,14 +111,10 @@ export class HttpService {
   }
 
   getProgress(endpoint: string): Observable<number | any> {
-    let headers: any = '';
-
-    if (isPlatformBrowser(this.platformId)) {
-      headers = new HttpHeaders().set(
-        'Authorization',
-        `Bearer ${this.authService.getJwtToken()}`
-      );
-    }
+    let headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${this.authService.getJwtToken()}`
+    );
 
     return this.http
       .request('get', this.base_url + endpoint, {

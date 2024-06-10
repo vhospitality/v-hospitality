@@ -17,9 +17,9 @@ import {
   fromEvent,
   tap,
 } from 'rxjs';
-import { SeoService } from 'src/app/global-services/seo.service';
 import { baseUrl } from '../../../../environments/environment';
 import { HttpService } from '../../../global-services/http.service';
+import { SeoService } from '../../../global-services/seo.service';
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { HeaderComponent } from '../../components/header/header.component';

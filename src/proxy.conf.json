@@ -1,9 +1,0 @@
-{
-  "/api/*": {
-    "target": "https://v-api.natview.ng",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug",
-    "pathRewrite": { "^/api": "" }
-  }
-}

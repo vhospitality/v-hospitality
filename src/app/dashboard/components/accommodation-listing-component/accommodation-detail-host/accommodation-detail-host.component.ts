@@ -1,5 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import {
+  Component,
+  Inject,
+  Input,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
@@ -40,7 +46,8 @@ export class AccommodationDetailHostComponent {
     private httpService: HttpService,
     private snackBar: MatSnackBar,
     private chatService: ChatService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.clickEventSubscription = this.service
       .getIsLoginClickEvent()
@@ -255,7 +262,9 @@ export class AccommodationDetailHostComponent {
           });
 
           setTimeout(() => {
-            window.location.reload();
+            if (isPlatformBrowser(this.platformId)) {
+              window.location.reload();
+            }
           }, 1000);
         },
         (err) => {
@@ -291,7 +300,9 @@ export class AccommodationDetailHostComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result?.loading) {
         setTimeout(() => {
-          window.location.reload();
+          if (isPlatformBrowser(this.platformId)) {
+            window.location.reload();
+          }
         }, 1000);
       }
     });
