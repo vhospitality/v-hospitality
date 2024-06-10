@@ -134,6 +134,10 @@ export class HostListPropertyComponent {
           this.monthlySubscriptions = [];
           this.yearlySubscriptions = [];
           this.getSubscriptions();
+        } else {
+          this.monthlySubscriptions = [];
+          this.yearlySubscriptions = [];
+          this.getSubscriptions();
         }
       }
     }
@@ -254,9 +258,10 @@ export class HostListPropertyComponent {
               this.service.setSubscriptionsMessage(data);
             }
           );
+        } else {
+          this.setupData(data);
+          this.service.setSubscriptionsMessage(data);
         }
-        this.setupData(data);
-        this.service.setSubscriptionsMessage(data);
       },
       () => {
         this.loaderSubscription = [];
