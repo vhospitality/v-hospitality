@@ -1,9 +1,7 @@
-import { CommonModule, Location, isPlatformBrowser } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import {
   Component,
   ElementRef,
-  Inject,
-  PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -19,7 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
-import { InputRestrictionDirective } from '../../../directives/no-special-character.directive';
+import { InputRestrictionDirective } from 'src/app/dashboard/directives/no-special-character.directive';
 
 @Component({
   selector: 'app-about-footer',
@@ -85,8 +83,7 @@ export class AboutFooterComponent {
   constructor(
     private snackBar: MatSnackBar,
     private _location: Location,
-    private fb: FormBuilder,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private fb: FormBuilder
   ) {
     this.createForm();
   }
@@ -97,6 +94,7 @@ export class AboutFooterComponent {
       lastname: ['', [Validators.required, Validators.minLength(3)]],
       phone: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.required]],
+      // agree: ['ny', [Validators.required]],
       message: ['', [Validators.required, Validators.minLength(10)]],
     });
 
@@ -153,8 +151,6 @@ export class AboutFooterComponent {
   }
 
   redirect(url: string) {
-    if (isPlatformBrowser(this.platformId)) {
-      window.open(url);
-    }
+    window.open(url);
   }
 }

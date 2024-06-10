@@ -20,7 +20,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
-import { PasswordStrengthMeterComponent } from 'angular-password-strength-meter';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SkeletonModule } from 'primeng/skeleton';
 import { baseUrl } from '../../../../../environments/environment';
@@ -28,8 +27,9 @@ import { AuthService } from '../../../../global-services/auth.service';
 import { HttpService } from '../../../../global-services/http.service';
 import { MustMatch } from '../../../../helpers/must-match.validators';
 import { ToggleNavService } from '../../../dashboard-service/toggle-nav.service';
-import { InputRestrictionDirective } from '../../../directives/no-special-character.directive';
 import { PersonalDetails } from '../../../model/form';
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { InputRestrictionDirective } from 'src/app/dashboard/directives/no-special-character.directive';
 
 @Component({
   selector: 'app-account-profile',
@@ -47,7 +47,7 @@ import { PersonalDetails } from '../../../model/form';
     SkeletonModule,
     LazyLoadImageModule,
     InputRestrictionDirective,
-    PasswordStrengthMeterComponent,
+    PasswordStrengthMeterModule,
   ],
   templateUrl: './account-profile.component.html',
   encapsulation: ViewEncapsulation.Emulated,

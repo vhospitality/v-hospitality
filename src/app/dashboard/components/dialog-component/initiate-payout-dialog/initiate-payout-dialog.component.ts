@@ -136,9 +136,7 @@ export class InitiatePayoutDialogComponent implements OnInit {
       this.httpService
         .postData(baseUrl.otp, {
           type: 'withdrawal',
-          amount:
-            this.calculateTransferFee(this.feedbackForm.value.amount) +
-            this.feedbackForm.value.amount,
+          amount: this.feedbackForm.value.amount,
         })
         .subscribe(
           (data: any) => {

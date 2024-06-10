@@ -13,6 +13,8 @@
     padding: 1rem;
 
     .warning {
+      // padding: 1rem;
+
       .w-title {
         color: var(--primary-800);
         font-family: var(--mark-font);
@@ -105,12 +107,9 @@
     padding: 1rem;
     grid-gap: 12px;
     flex-wrap: wrap;
-
-    .custom-search {
-      display: flex;
-      justify-content: left;
-      align-items: center;
-    }
+    border-top: 1px solid var(--gray-200);
+    border-left: 1px solid var(--gray-200);
+    border-right: 1px solid var(--gray-200);
 
     .left-filter-form {
       display: flex;
@@ -133,6 +132,10 @@
       .month-active {
         background: var(--gray-200);
       }
+    }
+
+    .custom-search {
+      width: 400px;
     }
   }
 }

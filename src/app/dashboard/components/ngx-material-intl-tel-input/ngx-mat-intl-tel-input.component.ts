@@ -2,6 +2,7 @@
 id-match, @typescript-eslint/naming-convention */
 
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   DoCheck,
@@ -136,7 +137,7 @@ export class NgxMatIntlTelInputComponent
 
   set format(value: PhoneNumberFormat) {
     this._format = value;
-    this.phoneNumber = this.formattedPhoneNumber as any;
+    this.phoneNumber = this.formattedPhoneNumber;
     this.stateChanges.next(undefined);
   }
 
@@ -243,7 +244,7 @@ export class NgxMatIntlTelInputComponent
       this.value = this.numberInstance?.number;
       if (this.numberInstance && this.numberInstance.isValid()) {
         if (this.phoneNumber !== this.formattedPhoneNumber) {
-          this.phoneNumber = this.formattedPhoneNumber as any;
+          this.phoneNumber = this.formattedPhoneNumber;
         }
         if (
           this.selectedCountry?.iso2 !== this.numberInstance.country &&
@@ -335,7 +336,7 @@ export class NgxMatIntlTelInputComponent
       this.numberInstance = parsePhoneNumberFromString(value);
       if (this.numberInstance) {
         const countryCode = this.numberInstance.country;
-        this.phoneNumber = this.formattedPhoneNumber as any;
+        this.phoneNumber = this.formattedPhoneNumber;
         if (!countryCode) {
           return;
         }
@@ -414,7 +415,7 @@ export class NgxMatIntlTelInputComponent
   }
 
   reset(): void {
-    this.phoneNumber = '' as any;
+    this.phoneNumber = '';
     this.propagateChange(null);
 
     this._changeDetectorRef.markForCheck();
@@ -453,7 +454,7 @@ export class NgxMatIntlTelInputComponent
         ?.toString()
         .startsWith(this.previousFormattedNumber || '')
     ) {
-      this.phoneNumber = asYouType.input(this.phoneNumber.toString()) as any;
+      this.phoneNumber = asYouType.input(this.phoneNumber.toString());
     }
     this.previousFormattedNumber = this.phoneNumber?.toString();
   }

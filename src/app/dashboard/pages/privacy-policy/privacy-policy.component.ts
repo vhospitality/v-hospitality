@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { baseUrl } from '../../../../environments/environment';
-import { SeoService } from '../../../global-services/seo.service';
+import { SeoService } from 'src/app/global-services/seo.service';
+import { baseUrl } from 'src/environments/environment';
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { HeaderComponent } from '../../components/header/header.component';

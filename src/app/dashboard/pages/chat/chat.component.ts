@@ -1,10 +1,8 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   ElementRef,
-  Inject,
-  PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -44,46 +42,40 @@ export class ChatComponent implements AfterViewInit {
   constructor(
     private service: ToggleNavService,
     private authService: AuthService,
-    private httpService: HttpService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private httpService: HttpService
   ) {
     this.datas = this.service.getListingDetailsMessage();
+    if (window?.innerWidth < 1299) {
+      this.display = false;
+    } else {
+      this.display = true;
+    }
 
-    if (isPlatformBrowser(this.platformId)) {
-      if (window?.innerWidth < 1299) {
-        this.display = false;
-      } else {
-        this.display = true;
-      }
+    let bookingId: any = localStorage.getItem(
+      baseUrl.localStorageSelectedBooking
+    );
 
-      let bookingId: any = localStorage.getItem(
-        baseUrl.localStorageSelectedBooking
-      );
+    if (JSON.parse(bookingId)) {
+      this.getBookingDetails(JSON.parse(bookingId));
+    }
 
-      if (JSON.parse(bookingId)) {
-        this.getBookingDetails(JSON.parse(bookingId));
-      }
+    let currentUser: any = localStorage.getItem(
+      baseUrl.localStorageSelectedChat
+    ) as any;
 
-      let currentUser: any = localStorage.getItem(
-        baseUrl.localStorageSelectedChat
-      ) as any;
-
-      if (currentUser?.u_id) {
-        this.currentUser = JSON.parse(currentUser);
-      }
+    if (currentUser?.u_id) {
+      this.currentUser = JSON.parse(currentUser);
     }
   }
 
   getCurrentuser(data: any) {
-    if (isPlatformBrowser(this.platformId)) {
-      if (window?.innerWidth < 1299) {
-        this.display2 = false;
-        this.display = true;
-      }
-
-      this.currentUser = data;
-      this.target?.nativeElement?.scrollIntoView();
+    if (window?.innerWidth < 1299) {
+      this.display2 = false;
+      this.display = true;
     }
+
+    this.currentUser = data;
+    this.target?.nativeElement?.scrollIntoView();
   }
 
   getBookingDetails(id: string) {

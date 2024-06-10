@@ -36,8 +36,6 @@ export class OtpPayoutDialogComponent {
     this.authService.checkExpired();
   }
 
-  ngOnInit(): void {}
-
   // this called only if user entered full code
   onCodeCompleted(code: string) {
     this.code = code;
@@ -49,9 +47,7 @@ export class OtpPayoutDialogComponent {
 
       this.httpService
         .postData(baseUrl.withdraws, {
-          amount:
-            this.calculateTransferFee(this.payout?.formData?.amount) +
-            this.payout?.formData?.amount,
+          amount: this.payout?.formData?.amount,
           code: this.code,
           bank: this.payout?.accountData?.bank_name,
         })

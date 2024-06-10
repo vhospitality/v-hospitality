@@ -1,14 +1,11 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
-  Inject,
   Input,
   OnInit,
   Output,
-  PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -20,8 +17,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputTextModule } from 'primeng/inputtext';
 import { Subscription } from 'rxjs';
-import { baseUrl } from '../../../../environments/environment';
-import { SeoService } from '../../../global-services/seo.service';
+import { SeoService } from 'src/app/global-services/seo.service';
+import { baseUrl } from 'src/environments/environment';
 import { AboutFooterComponent } from '../../components/about-component/about-footer/about-footer.component';
 import { AboutComponent } from '../../components/about-component/about/about.component';
 import { BlogComponent } from '../../components/about-component/blog/blog.component';
@@ -62,7 +59,7 @@ import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./about-us.component.scss'],
 })
-export class AboutUsComponent implements OnInit, AfterViewInit {
+export class AboutUsComponent implements OnInit {
   @ViewChild('contact', { static: true })
   contact!: ElementRef<HTMLDivElement>;
 
@@ -124,34 +121,8 @@ export class AboutUsComponent implements OnInit, AfterViewInit {
     private router: Router,
     private service: ToggleNavService,
     private direct: ActivatedRoute,
-    private seo: SeoService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private seo: SeoService
   ) {
-    this.seo.updateSeoTags({
-      title: 'About us' + ' - ' + baseUrl.feDomain,
-    });
-  }
-
-  search() {
-    this.service.setAccommodationMessage({
-      selectOption: this.selectOption,
-      country: this.address,
-      date: this.checkinDate,
-    });
-    this.router.navigate(['/accommodations']);
-  }
-
-  scroll(el: HTMLElement) {
-    if (isPlatformBrowser(this.platformId)) {
-      setTimeout(() => {
-        el.scrollIntoView();
-      }, 100);
-    }
-  }
-
-  ngAfterViewInit() {
-    this.getPlaceAutocomplete();
-
     this.clickEventSubscription = this.sharedSelect
       .getSelectClickEvent()
       .subscribe((data: any) => {
@@ -195,22 +166,43 @@ export class AboutUsComponent implements OnInit, AfterViewInit {
 
         this.sharedSelect.setSelectMessage(this.selectOption);
       });
+
+    this.seo.updateSeoTags({
+      title: 'About us' + ' - ' + baseUrl.feDomain,
+    });
+  }
+
+  search() {
+    this.service.setAccommodationMessage({
+      selectOption: this.selectOption,
+      country: this.address,
+      date: this.checkinDate,
+    });
+    this.router.navigate(['/accommodations']);
+  }
+
+  scroll(el: HTMLElement) {
+    setTimeout(() => {
+      el.scrollIntoView();
+    }, 100);
+  }
+
+  ngAfterViewInit() {
+    this.getPlaceAutocomplete();
   }
 
   private getPlaceAutocomplete() {
-    if (isPlatformBrowser(this.platformId)) {
-      const autocomplete = new google.maps.places.Autocomplete(
-        this.addresstext?.nativeElement,
-        {
-          componentRestrictions: { country: 'NG' },
-          types: [this.adressType], // 'establishment' / 'address' / 'geocode'
-        }
-      );
-      google.maps.event.addListener(autocomplete, 'place_changed', () => {
-        const place = autocomplete.getPlace();
-        this.invokeEvent(place);
-      });
-    }
+    const autocomplete = new google.maps.places.Autocomplete(
+      this.addresstext?.nativeElement,
+      {
+        componentRestrictions: { country: 'NG' },
+        types: [this.adressType], // 'establishment' / 'address' / 'geocode'
+      }
+    );
+    google.maps.event.addListener(autocomplete, 'place_changed', () => {
+      const place = autocomplete.getPlace();
+      this.invokeEvent(place);
+    });
   }
 
   invokeEvent(place: any) {

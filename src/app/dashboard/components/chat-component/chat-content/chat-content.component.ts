@@ -1,11 +1,9 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   Component,
   ElementRef,
-  Inject,
   Input,
-  PLATFORM_ID,
+  OnInit,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -36,7 +34,7 @@ import { ChatHeaderComponent } from '../chat-header/chat-header.component';
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./chat-content.component.scss'],
 })
-export class ChatContentComponent implements AfterViewInit {
+export class ChatContentComponent implements OnInit {
   @ViewChild('target', { static: true })
   target!: ElementRef<HTMLDivElement>;
 
@@ -59,53 +57,51 @@ export class ChatContentComponent implements AfterViewInit {
   constructor(
     private chatService: ChatService,
     private service: ToggleNavService,
-    private httpService: HttpService,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+    private httpService: HttpService
+  ) {
+    this.clickEventSubscription = this.service
+      .getIsLoginClickEvent()
+      .subscribe(() => {
+        this.userData = this.service.getProfileMessage();
+      });
+  }
 
   join(username: string, roomId: string): void {
     this.chatService.joinRoom({ user: username, room: roomId });
   }
 
-  ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.clickEventSubscription = this.service
-        .getIsLoginClickEvent()
-        .subscribe(() => {
-          this.userData = this.service.getProfileMessage();
-        });
-
-      this.chatService.getMessage().subscribe((data) => {
-        if (data?.sender !== this.userData?.uuid) {
-          if (this.messages?.length > 0) {
-            this.messages.push(data);
-          } else {
-            this.messages = [data];
-          }
+  ngOnInit(): void {
+    this.chatService.getMessage().subscribe((data) => {
+      if (data?.sender !== this.userData?.uuid) {
+        if (this.messages?.length > 0) {
+          this.messages.push(data);
+        } else {
+          this.messages = [data];
         }
-
-        if (data?.receiver === this.userData?.uuid) {
-          if (!('Notification' in window)) {
-            return;
-          }
-          this.playSound();
-        }
-        this.scrollToBottom();
-      });
-
-      let currentRoom = JSON.parse(localStorage.getItem(baseUrl.rooms) as any);
-      if (currentRoom?.length > 0 && currentRoom) {
-        this.currentRoom = currentRoom[0];
       }
 
-      this.service.currentRoom?.subscribe((room: any) => {
-        if (room?.roomId !== currentRoom?.roomId) {
-          this.currentRoom = room;
-          this.messages = [];
-          this.getMessages();
+      if (data?.receiver === this.userData?.uuid) {
+        if (!('Notification' in window)) {
+          return;
         }
-      });
+
+        this.playSound();
+      }
+      this.scrollToBottom();
+    });
+
+    let currentRoom = JSON.parse(localStorage.getItem(baseUrl.rooms) as any);
+    if (currentRoom?.length > 0 && currentRoom) {
+      this.currentRoom = currentRoom[0];
     }
+
+    this.service.currentRoom?.subscribe((room: any) => {
+      if (room?.roomId !== currentRoom?.roomId) {
+        this.currentRoom = room;
+        this.messages = [];
+        this.getMessages();
+      }
+    });
   }
 
   getMessages() {

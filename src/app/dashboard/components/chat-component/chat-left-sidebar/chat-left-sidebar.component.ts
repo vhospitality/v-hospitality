@@ -1,11 +1,9 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   Component,
   EventEmitter,
-  Inject,
+  OnInit,
   Output,
-  PLATFORM_ID,
   ViewEncapsulation,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -41,7 +39,7 @@ import { NoDataMessageComponent } from '../../no-data-message/no-data-message.co
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./chat-left-sidebar.component.scss'],
 })
-export class ChatLeftSidebarComponent implements AfterViewInit {
+export class ChatLeftSidebarComponent implements OnInit {
   @Output() currentUser = new EventEmitter<any>();
   search: string = '';
   active: string = '';
@@ -56,9 +54,15 @@ export class ChatLeftSidebarComponent implements AfterViewInit {
   constructor(
     private service: ToggleNavService,
     private httpService: HttpService,
-    private chatService: ChatService,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+    private chatService: ChatService
+  ) {
+    this.clickEventSubscription = this.service
+      .getIsLoginClickEvent()
+      .subscribe(() => {
+        this.userData = this.service.getProfileMessage();
+        this.getRooms();
+      });
+  }
 
   getRooms() {
     if (this.rooms?.length === 0 || !this.rooms) {
@@ -91,29 +95,27 @@ export class ChatLeftSidebarComponent implements AfterViewInit {
   }
 
   changeActive(data?: any) {
-    if (isPlatformBrowser(this.platformId)) {
-      console.log(data, 'changeActive data');
+    console.log(data, 'changeActive data');
 
-      if (data) {
-        this.active = data?._id || data?.u_id;
+    if (data) {
+      this.active = data?._id || data?.u_id;
 
-        localStorage.setItem(
-          baseUrl.localStorageSelectedChat,
-          JSON.stringify(data?.user || data)
-        );
+      localStorage.setItem(
+        baseUrl.localStorageSelectedChat,
+        JSON.stringify(data?.user || data)
+      );
 
-        this.currentUser.emit(data?.user || data);
-        this.currentUser.emit(data?.user || data);
+      this.currentUser.emit(data?.user || data);
+      this.currentUser.emit(data?.user || data);
 
-        this.joinRoom(
-          `${this.userData?.first_name} ${this.userData?.last_name}`,
-          data?.roomId,
-          data?.users?.find((name: any) => name?.u_id !== this.userData?.uuid)
-        );
-      }
-
-      this.service.changeRoom(data);
+      this.joinRoom(
+        `${this.userData?.first_name} ${this.userData?.last_name}`,
+        data?.roomId,
+        data?.users?.find((name: any) => name?.u_id !== this.userData?.uuid)
+      );
     }
+
+    this.service.changeRoom(data);
   }
 
   joinRoom(username: string, roomId: string, user_id: string): void {
@@ -132,33 +134,24 @@ export class ChatLeftSidebarComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.getRooms();
+  ngOnInit(): void {
+    this.getRooms();
 
-      this.clickEventSubscription = this.service
-        .getIsLoginClickEvent()
-        .subscribe(() => {
-          this.userData = this.service.getProfileMessage();
-          this.getRooms();
-        });
+    this.chatService.getMessage().subscribe((data) => {
+      this.rooms.filter((n: any, index: number) => {
+        if (n?.roomId == data?.room) {
+          this.rooms[index].updatedAt = new Date();
+          this.rooms[index].lastMessage = `${
+            data?.sender == this.userData?.uuid ? 'You:' : ''
+          } ${data?.message}`;
+        }
 
-      this.chatService.getMessage().subscribe((data) => {
-        this.rooms.filter((n: any, index: number) => {
-          if (n?.roomId == data?.room) {
-            this.rooms[index].updatedAt = new Date();
-            this.rooms[index].lastMessage = `${
-              data?.sender == this.userData?.uuid ? 'You:' : ''
-            } ${data?.message}`;
-          }
-
-          if (n?._id === data?._id) {
-            this.rooms.splice(index, 1);
-            this.rooms.unshift(n);
-          }
-        });
+        if (n?._id === data?._id) {
+          this.rooms.splice(index, 1);
+          this.rooms.unshift(n);
+        }
       });
-    }
+    });
   }
 
   getMessages() {

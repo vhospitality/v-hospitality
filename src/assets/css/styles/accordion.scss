@@ -1,6 +1,25 @@
+// .p-accordion
+//   .p-accordion-header:not(.p-disabled).p-highlight
+//   .p-accordion-header-link {
+//   background: unset;
+//   border-color: unset;
+//   border: unset;
+//   border-radius: unset;
+//   box-shadow: unset;
+// }
+
+// .p-accordion .p-accordion-header .p-accordion-header-link {
+//   background: unset;
+//   border-color: unset;
+//   border: unset;
+//   border-radius: unset;
+//   box-shadow: unset;
+// }
+
 .p-accordion .p-accordion-tab {
+  // border-radius: none;
   box-shadow: unset;
-  border-radius: none;
+  // border: 1px solid var(--black);
 }
 
 .p-accordion-header-text {
@@ -22,6 +41,14 @@
   line-height: 24px;
   margin-left: 20px;
 }
+
+// .p-accordion .p-accordion-content {
+//   background: unset;
+//   border-color: unset;
+//   border: unset;
+//   border-radius: unset;
+//   box-shadow: unset;
+// }
 
 .p-accordion .p-accordion-tab.p-accordion-tab-active .p-accordion-toggle-icon {
   color: var(--gray-900);

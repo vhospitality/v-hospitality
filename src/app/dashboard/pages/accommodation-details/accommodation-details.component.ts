@@ -1,11 +1,5 @@
-import { CommonModule, Location, isPlatformBrowser } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  Inject,
-  PLATFORM_ID,
-  ViewEncapsulation,
-} from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
@@ -19,10 +13,10 @@ import { GalleriaModule } from 'primeng/galleria';
 import { ImageModule } from 'primeng/image';
 import { SkeletonModule } from 'primeng/skeleton';
 import { Subscription } from 'rxjs';
+import { SeoService } from 'src/app/global-services/seo.service';
 import { baseUrl } from '../../../../environments/environment';
 import { AuthService } from '../../../global-services/auth.service';
 import { HttpService } from '../../../global-services/http.service';
-import { SeoService } from '../../../global-services/seo.service';
 import { AccommodationDetailDetailComponent } from '../../components/accommodation-listing-component/accommodation-detail-detail/accommodation-detail-detail.component';
 import { AccommodationDetailFormComponent } from '../../components/accommodation-listing-component/accommodation-detail-form/accommodation-detail-form.component';
 import { AccommodationDetailHostComponent } from '../../components/accommodation-listing-component/accommodation-detail-host/accommodation-detail-host.component';
@@ -65,7 +59,7 @@ import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./accommodation-details.component.scss'],
 })
-export class AccommodationDetailsComponent implements AfterViewInit {
+export class AccommodationDetailsComponent {
   id!: string | null;
   clickEventSubscription?: Subscription;
   isLogin: boolean = false;
@@ -104,9 +98,32 @@ export class AccommodationDetailsComponent implements AfterViewInit {
     private authService: AuthService,
     private httpService: HttpService,
     private snackBar: MatSnackBar,
-    private seo: SeoService,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+    private seo: SeoService
+  ) {
+    this.isLogin = this.authService.isLoggedIn();
+
+    this.direct.paramMap.subscribe((params) => {
+      this.id = params.get('id');
+      this.getDetails(params.get('id'));
+    });
+
+    this.service.getIsLoginClickEvent().subscribe(() => {
+      this.isLogin = this.authService.isLoggedIn();
+    });
+
+    if (this.isLogin) {
+      let wishlist: any = this.service.getWishlistMessage();
+      if (wishlist) {
+        for (let n of wishlist) {
+          this.newAddedWishlist.push(n?.listing?.uuid);
+        }
+
+        this.newAddedWishlist2 = wishlist;
+      } else {
+        this.getWishlist();
+      }
+    }
+  }
 
   imageClick(pictures: any, uuid: any) {
     const index = pictures.findIndex((n: any) => n?.uuid === uuid);
@@ -115,11 +132,7 @@ export class AccommodationDetailsComponent implements AfterViewInit {
   }
 
   getUrl() {
-    if (isPlatformBrowser(this.platformId)) {
-      return window.location.href;
-    } else {
-      return '';
-    }
+    return window.location.href;
   }
 
   getWishlist() {
@@ -250,7 +263,7 @@ export class AccommodationDetailsComponent implements AfterViewInit {
             title: this.listingDetails?.title + ' - ' + baseUrl.feDomain,
             image:
               this.listingDetails?.pictures?.length > 0
-                ? this.listingDetails?.pictures[0]?.url
+                ? this.listingDetails?.pictures[0]
                 : undefined,
             description: this.listingDetails?.description,
           });
@@ -267,31 +280,5 @@ export class AccommodationDetailsComponent implements AfterViewInit {
 
   back() {
     this._location.back();
-  }
-
-  ngAfterViewInit(): void {
-    this.isLogin = this.authService.isLoggedIn();
-
-    this.direct.paramMap.subscribe((params) => {
-      this.id = params.get('id');
-      this.getDetails(params.get('id'));
-    });
-
-    this.service.getIsLoginClickEvent().subscribe(() => {
-      this.isLogin = this.authService.isLoggedIn();
-    });
-
-    if (this.isLogin) {
-      let wishlist: any = this.service.getWishlistMessage();
-      if (wishlist) {
-        for (let n of wishlist) {
-          this.newAddedWishlist.push(n?.listing?.uuid);
-        }
-
-        this.newAddedWishlist2 = wishlist;
-      } else {
-        this.getWishlist();
-      }
-    }
   }
 }

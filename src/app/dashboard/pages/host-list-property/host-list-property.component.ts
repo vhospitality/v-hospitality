@@ -7,10 +7,10 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AccordionModule } from 'primeng/accordion';
 import { SkeletonModule } from 'primeng/skeleton';
 import { Subscription } from 'rxjs';
+import { SeoService } from 'src/app/global-services/seo.service';
 import { baseUrl } from '../../../../environments/environment';
 import { AuthService } from '../../../global-services/auth.service';
 import { HttpService } from '../../../global-services/http.service';
-import { SeoService } from '../../../global-services/seo.service';
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
 import { DialogComponent } from '../../components/dialog/dialog.component';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -127,7 +127,7 @@ export class HostListPropertyComponent {
 
     if (this.subType == 'subscription') {
       // subscription
-      if (subscriptions && this.userData) {
+      if (subscriptions) {
         this.setupData(subscriptions);
       } else {
         if (this.userData) {
@@ -213,14 +213,11 @@ export class HostListPropertyComponent {
 
   setupData(data: any) {
     this.monthlySubscriptions = data?.data.filter((name: any) => {
-      return (
-        (name?.type == 'monthly' || name?.type == 'forever') &&
-        name?.is_active == 1
-      );
+      return name?.type == 'monthly' || name?.type == 'forever';
     });
 
     this.yearlySubscriptions = data?.data.filter((name: any) => {
-      return name?.type == 'annual' && name?.is_active == 1;
+      return name?.type == 'annual';
     });
 
     if (this.activeBilling == 'monthly') {
@@ -257,10 +254,9 @@ export class HostListPropertyComponent {
               this.service.setSubscriptionsMessage(data);
             }
           );
-        } else {
-          this.setupData(data);
-          this.service.setSubscriptionsMessage(data);
         }
+        this.setupData(data);
+        this.service.setSubscriptionsMessage(data);
       },
       () => {
         this.loaderSubscription = [];
@@ -305,6 +301,8 @@ export class HostListPropertyComponent {
       this.router.navigate(['/property-signup']);
     } else if (!this.authService.isLoggedIn()) {
       this.openDialog('', 'login2');
+    } else if (sub?.is_active === 0) {
+      return;
     } else {
       this.createSubscruption(sub);
     }

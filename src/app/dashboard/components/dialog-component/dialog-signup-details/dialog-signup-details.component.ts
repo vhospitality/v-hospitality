@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { DialogModule } from 'primeng/dialog';
 import { Observable, Subject } from 'rxjs';
 import { baseUrl } from '../../../../../environments/environment';
@@ -50,6 +51,7 @@ export const StrongPasswordRegx: RegExp =
     MatIconModule,
     InputRestrictionDirective,
     DialogModule,
+    PasswordStrengthMeterModule,
     NgxMatIntlTelInputComponent,
   ],
   templateUrl: './dialog-signup-details.component.html',

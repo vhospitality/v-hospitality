@@ -13,13 +13,13 @@ import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import { Subscription, filter } from 'rxjs';
+import { baseUrl } from 'src/environments/environment';
 import { DialogComponent } from './dashboard/components/dialog/dialog.component';
 import { ToggleNavService } from './dashboard/dashboard-service/toggle-nav.service';
 import { AuthService } from './global-services/auth.service';
 import { ChatService } from './global-services/chat.service';
 import { HttpService } from './global-services/http.service';
 import { SeoService } from './global-services/seo.service';
-import { baseUrl } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -58,21 +58,19 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.checkForUpdates();
     this.seo.updateSeoTags({});
     this.setStructuredData();
-  }
 
-  setStructuredData() {
-    const script = this.doc.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = `
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": ${baseUrl.feDomain2},
-      "name": ${this.seo.title},
-      "description": ${this.seo.description}
-    }
-    `;
-    this.doc.head.appendChild(script);
+    this.bnIdle.startWatching(600).subscribe((isTimedOut: boolean) => {
+      if (isTimedOut) {
+        if (this.canLogout) {
+          this.authService.logout();
+          this.service.sendIsLoginClickEvent();
+          this.canLogout = false;
+          if (confirm('Your session has timed out. Please log in again.')) {
+            this.openDialog('', 'login2');
+          }
+        }
+      }
+    });
   }
 
   openDialog(data: any, type: string) {
@@ -104,9 +102,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         )
         .subscribe(() => {
           if (confirm('New version available. Load New Version?')) {
-            if (isPlatformBrowser(this.platformId)) {
-              window.location.reload();
-            }
+            window.location.reload();
           }
         });
     }
@@ -116,46 +112,29 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.requestPermission();
     this.listen();
 
-    if (isPlatformBrowser(this.platformId)) {
-      this.chatService.getMessage().subscribe((data) => {
-        if (data?.receiver === this.userData?.uuid) {
-          this.displayMessage(data?.message, data?.sender_name);
-        }
-      });
+    this.chatService.getMessage().subscribe((data) => {
+      if (data?.receiver === this.userData?.uuid) {
+        this.displayMessage(data?.message, data?.sender_name);
+      }
+    });
 
-      this.direct.queryParamMap.subscribe((params: any) => {
-        if (
-          params?.params?.auth?.toLowerCase() == 'signup' ||
-          params?.params?.auth?.toLowerCase() == 'register'
-        ) {
-          this.openDialog('', 'login');
-          this.seo.updateSeoTags({
-            title: 'Sign Up' + ' - ' + baseUrl.feDomain,
-          });
-          this.router.navigate(['/home']);
-        } else if (
-          params?.params?.auth?.toLowerCase() == 'login' ||
-          params?.params?.auth?.toLowerCase() == 'signin'
-        ) {
-          this.openDialog('', 'login2');
-          this.seo.updateSeoTags({ title: 'Login' + ' - ' + baseUrl.feDomain });
-          this.router.navigate(['/home']);
-        }
-      });
-
-      this.bnIdle.startWatching(600).subscribe((isTimedOut: boolean) => {
-        if (isTimedOut) {
-          if (this.canLogout) {
-            this.authService.logout();
-            this.service.sendIsLoginClickEvent();
-            this.canLogout = false;
-            if (confirm('Your session has timed out. Please log in again.')) {
-              this.openDialog('', 'login2');
-            }
-          }
-        }
-      });
-    }
+    this.direct.queryParamMap.subscribe((params: any) => {
+      if (
+        params?.params?.auth?.toLowerCase() == 'signup' ||
+        params?.params?.auth?.toLowerCase() == 'register'
+      ) {
+        this.openDialog('', 'login');
+        this.seo.updateSeoTags({ title: 'Sign Up' + ' - ' + baseUrl.feDomain });
+        this.router.navigate(['/home']);
+      } else if (
+        params?.params?.auth?.toLowerCase() == 'login' ||
+        params?.params?.auth?.toLowerCase() == 'signin'
+      ) {
+        this.openDialog('', 'login2');
+        this.seo.updateSeoTags({ title: 'Login' + ' - ' + baseUrl.feDomain });
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
   checkIfLogin() {
@@ -167,48 +146,48 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   updateToken(token?: any) {
-    if (token) {
-      this.userData = this.service.getProfileMessage();
-      this.registerTokenForChat(token);
+    // if (token) {
+    this.userData = this.service.getProfileMessage();
+    this.registerTokenForChat(token);
 
-      this.httpService
-        .postData(baseUrl.deviceToken, {
-          device_token: token || this.userData?.device_token,
-          profile_picture: this.userData?.profile_picture,
-          first_name: this.userData?.first_name,
-          last_name: this.userData?.last_name,
-        })
-        .subscribe(
-          () => {
-            localStorage.setItem(this.token, token);
-          },
-          () => {}
-        );
-    }
+    this.httpService
+      .postData(baseUrl.deviceToken, {
+        device_token: token || this.userData?.device_token,
+        profile_picture: this.userData?.profile_picture,
+        first_name: this.userData?.first_name,
+        last_name: this.userData?.last_name,
+      })
+      .subscribe(
+        () => {
+          localStorage.setItem(this.token, token);
+        },
+        () => {}
+      );
+    // }
   }
 
   requestPermission() {
-    if (isPlatformBrowser(this.platformId)) {
-      const messaging = getMessaging();
+    // if (isPlatformBrowser(this.platformId)) {
+    const messaging = getMessaging();
 
-      getToken(messaging, { vapidKey: baseUrl.firebase.vapidKey }).then(
-        (currentToken) => {
-          if (currentToken) {
-            this.deviceToken = currentToken;
-            this.checkIfLogin();
-          }
+    getToken(messaging, { vapidKey: baseUrl.firebase.vapidKey }).then(
+      (currentToken) => {
+        if (currentToken) {
+          this.deviceToken = currentToken;
+          this.checkIfLogin();
         }
-      );
-    }
+      }
+    );
+    // }
   }
 
   listen() {
-    if (isPlatformBrowser(this.platformId)) {
-      const messaging = getMessaging();
-      onMessage(messaging, (payload) => {
-        this.service.sendNotificationClickEvent(payload);
-      });
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    const messaging = getMessaging();
+    onMessage(messaging, (payload) => {
+      this.service.sendNotificationClickEvent(payload);
+    });
+    // }
   }
 
   displayMessage(message: string, title: string) {
@@ -299,6 +278,21 @@ export class AppComponent implements OnInit, AfterViewInit {
         profile_picture: this.userData?.profile_picture,
       }
     );
+  }
+
+  setStructuredData() {
+    const script = this.doc.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = `
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": ${baseUrl.feDomain2},
+      "name": ${this.seo.title},
+      "description": ${this.seo.description}
+    }
+    `;
+    this.doc.head.appendChild(script);
   }
 
   ngAfterViewInit() {

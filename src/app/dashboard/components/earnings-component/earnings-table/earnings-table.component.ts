@@ -1,12 +1,5 @@
-import { CommonModule, DatePipe, isPlatformBrowser } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  Inject,
-  PLATFORM_ID,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -48,7 +41,7 @@ import { DialogComponent } from '../../dialog/dialog.component';
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./earnings-table.component.scss'],
 })
-export class EarningsTableComponent implements AfterViewInit {
+export class EarningsTableComponent {
   @ViewChild('fform') feedbackFormDirective: any;
   feedbackForm: any = FormGroup;
   earnings: any[] = [];
@@ -73,16 +66,11 @@ export class EarningsTableComponent implements AfterViewInit {
     private httpService: HttpService,
     private dialog: MatDialog,
     private datepipe: DatePipe,
-    private excelService: ExcelService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private excelService: ExcelService
   ) {
-    this.createForm();
-  }
-
-  ngAfterViewInit(): void {
     this.authService.checkExpired();
+    this.createForm();
     this.paginateLoadData();
-    this.checkIfHostOrGuest();
   }
 
   createForm() {
@@ -151,7 +139,7 @@ export class EarningsTableComponent implements AfterViewInit {
           this.total = data?.data?.transactions?.total;
           this.loading = false;
         },
-        () => {
+        (err) => {
           this.authService.checkExpired();
           this.earnings = [];
           this.total = 0;
@@ -183,19 +171,15 @@ export class EarningsTableComponent implements AfterViewInit {
   }
 
   checkIfHostOrGuest() {
-    if (isPlatformBrowser(this.platformId)) {
-      if (localStorage.getItem('CURRENT_USER_TYPE') === null) {
-        return false;
-      } else {
-        let switchGuest = localStorage.getItem('CURRENT_USER_TYPE') as any;
-        if (switchGuest === 'true') {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    } else {
+    if (localStorage.getItem('CURRENT_USER_TYPE') === null) {
       return false;
+    } else {
+      let switchGuest = localStorage.getItem('CURRENT_USER_TYPE') as any;
+      if (switchGuest === 'true') {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 

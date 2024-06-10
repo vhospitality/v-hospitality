@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
 
-import { AppModule } from './app.module';
+import { provideClientHydration } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
+import { AppModule } from './app.module';
 
 @NgModule({
-  imports: [
-    AppModule,
-    ServerModule,
-  ],
+  imports: [AppModule, ServerModule],
+  providers: [provideClientHydration()],
   bootstrap: [AppComponent],
 })
 export class AppServerModule {}

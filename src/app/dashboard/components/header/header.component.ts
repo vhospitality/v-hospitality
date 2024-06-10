@@ -1,10 +1,7 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   Component,
   ElementRef,
-  Inject,
-  PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -57,7 +54,7 @@ import { DialogComponent } from '../dialog/dialog.component';
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent {
   ref: DynamicDialogRef | undefined;
   @ViewChild('op') op: ElementRef | any;
   isLogin: boolean = false;
@@ -89,11 +86,8 @@ export class HeaderComponent implements AfterViewInit {
     private authService: AuthService,
     private service: ToggleNavService,
     private httpService: HttpService,
-    private snackBar: MatSnackBar,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
-
-  ngAfterViewInit(): void {
+    private snackBar: MatSnackBar
+  ) {
     this.checkIfLogin();
     this.userData = this.service.getProfileMessage();
     this.checkIfHostOrGuest();
@@ -114,7 +108,7 @@ export class HeaderComponent implements AfterViewInit {
       this.getAmenities();
     }
 
-    let houseRules = this.service.getHouseRulesMessage();
+    let houseRules = this.service.getAmenitiesMessage();
     if (houseRules) {
     } else {
       this.getHouseRules();
@@ -268,20 +262,18 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   checkIfHostOrGuest() {
-    if (isPlatformBrowser(this.platformId)) {
-      // if (this.roles?.includes('host')) {
-      if (localStorage.getItem('CURRENT_USER_TYPE') === null) {
+    // if (this.roles?.includes('host')) {
+    if (localStorage.getItem('CURRENT_USER_TYPE') === null) {
+      this.switchGuest = true;
+    } else {
+      let switchGuest = localStorage.getItem('CURRENT_USER_TYPE') as any;
+      if (switchGuest === 'true') {
         this.switchGuest = true;
       } else {
-        let switchGuest = localStorage.getItem('CURRENT_USER_TYPE') as any;
-        if (switchGuest === 'true') {
-          this.switchGuest = true;
-        } else {
-          this.switchGuest = false;
-        }
+        this.switchGuest = false;
       }
-      // }
     }
+    // }
   }
 
   getProfileDetails() {
@@ -318,26 +310,24 @@ export class HeaderComponent implements AfterViewInit {
         (data: any) => {
           this.service.setAmenitiestMessage(data?.data);
         },
-        () => {}
+        (err) => {}
       );
   }
 
   getHouseRules() {
-    this.httpService.getSingleNoAuth(baseUrl.houseRules).subscribe(
-      (data: any) => {
+    this.httpService
+      .getSingleNoAuth(baseUrl.houseRules)
+      .subscribe((data: any) => {
         this.service.setHouseRulesMessage(data?.data);
-      },
-      () => {}
-    );
+      });
   }
 
   getSubscriptions() {
-    this.httpService.getSingleNoAuth(baseUrl.subscriptions).subscribe(
-      (data: any) => {
+    this.httpService
+      .getSingleNoAuth(baseUrl.subscriptions)
+      .subscribe((data: any) => {
         this.service.setSubscriptionsMessage(data);
-      },
-      () => {}
-    );
+      });
   }
 
   getWishlist() {
@@ -345,13 +335,10 @@ export class HeaderComponent implements AfterViewInit {
       .getAuthSingle(
         baseUrl.wishlist + '/?per_page=1&include=listing&fields[listing]=uuid'
       )
-      .subscribe(
-        (data: any) => {
-          this.wishlist = data?.data;
-          this.service.setWishlistMessage(data?.data);
-        },
-        () => {}
-      );
+      .subscribe((data: any) => {
+        this.wishlist = data?.data;
+        this.service.setWishlistMessage(data?.data);
+      });
   }
 
   getNotification() {
@@ -374,7 +361,7 @@ export class HeaderComponent implements AfterViewInit {
             this.service.setNotificationMessage(data?.data?.data);
             this.isLoading = false;
           },
-          () => {
+          (err) => {
             this.isLoading = false;
           }
         );

@@ -76,17 +76,21 @@ export class AuthService {
   }
 
   isLoggedIn() {
+    // let isLogin: boolean = false;
+    // if (isPlatformBrowser(this.platformId)) {
     return !!this.getJwtToken();
+    // }
+    // return isLogin;
   }
 
   checkExpired() {
-    if (isPlatformBrowser(this.platformId)) {
-      const isExpired = this.helper.isTokenExpired(this.getJwtToken());
-      if (isExpired) {
-        this.shared.sendIsLoginClickEvent();
-        this.logout();
-      }
+    // if (isPlatformBrowser(this.platformId)) {
+    const isExpired = this.helper.isTokenExpired(this.getJwtToken());
+    if (isExpired) {
+      this.shared.sendIsLoginClickEvent();
+      this.logout();
     }
+    // }
   }
 
   refreshToken() {
@@ -105,43 +109,41 @@ export class AuthService {
   }
 
   getJwtToken(): any {
-    if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem(this.JWT_TOKEN);
-    } else {
-      return false;
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    return localStorage.getItem(this.JWT_TOKEN);
+    // }
   }
 
   public logout() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.removeTokens();
-      this.shared.setProfileMessage(undefined);
-      this.shared.setSubscriptionsMessage(undefined);
-      this.shared.setPayoutMessage(undefined);
-      this.shared.setCardsMessage(undefined);
-      this.shared.setAccommodationMessage(undefined);
-      this.shared.setPropertyMessage(undefined);
-      this.shared.setWishlistMessage(undefined);
-      this.shared.setDraftMessage(undefined);
-      this.shared.setNotificationMessage(undefined);
-      this.shared.profileMessage = undefined;
-      this.shared.subscriptions = undefined;
-      this.shared.payoutMessage = undefined;
-      this.shared.cards = undefined;
-      this.shared.accommodationMessage = undefined;
-      this.shared.propertyMessage = undefined;
-      this.shared.wishlist = undefined;
-      this.shared.draft = undefined;
-      this.shared.notificationMessage = undefined;
-      localStorage.removeItem(baseUrl.wishlist_storage);
-      localStorage.removeItem(baseUrl.localStorageSelectedBooking);
-      localStorage.removeItem(baseUrl.localStorageSelectedChat);
-      localStorage.removeItem(baseUrl.rooms);
-      localStorage.removeItem('V_HOSPITALITY_DEVICE_TOKEN');
-      this.router.navigate(['/home'], {
-        queryParams: { returnUrl: this.router.url },
-      });
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    this.removeTokens();
+    this.shared.setProfileMessage(undefined);
+    this.shared.setSubscriptionsMessage(undefined);
+    this.shared.setPayoutMessage(undefined);
+    this.shared.setCardsMessage(undefined);
+    this.shared.setAccommodationMessage(undefined);
+    this.shared.setPropertyMessage(undefined);
+    this.shared.setWishlistMessage(undefined);
+    this.shared.setDraftMessage(undefined);
+    this.shared.setNotificationMessage(undefined);
+    this.shared.profileMessage = undefined;
+    this.shared.subscriptions = undefined;
+    this.shared.payoutMessage = undefined;
+    this.shared.cards = undefined;
+    this.shared.accommodationMessage = undefined;
+    this.shared.propertyMessage = undefined;
+    this.shared.wishlist = undefined;
+    this.shared.draft = undefined;
+    this.shared.notificationMessage = undefined;
+    localStorage.removeItem(baseUrl.wishlist_storage);
+    localStorage.removeItem(baseUrl.localStorageSelectedBooking);
+    localStorage.removeItem(baseUrl.localStorageSelectedChat);
+    localStorage.removeItem(baseUrl.rooms);
+    localStorage.removeItem('V_HOSPITALITY_DEVICE_TOKEN');
+    this.router.navigate(['/home'], {
+      queryParams: { returnUrl: this.router.url },
+    });
+    // }
   }
 
   getRefreshToken(): any {
@@ -151,21 +153,21 @@ export class AuthService {
   }
 
   private storeJwtToken(jwt: string) {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem(this.JWT_TOKEN, jwt);
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    localStorage.setItem(this.JWT_TOKEN, jwt);
+    // }
   }
 
   public storeTokens(tokens: Tokens) {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem(this.JWT_TOKEN, tokens.access);
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    localStorage.setItem(this.JWT_TOKEN, tokens.access);
+    // }
   }
 
   private removeTokens() {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem(this.JWT_TOKEN);
-      localStorage.removeItem(this.REFRESH_TOKEN);
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    localStorage.removeItem(this.JWT_TOKEN);
+    localStorage.removeItem(this.REFRESH_TOKEN);
+    // }
   }
 }

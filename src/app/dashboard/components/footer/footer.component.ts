@@ -10,8 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { baseUrl } from '../../../../environments/environment';
-import { HttpService } from '../../../global-services/http.service';
+import { HttpService } from 'src/app/global-services/http.service';
+import { baseUrl } from 'src/environments/environment';
 import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
 
 @Component({

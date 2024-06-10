@@ -1,11 +1,5 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  Inject,
-  PLATFORM_ID,
-  ViewEncapsulation,
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -53,8 +47,7 @@ export class AccountComponent implements AfterViewInit {
     private authService: AuthService,
     private service: ToggleNavService,
     private httpService: HttpService,
-    public dialog: MatDialog,
-    @Inject(PLATFORM_ID) private platformId: Object
+    public dialog: MatDialog
   ) {
     this.userData = this.service.getProfileMessage();
 
@@ -114,16 +107,14 @@ export class AccountComponent implements AfterViewInit {
   }
 
   checkIfHostOrGuest() {
-    if (isPlatformBrowser(this.platformId)) {
-      if (localStorage.getItem('CURRENT_USER_TYPE') === null) {
-        this.switchGuest = false;
+    if (localStorage.getItem('CURRENT_USER_TYPE') === null) {
+      this.switchGuest = false;
+    } else {
+      let switchGuest = localStorage.getItem('CURRENT_USER_TYPE') as any;
+      if (switchGuest === 'true') {
+        this.switchGuest = true;
       } else {
-        let switchGuest = localStorage.getItem('CURRENT_USER_TYPE') as any;
-        if (switchGuest === 'true') {
-          this.switchGuest = true;
-        } else {
-          this.switchGuest = false;
-        }
+        this.switchGuest = false;
       }
     }
   }
