@@ -127,10 +127,14 @@ export class HostListPropertyComponent {
 
     if (this.subType == 'subscription') {
       // subscription
-      if (subscriptions && this.userData) {
+      if (subscriptions) {
         this.setupData(subscriptions);
       } else {
         if (this.userData) {
+          this.monthlySubscriptions = [];
+          this.yearlySubscriptions = [];
+          this.getSubscriptions();
+        } else {
           this.monthlySubscriptions = [];
           this.yearlySubscriptions = [];
           this.getSubscriptions();
@@ -213,14 +217,11 @@ export class HostListPropertyComponent {
 
   setupData(data: any) {
     this.monthlySubscriptions = data?.data.filter((name: any) => {
-      return (
-        (name?.type == 'monthly' || name?.type == 'forever') &&
-        name?.is_active == 1
-      );
+      return name?.type == 'monthly' || name?.type == 'forever';
     });
 
     this.yearlySubscriptions = data?.data.filter((name: any) => {
-      return name?.type == 'annual' && name?.is_active == 1;
+      return name?.type == 'annual';
     });
 
     if (this.activeBilling == 'monthly') {
@@ -262,7 +263,7 @@ export class HostListPropertyComponent {
           this.service.setSubscriptionsMessage(data);
         }
       },
-      (err) => {
+      () => {
         this.loaderSubscription = [];
       }
     );
@@ -305,6 +306,8 @@ export class HostListPropertyComponent {
       this.router.navigate(['/property-signup']);
     } else if (!this.authService.isLoggedIn()) {
       this.openDialog('', 'login2');
+    } else if (sub?.is_active === 0) {
+      return;
     } else {
       this.createSubscruption(sub);
     }

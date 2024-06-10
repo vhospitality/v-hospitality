@@ -10,7 +10,7 @@ export const baseUrl = {
   jwt_token: 'VHOSPITALITY_ACCESS',
   refresh_token: 'VHOSPITALITY_REFRESH',
   wishlist_storage: 'VHOSPITALITY_WISHLIST',
-  server: 'https://api.v-hospitality.com/api/v1/',
+  server: 'https://staging-api.v-hospitality.com/api/v1/',
   messagingUrl: 'https://chat-api.v-hospitality.com/',
   messagingUrl2: 'https://chat-api.v-hospitality.com',
   feDomain: 'v-hospitality.com',

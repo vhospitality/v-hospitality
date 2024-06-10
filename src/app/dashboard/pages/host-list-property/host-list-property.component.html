@@ -131,12 +131,23 @@
                     (click)="startProcess(sub?.uuid, sub)"
                     id="paymentForm"
                     type="button"
-                    [disabled]="this.userData && this.userData?.subscription?.is_active === 1 && this.userData?.subscription?.subscription_type?.toLowerCase() !== 'freemium' && sub?.name?.toLowerCase() === 'freemium'"
+                    [disabled]="sub?.is_active === 0 && this.userData && this.userData?.subscription?.is_active === 1 && this.userData?.subscription?.subscription_type?.toLowerCase() !== 'freemium' && sub?.name?.toLowerCase() === 'freemium'"
                     class="submit ripple-button orange-button" [class.upgrade]="this.userData?.subscription?.is_active === 1">
                         <span *ngIf="loading !== sub?.uuid" >Subscribe</span>
                         <div *ngIf="loading === sub?.uuid" class="loader-white"></div>
                 </button>
-            </div>            
+            </div>      
+            
+            <div class="third-card" *ngIf="!this.userData">
+                <button
+                (click)="startProcess(sub?.uuid, sub)"
+                    id="paymentForm"
+                    type="button"
+                    [disabled]="sub?.is_active === 0"
+                    class="submit ripple-button orange-button">
+                        <span>Subscribe</span>
+                </button>
+            </div>      
 
             <div class="third-card" *ngIf="this.userData && this.userData?.subscription?.subscription === sub?.uuid &&
                 this.userData?.subscription?.is_active === 1">

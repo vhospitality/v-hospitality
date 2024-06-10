@@ -1,4 +1,4 @@
-import { isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -46,7 +46,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: Object,
     private bnIdle: BnNgIdleService,
     private direct: ActivatedRoute,
-    private seo: SeoService
+    private seo: SeoService,
+    @Inject(DOCUMENT) private doc: Document
   ) {
     this.clickEventSubscription = this.service
       .getIsLoginClickEvent()
@@ -55,8 +56,8 @@ export class AppComponent implements OnInit, AfterViewInit {
       });
 
     this.checkForUpdates();
-
     this.seo.updateSeoTags({});
+    this.setStructuredData();
 
     this.bnIdle.startWatching(600).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
@@ -277,6 +278,21 @@ export class AppComponent implements OnInit, AfterViewInit {
         profile_picture: this.userData?.profile_picture,
       }
     );
+  }
+
+  setStructuredData() {
+    const script = this.doc.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = `
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": ${baseUrl.feDomain2},
+      "name": ${this.seo.title},
+      "description": ${this.seo.description}
+    }
+    `;
+    this.doc.head.appendChild(script);
   }
 
   ngAfterViewInit() {
