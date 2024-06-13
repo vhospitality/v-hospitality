@@ -19,6 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {
   BrowserModule,
   provideClientHydration,
+  withHttpTransferCacheOptions,
 } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -73,8 +74,12 @@ initializeApp(baseUrl.firebase);
     provideImageKitLoader(baseUrl.lazyLoadUrl),
     SeoService,
     provideHttpClient(withFetch()),
-    provideClientHydration(),
     provideAnimationsAsync(),
+    provideClientHydration(
+      withHttpTransferCacheOptions({
+        includePostRequests: true,
+      })
+    ),
   ],
   bootstrap: [AppComponent],
 })

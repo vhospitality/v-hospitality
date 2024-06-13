@@ -1,4 +1,4 @@
-<ngx-loading-bar [color]="'#EF5E17'" [height]="'5px'"></ngx-loading-bar>
-<div class="wrapper">
+<ngx-loading-bar *ngIf="isBrowser" [color]="'#EF5E17'" [height]="'5px'"></ngx-loading-bar>
+<div class="wrapper" *ngIf="isBrowser">
     <router-outlet></router-outlet>
 </div>

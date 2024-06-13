@@ -1,11 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import {
-  Component,
-  Inject,
-  PLATFORM_ID,
-  ViewEncapsulation,
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SidebarModule } from 'primeng/sidebar';
 import { Observable, Subscription, map, shareReplay } from 'rxjs';
@@ -30,10 +25,8 @@ import { ToastComponent } from '../toast/toast.component';
 export class AppPublicSidenavComponent {
   sidebarVisible: boolean = false;
   clickEventSubscription?: Subscription;
-  isBrowser: boolean;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: any,
     private breakpointObserver: BreakpointObserver,
     private shared: ToggleNavService
   ) {
@@ -42,8 +35,6 @@ export class AppPublicSidenavComponent {
       .subscribe(() => {
         this.sidebarVisible = !this.sidebarVisible;
       });
-
-    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver

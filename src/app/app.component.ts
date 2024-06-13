@@ -33,6 +33,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   deviceToken: any;
   subscriptionPopup: boolean = false;
   canLogout: boolean = false;
+  isBrowser: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -302,6 +303,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+
     if (isPlatformBrowser(this.platformId)) {
       let loader = document.getElementById('loader');
       if (loader) {

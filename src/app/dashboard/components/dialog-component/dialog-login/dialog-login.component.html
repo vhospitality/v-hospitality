@@ -1,7 +1,7 @@
 <div class="wrapper">
     <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
 
-        <div class="form-field" *ngIf="!email">
+        <!-- <div class="form-field" *ngIf="!email">
             <div class="label">Phone number*</div>
             <mat-form-field class="full-width" appearance="outline">
                 <ngx-mat-intl-tel-input [preferredCountries]="['ng', 'us']" [enablePlaceholder]="true"
@@ -12,9 +12,17 @@
                     }}
                 </mat-error>
             </mat-form-field>
-        </div>
+        </div> -->
 
-        <div class="form-field" *ngIf="email">
+        <!-- <div class="form-field" *ngIf="email">
+            <div class="label">Email address*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="email" type="email" email>
+                <mat-error>{{formErrors.email}}</mat-error>
+            </mat-form-field>
+        </div> -->
+
+        <div class="form-field">
             <div class="label">Email address*</div>
             <mat-form-field class="full-width" appearance="outline">
                 <input matInput formControlName="email" type="email" email>
