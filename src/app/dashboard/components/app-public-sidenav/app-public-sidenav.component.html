@@ -1,4 +1,4 @@
-<div class="sidenav-container" *ngIf="isBrowser">
+<div class="sidenav-container">
     <app-toast></app-toast>
     <p-sidebar #publicsidenav [(visible)]="sidebarVisible" fixedInViewport
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'">

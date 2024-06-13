@@ -1,7 +1,7 @@
 <div class="wrapper">
     <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
 
-        <div class="form-field" *ngIf="!email">
+        <!-- <div class="form-field" *ngIf="!email">
             <div class="label">Phone number*</div>
             <mat-form-field class="full-width" appearance="outline">
                 <ngx-mat-intl-tel-input [preferredCountries]="['ng', 'us']" [enablePlaceholder]="true"
@@ -20,11 +20,20 @@
                 <input matInput formControlName="email" type="email" email>
                 <mat-error>{{formErrors.email}}</mat-error>
             </mat-form-field>
+        </div> -->
+
+        <div class="form-field">
+            <div class="label">Email address*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="email" type="email" email>
+                <mat-error>{{formErrors.email}}</mat-error>
+            </mat-form-field>
         </div>
 
         <div class="agree">
             By pressing Continue, you agree to our <span class="cursor-pointer"
-                (click)="redirectToPolicy('/terms')">User Agreement</span>,
+                (click)="redirectToPolicy('/terms')">User
+                Agreement</span>,
             <span class="cursor-pointer" (click)="redirectToPolicy('/privacy-policy')">Privacy Policy</span>
             and <span class="cursor-pointer" (click)="redirectToPolicy('/cookie-policy')">Cookie Policy</span>.
         </div>
@@ -40,7 +49,7 @@
             </button>
         </div>
 
-        <p-divider align="center">
+        <!-- <p-divider align="center">
             <b>OR</b>
         </p-divider>
 
@@ -52,7 +61,7 @@
                 <span *ngIf="!email">Continue with e-mail</span>
                 <span></span>
             </button>
-        </div>
+        </div> -->
 
     </form>
 </div>

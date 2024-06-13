@@ -25,6 +25,7 @@ export class SeoService {
   // }
 
   updateSeoTags(detail: any): void {
+
     this.titleService.setTitle(detail?.title || this.title);
 
     this.metaService.updateTag({
