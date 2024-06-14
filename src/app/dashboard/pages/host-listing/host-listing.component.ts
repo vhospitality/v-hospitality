@@ -128,7 +128,7 @@ export class HostListingComponent implements AfterViewInit {
 
       if (param?.name) {
         this.openDialog({
-          message: `Congratulations! You've successfully subscribed to ${param?.name}, and your listing is now live!`,
+          message: `Congratulations! You've successfully subscribed to ${param?.name}, and you can now list your home!`,
           requestType: 'success-error',
           requestMessage: '',
         });
