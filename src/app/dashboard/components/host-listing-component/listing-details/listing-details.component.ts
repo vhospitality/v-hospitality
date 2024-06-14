@@ -46,6 +46,7 @@ export class ListingDetailsComponent {
 
     Object.assign(accommodationDetails, {
       step: step,
+      stepType: true,
     });
 
     this.service.setAccommodationMessage(accommodationDetails);

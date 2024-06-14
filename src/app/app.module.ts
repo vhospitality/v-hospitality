@@ -1,8 +1,6 @@
 import { AsyncPipe, DatePipe, provideImageKitLoader } from '@angular/common';
 import {
-  HttpClientModule,
-  provideHttpClient,
-  withFetch,
+  HttpClientModule
 } from '@angular/common/http';
 import {
   ModuleWithProviders,
@@ -17,12 +15,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {
-  BrowserModule,
-  provideClientHydration,
-  withHttpTransferCacheOptions,
+  BrowserModule
 } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
@@ -73,13 +68,13 @@ initializeApp(baseUrl.firebase);
     AsyncPipe,
     provideImageKitLoader(baseUrl.lazyLoadUrl),
     SeoService,
-    provideHttpClient(withFetch()),
-    provideAnimationsAsync(),
-    provideClientHydration(
-      withHttpTransferCacheOptions({
-        includePostRequests: true,
-      })
-    ),
+    // provideHttpClient(withFetch()),
+    // provideAnimationsAsync(),
+    // provideClientHydration(
+    //   withHttpTransferCacheOptions({
+    //     includePostRequests: true,
+    //   })
+    // ),
   ],
   bootstrap: [AppComponent],
 })
