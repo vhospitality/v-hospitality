@@ -8,7 +8,7 @@
         *ngIf="userData && userData?.subscription?.is_active !== 1 && total > 0 && userData?.awaiting_subscriptions_count > 0">
         <div class="warning">
             <div class="w-title">Apartment Listed</div>
-            <div class="w-desc">You apartment have been listed on V-Hospitality, continue to subscribe to have it
+            <div class="w-desc">Your apartment have been listed on V-Hospitality, continue to subscribe to have it
                 published and open for bookings.
             </div>
         </div>
@@ -97,7 +97,8 @@
                     </td>
                     <td>{{listing?.title}}</td>
                     <td>
-                        <button mat-button type="button" [class.success]="listing?.status==='published'"
+                        <button (click)="redirectToSubscription(listing?.status)" mat-button type="button"
+                            [class.success]="listing?.status==='published'"
                             [class.pending]="listing?.status==='booked' || listing?.status==='pending'"
                             [class.decline]="listing?.status==='unpublished' || listing?.status==='rejected'">{{
                             splitStatus(listing?.status) }}
@@ -130,6 +131,18 @@
                 </svg>
                 <span>Back</span>
             </button>
+        </div>
+
+        <div class="warnint-text" *ngIf="listingDetails?.status?.toLowerCase() === 'awaiting_subscription'">
+            <div class="warning">
+                <div class="w-title">Listing Approved</div>
+                <div class="w-desc">Your listing has been approved to be hosted on V-Hospitality, continue to subscribe
+                    to have it published and open for bookings.
+                </div>
+            </div>
+            <div>
+                <button mat-button [routerLink]="['/host-subscription/subscription']">Subscribe</button>
+            </div>
         </div>
 
         <div class="title">{{listingDetails?.propertyDetails?.title}}</div>

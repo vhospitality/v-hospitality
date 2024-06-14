@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
@@ -108,7 +108,8 @@ export class HostListingComponent implements AfterViewInit {
     private dialog: MatDialog,
     private httpService: HttpService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.paginateLoadData();
 
@@ -121,6 +122,18 @@ export class HostListingComponent implements AfterViewInit {
     if (!this.userData) {
       this.service.sendIsLoginClickEvent();
     }
+
+    this.route.queryParamMap.subscribe((params: any) => {
+      const param = params?.params;
+
+      if (param?.name) {
+        this.openDialog({
+          message: `Congratulations! You've successfully subscribed to ${param?.name}, and your listing is now live!`,
+          requestType: 'success-error',
+          requestMessage: '',
+        });
+      }
+    });
   }
 
   paginateLoadData(event?: any) {
@@ -342,6 +355,12 @@ export class HostListingComponent implements AfterViewInit {
       return splitText[0] + ' ' + splitText[1];
     } else {
       return status;
+    }
+  }
+
+  redirectToSubscription(status: string) {
+    if (status?.toLowerCase() === 'awaiting_subscription') {
+      this.router.navigate(['/host-subscription/subscription']);
     }
   }
 }

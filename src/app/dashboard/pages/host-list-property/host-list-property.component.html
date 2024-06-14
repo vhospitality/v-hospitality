@@ -103,7 +103,8 @@
         </div>
 
         <!--  -->
-        <div class="subscription-card" *ngFor="let sub of subscriptions;">
+        <div class="subscription-card" [class.pricing-plan--complete]="this.userData && this.userData?.subscription?.subscription === sub?.uuid &&
+                this.userData?.subscription?.is_active === 1" *ngFor="let sub of subscriptions;">
             <div class="first-card">
                 <div>
                     <div class="title">{{ sub?.name }} <span *ngIf="sub?.badge">{{sub?.badge}}</span></div>
@@ -149,7 +150,7 @@
                 </button>
             </div>      
 
-            <div class="third-card" *ngIf="this.userData && this.userData?.subscription?.subscription === sub?.uuid &&
+            <!-- <div class="third-card" *ngIf="this.userData && this.userData?.subscription?.subscription === sub?.uuid &&
                 this.userData?.subscription?.is_active === 1">
                 <button
                     type="button"
@@ -157,7 +158,7 @@
                     (click)="startProcess(sub?.uuid, sub)">
                         Add Your Property
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
 

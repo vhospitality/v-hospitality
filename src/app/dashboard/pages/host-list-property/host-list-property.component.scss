@@ -190,6 +190,25 @@
     grid-gap: 32px;
     align-items: top;
 
+    .pricing-plan--complete::after {
+      content: "Current Plan";
+      position: absolute;
+      text-align: center;
+      top: 40px;
+      right: -70px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--black);
+      background-color: var(--primary-100);
+      padding: 0.2rem 5rem;
+      transform: rotate(45deg);
+    }
+
+    .pricing-plan--complete {
+      position: relative;
+      overflow: hidden;
+    }
+
     .subscription-card {
       display: flex;
       flex-direction: column;
@@ -229,6 +248,7 @@
           align-items: center;
           flex-wrap: wrap;
           text-transform: capitalize;
+          width: 90%;
 
           span {
             background: var(--primary-50);
@@ -254,6 +274,7 @@
           font-weight: 500;
           line-height: 1.5rem;
           text-align: left;
+          width: 80%;
         }
 
         .price {
