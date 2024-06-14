@@ -20,7 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
-import { PasswordStrengthMeterComponent } from 'angular-password-strength-meter';
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SkeletonModule } from 'primeng/skeleton';
 import { baseUrl } from '../../../../../environments/environment';
@@ -47,7 +47,7 @@ import { PersonalDetails } from '../../../model/form';
     SkeletonModule,
     LazyLoadImageModule,
     InputRestrictionDirective,
-    PasswordStrengthMeterComponent,
+    PasswordStrengthMeterModule
   ],
   templateUrl: './account-profile.component.html',
   encapsulation: ViewEncapsulation.Emulated,

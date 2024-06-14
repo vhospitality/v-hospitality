@@ -184,14 +184,19 @@ export class HostListPropertyComponent {
     }
   }
 
-  reloadSubscription() {
+  reloadSubscription(sub?: any) {
     this.subscriptions = [];
     this.monthlySubscriptions = [];
     this.yearlySubscriptions = [];
     this.loaderSubscription = [1, 2];
 
     setTimeout(() => {
-      this.router.navigate(['/host-listing']);
+      this.router.navigate([`/host-listing/`], {
+        queryParams: {
+          name: sub?.name,
+        },
+      });
+
       this.snackBar.open('Successfully subscribed', 'x', {
         duration: 3000,
         panelClass: 'success',
@@ -332,7 +337,7 @@ export class HostListPropertyComponent {
                 verticalPosition: 'top',
               }
             );
-            this.reloadSubscription();
+            this.reloadSubscription(sub);
           } else {
             data.type = 'subscription';
             Object.assign(data, sub);
