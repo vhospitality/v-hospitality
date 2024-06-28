@@ -237,8 +237,8 @@
             <div class="faq cursor-pointer" *ngIf="isLogin && !loading">
                 <button (click)="op2.toggle($event)" mat-icon-button type="button">
                     <img [src]="profileImage || userData?.profile_picture" [defaultImage]="defaultImage"
-                        [lazyLoad]="profileImage || userData?.profile_picture" loading="eager" [errorImage]="defaultImage"
-                        [alt]="userData?.first_name" />
+                        [lazyLoad]="profileImage || userData?.profile_picture" loading="eager"
+                        [errorImage]="defaultImage" [alt]="userData?.first_name" />
                 </button>
             </div>
 
@@ -314,5 +314,6 @@
 
 </div>
 
-<p-messages *ngIf="this.userData?.is_advanced_verified === 0" (click)="verifyAccount()" [(value)]="waringMessages"
-    [enableService]="false" [closable]="true"></p-messages>
+<p-messages *ngIf="this.userData?.is_advanced_verified === 0" (click)="handleClick()" [(value)]="waringMessages"
+    [enableService]="false" [closable]="true">
+</p-messages>

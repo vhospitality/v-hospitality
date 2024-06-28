@@ -1,4 +1,4 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from "@angular/common";
 import {
   AfterViewInit,
   Component,
@@ -7,33 +7,33 @@ import {
   PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { RouterModule } from '@angular/router';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { AvatarModule } from 'primeng/avatar';
-import { AvatarGroupModule } from 'primeng/avatargroup';
-import { BadgeModule } from 'primeng/badge';
-import { ButtonModule } from 'primeng/button';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { InputSwitchModule } from 'primeng/inputswitch';
-import { MessagesModule } from 'primeng/messages';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { Subscription } from 'rxjs';
-import { baseUrl } from '../../../../environments/environment';
-import { AuthService } from '../../../global-services/auth.service';
-import { HttpService } from '../../../global-services/http.service';
-import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
-import { DateAgoPipe } from '../../pipes/date-ago.pipe';
-import { DialogComponent } from '../dialog/dialog.component';
+} from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialog } from "@angular/material/dialog";
+import { MatInputModule } from "@angular/material/input";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { RouterModule } from "@angular/router";
+import { LazyLoadImageModule } from "ng-lazyload-image";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { AvatarModule } from "primeng/avatar";
+import { AvatarGroupModule } from "primeng/avatargroup";
+import { BadgeModule } from "primeng/badge";
+import { ButtonModule } from "primeng/button";
+import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
+import { InputSwitchModule } from "primeng/inputswitch";
+import { MessagesModule } from "primeng/messages";
+import { OverlayPanelModule } from "primeng/overlaypanel";
+import { Subscription } from "rxjs";
+import { baseUrl } from "../../../../environments/environment";
+import { AuthService } from "../../../global-services/auth.service";
+import { HttpService } from "../../../global-services/http.service";
+import { ToggleNavService } from "../../dashboard-service/toggle-nav.service";
+import { DateAgoPipe } from "../../pipes/date-ago.pipe";
+import { DialogComponent } from "../dialog/dialog.component";
 
 @Component({
-  selector: 'app-header',
+  selector: "app-header",
   standalone: true,
   imports: [
     CommonModule,
@@ -53,13 +53,13 @@ import { DialogComponent } from '../dialog/dialog.component';
     MessagesModule,
   ],
   providers: [DialogService],
-  templateUrl: './header.component.html',
+  templateUrl: "./header.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements AfterViewInit {
   ref: DynamicDialogRef | undefined;
-  @ViewChild('op') op: ElementRef | any;
+  @ViewChild("op") op: ElementRef | any;
   isLogin: boolean = false;
   notifications: any[] = [];
   totalNotification: number = 0;
@@ -160,11 +160,11 @@ export class HeaderComponent implements AfterViewInit {
       Notification.requestPermission(function () {
         new Notification(data?.notification?.title, {
           body: data?.notification?.body,
-          icon: 'assets/icons/v-logo-black.svg',
+          icon: "assets/icons/v-logo-black.svg",
           tag: data?.notification?.title,
           renotify: true,
           requireInteraction: true,
-          image: 'assets/icons/v-logo-black.svg',
+          image: "assets/icons/v-logo-black.svg",
           vibrate: [200, 100, 200, 100, 200, 100, 200],
         });
       });
@@ -181,10 +181,10 @@ export class HeaderComponent implements AfterViewInit {
     ) {
       this.waringMessages = [
         {
-          severity: 'warn',
-          summary: 'User verification:',
+          severity: "warn",
+          summary: "User verification:",
           detail:
-            'Complete your verification process by uploading a means of identification and be able to list and book a property on v-hospitality.',
+            "Complete your verification process by uploading a means of identification and be able to list and book a property on v-hospitality.",
         },
       ];
     } else if (
@@ -194,8 +194,8 @@ export class HeaderComponent implements AfterViewInit {
     ) {
       this.waringMessages = [
         {
-          severity: 'info',
-          summary: 'User verification:',
+          severity: "info",
+          summary: "User verification:",
           detail:
             "We're currently in the process of reviewing your application. We'll notify you as soon as the review is complete.",
         },
@@ -206,17 +206,17 @@ export class HeaderComponent implements AfterViewInit {
     ) {
       this.waringMessages = [
         {
-          severity: 'error',
-          summary: 'User verification:',
+          severity: "error",
+          summary: "User verification:",
           detail:
-            'We regret to inform you that your application has been declined. Please update your documents to provide clearer information, which will help facilitate the process.',
+            "We regret to inform you that your application has been declined. Please update your documents to provide clearer information, which will help facilitate the process.",
         },
       ];
     }
   }
 
   playSound() {
-    let src = '/assets/mp3/message.mp3';
+    let src = "/assets/mp3/message.mp3";
     let audio = new Audio(src);
     audio.play();
   }
@@ -270,11 +270,11 @@ export class HeaderComponent implements AfterViewInit {
   checkIfHostOrGuest() {
     if (isPlatformBrowser(this.platformId)) {
       // if (this.roles?.includes('host')) {
-      if (localStorage.getItem('CURRENT_USER_TYPE') === null) {
+      if (localStorage.getItem("CURRENT_USER_TYPE") === null) {
         this.switchGuest = true;
       } else {
-        let switchGuest = localStorage.getItem('CURRENT_USER_TYPE') as any;
-        if (switchGuest === 'true') {
+        let switchGuest = localStorage.getItem("CURRENT_USER_TYPE") as any;
+        if (switchGuest === "true") {
           this.switchGuest = true;
         } else {
           this.switchGuest = false;
@@ -312,7 +312,7 @@ export class HeaderComponent implements AfterViewInit {
   getAmenities() {
     this.httpService
       .getSingleNoAuth(
-        baseUrl.amenityCategories + '?include=amenities&per_page=100'
+        baseUrl.amenityCategories + "?include=amenities&per_page=100"
       )
       .subscribe(
         (data: any) => {
@@ -343,7 +343,7 @@ export class HeaderComponent implements AfterViewInit {
   getWishlist() {
     this.httpService
       .getAuthSingle(
-        baseUrl.wishlist + '/?per_page=1&include=listing&fields[listing]=uuid'
+        baseUrl.wishlist + "/?per_page=1&include=listing&fields[listing]=uuid"
       )
       .subscribe(
         (data: any) => {
@@ -385,9 +385,9 @@ export class HeaderComponent implements AfterViewInit {
   readNotification(id?: string, index?: any) {
     if (id) {
       this.httpService
-        .updateData(baseUrl.notifications + `/${id}`, '')
+        .updateData(baseUrl.notifications + `/${id}`, "")
         .subscribe((data: any) => {
-          this.notifications[index]['read_at'] = new Date();
+          this.notifications[index]["read_at"] = new Date();
           // this.notifications.splice(index, 1);
           if (this.totalNotification > 0) {
             this.totalNotification = this.totalNotification - 1;
@@ -395,13 +395,13 @@ export class HeaderComponent implements AfterViewInit {
         });
     } else {
       this.isReadNotificationLoading = true;
-      this.httpService.updateData(baseUrl.notifications + '/all', '').subscribe(
+      this.httpService.updateData(baseUrl.notifications + "/all", "").subscribe(
         () => {
           this.isReadNotificationLoading = false;
           // this.notifications = [];
           this.totalNotification = 0;
           this.notifications.forEach((n: any, index: number) => {
-            this.notifications[index]['read_at'] = new Date();
+            this.notifications[index]["read_at"] = new Date();
           });
         },
         (err) => {
@@ -454,29 +454,29 @@ export class HeaderComponent implements AfterViewInit {
 
   switch(type: boolean) {
     this.switchGuest = type;
-    localStorage.setItem('CURRENT_USER_TYPE', type.toString());
+    localStorage.setItem("CURRENT_USER_TYPE", type.toString());
     this.service.sendIsLoginClickEvent();
 
     this.snackBar.open(
       `You have successfully switched to a ${
-        type ? 'Guest' : 'Host'
+        type ? "Guest" : "Host"
       } user status`,
-      'x',
+      "x",
       {
         duration: 3000,
-        panelClass: 'success',
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
+        panelClass: "success",
+        horizontalPosition: "center",
+        verticalPosition: "top",
       }
     );
   }
 
   formatName() {
     let displayname1 =
-      this.userData?.first_name?.toUpperCase()?.replaceAll(' ', '') || 'V';
+      this.userData?.first_name?.toUpperCase()?.replaceAll(" ", "") || "V";
     let displayname2 =
-      this.userData?.last_name?.toUpperCase()?.replaceAll(' ', '') || 'HOS';
-    let displayname3 = displayname1[0] + '' + displayname2[0];
+      this.userData?.last_name?.toUpperCase()?.replaceAll(" ", "") || "HOS";
+    let displayname3 = displayname1[0] + "" + displayname2[0];
     return displayname3;
   }
 
@@ -506,11 +506,11 @@ export class HeaderComponent implements AfterViewInit {
   verifyAccount() {
     this.dialog.open(DialogComponent, {
       data: {
-        type: 'dialog',
+        type: "dialog",
         data: {
-          requestType: 'upload',
-          requestMessage: 'Please verify your identity',
-          data: '',
+          requestType: "upload",
+          requestMessage: "Please verify your identity",
+          data: "",
         },
       },
     });
@@ -524,5 +524,19 @@ export class HeaderComponent implements AfterViewInit {
     //   .subscribe((data: any) => {
     //     this.unreadMessage = data?.unread;
     //   });
+  }
+
+  isAccountVerifiable(): boolean {
+    return (
+      (this.userData?.reason_for_advance_verification_rejection ||
+        this.userData?.identity_documents?.length < 1) &&
+      this.userData?.is_advanced_verified === 0
+    );
+  }
+
+  handleClick(): void {
+    if (this.isAccountVerifiable()) {
+      this.verifyAccount();
+    }
   }
 }
