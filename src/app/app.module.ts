@@ -1,33 +1,36 @@
-import { AsyncPipe, DatePipe, provideImageKitLoader } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
+import { AsyncPipe, DatePipe, provideImageKitLoader } from '@angular/common';
+import {
+  HttpClientModule
+} from '@angular/common/http';
 import {
   ModuleWithProviders,
   NgModule,
   Optional,
   SkipSelf,
   isDevMode,
-} from "@angular/core";
-import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
-import { MatNativeDateModule } from "@angular/material/core";
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatDialogModule } from "@angular/material/dialog";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ServiceWorkerModule } from "@angular/service-worker";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { LoadingBarModule } from "@ngx-loading-bar/core";
-import { LoadingBarHttpClientModule } from "@ngx-loading-bar/http-client";
-import { initializeApp } from "firebase/app";
-import { baseUrl } from "../environments/environment";
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { AuthService } from "./global-services/auth.service";
-import { ChatService } from "./global-services/chat.service";
-import { HttpService } from "./global-services/http.service";
-import { NetworkAwarePreloadingStrategyService2Service } from "./global-services/network-aware-preloading-strategy.service";
-import { SeoService } from "./global-services/seo.service";
-import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+} from '@angular/core';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {
+  BrowserModule
+} from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { initializeApp } from 'firebase/app';
+import { baseUrl } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AuthService } from './global-services/auth.service';
+import { ChatService } from './global-services/chat.service';
+import { HttpService } from './global-services/http.service';
+import { NetworkAwarePreloadingStrategyService2Service } from './global-services/network-aware-preloading-strategy.service';
+import { SeoService } from './global-services/seo.service';
 
 initializeApp(baseUrl.firebase);
 
@@ -45,14 +48,13 @@ initializeApp(baseUrl.firebase);
     HttpClientModule,
     LoadingBarHttpClientModule,
     LoadingBarModule,
-    ServiceWorkerModule.register("ngsw-worker.js", {
+    ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: "registerWhenStable:30000",
+      registrationStrategy: 'registerWhenStable:30000',
     }),
     FontAwesomeModule,
-    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [
     HttpService,
@@ -87,7 +89,7 @@ export class AppModule {
   constructor(@Optional() @SkipSelf() parentModule: AppModule) {
     if (parentModule) {
       throw new Error(
-        "StateModule is already loaded. Import it in the AppModule only"
+        'StateModule is already loaded. Import it in the AppModule only'
       );
     }
   }

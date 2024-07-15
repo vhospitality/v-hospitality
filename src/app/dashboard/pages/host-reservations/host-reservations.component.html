@@ -26,7 +26,7 @@
                 <span>Add</span>
             </button>
 
-            <button (click)="goToCalendar(); clearFilter(); loadCalendarData()" type="button" *ngIf="active==='add'"
+            <button (click)="active='calender'; clearFilter(); loadCalendarData()" type="button" *ngIf="active==='add'"
                 class="ripple-button orange-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-calendar-week-fill" viewBox="0 0 16 16">
@@ -36,7 +36,7 @@
                 <span>View Calendar</span>
             </button>
 
-            <button *ngIf="active==='calender'" (click)="goBack(); clearFilter(); paginateLoadData()" type="button"
+            <button *ngIf="active==='calender'" (click)="active='add'; clearFilter(); paginateLoadData()" type="button"
                 class="ripple-button orange-button">
                 <span>Go Back</span>
             </button>
@@ -260,7 +260,7 @@
         </p-table>
     </div>
 
-    <!-- <div class="calender" *ngIf="active==='calender'">
+    <div class="calender" *ngIf="active==='calender'">
 
         <div class="full-calendar">
 
@@ -317,68 +317,7 @@
         </div>
 
         <p-progressBar *ngIf="loadingCalender" [value]="calenderValue"></p-progressBar>
-    </div> -->
-
-    <div class="calender" *ngIf="active === 'calender'">
-        <div class="full-calendar">
-            <h2 style="text-align: center;" *ngIf="!loadingCalender && !calenderEvents">No reservations found.</h2>
-
-            <full-calendar *ngIf="!loadingCalender && calenderEvents" [options]="calendarOptions">
-                <ng-template #eventContent let-arg>
-                    <div *ngIf="arg?.event?._def?.extendedProps?.type === 'blocked'; else regularEvent">
-                        Blocked
-                    </div>
-
-                    <ng-template #regularEvent>
-                        <div class="name2 truncate">
-                            {{ arg?.event?._def?.extendedProps?.data?.title }}
-                        </div>
-
-                        <div class="name truncate">
-                            <span class="pi pi-user" style="margin-right: 5px;"></span>
-                            {{ arg?.event?.title }}
-                        </div>
-
-                        <div class="date truncate">
-                            <span class="pi pi-calendar" style="margin-right: 5px;"></span>
-                            <span>{{ arg?.event?._def?.extendedProps?.data?.check_in | date:'mediumDate' }} - {{
-                                arg?.event?._def?.extendedProps?.data?.check_out | date:'mediumDate' }}</span>
-                        </div>
-
-                        <div style="margin-top: 1rem; margin-bottom: 1rem;">
-                            <p-avatarGroup>
-                                <div *ngIf="arg?.event?._def?.extendedProps?.data?.no_of_guests > 2">
-                                    <p-avatar image="assets/icons/profile.png" shape="circle"></p-avatar>
-                                    <p-avatar image="assets/icons/profile.png" shape="circle"></p-avatar>
-                                </div>
-
-                                <p-avatar *ngIf="arg?.event?._def?.extendedProps?.data?.no_of_guests == 2"
-                                    image="assets/icons/profile.png" shape="circle"></p-avatar>
-                                <p-avatar *ngIf="arg?.event?._def?.extendedProps?.data?.no_of_guests == 2"
-                                    image="assets/icons/profile.png" shape="circle"></p-avatar>
-                                <p-avatar *ngIf="arg?.event?._def?.extendedProps?.data?.no_of_guests == 1"
-                                    image="assets/icons/profile.png" shape="circle"></p-avatar>
-
-                                <p-avatar *ngIf="arg?.event?._def?.extendedProps?.data?.no_of_guests > 2"
-                                    label="+{{ arg?.event?._def?.extendedProps?.data?.no_of_guests - 2 }}"
-                                    shape="circle"
-                                    [style]="{ 'background-color': 'var(--primary-color)', color: 'var(--white)' }"></p-avatar>
-                            </p-avatarGroup>
-                        </div>
-
-                        <div class="status" style="margin-top: 1rem;"
-                            [class.success]="arg?.event?._def?.extendedProps?.data?.status === 'accepted' || arg?.event?._def?.extendedProps?.data?.status === 'check_in'"
-                            [class.pending]="arg?.event?._def?.extendedProps?.data?.status === 'pending' || arg?.event?._def?.extendedProps?.data?.status === 'checked_out'"
-                            [class.decline]="arg?.event?._def?.extendedProps?.data?.status === 'declined'">{{
-                            splitBookingStatus(arg?.event?._def?.extendedProps?.data?.status) }}</div>
-                    </ng-template>
-                </ng-template>
-            </full-calendar>
-        </div>
-
-        <p-progressBar *ngIf="loadingCalender" [value]="calenderValue"></p-progressBar>
     </div>
-
 
 </div>
 
