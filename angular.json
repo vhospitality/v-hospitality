@@ -51,7 +51,8 @@
               "./node_modules/ngx-sharebuttons/themes/circles.scss",
               "./node_modules/ngx-sharebuttons/themes/modern.scss",
               "./node_modules/font-awesome/css/font-awesome.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/ng-multiselect-dropdown.theme.scss"
             ],
             "scripts": [],
             "serviceWorker": true,
@@ -151,7 +152,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         },
         "server": {
@@ -216,7 +220,9 @@
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "routes": ["/"]
+            "routes": [
+              "/"
+            ]
           },
           "configurations": {
             "production": {

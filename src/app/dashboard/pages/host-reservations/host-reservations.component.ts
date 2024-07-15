@@ -1,46 +1,46 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from "@angular/common";
 import {
   AfterViewInit,
   Component,
   ViewChild,
   ViewEncapsulation,
-} from '@angular/core';
+} from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-} from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialog } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { RouterModule } from '@angular/router';
-import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions, DateSelectArg } from '@fullcalendar/core'; // useful for typechecking
-import dayGridPlugin from '@fullcalendar/daygrid';
-import { AvatarModule } from 'primeng/avatar';
-import { AvatarGroupModule } from 'primeng/avatargroup';
-import { CalendarModule } from 'primeng/calendar';
-import { DropdownModule } from 'primeng/dropdown';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { TableModule } from 'primeng/table';
-import { baseUrl } from '../../../../environments/environment';
-import { AuthService } from '../../../global-services/auth.service';
-import { ExcelService } from '../../../global-services/excel.service';
-import { HttpService } from '../../../global-services/http.service';
-import { BackButtonComponent } from '../../components/back-button/back-button.component';
-import { DialogComponent } from '../../components/dialog/dialog.component';
-import { FooterComponent } from '../../components/footer/footer.component';
-import { HeaderComponent } from '../../components/header/header.component';
-import { NoDataMessageComponent } from '../../components/no-data-message/no-data-message.component';
-
+} from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatDialog } from "@angular/material/dialog";
+import { MatInputModule } from "@angular/material/input";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatSelectModule } from "@angular/material/select";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { FullCalendarModule } from "@fullcalendar/angular";
+import { CalendarOptions, DateSelectArg } from "@fullcalendar/core"; // useful for typechecking
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
+import { AvatarModule } from "primeng/avatar";
+import { AvatarGroupModule } from "primeng/avatargroup";
+import { CalendarModule } from "primeng/calendar";
+import { DropdownModule } from "primeng/dropdown";
+import { ProgressBarModule } from "primeng/progressbar";
+import { TableModule } from "primeng/table";
+import { baseUrl } from "../../../../environments/environment";
+import { AuthService } from "../../../global-services/auth.service";
+import { ExcelService } from "../../../global-services/excel.service";
+import { HttpService } from "../../../global-services/http.service";
+import { BackButtonComponent } from "../../components/back-button/back-button.component";
+import { DialogComponent } from "../../components/dialog/dialog.component";
+import { FooterComponent } from "../../components/footer/footer.component";
+import { HeaderComponent } from "../../components/header/header.component";
+import { NoDataMessageComponent } from "../../components/no-data-message/no-data-message.component";
 @Component({
-  selector: 'app-host-reservations',
+  selector: "app-host-reservations",
   standalone: true,
   imports: [
     CommonModule,
@@ -66,12 +66,27 @@ import { NoDataMessageComponent } from '../../components/no-data-message/no-data
     NoDataMessageComponent,
   ],
   providers: [ExcelService],
-  templateUrl: './host-reservations.component.html',
+  templateUrl: "./host-reservations.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./host-reservations.component.scss'],
+  styleUrls: ["./host-reservations.component.scss"],
 })
 export class HostReservationsComponent implements AfterViewInit {
-  @ViewChild('fform') feedbackFormDirective: any;
+  constructor(
+    private dialog: MatDialog,
+    private httpService: HttpService,
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private datepipe: DatePipe,
+    private snackBar: MatSnackBar,
+    private excelService: ExcelService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.createForm();
+    this.paginateLoadData();
+    this.loadCalendarData();
+  }
+  @ViewChild("fform") feedbackFormDirective: any;
   feedbackForm: any = FormGroup;
   reservations: any[] = [];
   loading: boolean = true;
@@ -81,28 +96,28 @@ export class HostReservationsComponent implements AfterViewInit {
   filterObject: any = {};
   filterObject2: any = {};
   paymentStatus: any = [
-    { viewValue: 'Pending', value: 'pending' },
-    { viewValue: 'Failed', value: 'failed' },
-    { viewValue: 'success', value: 'success' },
+    { viewValue: "Pending", value: "pending" },
+    { viewValue: "Failed", value: "failed" },
+    { viewValue: "success", value: "success" },
   ];
   bookingStatus: any = [
-    { viewValue: 'Pending', value: 'pending' },
-    { viewValue: 'Declined', value: 'declined' },
-    { viewValue: 'Accepted', value: 'accepted' },
-    { viewValue: 'Checked in', value: 'check_in' },
-    { viewValue: 'Checked out', value: 'checked_out' },
+    { viewValue: "Pending", value: "pending" },
+    { viewValue: "Declined", value: "declined" },
+    { viewValue: "Accepted", value: "accepted" },
+    { viewValue: "Checked in", value: "check_in" },
+    { viewValue: "Checked out", value: "checked_out" },
   ];
   updatingUUID: any[] = [];
-  active: string = 'add';
+  active: string = "add";
   loadingCalender: boolean = false;
   calenderValue: number = 0;
   calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
+    initialView: "dayGridMonth",
     initialDate: new Date(),
     headerToolbar: {
-      left: '',
-      center: 'title',
-      right: 'today prev,next',
+      left: "",
+      center: "title",
+      right: "today prev,next",
     },
     plugins: [dayGridPlugin],
   };
@@ -110,27 +125,29 @@ export class HostReservationsComponent implements AfterViewInit {
   calenderEvents: any;
   pageEvent: any;
 
-  constructor(
-    private dialog: MatDialog,
-    private httpService: HttpService,
-    private authService: AuthService,
-    private fb: FormBuilder,
-    private datepipe: DatePipe,
-    private snackBar: MatSnackBar,
-    private excelService: ExcelService
-  ) {
-    this.createForm();
-    this.paginateLoadData();
-    this.loadCalendarData();
+  ngOnInit() {
+    const activeTab = this.route.snapshot.queryParamMap.get("active");
+
+    this.router.events.subscribe(() => {
+      this.active = this.route.snapshot.queryParamMap.get("active")
+        ? "calender"
+        : "add";
+    });
+
+    // console.log("tab tab", activeTab);
+
+    // if (activeTab) {
+    //   this.active = activeTab;
+    // }
   }
 
   createForm() {
     this.feedbackForm = this.fb.group({
-      search: [''],
-      date: [''],
-      payment_status: [''],
-      booking_status: [''],
-      booking_code: [''],
+      search: [""],
+      date: [""],
+      payment_status: [""],
+      booking_status: [""],
+      booking_code: [""],
     });
   }
 
@@ -143,34 +160,34 @@ export class HostReservationsComponent implements AfterViewInit {
 
     if (this.feedbackForm.value.search) {
       Object.assign(this.filterObject, {
-        'filter[listing]': this.feedbackForm.value.search,
+        "filter[listing]": this.feedbackForm.value.search,
       });
     }
 
     if (this.feedbackForm.value.booking_status) {
       Object.assign(this.filterObject, {
-        'filter[status]': this.feedbackForm.value.booking_status,
+        "filter[status]": this.feedbackForm.value.booking_status,
       });
     }
 
     if (this.feedbackForm.value.payment_status) {
       Object.assign(this.filterObject, {
-        'filter[payment_status]': this.feedbackForm.value.payment_status,
+        "filter[payment_status]": this.feedbackForm.value.payment_status,
       });
     }
 
     if (this.feedbackForm.value.date) {
       Object.assign(this.filterObject, {
-        'filter[created_at]': this.datepipe.transform(
+        "filter[created_at]": this.datepipe.transform(
           this.feedbackForm.value.date,
-          'YYYY-MM-dd'
+          "YYYY-MM-dd"
         ),
       });
     }
 
     if (this.feedbackForm.value.booking_code) {
       Object.assign(this.filterObject, {
-        'filter[booking_code]': this.feedbackForm.value.booking_code,
+        "filter[booking_code]": this.feedbackForm.value.booking_code,
       });
     }
 
@@ -219,11 +236,11 @@ export class HostReservationsComponent implements AfterViewInit {
       .subscribe(
         (data: any) => {
           this.removeReservation(uuid);
-          this.snackBar.open('Successfully updated reservation', 'x', {
+          this.snackBar.open("Successfully updated reservation", "x", {
             duration: 3000,
-            panelClass: 'success',
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
+            panelClass: "success",
+            horizontalPosition: "center",
+            verticalPosition: "top",
           });
           this.paginateLoadData();
         },
@@ -234,13 +251,13 @@ export class HostReservationsComponent implements AfterViewInit {
               err?.error?.msg ||
               err?.error?.detail ||
               err?.error?.status ||
-              'An error occured!',
-            'x',
+              "An error occured!",
+            "x",
             {
               duration: 3000,
-              panelClass: 'error',
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
+              panelClass: "error",
+              horizontalPosition: "center",
+              verticalPosition: "top",
             }
           );
         }
@@ -251,7 +268,7 @@ export class HostReservationsComponent implements AfterViewInit {
     this.dialog.closeAll();
     let dialogRef = this.dialog.open(DialogComponent, {
       data: {
-        type: type || 'dialog',
+        type: type || "dialog",
         data: data,
       },
     });
@@ -270,20 +287,20 @@ export class HostReservationsComponent implements AfterViewInit {
     for (let n of this.reservations)
       data.push({
         Guest: `${n?.user?.first_name} ${n?.user?.last_name}`,
-        'Number of Guest': `${n?.guests?.adults} Adult, ${
+        "Number of Guest": `${n?.guests?.adults} Adult, ${
           n?.guests?.children
         } Children, ${n?.guests?.infants} Infant Total: (${
           n?.guests?.adults + n?.guests?.children + n?.guests?.infants
         })`,
         Listing: n?.listing?.title,
         Dates: `Check in ${n?.check_in}, Check out, ${n?.check_out}`,
-        'Reservation Status': n?.status,
-        'Payment Status': n?.payment_status,
-        'Reservation Code': n?.booking_code,
+        "Reservation Status": n?.status,
+        "Payment Status": n?.payment_status,
+        "Reservation Code": n?.booking_code,
         Booked: n?.created_at,
         Earnings: n?.amount_paid || n?.amount || n?.initial_amount,
       });
-    this.excelService.exportAsExcelFile(data, 'RESERVATIONS');
+    this.excelService.exportAsExcelFile(data, "RESERVATIONS");
   }
 
   getNumberOfNight(checkinDate: string, checkoutDate: string) {
@@ -344,12 +361,12 @@ export class HostReservationsComponent implements AfterViewInit {
   loadCalendarData() {
     this.loadingCalender = true;
     this.calendarOptions = {
-      initialView: 'dayGridMonth',
+      initialView: "dayGridMonth",
       initialDate: new Date(),
       headerToolbar: {
-        left: '',
-        center: 'title',
-        right: 'today prev,next',
+        left: "",
+        center: "title",
+        right: "today prev,next",
       },
       plugins: [dayGridPlugin],
     };
@@ -357,31 +374,92 @@ export class HostReservationsComponent implements AfterViewInit {
 
     if (this.feedbackForm.value.search) {
       Object.assign(this.filterObject2, {
-        'filter[guest_name]': this.feedbackForm.value.search,
+        "filter[guest_name]": this.feedbackForm.value.search,
       });
     }
 
     if (this.feedbackForm.value.booking_status) {
       Object.assign(this.filterObject2, {
-        'filter[status]': this.feedbackForm.value.booking_status,
+        "filter[status]": this.feedbackForm.value.booking_status,
       });
     }
 
     if (this.feedbackForm.value.date) {
       Object.assign(this.filterObject2, {
-        'filter[created_at]': this.datepipe.transform(
+        "filter[created_at]": this.datepipe.transform(
           this.feedbackForm.value.date,
-          'YYYY-MM-dd'
+          "YYYY-MM-dd"
         ),
       });
     }
 
     let url = new URLSearchParams(this.filterObject2).toString();
 
-    this.httpService.getProgress('calendars' + `/?${url}`).subscribe(
+    // this.httpService.getProgress("calendars" + `/?${url}`).subscribe(
+    //   (progress: any) => {
+    //     if (typeof progress !== "number" && typeof progress !== "undefined") {
+    //       let events = [];
+
+    //       for (let e of progress?.data) {
+    //         events.push({
+    //           title: e?.guest_name,
+    //           start: e?.check_in,
+    //           end: e?.check_out,
+    //           status: e?.status,
+    //           check_in: e?.check_in,
+    //           check_out: e?.check_out,
+    //           data: e,
+    //         });
+    //       }
+
+    //       this.calenderEvents = events;
+
+    //       this.calendarOptions = {
+    //         initialView: "dayGridMonth",
+    //         height: "auto",
+    //         initialDate: new Date(),
+    //         eventClick: this.handleEventClick.bind(this),
+    //         events: events,
+    //         select: this.handleDateSelect.bind(this),
+    //         dateClick: (arg) => this.handleDateClick(arg),
+    //         headerToolbar: {
+    //           left: "dayGridMonth,dayGridWeek,dayGridDay",
+    //           center: "title",
+    //           right: "today prev,next",
+    //         },
+    //         plugins: [dayGridPlugin, interactionPlugin],
+    //       };
+    //       this.loadingCalender = false;
+    //     } else {
+    //       if (typeof progress === "number" && progress >= 95) {
+    //         this.calenderValue = 95;
+    //       } else {
+    //         this.calenderValue = progress || 0;
+    //       }
+    //     }
+    //   },
+    //   (err) => {
+    //     this.authService.checkExpired();
+    //     this.loadingCalender = false;
+    //     this.calenderValue = 0;
+    //     this.calenderEvents = undefined;
+    //     this.calendarOptions = {
+    //       initialView: "dayGridMonth",
+    //       initialDate: new Date(),
+    //       headerToolbar: {
+    //         left: "",
+    //         center: "title",
+    //         right: "today prev,next",
+    //       },
+    //       plugins: [dayGridPlugin],
+    //     };
+    //   }
+    // );
+
+    this.httpService.getProgress("calendars" + `/?${url}`).subscribe(
       (progress: any) => {
-        if (typeof progress !== 'number' && typeof progress !== 'undefined') {
-          let events = [];
+        if (typeof progress !== "number" && typeof progress !== "undefined") {
+          let events: any[] = [];
 
           for (let e of progress?.data) {
             events.push({
@@ -395,25 +473,46 @@ export class HostReservationsComponent implements AfterViewInit {
             });
           }
 
-          this.calenderEvents = events;
+          // Make another HTTP request to get the blocked dates
+          this.httpService.getProgress("hosts/calendars/blocked").subscribe(
+            (blockedDates: any) => {
+              console.log(blockedDates);
 
-          this.calendarOptions = {
-            initialView: 'dayGridMonth',
-            height: 'auto',
-            initialDate: new Date(),
-            eventClick: this.handleEventClick.bind(this),
-            events: events,
-            select: this.handleDateSelect.bind(this),
-            headerToolbar: {
-              left: 'dayGridMonth,dayGridWeek,dayGridDay',
-              center: 'title',
-              right: 'today prev,next',
+              for (let b of blockedDates?.data) {
+                events.push({
+                  title: "Blocked",
+                  start: b?.blockedDate.date,
+                  end: b?.blockedDate.date,
+                  type: "blocked",
+                  data: b,
+                });
+              }
+
+              this.calenderEvents = events;
+
+              this.calendarOptions = {
+                initialView: "dayGridMonth",
+                height: "auto",
+                initialDate: new Date(),
+                eventClick: this.handleEventClick.bind(this),
+                events: events,
+                select: this.handleDateSelect.bind(this),
+                dateClick: (arg) => this.handleDateClick(arg),
+                headerToolbar: {
+                  left: "dayGridMonth,dayGridWeek,dayGridDay",
+                  center: "title",
+                  right: "today prev,next",
+                },
+                plugins: [dayGridPlugin, interactionPlugin],
+              };
+              this.loadingCalender = false;
             },
-            plugins: [dayGridPlugin],
-          };
-          this.loadingCalender = false;
+            (err) => {
+              console.error("Failed to load blocked dates", err);
+            }
+          );
         } else {
-          if (typeof progress === 'number' && progress >= 95) {
+          if (typeof progress === "number" && progress >= 95) {
             this.calenderValue = 95;
           } else {
             this.calenderValue = progress || 0;
@@ -426,12 +525,12 @@ export class HostReservationsComponent implements AfterViewInit {
         this.calenderValue = 0;
         this.calenderEvents = undefined;
         this.calendarOptions = {
-          initialView: 'dayGridMonth',
+          initialView: "dayGridMonth",
           initialDate: new Date(),
           headerToolbar: {
-            left: '',
-            center: 'title',
-            right: 'today prev,next',
+            left: "",
+            center: "title",
+            right: "today prev,next",
           },
           plugins: [dayGridPlugin],
         };
@@ -440,30 +539,77 @@ export class HostReservationsComponent implements AfterViewInit {
   }
 
   handleEventClick(arg: any): void {
-    this.openDialog(
-      {
-        requestType: 'guest-details',
-        requestMessage: 'Guest Details',
-        data: arg?.event?._def,
-      },
-      'dialog'
-    );
+    console.log("event", arg?.event?._def);
+
+    if (arg?.event?._def?.extendedProps?.type == "blocked") {
+      this.openDialog(
+        {
+          requestType: "date-block",
+          requestMessage: "Update Blocked Date",
+          data: {
+            type: "update",
+            data: arg?.event?._def?.extendedProps,
+          },
+        },
+        "dialog"
+      );
+    } else {
+      this.openDialog(
+        {
+          requestType: "guest-details",
+          requestMessage: "Guest Details",
+          data: arg?.event?._def,
+        },
+        "dialog"
+      );
+    }
   }
 
   // Custom function to handle date selection
   handleDateSelect(selectInfo: DateSelectArg) {
     const selectedDate = selectInfo.start;
 
-    // Check if the selected date is disabled
+    console.log(selectInfo);
+
+    // // Check if the selected date is disabled
+    // if (this.isDateDisabled(selectedDate)) {
+    //   // Prevent selection of disabled dates
+    //   this.calendarOptions.selectable = false;
+    //   alert("This date is disabled.");
+    // } else {
+    //   // Allow selection of valid dates
+    //   this.calendarOptions.selectable = true;
+    //   // Handle the selected date as needed
+    //   alert("Selected date: " + selectedDate);
+    // }
+  }
+
+  handleDateClick(arg: DateClickArg) {
+    const selectedDate = arg.date;
+
+    console.log(arg);
+
+    // // Check if the selected date is disabled
     if (this.isDateDisabled(selectedDate)) {
       // Prevent selection of disabled dates
       this.calendarOptions.selectable = false;
-      alert('This date is disabled.');
+      alert("This date is disabled.");
     } else {
       // Allow selection of valid dates
       this.calendarOptions.selectable = true;
       // Handle the selected date as needed
-      alert('Selected date: ' + selectedDate);
+      // alert("Selected date: " + selectedDate);
+      this.openDialog(
+        {
+          requestType: "date-block",
+          requestMessage: "Toggle Data Visibility",
+          data: {
+            type: "create",
+            data: selectedDate,
+          },
+        },
+        "dialog"
+      );
     }
   }
 
@@ -473,8 +619,8 @@ export class HostReservationsComponent implements AfterViewInit {
     // For example, you might have an array of disabled dates
     const disabledDates: any = [
       /* list of disabled dates as Date objects */
-      new Date('2023-12-18'),
-      new Date('2023-12-19'),
+      new Date("2023-12-18"),
+      new Date("2023-12-19"),
     ];
     return disabledDates.some(
       (disabledDate: any) => disabledDate.getTime() === date.getTime()
@@ -482,15 +628,23 @@ export class HostReservationsComponent implements AfterViewInit {
   }
 
   removeDate() {
-    this.feedbackForm.get('date').setValue(null);
+    this.feedbackForm.get("date").setValue(null);
   }
 
   splitBookingStatus(status: string) {
-    let splitText = status.split('_');
+    let splitText = status.split("_");
     if (splitText.length > 1) {
-      return splitText[0] + ' ' + splitText[1];
+      return splitText[0] + " " + splitText[1];
     } else {
       return status;
     }
+  }
+
+  goToCalendar() {
+    this.router.navigateByUrl("host-reservations?active=calender");
+  }
+
+  goBack() {
+    this.router.navigateByUrl("host-reservations");
   }
 }
