@@ -108,6 +108,9 @@
         <div class="default" *ngIf="data?.data?.requestType === 'guest-details'">
             <app-guest-details-dialog [data]="data?.data"></app-guest-details-dialog>
         </div>
+        <div class="default" *ngIf="data?.data?.requestType === 'date-block'">
+            <app-toggle-date-dialog [data]="data?.data"></app-toggle-date-dialog>
+        </div>
         <div class="default" *ngIf="data?.data?.requestType === 'upgrade-plan'">
             <app-plan-upgrade></app-plan-upgrade>
         </div>
