@@ -1,19 +1,19 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { baseUrl } from '../../../../../environments/environment';
-import { AuthService } from '../../../../global-services/auth.service';
-import { HttpService } from '../../../../global-services/http.service';
-import { DialogComponent } from '../../dialog/dialog.component';
+import { CommonModule } from "@angular/common";
+import { Component, Input, ViewEncapsulation } from "@angular/core";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { baseUrl } from "../../../../../environments/environment";
+import { AuthService } from "../../../../global-services/auth.service";
+import { HttpService } from "../../../../global-services/http.service";
+import { DialogComponent } from "../../dialog/dialog.component";
 
 @Component({
-  selector: 'app-check-in',
+  selector: "app-check-in",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './check-in.component.html',
+  templateUrl: "./check-in.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./check-in.component.scss'],
+  styleUrls: ["./check-in.component.scss"],
 })
 export class CheckInComponent {
   @Input() data: any;
@@ -37,18 +37,21 @@ export class CheckInComponent {
 
     this.httpService
       .updateData(baseUrl.bookings + `/${this?.data?.data?.uuid}`, {
-        status: 'checked_in',
+        status: "checked_in",
       })
       .subscribe(
         () => {
           this.loading = false;
           this.disabled = false;
-          this.snackBar.open('Check in successful!', 'x', {
+          this.snackBar.open("Check in successful!", "x", {
             duration: 3000,
-            panelClass: 'success',
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
+            panelClass: "success",
+            horizontalPosition: "center",
+            verticalPosition: "top",
           });
+
+          (window as any).ttq.track("CheckIntoHotel");
+
           this.dialogRef.close({
             loading: true,
           });
@@ -63,13 +66,13 @@ export class CheckInComponent {
               err?.error?.msg ||
               err?.error?.detail ||
               err?.error?.status ||
-              'An error occured!',
-            'x',
+              "An error occured!",
+            "x",
             {
               duration: 5000,
-              panelClass: 'error',
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
+              panelClass: "error",
+              horizontalPosition: "center",
+              verticalPosition: "top",
             }
           );
         }

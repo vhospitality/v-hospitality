@@ -1,19 +1,19 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { baseUrl } from '../../../../../environments/environment';
-import { AuthService } from '../../../../global-services/auth.service';
-import { HttpService } from '../../../../global-services/http.service';
+import { CommonModule } from "@angular/common";
+import { Component, Input, ViewEncapsulation } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
+import { baseUrl } from "../../../../../environments/environment";
+import { AuthService } from "../../../../global-services/auth.service";
+import { HttpService } from "../../../../global-services/http.service";
 
 @Component({
-  selector: 'app-check-out-dialog',
+  selector: "app-check-out-dialog",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './check-out-dialog.component.html',
+  templateUrl: "./check-out-dialog.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./check-out-dialog.component.scss'],
+  styleUrls: ["./check-out-dialog.component.scss"],
 })
 export class CheckOutDialogComponent {
   @Input() data: any;
@@ -37,7 +37,7 @@ export class CheckOutDialogComponent {
 
     this.httpService
       .updateData(baseUrl.bookings + `/${this?.data?.data?.uuid}`, {
-        status: 'checked_out',
+        status: "checked_out",
       })
       .subscribe(
         () => {
@@ -70,7 +70,9 @@ export class CheckOutDialogComponent {
             },
           };
 
-          this.router.navigate(['/check-out', btoa(JSON.stringify(data2))]);
+          (window as any).ttq.track("CheckOutOfHotel");
+
+          this.router.navigate(["/check-out", btoa(JSON.stringify(data2))]);
           this.closeDialog();
         },
         (err) => {
@@ -83,13 +85,13 @@ export class CheckOutDialogComponent {
               err?.error?.msg ||
               err?.error?.detail ||
               err?.error?.status ||
-              'An error occured!',
-            'x',
+              "An error occured!",
+            "x",
             {
               duration: 5000,
-              panelClass: 'error',
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
+              panelClass: "error",
+              horizontalPosition: "center",
+              verticalPosition: "top",
             }
           );
         }

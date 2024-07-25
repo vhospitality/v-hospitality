@@ -1,26 +1,26 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from "@angular/common";
 import {
   Component,
   Inject,
   Input,
   PLATFORM_ID,
   ViewEncapsulation,
-} from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { SkeletonModule } from 'primeng/skeleton';
-import { Subject } from 'rxjs';
-import { baseUrl } from '../../../../../environments/environment';
-import { AuthService } from '../../../../global-services/auth.service';
-import { HttpService } from '../../../../global-services/http.service';
-import { ToggleNavService } from '../../../dashboard-service/toggle-nav.service';
-import { DialogComponent } from '../../dialog/dialog.component';
-import { NoDataMessageComponent } from '../../no-data-message/no-data-message.component';
+} from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
+import { SkeletonModule } from "primeng/skeleton";
+import { Subject } from "rxjs";
+import { baseUrl } from "../../../../../environments/environment";
+import { AuthService } from "../../../../global-services/auth.service";
+import { HttpService } from "../../../../global-services/http.service";
+import { ToggleNavService } from "../../../dashboard-service/toggle-nav.service";
+import { DialogComponent } from "../../dialog/dialog.component";
+import { NoDataMessageComponent } from "../../no-data-message/no-data-message.component";
 
 @Component({
-  selector: 'app-pay-with-card-dialog',
+  selector: "app-pay-with-card-dialog",
   standalone: true,
   imports: [
     CommonModule,
@@ -28,9 +28,9 @@ import { NoDataMessageComponent } from '../../no-data-message/no-data-message.co
     NoDataMessageComponent,
     SkeletonModule,
   ],
-  templateUrl: './pay-with-card-dialog.component.html',
+  templateUrl: "./pay-with-card-dialog.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./pay-with-card-dialog.component.scss'],
+  styleUrls: ["./pay-with-card-dialog.component.scss"],
 })
 export class PayWithCardDialogComponent {
   @Input() card: any;
@@ -38,7 +38,7 @@ export class PayWithCardDialogComponent {
   loading: boolean = false;
   loadingCards: boolean = false;
   disabled: boolean = false;
-  errorMessage: string = 'No payment cards found.';
+  errorMessage: string = "No payment cards found.";
   activeCard: any;
   serviceData: any = {};
   public name = new Subject<any>();
@@ -68,11 +68,11 @@ export class PayWithCardDialogComponent {
     this.service.accommodationMessage = undefined;
     this.service.propertyMessage = undefined;
 
-    this.snackBar.open('Redirecting to payment page, please wait!', 'x', {
+    this.snackBar.open("Redirecting to payment page, please wait!", "x", {
       duration: 10000,
-      panelClass: 'success',
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
+      panelClass: "success",
+      horizontalPosition: "center",
+      verticalPosition: "top",
     });
 
     if (isPlatformBrowser(this.platformId)) {
@@ -95,11 +95,11 @@ export class PayWithCardDialogComponent {
 
   onSubmit() {
     if (!this.activeCard) {
-      this.snackBar.open('Please select card!', 'x', {
+      this.snackBar.open("Please select card!", "x", {
         duration: 5000,
-        panelClass: 'error',
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
+        panelClass: "error",
+        horizontalPosition: "center",
+        verticalPosition: "top",
       });
     } else {
       this.loading = true;
@@ -113,7 +113,7 @@ export class PayWithCardDialogComponent {
             this.card?.data?.reference ||
             this.card?.reference,
           metadata:
-            this.card?.type == 'booking'
+            this.card?.type == "booking"
               ? {
                   listing_uuid:
                     this.card?.listing_uuid || this.card?.listing?.uuid,
@@ -123,12 +123,12 @@ export class PayWithCardDialogComponent {
                   uuid: this.userData?.uuid,
                   guests: this.card?.guests,
                   reference: this.card?.payment_reference,
-                  type: 'booking',
+                  type: "booking",
                 }
               : {
                   subscription_uuid: this.card?.uuid,
                   uuid: this.userData?.uuid,
-                  type: 'subscription',
+                  type: "subscription",
                   reference: this.card?.data?.reference,
                 },
         })
@@ -137,20 +137,35 @@ export class PayWithCardDialogComponent {
             this.loading = false;
             this.disabled = false;
 
-            this.snackBar.open('Card has been charged successfully', 'x', {
+            this.snackBar.open("Card has been charged successfully", "x", {
               duration: 5000,
-              panelClass: 'success',
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
+              panelClass: "success",
+              horizontalPosition: "center",
+              verticalPosition: "top",
             });
 
-            if (this.card?.type == 'booking') {
+            if (this.card?.type == "booking") {
               this.service.setAccommodationMessage(undefined);
               this.service.setPropertyMessage(undefined);
               this.service.accommodationMessage = undefined;
               this.service.propertyMessage = undefined;
+
+              (window as any).ttq.track("CompletePayment", {
+                contents: [
+                  {
+                    content_id: "301",
+                    content_name: "hotel 50",
+                    quantity: 1,
+                    price: this.card?.total * 100 || this.card?.price * 100,
+                  },
+                ],
+                content_type: "product",
+                value: this.card?.total * 100 || this.card?.price * 100,
+                currency: "NGN",
+              });
+
               setTimeout(() => {
-                this.router.navigate(['/bookings']);
+                this.router.navigate(["/bookings"]);
               }, 3000);
             } else {
               this.service.sendReloadSubscriptionClickEvent();
@@ -167,13 +182,13 @@ export class PayWithCardDialogComponent {
                 err?.error?.msg ||
                 err?.error?.detail ||
                 err?.error?.status ||
-                'An error occured!',
-              'x',
+                "An error occured!",
+              "x",
               {
                 duration: 5000,
-                panelClass: 'error',
-                horizontalPosition: 'center',
-                verticalPosition: 'top',
+                panelClass: "error",
+                horizontalPosition: "center",
+                verticalPosition: "top",
               }
             );
           }
@@ -201,7 +216,7 @@ export class PayWithCardDialogComponent {
   }
 
   removeWhiteSpace(name: any) {
-    return name.replaceAll(/\s/g, '');
+    return name.replaceAll(/\s/g, "");
   }
 
   openDialog(data: any, type: string) {
