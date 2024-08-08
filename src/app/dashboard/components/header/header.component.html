@@ -303,6 +303,13 @@
                 </button>
             </div>
 
+            <div class="faq">
+                <button class="ripple-button" type="button" (click)="openDialog('', 'affiliate-form')">
+                    <span>Become affiliate</span>
+                </button>
+            </div>
+
+
             <div class="signin" *ngIf="!isLogin">
                 <button class="ripple-button" type="button" (click)="openDialog('', 'login')">
                     <span>Create an account</span>

@@ -1,0 +1,85 @@
+.wrapper {
+  .form {
+    margin-top: 32px;
+
+    .full-width {
+      width: 100%;
+    }
+
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      height: 46px !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    ::ng-deep .p-dropdown .p-dropdown-label {
+      height: 52px;
+      width: 60px;
+    }
+
+    .half {
+      height: 53px;
+      width: 100px;
+    }
+
+    .submit-p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .submit {
+      background: var(--orange-text);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 5px;
+    }
+
+    .signup {
+      border: 1px solid var(--primary-50);
+      background: var(--primary-50);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--primary-700);
+      margin-left: 5px;
+    }
+
+    .loader-white {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .forget-password {
+    color: #bf4b12;
+    font-family: var(--mark-font);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .agree {
+    color: #344054;
+    font-family: var(--mark-font);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 1rem;
+    margin-top: 10px;
+
+    span {
+      font-weight: 700;
+      color: #bf4b12;
+    }
+  }
+}

@@ -31,6 +31,7 @@ import { SelectCardDialogComponent } from "../dialog-component/select-card-dialo
 import { SuccessErrorDialogComponent } from "../dialog-component/success-error-dialog/success-error-dialog.component";
 import { ReviewDialogComponent } from "../review-component/review-dialog/review-dialog.component";
 import { ToggleDateDialogComponent } from "../dialog-component/toggle-date-dialog/toggle-date-dialog.component";
+import { DialogSignupAffiliateComponent } from "../dialog-component/dialog-signup-affiliate/dialog-signup-affiliate.component";
 
 @Component({
   selector: "app-dialog",
@@ -61,6 +62,7 @@ import { ToggleDateDialogComponent } from "../dialog-component/toggle-date-dialo
     GuestDetailsDialogComponent,
     PlanUpgradeComponent,
     ToggleDateDialogComponent,
+    DialogSignupAffiliateComponent,
   ],
   templateUrl: "./dialog.component.html",
   encapsulation: ViewEncapsulation.Emulated,
