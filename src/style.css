@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scale-100 {
+  transform: scale(1);
+}
+
+.scale-75 {
+  transform: scale(0.75);
+}
+
+.transition-all {
+  transition: all 0.5s ease-in-out;
+}

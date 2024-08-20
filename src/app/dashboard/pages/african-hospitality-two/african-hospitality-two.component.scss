@@ -1,0 +1,29 @@
+.carousel-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  transition: transform 0.5s ease-in-out;
+}
+
+.scale-100 {
+  transform: scale(1);
+}
+
+.scale-75 {
+  transform: scale(0.75);
+}
+
+.scale-90 {
+  transform: scale(0.9);
+}
+
+.carousel-container {
+  position: relative;
+}
+
+.carousel-item {
+  width: 50px; /* Adjust based on your design */
+  height: 50px; /* Adjust based on your design */
+}
