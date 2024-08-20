@@ -149,7 +149,8 @@
         </div>
 
         <div class="relative">
-            <button pButton pRipple label="Submit" class="bg-primary px-4 py-2 rounded-md absolute left-2 top-3">Host
+            <button [routerLink]="['/host-subscription']" pButton pRipple label="Submit"
+                class="bg-primary px-4 py-2 rounded-md absolute left-2 top-3">Host
                 your
                 home</button>
             <img class="h-full w-full" src="assets/images/hand-holding-key-real-estate-agent.png" alt="">
@@ -228,7 +229,7 @@
 
                             </div>
 
-                            <button
+                            <button [routerLink]="['/home-main']"
                                 class=" self-center bg-orange-500 text-white px-4 py-3 rounded-lg hover:bg-orange-600 transition">Book
                                 Now</button>
                         </div>
@@ -347,8 +348,8 @@
                         List your own property
                     </p>
                 </div>
-
-                <button class="button bg-primary rounded-md px-5 py-2 mt-6 text-white">Book Now</button>
+                <button [routerLink]="['/home-main']"
+                    class="button bg-primary rounded-md px-5 py-2 mt-6 text-white">Book Now</button>
             </div>
         </div>
     </div>
@@ -440,29 +441,34 @@
         </div>
         <div class="flex flex-col space-y-2 mt-5 sm:mt-0">
             <h3 class="font-bold">Company</h3>
-            <div [routerLink]="['/about']" class="hover:underline">About us</div>
-            <div [routerLink]="['/host-subscription/subscription']" class="hover:underline">Subscriptions</div>
-            <div (click)="redirectContact()" class="hover:underline">Contact us</div>
+            <div [routerLink]="['/about']" class="hover:underline cursor-pointer">About us</div>
+            <div [routerLink]="['/host-subscription/subscription']" class="hover:underline cursor-pointer">Subscriptions
+            </div>
+            <div (click)="redirectContact()" class="hover:underline cursor-pointer">Contact us</div>
         </div>
         <div class="flex flex-col space-y-2  mt-5 sm:mt-0">
             <h3 class="font-bold">Resources</h3>
-            <div [routerLink]="['/faqs']" class="hover:underline">Faqs</div>
+            <div [routerLink]="['/faqs']" class="hover:underline cursor-pointer">Faqs</div>
         </div>
         <div class="flex flex-col space-y-2 mt-5 sm:mt-0">
             <h3 class="font-bold">Legal</h3>
-            <div [routerLink]="['/terms']" class="hover:underline">Terms</div>
-            <div [routerLink]="['/privacy-policy']" class="hover:underline">Privacy</div>
-            <div [routerLink]="['/cookie-policy']" class="hover:underline">Cookies</div>
+            <div [routerLink]="['/terms']" class="hover:underline cursor-pointer">Terms</div>
+            <div [routerLink]="['/privacy-policy']" class="hover:underline cursor-pointer">Privacy</div>
+            <div [routerLink]="['/cookie-policy']" class="hover:underline cursor-pointer">Cookies</div>
         </div>
     </div>
 
     <div class="container mx-auto px-4 mt-10 border-t border-gray-700 pt-6 flex justify-between items-center">
         <p>© Powered by Greencity. All rights reserved.</p>
         <div class="flex space-x-4">
-            <a href="#" aria-label="Facebook"><i class="pi pi-facebook" style="color: white; font-size: 1rem;"></i></a>
-            <a href="#" aria-label="Facebook"><i class="pi pi-twitter" style="color: white; font-size: 1rem;"></i></a>
-            <a href="#" aria-label="Facebook"><i class="pi pi-instagram" style="color: white; font-size: 1rem;"></i></a>
-            <a href="#" aria-label="Facebook"><i class="pi pi-linkedin" style="color: white; font-size: 1rem;"></i></a>
+            <a href="#" aria-label="Facebook"><i class="pi pi-facebook cursor-pointer"
+                    style="color: white; font-size: 1rem;"></i></a>
+            <a href="#" aria-label="Facebook"><i class="pi pi-twitter cursor-pointer"
+                    style="color: white; font-size: 1rem;"></i></a>
+            <a href="#" aria-label="Facebook"><i class="pi pi-instagram cursor-pointer"
+                    style="color: white; font-size: 1rem;"></i></a>
+            <a href="#" aria-label="Facebook"><i class="pi pi-linkedin cursor-pointer"
+                    style="color: white; font-size: 1rem;"></i></a>
         </div>
     </div>
 </footer>

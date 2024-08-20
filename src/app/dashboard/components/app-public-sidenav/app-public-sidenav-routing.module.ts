@@ -11,14 +11,14 @@ const routes: Routes = [
     children: [
       { path: "", redirectTo: "home", pathMatch: "full" },
       {
-        path: "home",
+        path: "home-main",
         loadComponent: () =>
           import(
             "../../pages/african-hospitality/african-hospitality.component"
           ).then((m) => m.AfricanHospitalityComponent),
       },
       {
-        path: "home-two",
+        path: "home",
         loadComponent: () =>
           import(
             "../../pages/african-hospitality-two/african-hospitality-two.component"
