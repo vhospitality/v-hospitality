@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe, isPlatformBrowser } from '@angular/common';
+import { CommonModule, DatePipe, isPlatformBrowser } from "@angular/common";
 import {
   AfterViewInit,
   Component,
@@ -9,43 +9,43 @@ import {
   PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
-} from '@angular/core';
+} from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-} from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { RouterModule } from '@angular/router';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { CalendarModule } from 'primeng/calendar';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputTextModule } from 'primeng/inputtext';
-import { PaginatorModule } from 'primeng/paginator';
-import { SkeletonModule } from 'primeng/skeleton';
-import { SliderModule } from 'primeng/slider';
-import { Subscription } from 'rxjs';
-import { baseUrl } from '../../../../environments/environment';
-import { AuthService } from '../../../global-services/auth.service';
-import { HttpService } from '../../../global-services/http.service';
-import { SeoService } from '../../../global-services/seo.service';
-import { BackButtonComponent } from '../../components/back-button/back-button.component';
-import { FooterComponent } from '../../components/footer/footer.component';
-import { HeaderComponent } from '../../components/header/header.component';
-import { MapComponent } from '../../components/map/map.component';
-import { NoDataMessageComponent } from '../../components/no-data-message/no-data-message.component';
-import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
+} from "@angular/forms";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatButtonModule } from "@angular/material/button";
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatSliderModule } from "@angular/material/slider";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { RouterModule } from "@angular/router";
+import { LazyLoadImageModule } from "ng-lazyload-image";
+import { CalendarModule } from "primeng/calendar";
+import { DropdownModule } from "primeng/dropdown";
+import { InputTextModule } from "primeng/inputtext";
+import { PaginatorModule } from "primeng/paginator";
+import { SkeletonModule } from "primeng/skeleton";
+import { SliderModule } from "primeng/slider";
+import { Subscription } from "rxjs";
+import { baseUrl } from "../../../../environments/environment";
+import { AuthService } from "../../../global-services/auth.service";
+import { HttpService } from "../../../global-services/http.service";
+import { SeoService } from "../../../global-services/seo.service";
+import { BackButtonComponent } from "../../components/back-button/back-button.component";
+import { FooterComponent } from "../../components/footer/footer.component";
+import { HeaderComponent } from "../../components/header/header.component";
+import { MapComponent } from "../../components/map/map.component";
+import { NoDataMessageComponent } from "../../components/no-data-message/no-data-message.component";
+import { ToggleNavService } from "../../dashboard-service/toggle-nav.service";
 
 @Component({
-  selector: 'app-accommodation-listing',
+  selector: "app-accommodation-listing",
   standalone: true,
   imports: [
     CommonModule,
@@ -75,16 +75,16 @@ import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
     MatButtonModule,
     BackButtonComponent,
   ],
-  templateUrl: './accommodation-listing.component.html',
+  templateUrl: "./accommodation-listing.component.html",
   encapsulation: ViewEncapsulation.Emulated,
   // providers: [{ provide: LAZYLOAD_IMAGE_HOOKS, useClass: ScrollHooks }],
-  styleUrls: ['./accommodation-listing.component.scss'],
+  styleUrls: ["./accommodation-listing.component.scss"],
 })
 export class AccommodationListingComponent implements AfterViewInit {
-  @ViewChild('fform') feedbackFormDirective: any;
+  @ViewChild("fform") feedbackFormDirective: any;
   @Input() adressType: any;
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
-  @ViewChild('addresstext') addresstext: any;
+  @ViewChild("addresstext") addresstext: any;
   address: any;
   feedbackForm: any = FormGroup;
   total_records = 0;
@@ -92,7 +92,7 @@ export class AccommodationListingComponent implements AfterViewInit {
   datas: any[] = [];
   perPage = 12;
   dafaultImage: string = baseUrl.defaultImage;
-  errorMessage: string = 'No accommodation found at the moment';
+  errorMessage: string = "No accommodation found at the moment";
   filterObject = {};
   serviceData: any;
   map: any;
@@ -100,10 +100,10 @@ export class AccommodationListingComponent implements AfterViewInit {
   minimumDate = new Date();
 
   filters: any[] = [
-    { name: 'All', code: undefined },
-    { name: 'Instant book', code: 'is_instant_bookable' },
-    { name: 'Expensive', code: '+price' },
-    { name: 'Cheapest', code: '-price' },
+    { name: "All", code: undefined },
+    { name: "Instant book", code: "is_instant_bookable" },
+    { name: "Expensive", code: "+price" },
+    { name: "Cheapest", code: "-price" },
   ];
 
   rangeValues: number[] = [100, 800];
@@ -124,7 +124,7 @@ export class AccommodationListingComponent implements AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.seo.updateSeoTags({
-      title: 'Accommodations' + ' - ' + baseUrl.feDomain,
+      title: "Accommodations" + " - " + baseUrl.feDomain,
     });
 
     this.isLogin = this.authService.isLoggedIn();
@@ -162,6 +162,7 @@ export class AccommodationListingComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.getPlaceAutocomplete();
+    (window as any).fbq("track", "Search");
   }
 
   stopPropagation(event: any) {
@@ -170,10 +171,10 @@ export class AccommodationListingComponent implements AfterViewInit {
 
   createForm() {
     this.feedbackForm = this.fb.group({
-      date: [''],
-      state: [''],
-      search: [''],
-      filter: [''],
+      date: [""],
+      state: [""],
+      search: [""],
+      filter: [""],
     });
   }
 
@@ -181,67 +182,67 @@ export class AccommodationListingComponent implements AfterViewInit {
     this.datas2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     this.datas = [];
     this.filterObject = {};
-    let priceType: any = '';
+    let priceType: any = "";
 
     const get_current_page = event?.first + this.perPage || this.perPage;
 
     if (this.feedbackForm.value.search) {
       Object.assign(this.filterObject, {
-        'filter[title]': this.feedbackForm.value.search,
+        "filter[title]": this.feedbackForm.value.search,
       });
     }
 
     if (this.feedbackForm.value?.state || this.address) {
       Object.assign(this.filterObject, {
-        'filter[state]':
+        "filter[state]":
           this.address?.address_components?.find(
             (n: any) =>
-              n?.types.includes('locality') ||
-              n?.types.includes('administrative_area_level_1')
+              n?.types.includes("locality") ||
+              n?.types.includes("administrative_area_level_1")
           )?.long_name ||
           this.address?.state ||
-          '',
-        'filter[country]':
+          "",
+        "filter[country]":
           this.address?.address_components?.find((n: any) =>
-            n?.types.includes('country')
+            n?.types.includes("country")
           )?.long_name ||
           this.address?.country ||
-          '',
-        'filter[city]':
+          "",
+        "filter[city]":
           this.address?.address_components?.find(
             (n: any) =>
-              n?.types.includes('sublocality') ||
-              n?.types.includes('neighborhood')
+              n?.types.includes("sublocality") ||
+              n?.types.includes("neighborhood")
           )?.long_name ||
           this.address?.city ||
-          '',
+          "",
       });
     }
 
     if (this.serviceData?.collection?.uuid) {
       Object.assign(this.filterObject, {
-        'filter[collection.uuid]': this.serviceData?.collection?.uuid,
+        "filter[collection.uuid]": this.serviceData?.collection?.uuid,
       });
     }
 
-    if (this.feedbackForm.value.filter == 'is_instant_bookable') {
+    if (this.feedbackForm.value.filter == "is_instant_bookable") {
       Object.assign(this.filterObject, {
-        'filter[is_instant_bookable]': 1,
+        "filter[is_instant_bookable]": 1,
       });
     }
 
     if (
-      this.feedbackForm.value.filter == '+price' ||
-      this.feedbackForm.value.filter == '-price'
+      this.feedbackForm.value.filter == "+price" ||
+      this.feedbackForm.value.filter == "-price"
     ) {
       priceType = `&sort=${this.feedbackForm.value.filter}`;
     }
 
     if (this.feedbackForm.value.date) {
       Object.assign(this.filterObject, {
-        'filter[available_from]': this.datepipe.transform(
+        "filter[available_from]": this.datepipe.transform(
           this.feedbackForm.value.date,
-          'YYYY-MM-dd'
+          "YYYY-MM-dd"
         ),
       });
     }
@@ -260,6 +261,8 @@ export class AccommodationListingComponent implements AfterViewInit {
           this.datas = data?.data?.data;
           this.total_records = data?.data?.total;
           this.datas2 = [];
+
+          (window as any).fbq("track", "Search");
         },
         (err) => {
           this.datas2 = [];
@@ -272,7 +275,7 @@ export class AccommodationListingComponent implements AfterViewInit {
   getWishlist() {
     this.httpService
       .getAuthSingle(
-        baseUrl.wishlist + '/?per_page=1&include=listing&fields[listing]=uuid'
+        baseUrl.wishlist + "/?per_page=1&include=listing&fields[listing]=uuid"
       )
       .subscribe((data: any) => {
         for (let n of data?.data) {
@@ -321,7 +324,7 @@ export class AccommodationListingComponent implements AfterViewInit {
       this.wishlists.push(uuid);
 
       this.httpService
-        .postData(baseUrl.listing + `/${uuid}/wishlists`, '')
+        .postData(baseUrl.listing + `/${uuid}/wishlists`, "")
         .subscribe(
           (data: any) => {
             this.newAddedWishlist.push(uuid);
@@ -334,21 +337,21 @@ export class AccommodationListingComponent implements AfterViewInit {
             this.removeWishlist(uuid);
             this.service.sendIsLoginClickEvent();
 
-            this.snackBar.open('Successfully added wishlist item', 'x', {
+            this.snackBar.open("Successfully added wishlist item", "x", {
               duration: 3000,
-              panelClass: 'success',
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
+              panelClass: "success",
+              horizontalPosition: "center",
+              verticalPosition: "top",
             });
           },
           () => {
             this.removeWishlist(uuid);
 
-            this.snackBar.open('Failed to add wishlist item', 'x', {
+            this.snackBar.open("Failed to add wishlist item", "x", {
               duration: 3000,
-              panelClass: 'error',
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
+              panelClass: "error",
+              horizontalPosition: "center",
+              verticalPosition: "top",
             });
           }
         );
@@ -364,21 +367,21 @@ export class AccommodationListingComponent implements AfterViewInit {
             this.removeWishlist(uuid);
             this.deleteWishlist(uuid);
 
-            this.snackBar.open('Successfully deleted wishlist item', 'x', {
+            this.snackBar.open("Successfully deleted wishlist item", "x", {
               duration: 3000,
-              panelClass: 'success',
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
+              panelClass: "success",
+              horizontalPosition: "center",
+              verticalPosition: "top",
             });
           },
           () => {
             this.removeWishlist(uuid);
 
-            this.snackBar.open('Failed to delete wishlist item', 'x', {
+            this.snackBar.open("Failed to delete wishlist item", "x", {
               duration: 3000,
-              panelClass: 'error',
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
+              panelClass: "error",
+              horizontalPosition: "center",
+              verticalPosition: "top",
             });
           }
         );
@@ -400,7 +403,7 @@ export class AccommodationListingComponent implements AfterViewInit {
           types: [this.adressType], // 'establishment' / 'address' / 'geocode'
         }
       );
-      google.maps.event.addListener(autocomplete, 'place_changed', () => {
+      google.maps.event.addListener(autocomplete, "place_changed", () => {
         const place = autocomplete.getPlace();
         this.invokeEvent(place);
       });

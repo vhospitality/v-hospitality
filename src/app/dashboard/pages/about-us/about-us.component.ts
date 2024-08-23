@@ -1,4 +1,4 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from "@angular/common";
 import {
   AfterViewInit,
   Component,
@@ -11,32 +11,32 @@ import {
   PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
-} from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { CalendarModule } from 'primeng/calendar';
-import { DropdownModule } from 'primeng/dropdown';
-import { GalleriaModule } from 'primeng/galleria';
-import { InputTextModule } from 'primeng/inputtext';
-import { Subscription } from 'rxjs';
-import { baseUrl } from '../../../../environments/environment';
-import { SeoService } from '../../../global-services/seo.service';
-import { AboutFooterComponent } from '../../components/about-component/about-footer/about-footer.component';
-import { AboutComponent } from '../../components/about-component/about/about.component';
-import { BlogComponent } from '../../components/about-component/blog/blog.component';
-import { ProductComponent } from '../../components/about-component/product/product.component';
-import { FooterComponent } from '../../components/footer/footer.component';
-import { HeaderComponent } from '../../components/header/header.component';
-import { CollectionsComponent } from '../../components/landing-page-component/collections/collections.component';
-import { ListPropertyBackgroundComponent } from '../../components/landing-page-component/list-property-background/list-property-background.component';
-import { SelectOptionComponent } from '../../components/select/select-option/select-option.component';
-import { SelectComponent } from '../../components/select/select.component';
-import { SelectService } from '../../components/select/select.service';
-import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
+} from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { LazyLoadImageModule } from "ng-lazyload-image";
+import { CalendarModule } from "primeng/calendar";
+import { DropdownModule } from "primeng/dropdown";
+import { GalleriaModule } from "primeng/galleria";
+import { InputTextModule } from "primeng/inputtext";
+import { Subscription } from "rxjs";
+import { baseUrl } from "../../../../environments/environment";
+import { SeoService } from "../../../global-services/seo.service";
+import { AboutFooterComponent } from "../../components/about-component/about-footer/about-footer.component";
+import { AboutComponent } from "../../components/about-component/about/about.component";
+import { BlogComponent } from "../../components/about-component/blog/blog.component";
+import { ProductComponent } from "../../components/about-component/product/product.component";
+import { FooterComponent } from "../../components/footer/footer.component";
+import { HeaderComponent } from "../../components/header/header.component";
+import { CollectionsComponent } from "../../components/landing-page-component/collections/collections.component";
+import { ListPropertyBackgroundComponent } from "../../components/landing-page-component/list-property-background/list-property-background.component";
+import { SelectOptionComponent } from "../../components/select/select-option/select-option.component";
+import { SelectComponent } from "../../components/select/select.component";
+import { SelectService } from "../../components/select/select.service";
+import { ToggleNavService } from "../../dashboard-service/toggle-nav.service";
 
 @Component({
-  selector: 'app-about-us',
+  selector: "app-about-us",
   standalone: true,
   imports: [
     CommonModule,
@@ -58,61 +58,61 @@ import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
     ProductComponent,
     BlogComponent,
   ],
-  templateUrl: './about-us.component.html',
+  templateUrl: "./about-us.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./about-us.component.scss'],
+  styleUrls: ["./about-us.component.scss"],
 })
 export class AboutUsComponent implements OnInit, AfterViewInit {
-  @ViewChild('contact', { static: true })
+  @ViewChild("contact", { static: true })
   contact!: ElementRef<HTMLDivElement>;
 
-  @ViewChild('blog', { static: true })
+  @ViewChild("blog", { static: true })
   blog!: ElementRef<HTMLDivElement>;
 
   @Input() adressType: any;
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
-  @ViewChild('addresstext') addresstext: any;
+  @ViewChild("addresstext") addresstext: any;
   address: any;
   minimumDate = new Date();
-  title: string = 'Find properties that suit your style';
+  title: string = "Find properties that suit your style";
 
   checkinDate: any;
   selectOption: any[] = [
     {
       id: 1,
-      gender: 'Adult',
-      desc: 'Ages 18 or above',
+      gender: "Adult",
+      desc: "Ages 18 or above",
       total: 0,
     },
     {
       id: 2,
-      gender: 'Children',
-      desc: 'Ages 2 - 17',
+      gender: "Children",
+      desc: "Ages 2 - 17",
       total: 0,
     },
     {
       id: 3,
-      gender: 'Infant',
-      desc: 'Under 2',
+      gender: "Infant",
+      desc: "Under 2",
       total: 0,
     },
   ];
 
   datas: any[] = [
     {
-      imgName: '/assets/images/5-bg.jpg',
+      imgName: "/assets/images/5-bg.jpg",
     },
     {
-      imgName: '/assets/images/5-bg.png',
+      imgName: "/assets/images/5-bg.png",
     },
     {
-      imgName: '/assets/images/3-bg.jpg',
+      imgName: "/assets/images/3-bg.jpg",
     },
     {
-      imgName: '/assets/images/4-bg.jpg',
+      imgName: "/assets/images/4-bg.jpg",
     },
     {
-      imgName: '/assets/images/third-swipper.jpg',
+      imgName: "/assets/images/third-swipper.jpg",
     },
   ];
 
@@ -128,7 +128,7 @@ export class AboutUsComponent implements OnInit, AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.seo.updateSeoTags({
-      title: 'About us' + ' - ' + baseUrl.feDomain,
+      title: "About us" + " - " + baseUrl.feDomain,
     });
   }
 
@@ -138,7 +138,7 @@ export class AboutUsComponent implements OnInit, AfterViewInit {
       country: this.address,
       date: this.checkinDate,
     });
-    this.router.navigate(['/accommodations']);
+    this.router.navigate(["/accommodations"]);
   }
 
   scroll(el: HTMLElement) {
@@ -157,19 +157,19 @@ export class AboutUsComponent implements OnInit, AfterViewInit {
       .subscribe((data: any) => {
         let findId = this.selectOption.findIndex((x) => x?.id === data?.id);
 
-        if (data?.type === 'add') {
+        if (data?.type === "add") {
           this.selectOption[findId].total += 1;
           if (
             this.selectOption[findId].total > 1 &&
             this.selectOption[findId].id !== 2 &&
-            !this.selectOption[findId]?.gender.endsWith('s')
+            !this.selectOption[findId]?.gender.endsWith("s")
           ) {
-            this.selectOption[findId].gender += 's';
+            this.selectOption[findId].gender += "s";
           }
-        } else if (data?.type === 'minus') {
+        } else if (data?.type === "minus") {
           if (this.selectOption[findId].total < 1) {
             this.selectOption[findId].total = 0;
-            if (this.selectOption[findId]?.gender.endsWith('s')) {
+            if (this.selectOption[findId]?.gender.endsWith("s")) {
               this.selectOption[findId].gender = this.selectOption[
                 findId
               ].gender.slice(0, -1);
@@ -179,11 +179,11 @@ export class AboutUsComponent implements OnInit, AfterViewInit {
             if (
               this.selectOption[findId].total > 1 &&
               this.selectOption[findId].id !== 2 &&
-              !this.selectOption[findId]?.gender.endsWith('s')
+              !this.selectOption[findId]?.gender.endsWith("s")
             ) {
-              this.selectOption[findId].gender += 's';
+              this.selectOption[findId].gender += "s";
             } else if (
-              this.selectOption[findId]?.gender.endsWith('s') &&
+              this.selectOption[findId]?.gender.endsWith("s") &&
               this.selectOption[findId].total < 2
             ) {
               this.selectOption[findId].gender = this.selectOption[
@@ -202,11 +202,11 @@ export class AboutUsComponent implements OnInit, AfterViewInit {
       const autocomplete = new google.maps.places.Autocomplete(
         this.addresstext?.nativeElement,
         {
-          componentRestrictions: { country: 'NG' },
+          componentRestrictions: { country: "NG" },
           types: [this.adressType], // 'establishment' / 'address' / 'geocode'
         }
       );
-      google.maps.event.addListener(autocomplete, 'place_changed', () => {
+      google.maps.event.addListener(autocomplete, "place_changed", () => {
         const place = autocomplete.getPlace();
         this.invokeEvent(place);
       });
@@ -224,11 +224,13 @@ export class AboutUsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.direct.queryParams.subscribe((params: any) => {
-      if (params?.view === 'contact') {
+      if (params?.view === "contact") {
         this.scroll(this.contact?.nativeElement);
-      } else if (params?.view === 'blog') {
+      } else if (params?.view === "blog") {
         this.scroll(this.blog?.nativeElement);
       }
     });
+
+    (window as any).fbq("track", "Contact");
   }
 }

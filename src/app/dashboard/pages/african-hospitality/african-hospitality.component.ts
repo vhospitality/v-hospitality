@@ -1,4 +1,4 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from "@angular/common";
 import {
   AfterViewInit,
   Component,
@@ -10,27 +10,27 @@ import {
   PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
-} from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { CalendarModule } from 'primeng/calendar';
-import { DropdownModule } from 'primeng/dropdown';
-import { GalleriaModule } from 'primeng/galleria';
-import { InputTextModule } from 'primeng/inputtext';
-import { Subscription } from 'rxjs';
-import { DialogComponent } from '../../components/dialog/dialog.component';
-import { FooterComponent } from '../../components/footer/footer.component';
-import { HeaderComponent } from '../../components/header/header.component';
-import { ApartmentsComponent } from '../../components/landing-page-component/apartments/apartments.component';
-import { SelectOptionComponent } from '../../components/select/select-option/select-option.component';
-import { SelectComponent } from '../../components/select/select.component';
-import { SelectService } from '../../components/select/select.service';
-import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
+} from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
+import { LazyLoadImageModule } from "ng-lazyload-image";
+import { CalendarModule } from "primeng/calendar";
+import { DropdownModule } from "primeng/dropdown";
+import { GalleriaModule } from "primeng/galleria";
+import { InputTextModule } from "primeng/inputtext";
+import { Subscription } from "rxjs";
+import { DialogComponent } from "../../components/dialog/dialog.component";
+import { FooterComponent } from "../../components/footer/footer.component";
+import { HeaderComponent } from "../../components/header/header.component";
+import { ApartmentsComponent } from "../../components/landing-page-component/apartments/apartments.component";
+import { SelectOptionComponent } from "../../components/select/select-option/select-option.component";
+import { SelectComponent } from "../../components/select/select.component";
+import { SelectService } from "../../components/select/select.service";
+import { ToggleNavService } from "../../dashboard-service/toggle-nav.service";
 
 @Component({
-  selector: 'app-african-hospitality',
+  selector: "app-african-hospitality",
   standalone: true,
   imports: [
     CommonModule,
@@ -47,54 +47,58 @@ import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
     GalleriaModule,
     LazyLoadImageModule,
   ],
-  templateUrl: './african-hospitality.component.html',
+  templateUrl: "./african-hospitality.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./african-hospitality.component.scss'],
+  styleUrls: ["./african-hospitality.component.scss"],
 })
 export class AfricanHospitalityComponent implements OnDestroy, AfterViewInit {
   @Input() adressType: any;
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
-  @ViewChild('addresstext') addresstext: any;
+  @ViewChild("addresstext") addresstext: any;
   address: any;
   minimumDate = new Date();
+
+  ngOnInit(): void {
+    (window as any).fbq("track", "ViewContent");
+  }
 
   checkinDate: any;
   selectOption: any[] = [
     {
       id: 1,
-      gender: 'Adult',
-      desc: 'Ages 18 or above',
+      gender: "Adult",
+      desc: "Ages 18 or above",
       total: 0,
     },
     {
       id: 2,
-      gender: 'Children',
-      desc: 'Ages 2 - 17',
+      gender: "Children",
+      desc: "Ages 2 - 17",
       total: 0,
     },
     {
       id: 3,
-      gender: 'Infant',
-      desc: 'Under 2',
+      gender: "Infant",
+      desc: "Under 2",
       total: 0,
     },
   ];
 
   datas: any[] = [
     {
-      imgName: '/assets/images/5-bg.jpg',
+      imgName: "/assets/images/5-bg.jpg",
     },
     {
-      imgName: '/assets/images/5-bg.png',
+      imgName: "/assets/images/5-bg.png",
     },
     {
-      imgName: '/assets/images/3-bg.jpg',
+      imgName: "/assets/images/3-bg.jpg",
     },
     {
-      imgName: '/assets/images/4-bg.jpg',
+      imgName: "/assets/images/4-bg.jpg",
     },
     {
-      imgName: '/assets/images/third-swipper.jpg',
+      imgName: "/assets/images/third-swipper.jpg",
     },
   ];
 
@@ -115,7 +119,7 @@ export class AfricanHospitalityComponent implements OnDestroy, AfterViewInit {
       country: this.address,
       date: this.checkinDate,
     });
-    this.router.navigate(['/accommodations']);
+    this.router.navigate(["/accommodations"]);
   }
 
   ngAfterViewInit() {
@@ -126,19 +130,19 @@ export class AfricanHospitalityComponent implements OnDestroy, AfterViewInit {
       .subscribe((data: any) => {
         let findId = this.selectOption.findIndex((x) => x?.id === data?.id);
 
-        if (data?.type === 'add') {
+        if (data?.type === "add") {
           this.selectOption[findId].total += 1;
           if (
             this.selectOption[findId].total > 1 &&
             this.selectOption[findId].id !== 2 &&
-            !this.selectOption[findId]?.gender.endsWith('s')
+            !this.selectOption[findId]?.gender.endsWith("s")
           ) {
-            this.selectOption[findId].gender += 's';
+            this.selectOption[findId].gender += "s";
           }
-        } else if (data?.type === 'minus') {
+        } else if (data?.type === "minus") {
           if (this.selectOption[findId].total < 1) {
             this.selectOption[findId].total = 0;
-            if (this.selectOption[findId]?.gender.endsWith('s')) {
+            if (this.selectOption[findId]?.gender.endsWith("s")) {
               this.selectOption[findId].gender = this.selectOption[
                 findId
               ].gender.slice(0, -1);
@@ -148,11 +152,11 @@ export class AfricanHospitalityComponent implements OnDestroy, AfterViewInit {
             if (
               this.selectOption[findId].total > 1 &&
               this.selectOption[findId].id !== 2 &&
-              !this.selectOption[findId]?.gender.endsWith('s')
+              !this.selectOption[findId]?.gender.endsWith("s")
             ) {
-              this.selectOption[findId].gender += 's';
+              this.selectOption[findId].gender += "s";
             } else if (
-              this.selectOption[findId]?.gender.endsWith('s') &&
+              this.selectOption[findId]?.gender.endsWith("s") &&
               this.selectOption[findId].total < 2
             ) {
               this.selectOption[findId].gender = this.selectOption[
@@ -168,20 +172,20 @@ export class AfricanHospitalityComponent implements OnDestroy, AfterViewInit {
     let selectOption = [
       {
         id: 1,
-        gender: 'Adult',
-        desc: 'Ages 18 or above',
+        gender: "Adult",
+        desc: "Ages 18 or above",
         total: 0,
       },
       {
         id: 2,
-        gender: 'Children',
-        desc: 'Ages 2 - 17',
+        gender: "Children",
+        desc: "Ages 2 - 17",
         total: 0,
       },
       {
         id: 3,
-        gender: 'Infant',
-        desc: 'Under 2',
+        gender: "Infant",
+        desc: "Under 2",
         total: 0,
       },
     ];
@@ -199,7 +203,7 @@ export class AfricanHospitalityComponent implements OnDestroy, AfterViewInit {
           types: [this.adressType], // 'establishment' / 'address' / 'geocode'
         }
       );
-      google.maps.event.addListener(autocomplete, 'place_changed', () => {
+      google.maps.event.addListener(autocomplete, "place_changed", () => {
         const place = autocomplete.getPlace();
         this.invokeEvent(place);
       });

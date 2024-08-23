@@ -1,4 +1,4 @@
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule, Location } from "@angular/common";
 import {
   AfterViewInit,
   Component,
@@ -6,33 +6,33 @@ import {
   OnDestroy,
   ViewChild,
   ViewEncapsulation,
-} from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { Router, RouterModule } from '@angular/router';
-import { SkeletonModule } from 'primeng/skeleton';
-import { Subscription } from 'rxjs';
-import { baseUrl } from '../../../../environments/environment';
-import { AuthService } from '../../../global-services/auth.service';
-import { HttpService } from '../../../global-services/http.service';
-import { AddressComponent } from '../../components/property-signup-component/address/address.component';
-import { AmenitiesComponent } from '../../components/property-signup-component/amenities/amenities.component';
-import { ApartmentKycComponent } from '../../components/property-signup-component/apartment-kyc/apartment-kyc.component';
-import { ApartmentPhotosComponent } from '../../components/property-signup-component/apartment-photos/apartment-photos.component';
-import { BedroomKindComponent } from '../../components/property-signup-component/bedroom-kind/bedroom-kind.component';
-import { DescribePlaceComponent } from '../../components/property-signup-component/describe-place/describe-place.component';
-import { GuestStayComponent } from '../../components/property-signup-component/guest-stay/guest-stay.component';
-import { GuestTotalComponent } from '../../components/property-signup-component/guest-total/guest-total.component';
-import { HouseRulesComponent } from '../../components/property-signup-component/house-rules/house-rules.component';
-import { HowGuestBookComponent } from '../../components/property-signup-component/how-guest-book/how-guest-book.component';
-import { PriceComponent } from '../../components/property-signup-component/price/price.component';
-import { PropertyDetailsComponent } from '../../components/property-signup-component/property-details/property-details.component';
-import { SecondHouseRulesComponent } from '../../components/property-signup-component/second-house-rules/second-house-rules.component';
-import { TypeofGuestComponent } from '../../components/property-signup-component/typeof-guest/typeof-guest.component';
-import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
+} from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { Router, RouterModule } from "@angular/router";
+import { SkeletonModule } from "primeng/skeleton";
+import { Subscription } from "rxjs";
+import { baseUrl } from "../../../../environments/environment";
+import { AuthService } from "../../../global-services/auth.service";
+import { HttpService } from "../../../global-services/http.service";
+import { AddressComponent } from "../../components/property-signup-component/address/address.component";
+import { AmenitiesComponent } from "../../components/property-signup-component/amenities/amenities.component";
+import { ApartmentKycComponent } from "../../components/property-signup-component/apartment-kyc/apartment-kyc.component";
+import { ApartmentPhotosComponent } from "../../components/property-signup-component/apartment-photos/apartment-photos.component";
+import { BedroomKindComponent } from "../../components/property-signup-component/bedroom-kind/bedroom-kind.component";
+import { DescribePlaceComponent } from "../../components/property-signup-component/describe-place/describe-place.component";
+import { GuestStayComponent } from "../../components/property-signup-component/guest-stay/guest-stay.component";
+import { GuestTotalComponent } from "../../components/property-signup-component/guest-total/guest-total.component";
+import { HouseRulesComponent } from "../../components/property-signup-component/house-rules/house-rules.component";
+import { HowGuestBookComponent } from "../../components/property-signup-component/how-guest-book/how-guest-book.component";
+import { PriceComponent } from "../../components/property-signup-component/price/price.component";
+import { PropertyDetailsComponent } from "../../components/property-signup-component/property-details/property-details.component";
+import { SecondHouseRulesComponent } from "../../components/property-signup-component/second-house-rules/second-house-rules.component";
+import { TypeofGuestComponent } from "../../components/property-signup-component/typeof-guest/typeof-guest.component";
+import { ToggleNavService } from "../../dashboard-service/toggle-nav.service";
 
 @Component({
-  selector: 'app-property-registration-page',
+  selector: "app-property-registration-page",
   standalone: true,
   imports: [
     CommonModule,
@@ -55,17 +55,17 @@ import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
     RouterModule,
     SkeletonModule,
   ],
-  templateUrl: './property-registration-page.component.html',
+  templateUrl: "./property-registration-page.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./property-registration-page.component.scss'],
+  styleUrls: ["./property-registration-page.component.scss"],
 })
 export class PropertyRegistrationPageComponent
   implements OnDestroy, AfterViewInit
 {
-  @ViewChild('target', { static: true })
+  @ViewChild("target", { static: true })
   target!: ElementRef<HTMLDivElement>;
 
-  @ViewChild('target2', { static: true })
+  @ViewChild("target2", { static: true })
   target2!: ElementRef<HTMLDivElement>;
 
   draftData: any;
@@ -73,30 +73,30 @@ export class PropertyRegistrationPageComponent
 
   list: any = [
     {
-      title: 'Tell us about your place',
-      desc: 'Share some basic info, like where it is and how many guests can stay.',
-      tag: 'about',
+      title: "Tell us about your place",
+      desc: "Share some basic info, like where it is and how many guests can stay.",
+      tag: "about",
       componentNumber: [1, 2, 3, 4, 5, 6],
       done: false,
     },
     {
-      title: 'Make it stand out',
-      desc: 'Uploads property documents, add 5 or more photos plus a title and description.',
-      tag: 'stand',
+      title: "Make it stand out",
+      desc: "Uploads property documents, add 5 or more photos plus a title and description.",
+      tag: "stand",
       componentNumber: [7, 8, 9, 10],
       done: false,
     },
     {
-      title: 'Availability',
-      desc: 'Use availability settings to customize how and when you want to host.',
-      tag: 'available',
+      title: "Availability",
+      desc: "Use availability settings to customize how and when you want to host.",
+      tag: "available",
       componentNumber: [11, 12, 13],
       done: false,
     },
     {
-      title: 'Finish and submit for review',
-      desc: 'Set a starting price, and submit your listing.',
-      tag: 'finish',
+      title: "Finish and submit for review",
+      desc: "Set a starting price, and submit your listing.",
+      tag: "finish",
       componentNumber: [14],
       done: false,
     },
@@ -139,16 +139,16 @@ export class PropertyRegistrationPageComponent
     this.displayActionButton = true;
 
     // if type is save and continue
-    if (type?.type == 'sc') {
+    if (type?.type == "sc") {
       if (type?.componentNumber == 14) {
         this.service.setAccommodationMessage(this.service.getPropertyMessage());
-        this.router.navigate(['/property-summary']);
+        this.router.navigate(["/property-summary"]);
         // this.router.navigate(['/host-listing']);
         this.draftData = {};
       } else if (
         type?.componentNumber == 8 &&
-        (this.draftData?.status == 'published' ||
-          this.draftData?.status == 'booked')
+        (this.draftData?.status == "published" ||
+          this.draftData?.status == "booked")
       ) {
         this.nextOrBackOrSave(type);
       } else {
@@ -166,9 +166,11 @@ export class PropertyRegistrationPageComponent
 
         this.activeList = activeList?.componentNumber;
       }
+
+      (window as any).fbq("track", "PropertySignup");
     }
     // if type is back
-    else if (type?.type == 'b') {
+    else if (type?.type == "b") {
       this.activeNumber =
         type?.componentNumber - 1 == 0 ? 1 : type?.componentNumber - 1;
 
@@ -186,16 +188,18 @@ export class PropertyRegistrationPageComponent
       });
 
       this.activeList = activeList?.componentNumber;
-    } else if (type?.type == 'error') {
+    } else if (type?.type == "error") {
       this.displayActionButton = true;
     }
     // if type is save and exist
     else {
       if (this.draftData?.id) {
         this.service.setAccommodationMessage(this.service.getPropertyMessage());
-        this.router.navigate(['/property-summary']);
+        (window as any).fbq("track", "PropertySignup");
+        this.router.navigate(["/property-summary"]);
       } else {
-        this.router.navigate(['/host-listing']);
+        (window as any).fbq("track", "PropertySignup");
+        this.router.navigate(["/host-listing"]);
       }
       this.draftData = {};
     }
@@ -205,7 +209,7 @@ export class PropertyRegistrationPageComponent
     this.target?.nativeElement?.scrollIntoView();
     this.target2?.nativeElement?.scrollIntoView();
 
-    if (this.activeNumber == 1 && type == 'b') {
+    if (this.activeNumber == 1 && type == "b") {
       this._location.back();
     } else {
       this.nextOrBackOrSave({ type: type, componentNumber: this.activeNumber });
@@ -244,17 +248,17 @@ export class PropertyRegistrationPageComponent
             totalGuest: [
               {
                 id: 1,
-                name: 'Guests',
+                name: "Guests",
                 total: data?.data?.no_of_guests || 0,
               },
               {
                 id: 2,
-                name: 'Bedrooms',
+                name: "Bedrooms",
                 total: data?.data?.no_of_bedrooms || 0,
               },
               {
                 id: 3,
-                name: 'Beds',
+                name: "Beds",
                 total: data?.data?.no_of_beds || 0,
               },
             ],
@@ -271,26 +275,26 @@ export class PropertyRegistrationPageComponent
             amenities: data?.data?.amenities?.filter((n: any) => {
               return { name: n?.name, value: true, uuid: n?.uuid };
             }),
-            document: { fileText: '', files: data?.data?.documents },
+            document: { fileText: "", files: data?.data?.documents },
             photos: { files: data?.data?.pictures },
             bedroomKind: [
               {
                 id: 1,
-                name: 'Private and attached',
+                name: "Private and attached",
                 sub_title:
                   "It's connected to the guest's room and is just for them.",
                 total: data?.data?.no_of_private_bathroom || 0,
               },
               {
                 id: 2,
-                name: 'Dedicated',
+                name: "Dedicated",
                 sub_title:
                   "It's private, but accessed via a shared space, like a hallway.",
                 total: data?.data?.no_of_dedicated_bathroom || 0,
               },
               {
                 id: 3,
-                name: 'Shared',
+                name: "Shared",
                 sub_title: "It's shared with other people.",
                 total: data?.data?.no_of_shared_bathroom || 0,
               },
@@ -320,7 +324,7 @@ export class PropertyRegistrationPageComponent
             houseRules: data?.data?.house_rules?.filter((n: any) => {
               return { name: n?.name, value: true, uuid: n?.uuid };
             }),
-            type: 'summary',
+            type: "summary",
           };
 
           this.draftData = sampleData;

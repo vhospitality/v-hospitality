@@ -1,26 +1,26 @@
-import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { AccordionModule } from 'primeng/accordion';
-import { SkeletonModule } from 'primeng/skeleton';
-import { Subscription } from 'rxjs';
-import { baseUrl } from '../../../../environments/environment';
-import { AuthService } from '../../../global-services/auth.service';
-import { HttpService } from '../../../global-services/http.service';
-import { SeoService } from '../../../global-services/seo.service';
-import { BackButtonComponent } from '../../components/back-button/back-button.component';
-import { DialogComponent } from '../../components/dialog/dialog.component';
-import { FooterComponent } from '../../components/footer/footer.component';
-import { HeaderComponent } from '../../components/header/header.component';
-import { NoDataMessageComponent } from '../../components/no-data-message/no-data-message.component';
-import { ToggleNavService } from '../../dashboard-service/toggle-nav.service';
-import { EscapeHtmlPipe } from '../../pipes/escape-html.pipe';
+import { CommonModule } from "@angular/common";
+import { Component, ViewEncapsulation } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { AccordionModule } from "primeng/accordion";
+import { SkeletonModule } from "primeng/skeleton";
+import { Subscription } from "rxjs";
+import { baseUrl } from "../../../../environments/environment";
+import { AuthService } from "../../../global-services/auth.service";
+import { HttpService } from "../../../global-services/http.service";
+import { SeoService } from "../../../global-services/seo.service";
+import { BackButtonComponent } from "../../components/back-button/back-button.component";
+import { DialogComponent } from "../../components/dialog/dialog.component";
+import { FooterComponent } from "../../components/footer/footer.component";
+import { HeaderComponent } from "../../components/header/header.component";
+import { NoDataMessageComponent } from "../../components/no-data-message/no-data-message.component";
+import { ToggleNavService } from "../../dashboard-service/toggle-nav.service";
+import { EscapeHtmlPipe } from "../../pipes/escape-html.pipe";
 
 @Component({
-  selector: 'app-host-list-property',
+  selector: "app-host-list-property",
   standalone: true,
   imports: [
     CommonModule,
@@ -34,12 +34,12 @@ import { EscapeHtmlPipe } from '../../pipes/escape-html.pipe';
     BackButtonComponent,
     RouterModule,
   ],
-  templateUrl: './host-list-property.component.html',
+  templateUrl: "./host-list-property.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./host-list-property.component.scss'],
+  styleUrls: ["./host-list-property.component.scss"],
 })
 export class HostListPropertyComponent {
-  activeBilling: string = 'monthly';
+  activeBilling: string = "monthly";
   subscriptions: any[] = [];
   monthlySubscriptions: any[] = [];
   yearlySubscriptions: any[] = [];
@@ -49,42 +49,42 @@ export class HostListPropertyComponent {
   userData: any;
   clickEventSubscription?: Subscription;
   clickEventSubscription2?: Subscription;
-  subType: any = '';
+  subType: any = "";
   errorMessage: string =
     "Coming Soon, we're working on something awesome. Stay tuned!";
-  loading: string = '';
+  loading: string = "";
   popupcount: boolean = false;
 
   feature1: any[] = [
-    { name: 'Receive access to ratings' },
-    { name: 'Enjoy 24/7 support' },
-    { name: 'Enjoy priority placement in search results' },
-    { name: 'Access to exclusive hosting resources to help you succeed.' },
-    { name: 'Special promotional and partnership opportunities.' },
-    { name: 'Priority customer support' },
-    { name: 'Advanced analytics to optimize your listings' },
-    { name: 'Exclusive marketing campaigns' },
-    { name: '13 month subscription' },
+    { name: "Receive access to ratings" },
+    { name: "Enjoy 24/7 support" },
+    { name: "Enjoy priority placement in search results" },
+    { name: "Access to exclusive hosting resources to help you succeed." },
+    { name: "Special promotional and partnership opportunities." },
+    { name: "Priority customer support" },
+    { name: "Advanced analytics to optimize your listings" },
+    { name: "Exclusive marketing campaigns" },
+    { name: "13 month subscription" },
   ];
 
   feature2: any[] = [
-    { name: 'Means of Identification.' },
+    { name: "Means of Identification." },
     {
-      name: 'Utility Bill - Any of the following:',
+      name: "Utility Bill - Any of the following:",
       sub: [
-        { name: 'Ground rent.' },
-        { name: 'Electricity Bill.' },
-        { name: 'Environment Bill.' },
-        { name: 'Water Bill.' },
+        { name: "Ground rent." },
+        { name: "Electricity Bill." },
+        { name: "Environment Bill." },
+        { name: "Water Bill." },
       ],
     },
   ];
 
   feature3: any[] = [
-    { name: 'Basic-boost' },
-    { name: 'Premium-professional' },
-    { name: 'Ultimate-portfolio' },
-    { name: 'Supreme-portfolio' },
+    { name: "Basic-boost" },
+    { name: "Premium-professional" },
+    { name: "Ultimate-portfolio" },
+    { name: "Supreme-portfolio" },
   ];
 
   constructor(
@@ -98,14 +98,14 @@ export class HostListPropertyComponent {
     private seo: SeoService
   ) {
     this.seo.updateSeoTags({
-      title: 'Pricing' + ' - ' + baseUrl.feDomain,
+      title: "Pricing" + " - " + baseUrl.feDomain,
     });
 
     let subscriptions: any = this.service.getSubscriptionsMessage();
     this.userData = this.service.getProfileMessage();
 
     this.direct.paramMap.subscribe((params) => {
-      this.subType = params.get('id');
+      this.subType = params.get("id");
     });
 
     this.direct.queryParamMap.subscribe((params: any) => {
@@ -114,18 +114,18 @@ export class HostListPropertyComponent {
           {
             reference: params?.params?.trxref || params?.params?.reference,
             message:
-              'You have just made a payment, would you like to save card for subsequent payments?',
-            requestType: 'success-error',
-            title: 'Save card details',
-            requestMessage: '',
-            type: 'card',
+              "You have just made a payment, would you like to save card for subsequent payments?",
+            requestType: "success-error",
+            title: "Save card details",
+            requestMessage: "",
+            type: "card",
           },
-          'dialog'
+          "dialog"
         );
       }
     });
 
-    if (this.subType == 'subscription') {
+    if (this.subType == "subscription") {
       // subscription
       if (subscriptions) {
         this.setupData(subscriptions);
@@ -154,7 +154,7 @@ export class HostListPropertyComponent {
       .getIsLoginClickEvent()
       .subscribe(() => {
         this.userData = this.service.getProfileMessage();
-        if (this.subType == 'subscription') {
+        if (this.subType == "subscription") {
           this.getSubscriptions();
         }
       });
@@ -167,15 +167,15 @@ export class HostListPropertyComponent {
 
     if (
       this.userData?.subscription?.subscription_type?.toLowerCase() ===
-      'freemium'
+      "freemium"
     ) {
       this.dialog.open(DialogComponent, {
         data: {
-          type: 'dialog',
+          type: "dialog",
           data: {
-            requestType: 'upgrade-plan',
-            requestMessage: 'You are currently using freemium plan',
-            data: '',
+            requestType: "upgrade-plan",
+            requestMessage: "You are currently using freemium plan",
+            data: "",
           },
         },
       });
@@ -197,11 +197,11 @@ export class HostListPropertyComponent {
         },
       });
 
-      this.snackBar.open('Successfully subscribed', 'x', {
+      this.snackBar.open("Successfully subscribed", "x", {
         duration: 3000,
-        panelClass: 'success',
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
+        panelClass: "success",
+        horizontalPosition: "center",
+        verticalPosition: "top",
       });
     }, 5000);
   }
@@ -217,19 +217,19 @@ export class HostListPropertyComponent {
   }
 
   getTransactionReference() {
-    return 'VHS' + Math.ceil(Math.random() * 10e13);
+    return "VHS" + Math.ceil(Math.random() * 10e13);
   }
 
   setupData(data: any) {
     this.monthlySubscriptions = data?.data.filter((name: any) => {
-      return name?.type == 'monthly' || name?.type == 'forever';
+      return name?.type == "monthly" || name?.type == "forever";
     });
 
     this.yearlySubscriptions = data?.data.filter((name: any) => {
-      return name?.type == 'annual';
+      return name?.type == "annual";
     });
 
-    if (this.activeBilling == 'monthly') {
+    if (this.activeBilling == "monthly") {
       this.subscriptions = this.monthlySubscriptions;
     } else {
       this.subscriptions = this.yearlySubscriptions;
@@ -292,7 +292,7 @@ export class HostListPropertyComponent {
   }
 
   changeActiveBilling(type: string) {
-    if (type == 'monthly') {
+    if (type == "monthly") {
       this.subscriptions = this.monthlySubscriptions;
     } else {
       this.subscriptions = this.yearlySubscriptions;
@@ -308,9 +308,9 @@ export class HostListPropertyComponent {
     ) {
       this.service.setAccommodationMessage(undefined);
       this.service.setPropertyMessage(undefined);
-      this.router.navigate(['/property-signup']);
+      this.router.navigate(["/property-signup"]);
     } else if (!this.authService.isLoggedIn()) {
-      this.openDialog('', 'login2');
+      this.openDialog("", "login2");
     } else if (sub?.is_active === 0) {
       return;
     } else {
@@ -328,25 +328,26 @@ export class HostListPropertyComponent {
         (data: any) => {
           if (sub?.price <= 0) {
             this.snackBar.open(
-              data?.message || 'Successfully subscribed to free plan',
-              'x',
+              data?.message || "Successfully subscribed to free plan",
+              "x",
               {
                 duration: 3000,
-                panelClass: 'success',
-                horizontalPosition: 'center',
-                verticalPosition: 'top',
+                panelClass: "success",
+                horizontalPosition: "center",
+                verticalPosition: "top",
               }
             );
+            (window as any).fbq("track", "Subscribe");
             this.reloadSubscription(sub);
           } else {
-            data.type = 'subscription';
+            data.type = "subscription";
             Object.assign(data, sub);
-            this.openDialog(data, 'card');
+            this.openDialog(data, "card");
           }
-          this.loading = '';
+          this.loading = "";
         },
         (err) => {
-          this.loading = '';
+          this.loading = "";
           this.setupData({ data: saveSubscriptions });
 
           this.snackBar.open(
@@ -354,13 +355,13 @@ export class HostListPropertyComponent {
               err?.error?.msg ||
               err?.error?.detail ||
               err?.error?.status ||
-              'An error occured!',
-            'x',
+              "An error occured!",
+            "x",
             {
               duration: 3000,
-              panelClass: 'error',
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
+              panelClass: "error",
+              horizontalPosition: "center",
+              verticalPosition: "top",
             }
           );
         }
@@ -373,9 +374,9 @@ export class HostListPropertyComponent {
       this.service.setPropertyMessage(undefined);
       this.service.accommodationMessage = undefined;
       this.service.propertyMessage = undefined;
-      this.router.navigate(['/property-signup']);
+      this.router.navigate(["/property-signup"]);
     } else {
-      this.openDialog('', 'login2');
+      this.openDialog("", "login2");
     }
   }
 }

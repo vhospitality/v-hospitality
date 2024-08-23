@@ -164,10 +164,13 @@ export class PayWithCardDialogComponent {
                 currency: "NGN",
               });
 
+              (window as any).fbq("track", "SubmitApplication");
+
               setTimeout(() => {
                 this.router.navigate(["/bookings"]);
               }, 3000);
             } else {
+              (window as any).fbq("track", "Subscribe");
               this.service.sendReloadSubscriptionClickEvent();
             }
             this.closeDialog();

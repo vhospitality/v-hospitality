@@ -1,35 +1,35 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from "@angular/common";
+import { Component, Input, ViewChild, ViewEncapsulation } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
-} from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { DividerModule } from 'primeng/divider';
-import { DropdownModule } from 'primeng/dropdown';
-import { AuthService } from '../../../../global-services/auth.service';
-import { ToggleNavService } from '../../../dashboard-service/toggle-nav.service';
-import { NativeElementInjectorDirective } from '../../../directives/native-element-injector.directive';
-import { InputRestrictionDirective } from '../../../directives/no-special-character.directive';
-import { allCountries } from '../../../model/country';
-import { CountryISO } from '../../../model/enums/country-iso.enum';
-import { PhoneNumberFormat } from '../../../model/enums/phone-number-format.enum';
-import { SearchCountryField } from '../../../model/enums/search-country-field.enum';
-import { Login } from '../../../model/form';
-import { DialogComponent } from '../../dialog/dialog.component';
-import { NgxMatIntlTelInputComponent } from '../../ngx-material-intl-tel-input/ngx-mat-intl-tel-input.component';
+} from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialog } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { DividerModule } from "primeng/divider";
+import { DropdownModule } from "primeng/dropdown";
+import { AuthService } from "../../../../global-services/auth.service";
+import { ToggleNavService } from "../../../dashboard-service/toggle-nav.service";
+import { NativeElementInjectorDirective } from "../../../directives/native-element-injector.directive";
+import { InputRestrictionDirective } from "../../../directives/no-special-character.directive";
+import { allCountries } from "../../../model/country";
+import { CountryISO } from "../../../model/enums/country-iso.enum";
+import { PhoneNumberFormat } from "../../../model/enums/phone-number-format.enum";
+import { SearchCountryField } from "../../../model/enums/search-country-field.enum";
+import { Login } from "../../../model/form";
+import { DialogComponent } from "../../dialog/dialog.component";
+import { NgxMatIntlTelInputComponent } from "../../ngx-material-intl-tel-input/ngx-mat-intl-tel-input.component";
 
 @Component({
-  selector: 'app-dialog-login',
+  selector: "app-dialog-login",
   standalone: true,
   imports: [
     CommonModule,
@@ -47,9 +47,9 @@ import { NgxMatIntlTelInputComponent } from '../../ngx-material-intl-tel-input/n
     InputRestrictionDirective,
     NgxMatIntlTelInputComponent,
   ],
-  templateUrl: './dialog-login.component.html',
+  templateUrl: "./dialog-login.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./dialog-login.component.scss'],
+  styleUrls: ["./dialog-login.component.scss"],
 })
 export class DialogLoginComponent {
   @Input() data: any;
@@ -61,25 +61,25 @@ export class DialogLoginComponent {
   countries: any = allCountries;
   hide: boolean = true;
 
-  @ViewChild('fform') feedbackFormDirective: any;
+  @ViewChild("fform") feedbackFormDirective: any;
   feedbackForm: any = FormGroup;
   feedback!: Login;
   loading = false;
 
   formErrors: any = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   };
 
   validationMessages: any = {
     email: {
-      required: 'Required.',
-      email: 'Not a valid e-mail.',
+      required: "Required.",
+      email: "Not a valid e-mail.",
       // maxlength: 'Not a valid phone number.',
       // minlength: 'Not a valid phone number.',
     },
     password: {
-      required: 'Required.',
+      required: "Required.",
     },
   };
 
@@ -96,9 +96,9 @@ export class DialogLoginComponent {
 
   createForm() {
     this.feedbackForm = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      country: [''],
+      email: ["", [Validators.required]],
+      password: ["", [Validators.required]],
+      country: [""],
     });
 
     this.feedbackForm.valueChanges.subscribe(() => this.onValueChanged());
@@ -113,13 +113,13 @@ export class DialogLoginComponent {
     for (const field in this.formErrors) {
       if (this.formErrors.hasOwnProperty(field)) {
         // clear previous error message (if any)
-        this.formErrors[field] = '';
+        this.formErrors[field] = "";
         const control = form.get(field);
         if (control && !control.valid) {
           const messages = this.validationMessages[field];
           for (const key in control.errors) {
             if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += messages[key] + ' ';
+              this.formErrors[field] += messages[key] + " ";
             }
           }
         }
@@ -153,13 +153,13 @@ export class DialogLoginComponent {
             this.service.sendNotificatonHeaderClickEvent();
 
             if (
-              this.router.url.includes('/accommodations-details') ||
-              this.router.url.includes('/host-subscription')
+              this.router.url.includes("/accommodations-details") ||
+              this.router.url.includes("/host-subscription")
             ) {
               return;
             } else {
               const returnUrl =
-                this.route.snapshot.queryParams['returnUrl'] || '/';
+                this.route.snapshot.queryParams["returnUrl"] || "/home-main";
               this.router.navigateByUrl(returnUrl);
             }
 
@@ -171,7 +171,7 @@ export class DialogLoginComponent {
 
   closeDialog() {
     this.dialog.closeAll();
-    this.router.navigate(['/forget-password']);
+    this.router.navigate(["/forget-password"]);
   }
 
   redirectToPolicy(url: string) {

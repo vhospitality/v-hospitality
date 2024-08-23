@@ -54,86 +54,24 @@
             <div class="flex space-x-4 overflow-x-auto" style="overflow-y: scroll;
             scrollbar-width: none;
             -ms-overflow-style: none;">
-                <div class="backdrop-blur-lg w-52 h-52 flex-shrink-0 p-4 flex flex-col justify-end items-start shadow-md bg-cover bg-center rounded-2xl"
-                    style="background-image: url('https://s3-alpha-sig.figma.com/img/8ad0/f8b5/b433c3bd8aa9f9df68f1efb0428cd11f?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KzIh0rfgwFye~fniZH4rHH~ahpv-WvfZNVDmDwxwyln74QIW2IuTWQSqBH7nDo~90I9h18awKomCQGd6Wh1n5UigGQ~hFmecO1sxDVe~iTSpDerF0do93Cq088afSWYqnzMMrRi6Lwf3s1uD99E6CSlHIj7C5E7sCaiH2Ts-TmmDHcKkKHUld~~YAvaDQuVWPI5jWtKcNOHjRJfwSztXPrxR6cKTlwuFi67tIDwxlsefL~jAZfrGqNESXUzkCMgfTeF-igx5QeN007gHyQRF6jWZuTMjvPpSgddxtCEfnejPvEdk~5pfExjD5b00Sm7JPOxqFSBmJTydBM1h4serFQ__');">
-                    <div
-                        class="bg-black/20 backdrop-blur-sm rounded-lg flex justify-start items-center py-4 w-full px-3">
-                        <div class="flex items-center justify-start">
-                            <img src="assets/icons/marker-pin-two.svg" alt="">
-                            <h3 class="text-white !mb-0 !ml-2 !text-sm !font-extralight">Nigeria</h3>
+                <ng-container *ngFor="let country of countries; let i = index">
+                    <div class="cursor-pointer backdrop-blur-lg w-72 h-72 text-center flex-shrink-0 p-4 flex flex-col justify-end items-start shadow-md bg-cover bg-center rounded-2xl overflow-clip"
+                        style="background-image: url({{ country.url }});" [routerLink]="['/home-main']"
+                        [style.pointer-events]="country.active ? 'initial' : 'none'">
+                        <p *ngIf="!country.active"
+                            class="!text-white !text-5xl font-black !text-nowrap !ml-[-20px] !mt-7">
+                            Coming Soon
+                        </p>
+                        <div
+                            class="bg-black/20 backdrop-blur-sm rounded-lg flex justify-start items-center py-4 w-full px-3">
+                            <div class="flex items-center justify-start">
+                                <img src="assets/icons/marker-pin-two.svg" alt="">
+                                <h3 class="text-white !mb-0 !ml-2 !text-sm !font-extralight">{{ country.name }}</h3>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="backdrop-blur-lg w-52 h-52 flex-shrink-0 p-4 flex flex-col justify-end items-start shadow-md bg-cover bg-center rounded-2xl"
-                    style="background-image: url('https://s3-alpha-sig.figma.com/img/8ad0/f8b5/b433c3bd8aa9f9df68f1efb0428cd11f?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KzIh0rfgwFye~fniZH4rHH~ahpv-WvfZNVDmDwxwyln74QIW2IuTWQSqBH7nDo~90I9h18awKomCQGd6Wh1n5UigGQ~hFmecO1sxDVe~iTSpDerF0do93Cq088afSWYqnzMMrRi6Lwf3s1uD99E6CSlHIj7C5E7sCaiH2Ts-TmmDHcKkKHUld~~YAvaDQuVWPI5jWtKcNOHjRJfwSztXPrxR6cKTlwuFi67tIDwxlsefL~jAZfrGqNESXUzkCMgfTeF-igx5QeN007gHyQRF6jWZuTMjvPpSgddxtCEfnejPvEdk~5pfExjD5b00Sm7JPOxqFSBmJTydBM1h4serFQ__');">
-                    <div
-                        class="bg-black/20 backdrop-blur-sm rounded-lg flex justify-start items-center py-4 w-full px-3">
-                        <div class="flex items-center justify-start">
-                            <img src="assets/icons/marker-pin-two.svg" alt="">
-                            <h3 class="text-white !mb-0 !ml-2 !text-sm !font-extralight">Nigeria</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="backdrop-blur-lg w-52 h-52 flex-shrink-0 p-4 flex flex-col justify-end items-start shadow-md bg-cover bg-center rounded-2xl"
-                    style="background-image: url('https://s3-alpha-sig.figma.com/img/8ad0/f8b5/b433c3bd8aa9f9df68f1efb0428cd11f?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KzIh0rfgwFye~fniZH4rHH~ahpv-WvfZNVDmDwxwyln74QIW2IuTWQSqBH7nDo~90I9h18awKomCQGd6Wh1n5UigGQ~hFmecO1sxDVe~iTSpDerF0do93Cq088afSWYqnzMMrRi6Lwf3s1uD99E6CSlHIj7C5E7sCaiH2Ts-TmmDHcKkKHUld~~YAvaDQuVWPI5jWtKcNOHjRJfwSztXPrxR6cKTlwuFi67tIDwxlsefL~jAZfrGqNESXUzkCMgfTeF-igx5QeN007gHyQRF6jWZuTMjvPpSgddxtCEfnejPvEdk~5pfExjD5b00Sm7JPOxqFSBmJTydBM1h4serFQ__');">
-                    <div
-                        class="bg-black/20 backdrop-blur-sm rounded-lg flex justify-start items-center py-4 w-full px-3">
-                        <div class="flex items-center justify-start">
-                            <img src="assets/icons/marker-pin-two.svg" alt="">
-                            <h3 class="text-white !mb-0 !ml-2 !text-sm !font-extralight">Nigeria</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="backdrop-blur-lg w-52 h-52 flex-shrink-0 p-4 flex flex-col justify-end items-start shadow-md bg-cover bg-center rounded-2xl"
-                    style="background-image: url('https://s3-alpha-sig.figma.com/img/8ad0/f8b5/b433c3bd8aa9f9df68f1efb0428cd11f?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KzIh0rfgwFye~fniZH4rHH~ahpv-WvfZNVDmDwxwyln74QIW2IuTWQSqBH7nDo~90I9h18awKomCQGd6Wh1n5UigGQ~hFmecO1sxDVe~iTSpDerF0do93Cq088afSWYqnzMMrRi6Lwf3s1uD99E6CSlHIj7C5E7sCaiH2Ts-TmmDHcKkKHUld~~YAvaDQuVWPI5jWtKcNOHjRJfwSztXPrxR6cKTlwuFi67tIDwxlsefL~jAZfrGqNESXUzkCMgfTeF-igx5QeN007gHyQRF6jWZuTMjvPpSgddxtCEfnejPvEdk~5pfExjD5b00Sm7JPOxqFSBmJTydBM1h4serFQ__');">
-                    <div
-                        class="bg-black/20 backdrop-blur-sm rounded-lg flex justify-start items-center py-4 w-full px-3">
-                        <div class="flex items-center justify-start">
-                            <img src="assets/icons/marker-pin-two.svg" alt="">
-                            <h3 class="text-white !mb-0 !ml-2 !text-sm !font-extralight">Nigeria</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="backdrop-blur-lg w-52 h-52 flex-shrink-0 p-4 flex flex-col justify-end items-start shadow-md bg-cover bg-center rounded-2xl"
-                    style="background-image: url('https://s3-alpha-sig.figma.com/img/8ad0/f8b5/b433c3bd8aa9f9df68f1efb0428cd11f?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KzIh0rfgwFye~fniZH4rHH~ahpv-WvfZNVDmDwxwyln74QIW2IuTWQSqBH7nDo~90I9h18awKomCQGd6Wh1n5UigGQ~hFmecO1sxDVe~iTSpDerF0do93Cq088afSWYqnzMMrRi6Lwf3s1uD99E6CSlHIj7C5E7sCaiH2Ts-TmmDHcKkKHUld~~YAvaDQuVWPI5jWtKcNOHjRJfwSztXPrxR6cKTlwuFi67tIDwxlsefL~jAZfrGqNESXUzkCMgfTeF-igx5QeN007gHyQRF6jWZuTMjvPpSgddxtCEfnejPvEdk~5pfExjD5b00Sm7JPOxqFSBmJTydBM1h4serFQ__');">
-                    <div
-                        class="bg-black/20 backdrop-blur-sm rounded-lg flex justify-start items-center py-4 w-full px-3">
-                        <div class="flex items-center justify-start">
-                            <img src="assets/icons/marker-pin-two.svg" alt="">
-                            <h3 class="text-white !mb-0 !ml-2 !text-sm !font-extralight">Nigeria</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="backdrop-blur-lg w-52 h-52 flex-shrink-0 p-4 flex flex-col justify-end items-start shadow-md bg-cover bg-center rounded-2xl"
-                    style="background-image: url('https://s3-alpha-sig.figma.com/img/8ad0/f8b5/b433c3bd8aa9f9df68f1efb0428cd11f?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KzIh0rfgwFye~fniZH4rHH~ahpv-WvfZNVDmDwxwyln74QIW2IuTWQSqBH7nDo~90I9h18awKomCQGd6Wh1n5UigGQ~hFmecO1sxDVe~iTSpDerF0do93Cq088afSWYqnzMMrRi6Lwf3s1uD99E6CSlHIj7C5E7sCaiH2Ts-TmmDHcKkKHUld~~YAvaDQuVWPI5jWtKcNOHjRJfwSztXPrxR6cKTlwuFi67tIDwxlsefL~jAZfrGqNESXUzkCMgfTeF-igx5QeN007gHyQRF6jWZuTMjvPpSgddxtCEfnejPvEdk~5pfExjD5b00Sm7JPOxqFSBmJTydBM1h4serFQ__');">
-                    <div
-                        class="bg-black/20 backdrop-blur-sm rounded-lg flex justify-start items-center py-4 w-full px-3">
-                        <div class="flex items-center justify-start">
-                            <img src="assets/icons/marker-pin-two.svg" alt="">
-                            <h3 class="text-white !mb-0 !ml-2 !text-sm !font-extralight">Nigeria</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="backdrop-blur-lg w-52 h-52 flex-shrink-0 p-4 flex flex-col justify-end items-start shadow-md bg-cover bg-center rounded-2xl"
-                    style="background-image: url('https://s3-alpha-sig.figma.com/img/8ad0/f8b5/b433c3bd8aa9f9df68f1efb0428cd11f?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KzIh0rfgwFye~fniZH4rHH~ahpv-WvfZNVDmDwxwyln74QIW2IuTWQSqBH7nDo~90I9h18awKomCQGd6Wh1n5UigGQ~hFmecO1sxDVe~iTSpDerF0do93Cq088afSWYqnzMMrRi6Lwf3s1uD99E6CSlHIj7C5E7sCaiH2Ts-TmmDHcKkKHUld~~YAvaDQuVWPI5jWtKcNOHjRJfwSztXPrxR6cKTlwuFi67tIDwxlsefL~jAZfrGqNESXUzkCMgfTeF-igx5QeN007gHyQRF6jWZuTMjvPpSgddxtCEfnejPvEdk~5pfExjD5b00Sm7JPOxqFSBmJTydBM1h4serFQ__');">
-                    <div
-                        class="bg-black/20 backdrop-blur-sm rounded-lg flex justify-start items-center py-4 w-full px-3">
-                        <div class="flex items-center justify-start">
-                            <img src="assets/icons/marker-pin-two.svg" alt="">
-                            <h3 class="text-white !mb-0 !ml-2 !text-sm !font-extralight">Nigeria</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="backdrop-blur-lg w-52 h-52 flex-shrink-0 p-4 flex flex-col justify-end items-start shadow-md bg-cover bg-center rounded-2xl"
-                    style="background-image: url('https://s3-alpha-sig.figma.com/img/8ad0/f8b5/b433c3bd8aa9f9df68f1efb0428cd11f?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KzIh0rfgwFye~fniZH4rHH~ahpv-WvfZNVDmDwxwyln74QIW2IuTWQSqBH7nDo~90I9h18awKomCQGd6Wh1n5UigGQ~hFmecO1sxDVe~iTSpDerF0do93Cq088afSWYqnzMMrRi6Lwf3s1uD99E6CSlHIj7C5E7sCaiH2Ts-TmmDHcKkKHUld~~YAvaDQuVWPI5jWtKcNOHjRJfwSztXPrxR6cKTlwuFi67tIDwxlsefL~jAZfrGqNESXUzkCMgfTeF-igx5QeN007gHyQRF6jWZuTMjvPpSgddxtCEfnejPvEdk~5pfExjD5b00Sm7JPOxqFSBmJTydBM1h4serFQ__');">
-                    <div
-                        class="bg-black/20 backdrop-blur-sm rounded-lg flex justify-start items-center py-4 w-full px-3">
-                        <div class="flex items-center justify-start">
-                            <img src="assets/icons/marker-pin-two.svg" alt="">
-                            <h3 class="text-white !mb-0 !ml-2 !text-sm !font-extralight">Nigeria</h3>
-                        </div>
-                    </div>
-                </div>
+                </ng-container>
+
             </div>
         </div>
 
@@ -324,10 +262,9 @@
                 alt="">
         </div>
         <div class="basis-1/2">
-            <h1 class="text-primary !font-bold !text-2xl">Trusted by the best
+            <h1 class="text-primary !font-bold !text-2xl !mb-7">Trusted by the best
                 exclusive agents</h1>
-            <p class="!my-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt.</p>
+
 
             <div class="mt-8">
                 <div class="flex items-center mb-5">
@@ -359,7 +296,7 @@
     <div class="flex justify-between mb-5">
         <div>
             <h2 class="!text-primary !mb-2 !font-bold">People Love Living with V Hospitality</h2>
-            <p>Aliquam lacinia diam quis lacus euismod</p>
+
         </div>
         <div></div>
     </div>
@@ -368,9 +305,9 @@
         [responsiveOptions]="responsiveOptions" [autoplayInterval]="3000">
         <ng-template let-testimony pTemplate="item">
             <div class="border rounded-xl p-6 mr-3">
-                <p class="!mb-3">{{ testimony.remark }}</p>
+                <!-- <p class="!mb-3">{{ testimony.remark }}</p> -->
                 <q>{{ testimony.testimony }}</q>
-                <p>{{ testimony.rating }}</p>
+                <!-- <p>{{ testimony.rating }}</p> -->
 
                 <div class="border-t mt-4 mb-2"></div>
                 <div class="flex items-center">
