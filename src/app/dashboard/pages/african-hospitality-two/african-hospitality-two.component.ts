@@ -277,7 +277,7 @@ export class AfricanHospitalityTwoComponent {
       url: "https://s3-alpha-sig.figma.com/img/afa7/63fa/1e9f3fc3726a5331ef5c24215b2eba3a?Expires=1725235200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nI96oR2HwSV55TGq2bIIWVqPFAoJPL3YWwyzppg7GioL5hP~l306ce2Yxvx6~doQrN9padidM33-TAQxmarmX~jPtSCSVttOu8CnDiEZYW4yn5cC2-2i4UxqGSYWenZWswvNl8zweEQB2cPTM7wDp693R9GK8aRwSwlu6LYyj0IVtRCDdn1YhsahT3mlJpqAvML3IxX2CjErGD5TqRqiWCKTZI0Q8tIpGVFhIN36fsS-x4gzHRBNiVxM4oV6ZTOkfO7SlNsfe4CG0rX7btymkVjS99i5CGSMQXjfuq7LhF8mpeMXZsajColSATCAakHvPBN7XxreHLJ6WQZVAoXc0g__",
     },
     {
-      name: "Dubai",
+      name: "UAE",
       active: false,
       url: "https://s3-alpha-sig.figma.com/img/60e0/2305/f482757901f9646a616c6b642f53c956?Expires=1725235200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=iwyliInu~XOlalMHmui442mZ1jkRwY0nrpsH96igyZPOyrokAyDH0atPGIFCt2FHAYc2h86qI9oogFr3Qhgf~~ar0I-y6oquEYtqqU9xFJFCjYgyWzq8SrHqbe7QQNbl9WNvWqnHZ36dLTati-Ano19oDXNrqxCHLUYaP4iiydb~fVKPZFWUZBLDwDYqZ81Bn~pMREAw0nI2a4ysG-tg0~dhubM0nIBnbrfj-55PV-OCBvqkIt5fnXNM5nbLv6eI0UPd2ARDItL0enJDYaFwF2tfFDolL5fLXnDrXDMaHef-H4~LodZvTw0dzzfdORtYCDJmA39CtQlEzVPTAP0eaQ__",
     },

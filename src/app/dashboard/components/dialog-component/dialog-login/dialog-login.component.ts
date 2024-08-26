@@ -159,7 +159,7 @@ export class DialogLoginComponent {
               return;
             } else {
               const returnUrl =
-                this.route.snapshot.queryParams["returnUrl"] || "/home-main";
+                this.route.snapshot.queryParams["returnUrl"] || "/";
               this.router.navigateByUrl(returnUrl);
             }
 
