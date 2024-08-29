@@ -70,5 +70,5 @@ export const baseUrl = {
   paystackKey: "pk_live_eb36b00cba906840da2b6f96dddc760c4afb6eac",
   searchLocation:
     "https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyCE4z4wdxDikBjqjTsMPEK0p6Dd5faoqbg&query=",
-  affiliateSignUp: "affiliate/signup",
+    affiliateSignUp: "affiliate/register",
 };
