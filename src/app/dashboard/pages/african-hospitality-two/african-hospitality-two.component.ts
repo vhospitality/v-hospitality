@@ -233,6 +233,30 @@ export class AfricanHospitalityTwoComponent {
       rating: 4.5,
       price: 200000,
     },
+    {
+      image:
+        "https://res.cloudinary.com/dvujxw2d0/image/upload/v1724946384/b53684266222b5716a6b548edde3f7e1_jrfeli.jpg",
+      title: "Luxury Family Home",
+      location: "Lagos, Nigeria",
+      rating: 4.5,
+      price: 200000,
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dvujxw2d0/image/upload/v1724946344/90ee85a8748c1607b05bef96115fead4_olapop.jpg",
+      title: "Luxury Family Home",
+      location: "Lagos, Nigeria",
+      rating: 4.5,
+      price: 200000,
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dvujxw2d0/image/upload/v1724946329/6e0cf4e56289bdc260ed4b30022d18d9_npvgce.jpg",
+      title: "Luxury Family Home",
+      location: "Lagos, Nigeria",
+      rating: 4.5,
+      price: 200000,
+    },
   ];
 
   countries = [
