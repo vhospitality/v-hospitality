@@ -16,6 +16,12 @@ import { HttpService } from "src/app/global-services/http.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { DialogComponent } from "../../components/dialog/dialog.component";
 import { Router, RouterLink, RouterModule } from "@angular/router";
+import { baseUrl } from "src/environments/environment";
+import { ButtonModule } from "primeng/button";
+import { MatButtonModule } from "@angular/material/button";
+import { AvatarModule } from "primeng/avatar";
+import { AvatarGroupModule } from "primeng/avatargroup";
+import { LazyLoadImageModule } from "ng-lazyload-image";
 
 @Component({
   selector: "app-african-hospitality-two",
@@ -25,6 +31,11 @@ import { Router, RouterLink, RouterModule } from "@angular/router";
     CarouselModule,
     RouterModule,
     RouterLink,
+    ButtonModule,
+    MatButtonModule,
+    AvatarModule,
+    AvatarGroupModule,
+    LazyLoadImageModule,
   ],
   providers: [DialogService],
   standalone: true,
@@ -328,5 +339,89 @@ export class AfricanHospitalityTwoComponent {
     setTimeout(() => {
       this.router.navigate(["/about"], { queryParams: { view: "contact" } });
     }, 50);
+  }
+
+  notifications: any[] = [];
+  totalNotification: number = 0;
+  isLoading: boolean = false;
+  currentPage: number = 1;
+  itemsPerPage: number = 15;
+
+  userData: any;
+  roles: any[] = [];
+  loading: boolean = false;
+  wishlist: any;
+  defaultImage: string = baseUrl?.defaultImage;
+  defaultImage2: string = baseUrl?.defaultImage;
+  switchGuest: boolean = true;
+  notify: boolean = false;
+  isReadNotificationLoading: boolean = false;
+  unreadMessage: any = 0;
+  waringMessages: any;
+  profileImage: any;
+  isLoaded: boolean = false;
+
+  ngAfterViewInit(): void {
+    this.checkIfLogin();
+    this.userData = this.service.getProfileMessage();
+
+    if (!this.userData) {
+      this.getProfileDetails();
+    } else {
+      for (let r of this.userData?.roles) {
+        this.roles.push(r?.name?.toLowerCase());
+      }
+    }
+  }
+
+  checkIfLogin() {
+    this.isLogin = this.authService.isLoggedIn();
+    this.userData = this.service.getProfileMessage();
+
+    if (!this.userData) {
+      this.getProfileDetails();
+    } else {
+      for (let r of this.userData?.roles) {
+        this.roles.push(r?.name?.toLowerCase());
+      }
+    }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.checkIfLogin();
+  }
+
+  getProfileDetails() {
+    if (this.isLogin) {
+      this.loading = true;
+      this.httpService.getAuthSingle(baseUrl.profileDetails).subscribe(
+        (data: any) => {
+          this.userData = data?.data;
+          this.profileImage = this.userData?.profile_picture;
+
+          for (let r of this.userData?.roles) {
+            this.roles.push(r?.name?.toLowerCase());
+          }
+
+          this.service.setProfileMessage(data?.data);
+          this.service.sendIsLoginClickEvent();
+          this.loading = false;
+        },
+        () => {
+          this.authService.checkExpired();
+          this.loading = false;
+        }
+      );
+    }
+  }
+
+  formatName() {
+    let displayname1 =
+      this.userData?.first_name?.toUpperCase()?.replaceAll(" ", "") || "V";
+    let displayname2 =
+      this.userData?.last_name?.toUpperCase()?.replaceAll(" ", "") || "HOS";
+    let displayname3 = displayname1[0] + "" + displayname2[0];
+    return displayname3;
   }
 }
