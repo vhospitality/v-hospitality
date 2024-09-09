@@ -1,20 +1,20 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import snsWebSdk from '@sumsub/websdk';
-import { baseUrl } from '../../../../../environments/environment';
-import { HttpService } from '../../../../global-services/http.service';
-import { ToggleNavService } from '../../../dashboard-service/toggle-nav.service';
-import { DialogComponent } from '../../dialog/dialog.component';
+import { CommonModule } from "@angular/common";
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import snsWebSdk from "@sumsub/websdk";
+import { baseUrl } from "../../../../../environments/environment";
+import { HttpService } from "../../../../global-services/http.service";
+import { ToggleNavService } from "../../../dashboard-service/toggle-nav.service";
+import { DialogComponent } from "../../dialog/dialog.component";
 
 @Component({
-  selector: 'app-identity-verification',
+  selector: "app-identity-verification",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './identity-verification.component.html',
+  templateUrl: "./identity-verification.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./identity-verification.component.scss'],
+  styleUrls: ["./identity-verification.component.scss"],
 })
 export class IdentityVerificationComponent implements OnInit {
   @Input() data: any;
@@ -34,8 +34,8 @@ export class IdentityVerificationComponent implements OnInit {
     this.dialog.closeAll();
     this.dialog.open(DialogComponent, {
       data: {
-        type: 'dialog',
-        data: { requestType: 'upload', data: '' },
+        type: "dialog",
+        data: { requestType: "upload", data: "" },
       },
     });
   }
@@ -48,7 +48,10 @@ export class IdentityVerificationComponent implements OnInit {
       (data: any) => {
         this.loading = false;
         this.error = false;
-        this.launchWebSdk(data?.data?.token);
+
+        window.location.href = `${data?.data?.url}`;
+
+        // this.launchWebSdk(data?.data?.token);
       },
       (err) => {
         this.loading = false;
@@ -58,13 +61,13 @@ export class IdentityVerificationComponent implements OnInit {
             err?.error?.msg ||
             err?.error?.detail ||
             err?.error?.status ||
-            'An error occured!',
-          'x',
+            "An error occured!",
+          "x",
           {
             duration: 5000,
-            panelClass: 'error',
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
+            panelClass: "error",
+            horizontalPosition: "center",
+            verticalPosition: "top",
           }
         );
       }
@@ -87,18 +90,18 @@ export class IdentityVerificationComponent implements OnInit {
         () => this.getNewAccessToken(access_token)
       )
       .withConf({
-        lang: 'en', //language of WebSDK texts and comments (ISO 639-1 format)
+        lang: "en", //language of WebSDK texts and comments (ISO 639-1 format)
         email: this.userData?.email,
         phone: this.userData?.phone,
       })
       .withOptions({ addViewportTag: false, adaptIframeHeight: true })
       // see below what kind of messages WebSDK generates
-      .on('idCheck.onStepCompleted', () => {
+      .on("idCheck.onStepCompleted", () => {
         this.service.setProfileMessage(undefined);
         this.service.profileMessage = undefined;
         this.service.sendIsLoginClickEvent();
       })
-      .on('idCheck.actionCompleted', () => {
+      .on("idCheck.actionCompleted", () => {
         this.service.setProfileMessage(undefined);
         this.service.profileMessage = undefined;
         this.service.sendIsLoginClickEvent();
@@ -106,7 +109,7 @@ export class IdentityVerificationComponent implements OnInit {
       .build();
     // you are ready to go:
     // just launch the WebSDK by providing the container element for it
-    snsWebSdkInstance.launch('#sumsub-websdk-container');
+    snsWebSdkInstance.launch("#sumsub-websdk-container");
   }
 
   getNewAccessToken(refresh_token: string) {
