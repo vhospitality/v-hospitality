@@ -1,9 +1,9 @@
 <div class="wrapper">
-    <div class="title">We require a valid government issue ID (drivers license, passport, national ID)</div>
+    <div class="title">Please click on continue to verify your account</div>
 
     <form class="form" novalidate [formGroup]="feedbackForm" #fform="ngForm">
 
-        <div class="form-field">
+        <!-- <div class="form-field">
             <div class="label">Identification Type</div>
             <mat-form-field class="full-width" appearance="outline">
                 <mat-select matInput formControlName="document" placeholder="Select document type">
@@ -53,11 +53,11 @@
                     </svg>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="submit-p">
             <button type="submit" class="submit ripple-button" (click)="submit()">
-                <span *ngIf="!loading">Submit</span>
+                <span *ngIf="!loading">Continue</span>
                 <div *ngIf="loading" class="loader-white"></div>
             </button>
         </div>
