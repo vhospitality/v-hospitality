@@ -357,7 +357,9 @@ export class DialogSignupDetailsComponent implements OnInit {
                 isEmail: this.data?.isEmail,
               });
 
-              window.location.href = `${data?.data?.url}`;
+              if (data?.data?.url) {
+                window.location.href = `${data?.data?.url}`;
+              }
 
               // setTimeout(() => {
               //   this.dialog.open(DialogComponent, {

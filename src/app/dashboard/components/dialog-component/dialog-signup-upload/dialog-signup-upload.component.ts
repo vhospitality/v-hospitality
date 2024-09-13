@@ -248,7 +248,9 @@ export class DialogSignupUploadComponent {
 
         console.log(data);
 
-        window.location.href = `${data?.data?.url}`;
+        if (data?.data?.url) {
+          window.location.href = `${data?.data?.url}`;
+        }
 
         this.service.setProfileMessage(undefined);
         this.service.profileMessage = undefined;
