@@ -456,7 +456,7 @@ export class HostReservationsComponent implements AfterViewInit {
     //   }
     // );
 
-    this.httpService.getProgress("calendars" + `/?${url}`).subscribe(
+    this.httpService.getProgress("calendars" + `?${url}`).subscribe(
       (progress: any) => {
         if (typeof progress !== "number" && typeof progress !== "undefined") {
           let events: any[] = [];

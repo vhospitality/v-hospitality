@@ -19,10 +19,13 @@
         <button mat-button class="ripple-button2" routerLinkActive="active" [routerLink]="['/host-listing']"
             (click)="closeSidenav()">Listing</button>
     </div>
-
     <div>
         <button mat-button class="ripple-button2" routerLinkActive="active" [routerLink]="['/host-subscription']"
             (click)="closeSidenav()">Host your home</button>
+    </div>
+    <div>
+        <button mat-button class="ripple-button2" (click)="closeSidenav(); openDialog('', 'affiliate-form')">Become an
+            affiliate</button>
     </div>
 
     <div *ngIf="isLogin && !switchGuest">

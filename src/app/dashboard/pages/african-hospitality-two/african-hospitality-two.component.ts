@@ -42,7 +42,7 @@ import { LazyLoadImageModule } from "ng-lazyload-image";
   templateUrl: "./african-hospitality-two.component.html",
   styleUrls: ["./african-hospitality-two.component.scss"],
 })
-export class AfricanHospitalityTwoComponent {
+export class AfricanHospitalityTwoComponent implements AfterViewInit {
   @Input() addressType: any;
 
   @ViewChild("propertySlider") propertySlider!: ElementRef;
