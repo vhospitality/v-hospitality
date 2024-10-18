@@ -4,6 +4,8 @@ import {
   Component,
   ElementRef,
   Input,
+  OnDestroy,
+  OnInit,
   ViewChild,
 } from "@angular/core";
 import { DialogModule } from "primeng/dialog";
@@ -22,6 +24,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { AvatarModule } from "primeng/avatar";
 import { AvatarGroupModule } from "primeng/avatargroup";
 import { LazyLoadImageModule } from "ng-lazyload-image";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-african-hospitality-two",
@@ -42,7 +45,9 @@ import { LazyLoadImageModule } from "ng-lazyload-image";
   templateUrl: "./african-hospitality-two.component.html",
   styleUrls: ["./african-hospitality-two.component.scss"],
 })
-export class AfricanHospitalityTwoComponent implements AfterViewInit {
+export class AfricanHospitalityTwoComponent
+  implements AfterViewInit, OnInit, OnDestroy
+{
   @Input() addressType: any;
 
   @ViewChild("propertySlider") propertySlider!: ElementRef;
@@ -360,6 +365,7 @@ export class AfricanHospitalityTwoComponent implements AfterViewInit {
   waringMessages: any;
   profileImage: any;
   isLoaded: boolean = false;
+  private loginSubscription: Subscription = new Subscription();
 
   ngAfterViewInit(): void {
     this.checkIfLogin();
@@ -372,6 +378,25 @@ export class AfricanHospitalityTwoComponent implements AfterViewInit {
         this.roles.push(r?.name?.toLowerCase());
       }
     }
+  }
+
+  ngOnInit() {
+    this.checkIfLogin();
+    this.subscribeToLoginEvents();
+  }
+
+  ngOnDestroy() {
+    if (this.loginSubscription) {
+      this.loginSubscription.unsubscribe();
+    }
+  }
+
+  subscribeToLoginEvents() {
+    this.loginSubscription = this.service
+      .getIsLoginClickEvent()
+      .subscribe(() => {
+        this.checkIfLogin();
+      });
   }
 
   checkIfLogin() {
