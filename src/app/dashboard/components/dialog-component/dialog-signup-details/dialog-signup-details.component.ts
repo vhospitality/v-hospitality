@@ -104,8 +104,6 @@ export class DialogSignupDetailsComponent implements OnInit {
   validationMessages: any = {
     firstName: {
       required: "Required.",
-      pattern: "Not a valid name.",
-      minlength: "Not a valid name.",
     },
     email: {
       required: "Required.",
@@ -180,22 +178,8 @@ export class DialogSignupDetailsComponent implements OnInit {
   createForm() {
     this.feedbackForm = this.fb.group(
       {
-        firstName: [
-          "",
-          [
-            Validators.required,
-            Validators.pattern("[a-zA-Z]*"),
-            Validators.minLength(3),
-          ],
-        ],
-        lastName: [
-          "",
-          [
-            Validators.required,
-            Validators.pattern("[a-zA-Z]*"),
-            Validators.minLength(3),
-          ],
-        ],
+        firstName: ["", [Validators.required]],
+        lastName: ["", [Validators.required]],
         month: ["", [Validators.required]],
         day: ["", [Validators.required]],
         year: ["", [Validators.required]],
