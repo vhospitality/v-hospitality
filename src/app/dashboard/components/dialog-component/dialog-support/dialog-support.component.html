@@ -1,0 +1,85 @@
+<div class="wrapper">
+    <form class="form" novalidate [formGroup]="supportForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+        <!-- Full Name -->
+        <div class="form-field">
+            <div class="label">Your Full Name*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="fullName" type="text">
+                <mat-error>{{formErrors.fullName}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Email -->
+        <div class="form-field">
+            <div class="label">Email Address*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="email" type="email">
+                <mat-hint>Please enter an active email</mat-hint>
+                <mat-error>{{formErrors.email}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-field">
+            <div class="label">Phone Number*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="phone" type="tel" placeholder="e.g. +1 (555) 123-4567">
+                <mat-hint>Please include your country code.</mat-hint>
+                <mat-error>{{formErrors.phone}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Support Topic -->
+        <div class="form-field">
+            <div class="label">What do you need help with?*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-select formControlName="supportTopic">
+                    <mat-option *ngFor="let topic of supportTopics" [value]="topic.value">
+                        {{topic.label}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>{{formErrors.supportTopic}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Property Location (conditional) -->
+        <div class="form-field" *ngIf="supportForm.get('supportTopic')?.value === 'add-property'">
+            <div class="label">Property Location*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput formControlName="propertyLocation" type="text" placeholder="City, Country">
+                <mat-error>{{formErrors.propertyLocation}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Preferred Contact Method -->
+        <div class="form-field">
+            <div class="label">Preferred Contact Method*</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-select formControlName="contactMethod">
+                    <mat-option *ngFor="let method of contactMethods" [value]="method.value">
+                        {{method.label}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>{{formErrors.contactMethod}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Comments -->
+        <div class="form-field">
+            <div class="label">How can we assist you?</div>
+            <mat-form-field class="full-width" appearance="outline">
+                <textarea matInput formControlName="comments" rows="4"
+                    placeholder="Please provide any additional details to help us understand your needs.">
+                </textarea>
+            </mat-form-field>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="submit-p">
+            <button type="submit" class="submit ripple-button">
+                <span *ngIf="!loading">Submit Support Request</span>
+                <div *ngIf="loading" class="loader-white"></div>
+            </button>
+        </div>
+    </form>
+</div>

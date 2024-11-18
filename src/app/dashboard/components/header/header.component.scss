@@ -348,3 +348,66 @@
     color: var(--white);
   }
 }
+
+.support-btn {
+  display: flex;
+  position: fixed;
+  z-index: 20;
+  bottom: 10px;
+  right: 10px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: white;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.support-btn i {
+  font-size: 16px;
+}
+
+.support-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-color: #d0d0d0;
+}
+
+.support-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Optional: Add slight animation on page load */
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.support-btn {
+  animation: floatIn 0.3s ease-out;
+}
+
+/* Make it responsive */
+@media screen and (max-width: 768px) {
+  .support-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .support-btn i {
+    font-size: 14px;
+  }
+}

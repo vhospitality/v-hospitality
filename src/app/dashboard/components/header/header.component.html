@@ -1,9 +1,14 @@
 <div class="header">
-
+    <button class="support-btn" (click)="openDialog('', 'support')">
+        <i class="pi pi-question-circle"></i> <!-- Assuming you're using PrimeNG icons -->
+        Support
+    </button>
     <nav class="nav">
         <div class="logo cursor-pointer">
             <img src="assets/icons/logo.svg" [routerLink]="['/home']" alt="" />
         </div>
+
+
 
         <div class="right-container2">
             <!-- notification -->

@@ -32,6 +32,7 @@ import { SuccessErrorDialogComponent } from "../dialog-component/success-error-d
 import { ReviewDialogComponent } from "../review-component/review-dialog/review-dialog.component";
 import { ToggleDateDialogComponent } from "../dialog-component/toggle-date-dialog/toggle-date-dialog.component";
 import { DialogSignupAffiliateComponent } from "../dialog-component/dialog-signup-affiliate/dialog-signup-affiliate.component";
+import { DialogSupportComponent } from "../dialog-component/dialog-support/dialog-support.component";
 
 @Component({
   selector: "app-dialog",
@@ -63,6 +64,7 @@ import { DialogSignupAffiliateComponent } from "../dialog-component/dialog-signu
     PlanUpgradeComponent,
     ToggleDateDialogComponent,
     DialogSignupAffiliateComponent,
+    DialogSupportComponent,
   ],
   templateUrl: "./dialog.component.html",
   encapsulation: ViewEncapsulation.Emulated,
