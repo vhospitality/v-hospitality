@@ -1,34 +1,34 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from "@angular/common";
 import {
   AfterViewInit,
   Component,
   Inject,
   OnInit,
   PLATFORM_ID,
-} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
-import { BnNgIdleService } from 'bn-ng-idle';
-import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-import { Subscription, filter } from 'rxjs';
-import { DialogComponent } from './dashboard/components/dialog/dialog.component';
-import { ToggleNavService } from './dashboard/dashboard-service/toggle-nav.service';
-import { AuthService } from './global-services/auth.service';
-import { ChatService } from './global-services/chat.service';
-import { HttpService } from './global-services/http.service';
-import { SeoService } from './global-services/seo.service';
-import { baseUrl } from '../environments/environment';
+} from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRoute, Router } from "@angular/router";
+import { SwUpdate, VersionReadyEvent } from "@angular/service-worker";
+import { BnNgIdleService } from "bn-ng-idle";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { Subscription, filter } from "rxjs";
+import { DialogComponent } from "./dashboard/components/dialog/dialog.component";
+import { ToggleNavService } from "./dashboard/dashboard-service/toggle-nav.service";
+import { AuthService } from "./global-services/auth.service";
+import { ChatService } from "./global-services/chat.service";
+import { HttpService } from "./global-services/http.service";
+import { SeoService } from "./global-services/seo.service";
+import { baseUrl } from "../environments/environment";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit, AfterViewInit {
   clickEventSubscription?: Subscription;
-  token: string = 'V_HOSPITALITY_DEVICE_TOKEN';
+  token: string = "V_HOSPITALITY_DEVICE_TOKEN";
   userData: any = this.service.getProfileMessage();
   deviceToken: any;
   subscriptionPopup: boolean = false;
@@ -62,8 +62,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   setStructuredData() {
-    const script = this.doc.createElement('script');
-    script.type = 'application/ld+json';
+    const script = this.doc.createElement("script");
+    script.type = "application/ld+json";
     script.text = `
     {
       "@context": "https://schema.org",
@@ -90,9 +90,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (this.updates.isEnabled) {
       this.updates.unrecoverable.subscribe((event) => {
         alert(
-          'An error occurred that we cannot recover from:\n' +
+          "An error occurred that we cannot recover from:\n" +
             event.reason +
-            '\n\nPlease reload the page.'
+            "\n\nPlease reload the page."
         );
       });
 
@@ -100,11 +100,11 @@ export class AppComponent implements OnInit, AfterViewInit {
         .pipe(
           filter(
             (event): event is VersionReadyEvent =>
-              event.type === 'VERSION_READY'
+              event.type === "VERSION_READY"
           )
         )
         .subscribe(() => {
-          if (confirm('New version available. Load New Version?')) {
+          if (confirm("New version available. Load New Version?")) {
             if (isPlatformBrowser(this.platformId)) {
               window.location.reload();
             }
@@ -126,21 +126,21 @@ export class AppComponent implements OnInit, AfterViewInit {
 
       this.direct.queryParamMap.subscribe((params: any) => {
         if (
-          params?.params?.auth?.toLowerCase() == 'signup' ||
-          params?.params?.auth?.toLowerCase() == 'register'
+          params?.params?.auth?.toLowerCase() == "signup" ||
+          params?.params?.auth?.toLowerCase() == "register"
         ) {
-          this.openDialog('', 'login');
+          this.openDialog("", "login");
           this.seo.updateSeoTags({
-            title: 'Sign Up' + ' - ' + baseUrl.feDomain,
+            title: "Sign Up" + " - " + baseUrl.feDomain,
           });
-          this.router.navigate(['/home']);
+          this.router.navigate(["/home"]);
         } else if (
-          params?.params?.auth?.toLowerCase() == 'login' ||
-          params?.params?.auth?.toLowerCase() == 'signin'
+          params?.params?.auth?.toLowerCase() == "login" ||
+          params?.params?.auth?.toLowerCase() == "signin"
         ) {
-          this.openDialog('', 'login2');
-          this.seo.updateSeoTags({ title: 'Login' + ' - ' + baseUrl.feDomain });
-          this.router.navigate(['/home']);
+          this.openDialog("", "login2");
+          this.seo.updateSeoTags({ title: "Login" + " - " + baseUrl.feDomain });
+          this.router.navigate(["/home"]);
         }
       });
 
@@ -150,8 +150,8 @@ export class AppComponent implements OnInit, AfterViewInit {
             this.authService.logout();
             this.service.sendIsLoginClickEvent();
             this.canLogout = false;
-            if (confirm('Your session has timed out. Please log in again.')) {
-              this.openDialog('', 'login2');
+            if (confirm("Your session has timed out. Please log in again.")) {
+              this.openDialog("", "login2");
             }
           }
         }
@@ -213,28 +213,28 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   displayMessage(message: string, title: string) {
-    if (Notification.permission === 'granted') {
+    if (Notification.permission === "granted") {
       // Permission is granted, proceed with showing notification
-      new Notification(title || 'New Message!', {
+      new Notification(title || "New Message!", {
         body: message,
-        icon: 'assets/icons/v-logo-black.svg',
-        tag: 'V-hospitality!',
+        icon: "assets/icons/v-logo-black.svg",
+        tag: "Vefristay!",
         renotify: true,
         requireInteraction: true,
-        image: 'assets/icons/v-logo-black.svg',
+        image: "assets/icons/v-logo-black.svg",
         vibrate: [200, 100, 200, 100, 200, 100, 200],
       });
-    } else if (Notification.permission !== 'denied') {
+    } else if (Notification.permission !== "denied") {
       Notification.requestPermission().then((permission) => {
-        if (permission === 'granted') {
+        if (permission === "granted") {
           // Permission is granted, proceed with showing notification
-          new Notification(title || 'New Message!', {
+          new Notification(title || "New Message!", {
             body: message,
-            icon: 'assets/icons/v-logo-black.svg',
-            tag: 'V-hospitality!',
+            icon: "assets/icons/v-logo-black.svg",
+            tag: "Vefristay!",
             renotify: true,
             requireInteraction: true,
-            image: 'assets/icons/v-logo-black.svg',
+            image: "assets/icons/v-logo-black.svg",
             vibrate: [200, 100, 200, 100, 200, 100, 200],
           });
         } else {
@@ -243,18 +243,18 @@ export class AppComponent implements OnInit, AfterViewInit {
       });
     }
 
-    this.snackBar.open('You have a new message', 'x', {
+    this.snackBar.open("You have a new message", "x", {
       duration: 9000,
-      panelClass: 'success',
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
+      panelClass: "success",
+      horizontalPosition: "center",
+      verticalPosition: "top",
     });
 
     this.playSound();
   }
 
   playSound(): void {
-    let src = '/assets/mp3/message.mp3';
+    let src = "/assets/mp3/message.mp3";
     let audio = new Audio(src);
     audio.play();
   }
@@ -277,7 +277,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   registerForMessaging(token: string) {
     if (token) {
       this.httpService
-        .registerForChat(baseUrl.messagingUrl + 'user', {
+        .registerForChat(baseUrl.messagingUrl + "user", {
           first_name: this.userData?.first_name,
           last_name: this.userData?.last_name,
           u_id: this.userData?.uuid,
@@ -306,9 +306,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.isBrowser = isPlatformBrowser(this.platformId);
 
     if (isPlatformBrowser(this.platformId)) {
-      let loader = document.getElementById('loader');
+      let loader = document.getElementById("loader");
       if (loader) {
-        loader.style.display = 'none';
+        loader.style.display = "none";
       }
     }
   }

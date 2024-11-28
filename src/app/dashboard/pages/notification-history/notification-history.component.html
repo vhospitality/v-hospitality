@@ -28,7 +28,7 @@
                     <!-- reservation or booking -->
                     <div class="message">
                         <div class="title">
-                            <div>{{ not?.data?.type === 'system' ? 'V-Hospitality' : not?.data?.type || not?.data?.title
+                            <div>{{ not?.data?.type === 'system' ? 'Vefristay' : not?.data?.type || not?.data?.title
                                 }} <span>{{ (not?.created_at | dateAgo) }}</span></div>
                             <img *ngIf="!not?.read_at" src="assets/icons/green.svg" alt="" />
                         </div>

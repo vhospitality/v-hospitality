@@ -184,7 +184,7 @@ export class HeaderComponent implements AfterViewInit {
           severity: "warn",
           summary: "User verification:",
           detail:
-            "Complete your verification process by uploading a means of identification and be able to list and book a property on v-hospitality.",
+            "Complete your verification process by uploading a means of identification and be able to list and book a property on vefristay.",
         },
       ];
     } else if (

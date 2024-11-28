@@ -10,11 +10,11 @@ export const baseUrl = {
   jwt_token: "VHOSPITALITY_ACCESS",
   refresh_token: "VHOSPITALITY_REFRESH",
   wishlist_storage: "VHOSPITALITY_WISHLIST",
-  server: "https://staging-api.v-hospitality.com/api/v1/",
+  server: "https://staging-api.vefristay.com/api/v1/",
   messagingUrl: "https://chat-api.v-hospitality.com/",
   messagingUrl2: "https://chat-api.v-hospitality.com",
-  feDomain: "v-hospitality.com",
-  feDomain2: "https://www.v-hospitality.com",
+  feDomain: "vefristay.com",
+  feDomain2: "https://www.vefristay.com",
   login: "login",
   refresh: "user/api/v1/token/refresh/",
   requestResetPassword: "reset-passwords",
@@ -70,5 +70,5 @@ export const baseUrl = {
   paystackKey: "pk_live_eb36b00cba906840da2b6f96dddc760c4afb6eac",
   searchLocation:
     "https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyCE4z4wdxDikBjqjTsMPEK0p6Dd5faoqbg&query=",
-    affiliateSignUp: "affiliate/register",
+  affiliateSignUp: "affiliate/register",
 };

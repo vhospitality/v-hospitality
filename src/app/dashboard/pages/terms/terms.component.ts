@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { baseUrl } from '../../../../environments/environment';
-import { SeoService } from '../../../global-services/seo.service';
-import { BackButtonComponent } from '../../components/back-button/back-button.component';
-import { FooterComponent } from '../../components/footer/footer.component';
-import { HeaderComponent } from '../../components/header/header.component';
+import { CommonModule } from "@angular/common";
+import { Component, ViewEncapsulation } from "@angular/core";
+import { baseUrl } from "../../../../environments/environment";
+import { SeoService } from "../../../global-services/seo.service";
+import { BackButtonComponent } from "../../components/back-button/back-button.component";
+import { FooterComponent } from "../../components/footer/footer.component";
+import { HeaderComponent } from "../../components/header/header.component";
 
 @Component({
-  selector: 'app-terms',
+  selector: "app-terms",
   standalone: true,
   imports: [
     CommonModule,
@@ -15,35 +15,35 @@ import { HeaderComponent } from '../../components/header/header.component';
     FooterComponent,
     BackButtonComponent,
   ],
-  templateUrl: './terms.component.html',
+  templateUrl: "./terms.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./terms.component.scss'],
+  styleUrls: ["./terms.component.scss"],
 })
 export class TermsComponent {
   datas: any = [
     {
-      title: ' Booking and Cancellation Policies:',
+      title: " Booking and Cancellation Policies:",
       content: [
         {
-          title: 'Guests',
+          title: "Guests",
           content: [
             {
-              name: 'Guests agree to adhere to the specified cancellation policies outlined during the booking process.              ',
+              name: "Guests agree to adhere to the specified cancellation policies outlined during the booking process.              ",
             },
             {
-              name: ' Cancellation timelines for refunds are clearly communicated.   ',
+              name: " Cancellation timelines for refunds are clearly communicated.   ",
             },
           ],
         },
 
         {
-          title: 'Hosts',
+          title: "Hosts",
           content: [
             {
-              name: 'Hosts must comply with the cancellation policies and provide valid reasons for cancellations under extenuating circumstances.',
+              name: "Hosts must comply with the cancellation policies and provide valid reasons for cancellations under extenuating circumstances.",
             },
             {
-              name: 'Non-compliance may result in penalties, including loss of hosting privileges.',
+              name: "Non-compliance may result in penalties, including loss of hosting privileges.",
             },
           ],
         },
@@ -51,28 +51,28 @@ export class TermsComponent {
     },
     //
     {
-      title: ' Payment and Fees:',
+      title: " Payment and Fees:",
       content: [
         {
-          title: 'Guests',
+          title: "Guests",
           content: [
             {
-              name: 'Guests agree to pay the total booking amount plus any additional fees specified during the reservation process.',
+              name: "Guests agree to pay the total booking amount plus any additional fees specified during the reservation process.",
             },
             {
-              name: 'Payment is processed through V-Hospitality securely.',
+              name: "Payment is processed through Vefristay securely.",
             },
           ],
         },
 
         {
-          title: 'Hosts',
+          title: "Hosts",
           content: [
             {
-              name: 'Hosts receive payment through V-Hospitality, minus any applicable fees.',
+              name: "Hosts receive payment through Vefristay, minus any applicable fees.",
             },
             {
-              name: 'Fees are transparently communicated, and any changes are notified in advance.',
+              name: "Fees are transparently communicated, and any changes are notified in advance.",
             },
           ],
         },
@@ -80,28 +80,28 @@ export class TermsComponent {
     },
     //
     {
-      title: ' Property Guidelines and Responsibilities:',
+      title: " Property Guidelines and Responsibilities:",
       content: [
         {
-          title: 'Guests',
+          title: "Guests",
           content: [
             {
-              name: 'Guests agree to respect the property and adhere to any specific guidelines provided by the host.',
+              name: "Guests agree to respect the property and adhere to any specific guidelines provided by the host.",
             },
             {
-              name: 'Any damages caused by guests are the responsibility of the guest to rectify.',
+              name: "Any damages caused by guests are the responsibility of the guest to rectify.",
             },
           ],
         },
 
         {
-          title: 'Hosts',
+          title: "Hosts",
           content: [
             {
-              name: 'Hosts agree to provide accurate property details and maintain the premises in a safe and habitable condition.',
+              name: "Hosts agree to provide accurate property details and maintain the premises in a safe and habitable condition.",
             },
             {
-              name: 'Any changes or issues with the property must be communicated promptly to the guest.',
+              name: "Any changes or issues with the property must be communicated promptly to the guest.",
             },
           ],
         },
@@ -109,56 +109,27 @@ export class TermsComponent {
     },
     //
     {
-      title: 'Code of Conduct:',
+      title: "Code of Conduct:",
       content: [
         {
-          title: 'Guests',
+          title: "Guests",
           content: [
             {
-              name: 'Guests agree to conduct themselves respectfully and not engage in any illegal or disruptive activities during their stay.',
+              name: "Guests agree to conduct themselves respectfully and not engage in any illegal or disruptive activities during their stay.",
             },
             {
-              name: 'Complaints regarding guest behaviour may result in penalties, including eviction.',
+              name: "Complaints regarding guest behaviour may result in penalties, including eviction.",
             },
           ],
         },
         {
-          title: 'Hosts',
+          title: "Hosts",
           content: [
             {
-              name: 'Hosts agree to treat guests with respect and provide a safe environment.',
+              name: "Hosts agree to treat guests with respect and provide a safe environment.",
             },
             {
-              name: 'Discrimination against guests based on race, ethnicity, gender, or other factors is strictly prohibited.',
-            },
-          ],
-        },
-      ],
-    },
-
-    //
-    {
-      title: 'Privacy and Data Security:',
-      content: [
-        {
-          title: 'Guests',
-          content: [
-            {
-              name: 'Guests acknowledge that V-Hospitality collects and processes their data as outlined in the privacy policy.',
-            },
-            {
-              name: 'Personal information is handled securely.',
-            },
-          ],
-        },
-        {
-          title: 'Hosts',
-          content: [
-            {
-              name: 'Hosts agree to the collection and use of their information for the purpose of facilitating bookings.',
-            },
-            {
-              name: 'Sensitive information is handled with the utmost confidentiality.',
+              name: "Discrimination against guests based on race, ethnicity, gender, or other factors is strictly prohibited.",
             },
           ],
         },
@@ -167,27 +138,27 @@ export class TermsComponent {
 
     //
     {
-      title: 'Dispute Resolution:',
+      title: "Privacy and Data Security:",
       content: [
         {
-          title: 'Guests',
+          title: "Guests",
           content: [
             {
-              name: "Guests agree to communicate and attempt to resolve any issues with hosts before involving V-Hospitality's support.",
+              name: "Guests acknowledge that Vefristay collects and processes their data as outlined in the privacy policy.",
             },
             {
-              name: "Formal disputes are handled through V-Hospitality's resolution centre.",
+              name: "Personal information is handled securely.",
             },
           ],
         },
         {
-          title: 'Hosts',
+          title: "Hosts",
           content: [
             {
-              name: 'Hosts agree to address guest concerns promptly and professionally.',
+              name: "Hosts agree to the collection and use of their information for the purpose of facilitating bookings.",
             },
             {
-              name: 'V-Hospitality may mediate disputes and enforce resolutions based on the terms and conditions.',
+              name: "Sensitive information is handled with the utmost confidentiality.",
             },
           ],
         },
@@ -196,21 +167,50 @@ export class TermsComponent {
 
     //
     {
-      title: 'Termination of Account:',
+      title: "Dispute Resolution:",
       content: [
         {
-          title: 'Guests',
+          title: "Guests",
           content: [
             {
-              name: 'V-Hospitality reserves the right to terminate a guest account for violations of terms and conditions.',
+              name: "Guests agree to communicate and attempt to resolve any issues with hosts before involving Vefristay's support.",
+            },
+            {
+              name: "Formal disputes are handled through Vefristay's resolution centre.",
             },
           ],
         },
         {
-          title: 'Hosts',
+          title: "Hosts",
           content: [
             {
-              name: 'V-Hospitality reserves the right to suspend or terminate host accounts for repeated policy violations.',
+              name: "Hosts agree to address guest concerns promptly and professionally.",
+            },
+            {
+              name: "Vefristay may mediate disputes and enforce resolutions based on the terms and conditions.",
+            },
+          ],
+        },
+      ],
+    },
+
+    //
+    {
+      title: "Termination of Account:",
+      content: [
+        {
+          title: "Guests",
+          content: [
+            {
+              name: "Vefristay reserves the right to terminate a guest account for violations of terms and conditions.",
+            },
+          ],
+        },
+        {
+          title: "Hosts",
+          content: [
+            {
+              name: "Vefristay reserves the right to suspend or terminate host accounts for repeated policy violations.",
             },
           ],
         },
@@ -218,13 +218,13 @@ export class TermsComponent {
     },
 
     {
-      title: 'Amendments to Terms and Conditions:',
+      title: "Amendments to Terms and Conditions:",
       content: [
         {
-          title: '',
+          title: "",
           content: [
             {
-              name: 'Both guests and hosts acknowledge that terms and conditions may be updated, and continued use of V-Hospitality constitutes acceptance of any changes.',
+              name: "Both guests and hosts acknowledge that terms and conditions may be updated, and continued use of Vefristay constitutes acceptance of any changes.",
             },
           ],
         },
@@ -234,7 +234,7 @@ export class TermsComponent {
 
   constructor(private seo: SeoService) {
     this.seo.updateSeoTags({
-      title: 'Terms and Conditions' + ' - ' + baseUrl.feDomain,
+      title: "Terms and Conditions" + " - " + baseUrl.feDomain,
     });
   }
 }

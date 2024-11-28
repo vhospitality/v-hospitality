@@ -177,7 +177,7 @@
                             <!-- reservation or booking -->
                             <div class="message">
                                 <div class="title">
-                                    <div>{{ not?.data?.type === 'system' ? 'V-Hospitality' : not?.data?.type ||
+                                    <div>{{ not?.data?.type === 'system' ? 'Vefristay' : not?.data?.type ||
                                         not?.data?.title }} <span>{{ (not?.created_at | dateAgo) }}</span></div>
                                     <img *ngIf="!not?.read_at" src="assets/icons/green.svg" alt="" />
                                 </div>
@@ -211,7 +211,7 @@
                             <!-- reservation or booking -->
                             <div class="message">
                                 <div class="title">
-                                    <div>{{ not?.data?.type === 'system' ? 'V-Hospitality' : not?.data?.type ||
+                                    <div>{{ not?.data?.type === 'system' ? 'Vefristay' : not?.data?.type ||
                                         not?.data?.title }} <span>{{ (not?.created_at | dateAgo) }}</span></div>
                                     <img *ngIf="!not?.read_at" src="assets/icons/green.svg" alt="" />
                                 </div>
@@ -258,7 +258,7 @@
                                     [lazyLoad]="userData?.profile_picture" [decode]="true" [errorImage]="defaultImage"
                                     [alt]="userData?.first_name" />
                                 <div>
-                                    {{ userData?.first_name || 'V-Hospitality' }} {{ userData?.last_name }}
+                                    {{ userData?.first_name || 'Vefristay' }} {{ userData?.last_name }}
                                     <div>{{ switchGuest ? 'Guest' : ' Host' }}</div>
                                 </div>
                             </div>

@@ -1,16 +1,16 @@
-import { isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import { baseUrl } from '../../environments/environment';
+import { isPlatformBrowser } from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
+import { Meta, Title } from "@angular/platform-browser";
+import { baseUrl } from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class SeoService {
-  title: string = 'V-Hospitality';
+  title: string = "Vefristay";
   description =
-    'V-Hospitality is the trusted online platform that enables people to discover and experience the true spirit of hospitality through our curated selection of accommodations.';
-  logo: string = 'favicon.ico';
+    "Vefristay is the trusted online platform that enables people to discover and experience the true spirit of hospitality through our curated selection of accommodations.";
+  logo: string = "favicon.ico";
 
   constructor(
     private titleService: Title,
@@ -25,66 +25,65 @@ export class SeoService {
   // }
 
   updateSeoTags(detail: any): void {
-
     this.titleService.setTitle(detail?.title || this.title);
 
     this.metaService.updateTag({
-      name: 'keywords',
+      name: "keywords",
       content:
-        'v-hospitality, vhospitality, hospitality, v hospitality, airbnb, booking, hotel, vacation, travel, tourism, holiday, trip, accommodation, guest, host, experience, explore, discover, stay, staycation, rental, property, apartment, house, villa, room, bed, breakfast, luxury, budget, affordable, safe, secure, reliable, trusted, verified, verified host, verified guest, verified property, verified accommodation, verified experience, verified stay, verified rental, verified booking, verified hotel, verified vacation, verified trip, verified tourism, verified holiday, verified travel, verified explore, verified discover, verified staycation, verified property, verified apartment, verified house, verified villa, verified room, verified bed, verified breakfast, verified luxury, verified budget, verified affordable, verified safe, verified secure, verified reliable, verified trusted',
+        "v-hospitality, vefristay, vhospitality, hospitality, v hospitality, airbnb, booking, hotel, vacation, travel, tourism, holiday, trip, accommodation, guest, host, experience, explore, discover, stay, staycation, rental, property, apartment, house, villa, room, bed, breakfast, luxury, budget, affordable, safe, secure, reliable, trusted, verified, verified host, verified guest, verified property, verified accommodation, verified experience, verified stay, verified rental, verified booking, verified hotel, verified vacation, verified trip, verified tourism, verified holiday, verified travel, verified explore, verified discover, verified staycation, verified property, verified apartment, verified house, verified villa, verified room, verified bed, verified breakfast, verified luxury, verified budget, verified affordable, verified safe, verified secure, verified reliable, verified trusted",
     });
 
     this.metaService.updateTag({
-      name: 'description',
+      name: "description",
       content: detail?.description || this.description,
     });
 
-    this.metaService.addTag({ name: 'robots', content: 'index, follow' });
+    this.metaService.addTag({ name: "robots", content: "index, follow" });
 
     // Facebook, WhatsApp, etc Card Meta Tags
     this.metaService.updateTag({
-      property: 'og:title',
+      property: "og:title",
       content: detail?.title || this.title,
     });
 
     this.metaService.updateTag({
-      property: 'og:image',
+      property: "og:image",
       content: detail?.image || this.logo,
     });
 
     this.metaService.updateTag({
-      property: 'og:url',
+      property: "og:url",
       content: this.getUrl(),
     });
 
     this.metaService.updateTag({
-      property: 'og:type',
-      content: 'website',
+      property: "og:type",
+      content: "website",
     });
 
     // Twitter Card Meta Tags
     this.metaService.updateTag({
-      name: 'twitter:card',
-      content: 'summary_large_image', // player, gallery, app, product
+      name: "twitter:card",
+      content: "summary_large_image", // player, gallery, app, product
     });
 
     this.metaService.updateTag({
-      name: 'twitter:title',
+      name: "twitter:title",
       content: detail?.title || this.title,
     });
 
     this.metaService.updateTag({
-      name: 'twitter:description',
+      name: "twitter:description",
       content: detail?.description || this.description,
     });
 
     this.metaService.updateTag({
-      name: 'twitter:image',
+      name: "twitter:image",
       content: detail?.image || this.logo,
     });
 
     this.metaService.updateTag({
-      name: 'twitter:url',
+      name: "twitter:url",
       content: this.getUrl(),
     });
   }
