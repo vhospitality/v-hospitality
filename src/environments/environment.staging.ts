@@ -71,4 +71,5 @@ export const baseUrl = {
   searchLocation:
     "https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyCE4z4wdxDikBjqjTsMPEK0p6Dd5faoqbg&query=",
   affiliateSignUp: "affiliate/register",
+  supportUrl: "supports",
 };
