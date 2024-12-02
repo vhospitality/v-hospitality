@@ -1,28 +1,28 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
 import {
   Component,
   EventEmitter,
   Output,
   ViewEncapsulation,
-} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { SkeletonModule } from 'primeng/skeleton';
-import { baseUrl } from '../../../../../environments/environment';
-import { HttpService } from '../../../../global-services/http.service';
-import { ToggleNavService } from '../../../dashboard-service/toggle-nav.service';
-import { DialogComponent } from '../../dialog/dialog.component';
+} from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { SkeletonModule } from "primeng/skeleton";
+import { baseUrl } from "../../../../../environments/environment";
+import { HttpService } from "../../../../global-services/http.service";
+import { ToggleNavService } from "../../../dashboard-service/toggle-nav.service";
+import { DialogComponent } from "../../dialog/dialog.component";
 
 @Component({
-  selector: 'app-collection-tag',
+  selector: "app-collection-tag",
   standalone: true,
   imports: [CommonModule, SkeletonModule],
-  templateUrl: './collection-tag.component.html',
+  templateUrl: "./collection-tag.component.html",
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['./collection-tag.component.scss'],
+  styleUrls: ["./collection-tag.component.scss"],
 })
 export class CollectionTagComponent {
   @Output() collection = new EventEmitter<any>();
-  active: string = 'all';
+  active: string = "all";
   collections: any[] = [];
   datas2: any[] = [];
   filterObject: any = {};
@@ -58,9 +58,9 @@ export class CollectionTagComponent {
   }
 
   chooseCollection(name?: string, uuid?: any) {
-    this.active = uuid || 'all';
+    this.active = uuid || "all";
     Object.assign(this.filterObject, {
-      'filter[collection.uuid]': uuid || '',
+      "filter[collection.uuid]": uuid || "",
       collection_name: name,
     });
     this.collection.emit(this.filterObject);
@@ -77,14 +77,16 @@ export class CollectionTagComponent {
     this.show = false;
   }
 
-  openDialog() {
+  openDialog(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
     this.dialog.closeAll();
     let dialogRef = this.dialog.open(DialogComponent, {
       data: {
-        type: 'dialog',
+        type: "dialog",
         data: {
-          requestMessage: 'Filter Search',
-          requestType: 'filter-dialog',
+          requestMessage: "Filter Search",
+          requestType: "filter-dialog",
           data: this.filterObject,
         },
       },

@@ -136,7 +136,7 @@ export class AfricanHospitalityTwoComponent
     {
       remark: "Great Job",
       testimony:
-        " ⁠I recently booked a stay through V Hospitality, and I have to say, it was fantastic! The site was super easy to use, and the place I found was exactly as described. The host was really welcoming, and the property was spotless. Honestly, this is my new go-to for travel in Nigeria.",
+        " ⁠I recently booked a stay through Vefristay, and I have to say, it was fantastic! The site was super easy to use, and the place I found was exactly as described. The host was really welcoming, and the property was spotless. Honestly, this is my new go-to for travel in Nigeria.",
       rating: 5,
       reviewer: {
         image: "assets/images/logo.png",
@@ -147,7 +147,7 @@ export class AfricanHospitalityTwoComponent
     {
       remark: "Great Job",
       testimony:
-        "V Hospitality really came through for me. I booked a beautiful apartment in Abuja that felt just like home. The host was super accommodating, and the neighborhood was exactly what I expected from the description. I’m already looking forward to my next trip with V Hospitality.",
+        "Vefristay really came through for me. I booked a beautiful apartment in Abuja that felt just like home. The host was super accommodating, and the neighborhood was exactly what I expected from the description. I’m already looking forward to my next trip with Vefristay.",
       rating: 5,
       reviewer: {
         image: "assets/images/logo.png",
@@ -158,7 +158,7 @@ export class AfricanHospitalityTwoComponent
     {
       remark: "Great Job",
       testimony:
-        "I was surprised by how many affordable yet luxurious options there were on V Hospitality. Booking was a breeze, and there were no hidden fees, which I really appreciated. My stay exceeded my expectations, and I’ll definitely be using this platform again.",
+        "I was surprised by how many affordable yet luxurious options there were on Vefristay. Booking was a breeze, and there were no hidden fees, which I really appreciated. My stay exceeded my expectations, and I’ll definitely be using this platform again.",
       rating: 5,
       reviewer: {
         image: "assets/images/logo.png",
@@ -169,7 +169,7 @@ export class AfricanHospitalityTwoComponent
     {
       remark: "Great Job",
       testimony:
-        "I was surprised by how many affordable yet luxurious options there were on V Hospitality. Booking was a breeze, and there were no hidden fees, which I really appreciated. My stay exceeded my expectations, and I’ll definitely be using this platform again.",
+        "I was surprised by how many affordable yet luxurious options there were on Vefristay. Booking was a breeze, and there were no hidden fees, which I really appreciated. My stay exceeded my expectations, and I’ll definitely be using this platform again.",
       rating: 5,
       reviewer: {
         image: "assets/images/logo.png",

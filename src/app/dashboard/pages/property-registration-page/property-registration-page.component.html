@@ -21,21 +21,21 @@
 
     <mat-sidenav-content>
         <div class="wrapper" #target2>
-            
+
             <div class="container-desktop2">
 
                 <div class="content2">
                     <p-skeleton width="15rem" height="3rem"></p-skeleton>
                     <p></p>
-                 </div>
+                </div>
 
-                 <p></p>
-                 <div class="content2">
+                <p></p>
+                <div class="content2">
                     <p-skeleton width="100%" height="300px"></p-skeleton>
                     <p></p>
-                 </div>
+                </div>
 
-                 <div class="content sidenav2">
+                <div class="content sidenav2">
                     <p></p>
                     <div class="sidenav4" *ngFor="let l of list;">
                         <div><p-skeleton width="50px" height="50px" borderRadius="50%"></p-skeleton></div>
@@ -46,8 +46,8 @@
                         </div>
                     </div>
                 </div>
-            
-             
+
+
                 <div class="footer">
                     <div class="cards">
                         <div class="cardd">
@@ -71,7 +71,7 @@
 
     <mat-sidenav hasBackdrop="false" class="sidenav" mode="side" [opened]="true">
         <div class="header">
-            <img [routerLink]="['/']" class="logo" src="assets/icons/logo.svg" alt="" />
+            <img [routerLink]="['/']" class="logo" src="assets/icons/logo.png" alt="" />
         </div>
 
         <div class="content">
@@ -79,11 +79,16 @@
                 <div class="rb-container">
                     <ul class="rb">
 
-                        <li class="rb-item" *ngFor="let l of list;" [class.active]="l?.componentNumber === activeList" [class.done]="l?.done">
+                        <li class="rb-item" *ngFor="let l of list;" [class.active]="l?.componentNumber === activeList"
+                            [class.done]="l?.done">
                             <div class="timeline-icon" [style]="{display: l?.done ? 'unset' : 'none' }">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M28.4939 12.9164L16.5606 24.433L13.3939 21.0497C12.8106 20.4997 11.8939 20.4664 11.2273 20.933C10.5773 21.4164 10.3939 22.2664 10.7939 22.9497L14.5439 29.0497C14.9106 29.6164 15.5439 29.9664 16.2606 29.9664C16.9439 29.9664 17.5939 29.6164 17.9606 29.0497C18.5606 28.2664 30.0106 14.6164 30.0106 14.6164C31.5106 13.083 29.6939 11.733 28.4939 12.8997V12.9164Z" fill="#EF5E17"/>
-                                    <rect x="1" y="1.59961" width="38" height="38" rx="19" stroke="#FACFB9" stroke-width="2"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41"
+                                    fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M28.4939 12.9164L16.5606 24.433L13.3939 21.0497C12.8106 20.4997 11.8939 20.4664 11.2273 20.933C10.5773 21.4164 10.3939 22.2664 10.7939 22.9497L14.5439 29.0497C14.9106 29.6164 15.5439 29.9664 16.2606 29.9664C16.9439 29.9664 17.5939 29.6164 17.9606 29.0497C18.5606 28.2664 30.0106 14.6164 30.0106 14.6164C31.5106 13.083 29.6939 11.733 28.4939 12.8997V12.9164Z"
+                                        fill="#EF5E17" />
+                                    <rect x="1" y="1.59961" width="38" height="38" rx="19" stroke="#FACFB9"
+                                        stroke-width="2" />
                                 </svg>
                             </div>
 
@@ -103,7 +108,7 @@
 
     <mat-sidenav-content>
         <div class="wrapper" #target>
-            
+
             <div class="container-desktop2">
 
                 <div class="sidenav2">
@@ -111,12 +116,17 @@
                         <div class="rightbox">
                             <div class="rb-container">
                                 <ul class="rb">
-            
-                                    <li class="rb-item" *ngFor="let l of list;" [class.active]="l?.componentNumber === activeList" [class.done]="l?.done">
+
+                                    <li class="rb-item" *ngFor="let l of list;"
+                                        [class.active]="l?.componentNumber === activeList" [class.done]="l?.done">
                                         <div class="timeline-icon" [style]="{display: l?.done ? 'unset' : 'none' }">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M28.4939 12.9164L16.5606 24.433L13.3939 21.0497C12.8106 20.4997 11.8939 20.4664 11.2273 20.933C10.5773 21.4164 10.3939 22.2664 10.7939 22.9497L14.5439 29.0497C14.9106 29.6164 15.5439 29.9664 16.2606 29.9664C16.9439 29.9664 17.5939 29.6164 17.9606 29.0497C18.5606 28.2664 30.0106 14.6164 30.0106 14.6164C31.5106 13.083 29.6939 11.733 28.4939 12.8997V12.9164Z" fill="#EF5E17"/>
-                                                <rect x="1" y="1.59961" width="38" height="38" rx="19" stroke="#FACFB9" stroke-width="2"/>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41"
+                                                viewBox="0 0 40 41" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M28.4939 12.9164L16.5606 24.433L13.3939 21.0497C12.8106 20.4997 11.8939 20.4664 11.2273 20.933C10.5773 21.4164 10.3939 22.2664 10.7939 22.9497L14.5439 29.0497C14.9106 29.6164 15.5439 29.9664 16.2606 29.9664C16.9439 29.9664 17.5939 29.6164 17.9606 29.0497C18.5606 28.2664 30.0106 14.6164 30.0106 14.6164C31.5106 13.083 29.6939 11.733 28.4939 12.8997V12.9164Z"
+                                                    fill="#EF5E17" />
+                                                <rect x="1" y="1.59961" width="38" height="38" rx="19" stroke="#FACFB9"
+                                                    stroke-width="2" />
                                             </svg>
                                         </div>
 
@@ -125,7 +135,7 @@
                                         </div>
                                         <div class="item-title">{{ l?.desc }}</div>
                                     </li>
-            
+
                                 </ul>
                             </div>
                         </div>
@@ -139,24 +149,30 @@
                     <app-bedroom-kind [componentData]="componentData" *ngIf="activeNumber===4"></app-bedroom-kind>
                     <app-address [componentData]="componentData" *ngIf="activeNumber===5"></app-address>
                     <app-how-guest-book [componentData]="componentData" *ngIf="activeNumber===6"></app-how-guest-book>
-                    <app-apartment-photos [componentData]="componentData" *ngIf="activeNumber===7"></app-apartment-photos>
+                    <app-apartment-photos [componentData]="componentData"
+                        *ngIf="activeNumber===7"></app-apartment-photos>
                     <app-apartment-kyc [componentData]="componentData" *ngIf="activeNumber===8"></app-apartment-kyc>
-                    <app-property-details [componentData]="componentData" *ngIf="activeNumber===9"></app-property-details>
+                    <app-property-details [componentData]="componentData"
+                        *ngIf="activeNumber===9"></app-property-details>
                     <app-amenities [componentData]="componentData" *ngIf="activeNumber===10"></app-amenities>
                     <app-guest-stay [componentData]="componentData" *ngIf="activeNumber===11"></app-guest-stay>
                     <app-house-rules [componentData]="componentData" *ngIf="activeNumber===12"></app-house-rules>
-                    <app-second-house-rules [componentData]="componentData" *ngIf="activeNumber===13"></app-second-house-rules>
+                    <app-second-house-rules [componentData]="componentData"
+                        *ngIf="activeNumber===13"></app-second-house-rules>
                     <app-price [componentData]="componentData" *ngIf="activeNumber===14"></app-price>
                 </div>
 
                 <div class="footer">
                     <div class="cards">
                         <div class="cardd">
-                            <button type="button" class="save" mat-button (click)="verifyNext('se')">Save & exit</button>
+                            <button type="button" class="save" mat-button (click)="verifyNext('se')">Save &
+                                exit</button>
                         </div>
                         <div class="cardd">
-                            <button type="button" class="ripple-button white-button" (click)="nextOrBackOrSave2('b')">Go back</button>
-                            <button type="button" class="ripple-button orange-button" (click)="verifyNext('sc'); displayActionButton=false">
+                            <button type="button" class="ripple-button white-button" (click)="nextOrBackOrSave2('b')">Go
+                                back</button>
+                            <button type="button" class="ripple-button orange-button"
+                                (click)="verifyNext('sc'); displayActionButton=false">
                                 <span>Save & Continue</span>
                             </button>
                         </div>
@@ -167,4 +183,3 @@
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
-
