@@ -103,7 +103,14 @@ export class DialogSignupDetailsComponent implements OnInit {
 
   validationMessages: any = {
     firstName: {
-      required: "Required.",
+      required: "First name is required.",
+      pattern: "Only letters are allowed.",
+      minlength: "First name must be at least 3 characters.",
+    },
+    lastName: {
+      required: "Last name is required.",
+      pattern: "Only letters are allowed.",
+      minlength: "Last name must be at least 3 characters.",
     },
     email: {
       required: "Required.",
@@ -114,11 +121,7 @@ export class DialogSignupDetailsComponent implements OnInit {
       // maxlength: 'Not a valid phone number.',
       // minlength: 'Not a valid phone number.',
     },
-    lastName: {
-      required: "Required.",
-      pattern: "Not a valid name.",
-      minlength: "Not a valid name.",
-    },
+
     month: {
       required: "Required.",
     },
@@ -178,8 +181,22 @@ export class DialogSignupDetailsComponent implements OnInit {
   createForm() {
     this.feedbackForm = this.fb.group(
       {
-        firstName: ["", [Validators.required]],
-        lastName: ["", [Validators.required]],
+        firstName: [
+          "",
+          [
+            Validators.required,
+            Validators.pattern("^[a-zA-Z]+$"), // Only letters allowed
+            Validators.minLength(3),
+          ],
+        ],
+        lastName: [
+          "",
+          [
+            Validators.required,
+            Validators.pattern("^[a-zA-Z]+$"), // Only letters allowed
+            Validators.minLength(3),
+          ],
+        ],
         month: ["", [Validators.required]],
         day: ["", [Validators.required]],
         year: ["", [Validators.required]],
@@ -281,7 +298,24 @@ export class DialogSignupDetailsComponent implements OnInit {
     if (feed) {
       return;
     } else {
-      const age = Number(new Date().getFullYear()) - Number(this.feedback.year);
+      const dob = new Date(
+        Number(this.feedback.year),
+        Number(this.feedback.month) - 1, // Months are 0-based in JavaScript
+        Number(this.feedback.day)
+      );
+      const today = new Date();
+
+      // Calculate age precisely
+      let age = today.getFullYear() - dob.getFullYear();
+      const monthDiff = today.getMonth() - dob.getMonth();
+
+      // Adjust age if birthday hasn't occurred this year
+      if (
+        monthDiff < 0 ||
+        (monthDiff === 0 && today.getDate() < dob.getDate())
+      ) {
+        age--;
+      }
 
       if (age < 18) {
         this.snackBar.open("You must be 18 years or older to register!", "x", {
