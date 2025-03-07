@@ -49,7 +49,7 @@ export class ForgotPasswordRequestVerificationComponent implements OnInit {
   feedbackForm: any = FormGroup;
   feedback!: RequestResetPassword;
   loading = false;
-  email: boolean = false;
+  email: boolean = true;
 
   formErrors: any = {
     email: '',
