@@ -113,12 +113,10 @@ export class ForgotPasswordRequestVerificationComponent implements OnInit {
     } else {
       this.loading = true;
       this.httpService
-        .postData(
-          baseUrl.requestResetPassword,
-          this.email
-            ? { email: this.feedback.email, type: 'email' }
-            : { phone: this.feedback.email, type: 'phone' }
-        )
+        .postData(baseUrl.requestResetPassword, {
+          email: this.feedback.email,
+          type: 'email',
+        })
         .subscribe(
           (data: any) => {
             this.loading = false;
