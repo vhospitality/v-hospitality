@@ -1,31 +1,31 @@
-import { CommonModule, DatePipe } from "@angular/common";
+import { CommonModule, DatePipe } from '@angular/common';
 import {
   Component,
   Input,
   OnDestroy,
   OnInit,
   ViewEncapsulation,
-} from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatButtonModule } from "@angular/material/button";
-import { MatDialog } from "@angular/material/dialog";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
-import { CalendarModule } from "primeng/calendar";
-import { Subscription } from "rxjs";
-import { baseUrl } from "../../../../../environments/environment";
-import { AuthService } from "../../../../global-services/auth.service";
-import { HttpService } from "../../../../global-services/http.service";
-import { ToggleNavService } from "../../../dashboard-service/toggle-nav.service";
-import { DialogComponent } from "../../dialog/dialog.component";
-import { SelectOptionComponent } from "../../select/select-option/select-option.component";
-import { SelectComponent } from "../../select/select.component";
-import { SelectService } from "../../select/select.service";
+} from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { CalendarModule } from 'primeng/calendar';
+import { Subscription } from 'rxjs';
+import { baseUrl } from '../../../../../environments/environment';
+import { AuthService } from '../../../../global-services/auth.service';
+import { HttpService } from '../../../../global-services/http.service';
+import { ToggleNavService } from '../../../dashboard-service/toggle-nav.service';
+import { DialogComponent } from '../../dialog/dialog.component';
+import { SelectOptionComponent } from '../../select/select-option/select-option.component';
+import { SelectComponent } from '../../select/select.component';
+import { SelectService } from '../../select/select.service';
 
 @Component({
-  selector: "app-accommodation-detail-form",
+  selector: 'app-accommodation-detail-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -38,9 +38,9 @@ import { SelectService } from "../../select/select.service";
     ReactiveFormsModule,
     MatButtonModule,
   ],
-  templateUrl: "./accommodation-detail-form.component.html",
+  templateUrl: './accommodation-detail-form.component.html',
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ["./accommodation-detail-form.component.scss"],
+  styleUrls: ['./accommodation-detail-form.component.scss'],
 })
 export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
   @Input() data: any;
@@ -59,7 +59,7 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
   serviceData: any = {};
   is_valid: boolean = false;
 
-  numberGuestError = "Please add number of guests";
+  numberGuestError = 'Please add number of guests';
   dateError?: string;
   guestError?: string;
 
@@ -81,19 +81,19 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
       .subscribe((data: any) => {
         let findId = this.selectOption?.findIndex((x) => x?.id === data?.id);
 
-        if (data?.type === "add") {
+        if (data?.type === 'add') {
           this.selectOption[findId].total += 1;
           if (
             this.selectOption[findId].total > 1 &&
             this.selectOption[findId].id !== 2 &&
-            !this.selectOption[findId]?.gender.endsWith("s")
+            !this.selectOption[findId]?.gender.endsWith('s')
           ) {
-            this.selectOption[findId].gender += "s";
+            this.selectOption[findId].gender += 's';
           }
-        } else if (data?.type === "minus") {
+        } else if (data?.type === 'minus') {
           if (this.selectOption[findId].total < 1) {
             this.selectOption[findId].total = 0;
-            if (this.selectOption[findId]?.gender.endsWith("s")) {
+            if (this.selectOption[findId]?.gender.endsWith('s')) {
               this.selectOption[findId].gender = this.selectOption[
                 findId
               ].gender.slice(0, -1);
@@ -103,11 +103,11 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
             if (
               this.selectOption[findId].total > 1 &&
               this.selectOption[findId].id !== 2 &&
-              !this.selectOption[findId]?.gender.endsWith("s")
+              !this.selectOption[findId]?.gender.endsWith('s')
             ) {
-              this.selectOption[findId].gender += "s";
+              this.selectOption[findId].gender += 's';
             } else if (
-              this.selectOption[findId]?.gender.endsWith("s") &&
+              this.selectOption[findId]?.gender.endsWith('s') &&
               this.selectOption[findId].total < 2
             ) {
               this.selectOption[findId].gender = this.selectOption[
@@ -137,20 +137,20 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
     let selectOption = [
       {
         id: 1,
-        gender: "Adult",
-        desc: "Ages 18 or above",
+        gender: 'Adult',
+        desc: 'Ages 18 or above',
         total: 0,
       },
       {
         id: 2,
-        gender: "Children",
-        desc: "Ages 2 - 17",
+        gender: 'Children',
+        desc: 'Ages 2 - 17',
         total: 0,
       },
       {
         id: 3,
-        gender: "Infant",
-        desc: "Under 2",
+        gender: 'Infant',
+        desc: 'Under 2',
         total: 0,
       },
     ];
@@ -171,7 +171,7 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
 
   validateDate() {
     if (!this.checkinDate || !this.checkoutDate) {
-      this.dateError = "Please select Check in and Check out date";
+      this.dateError = 'Please select Check in and Check out date';
     } else {
       const date1: any = new Date(this.checkinDate);
       const date2: any = new Date(this.checkoutDate);
@@ -233,7 +233,8 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
     const nightPrice =
       data?.price_per_night *
       (this.getNumberOfNight() || this.data?.minimum_nights);
-    const amount = nightPrice + this.getServiceChargeAmount(data);
+    // const amount = nightPrice + this.getServiceChargeAmount(data);
+    const amount = nightPrice;
     return amount * tax;
   }
 
@@ -288,8 +289,8 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
   configurePaymentData() {
     return {
       listing_uuid: this.data?.uuid,
-      check_in: this.datepipe.transform(this.checkinDate, "YYYY-MM-dd"),
-      check_out: this.datepipe.transform(this.checkoutDate, "YYYY-MM-dd"),
+      check_in: this.datepipe.transform(this.checkinDate, 'YYYY-MM-dd'),
+      check_out: this.datepipe.transform(this.checkoutDate, 'YYYY-MM-dd'),
       no_of_guests: this.getTotalGuest(),
       uuid: this.userData?.uuid,
       guests: {
@@ -301,7 +302,7 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
       email: this.userData?.email,
       host: this.data?.host,
       total: this.getTotalAmount(),
-      type: "booking",
+      type: 'booking',
     };
   }
 
@@ -318,7 +319,7 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
     this.validateDate();
 
     if (!this.isLogin) {
-      this.openDialog("", "login2");
+      this.openDialog('', 'login2');
     }
 
     if (this.isLogin && !this.userData) {
@@ -333,11 +334,11 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
       this.dialog.closeAll();
       this.dialog.open(DialogComponent, {
         data: {
-          type: "dialog",
+          type: 'dialog',
           data: {
-            requestType: "upload",
-            requestMessage: "Please verify your identity",
-            data: "",
+            requestType: 'upload',
+            requestMessage: 'Please verify your identity',
+            data: '',
           },
         },
       });
@@ -363,8 +364,8 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
 
     const dataToSend = {
       amount: this.getTotalAmount(),
-      check_in: this.datepipe.transform(this.checkinDate, "YYYY-MM-dd"),
-      check_out: this.datepipe.transform(this.checkoutDate, "YYYY-MM-dd"),
+      check_in: this.datepipe.transform(this.checkinDate, 'YYYY-MM-dd'),
+      check_out: this.datepipe.transform(this.checkoutDate, 'YYYY-MM-dd'),
       no_of_guests: this.getTotalGuest(),
       guests: {
         adults: this.selectOption?.find((n: any) => n?.id === 1)?.total || 0,
@@ -387,13 +388,13 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
               err?.error?.msg ||
               err?.error?.detail ||
               err?.error?.status ||
-              "An error occured!",
-            "x",
+              'An error occured!',
+            'x',
             {
               duration: 5000,
-              panelClass: "error",
-              horizontalPosition: "center",
-              verticalPosition: "top",
+              panelClass: 'error',
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
             }
           );
         }
@@ -402,7 +403,7 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
 
   configurePaymentOption(data: any) {
     Object.assign(data, this.configurePaymentData());
-    this.openDialog(data, "card");
+    this.openDialog(data, 'card');
   }
 
   createBooking() {
@@ -411,8 +412,8 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
     const dataToSend = {
       listing_uuid: this.data?.uuid,
       amount: this.getTotalAmount(),
-      check_in: this.datepipe.transform(this.checkinDate, "YYYY-MM-dd"),
-      check_out: this.datepipe.transform(this.checkoutDate, "YYYY-MM-dd"),
+      check_in: this.datepipe.transform(this.checkinDate, 'YYYY-MM-dd'),
+      check_out: this.datepipe.transform(this.checkoutDate, 'YYYY-MM-dd'),
       no_of_guests: this.getTotalGuest(),
       guests: {
         adults: this.selectOption?.find((n: any) => n?.id === 1)?.total || 0,
@@ -427,11 +428,11 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
         if (data?.data?.url && this.data?.is_instant_bookable !== 0) {
           this.configurePaymentOption(data?.data);
         } else {
-          this.snackBar.open("Request sent successfully", "x", {
+          this.snackBar.open('Request sent successfully', 'x', {
             duration: 3000,
-            panelClass: "success",
-            horizontalPosition: "center",
-            verticalPosition: "top",
+            panelClass: 'success',
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
           });
           this.viewRequestToBook();
         }
@@ -443,13 +444,13 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
             err?.error?.msg ||
             err?.error?.detail ||
             err?.error?.status ||
-            "An error occured!",
-          "x",
+            'An error occured!',
+          'x',
           {
             duration: 5000,
-            panelClass: "error",
-            horizontalPosition: "center",
-            verticalPosition: "top",
+            panelClass: 'error',
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
           }
         );
       }
@@ -459,8 +460,8 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
   viewRequestToBook() {
     const data2: any = {
       data: {
-        check_in: this.datepipe.transform(this.checkinDate, "YYYY-MM-dd"),
-        check_out: this.datepipe.transform(this.checkoutDate, "YYYY-MM-dd"),
+        check_in: this.datepipe.transform(this.checkinDate, 'YYYY-MM-dd'),
+        check_out: this.datepipe.transform(this.checkoutDate, 'YYYY-MM-dd'),
         price_per_night: this.data?.price_per_night,
         total_guests: this.getTotalGuest(),
         total: this.getTotalAmount(),
@@ -473,11 +474,11 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
       },
     };
 
-    this.router.navigate(["/booking-preview", btoa(JSON.stringify(data2))]);
+    this.router.navigate(['/booking-preview', btoa(JSON.stringify(data2))]);
   }
 
   getDatesBlockByHost() {
-    console.log("date comp", this.data);
+    console.log('date comp', this.data);
   }
 
   ngOnInit(): void {
