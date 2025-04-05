@@ -239,11 +239,11 @@ export class AccommodationDetailFormComponent implements OnDestroy, OnInit {
   }
 
   getServiceChargeAmount(data: any) {
-    const tax = (data?.payment_breakdown?.service_fee || 6) / 100;
-    const serviceCharge =
+    const serviceCharge = (data?.payment_breakdown?.service_fee || 6) / 100;
+    const amount =
       data?.price_per_night *
       (this.getNumberOfNight() || this.data?.minimum_nights);
-    return serviceCharge * tax;
+    return serviceCharge * amount;
   }
 
   getTotalAmount() {

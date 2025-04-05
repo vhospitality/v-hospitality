@@ -16,7 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ImageModule } from 'primeng/image';
 import { RatingModule } from 'primeng/rating';
@@ -74,14 +74,25 @@ export class ApartmentsComponent implements AfterViewInit {
   isLogin: boolean = false;
   clickEventSubscription?: Subscription;
   filterObject: any = {};
+  country: string | undefined;
 
   constructor(
     private httpService: HttpService,
     private authService: AuthService,
     private service: ToggleNavService,
     private snackBar: MatSnackBar,
+    private direct: ActivatedRoute,
+
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
+
+  ngOnInit(): void {
+    this.direct.queryParams.subscribe((params: any) => {
+      this.country = params.country;
+      console.log('params comp', params.country);
+    });
+    (window as any).fbq('track', 'ViewContent');
+  }
 
   ngAfterViewInit(): void {
     this.isLogin = this.authService.isLoggedIn();
@@ -129,7 +140,9 @@ export class ApartmentsComponent implements AfterViewInit {
     this.httpService
       .getSingleNoAuth(
         baseUrl.listing +
-          `/?include=reviews_count,collection,media&fields[listings]=uuid,title,amenities,apt_suite,available_from,available_to,check_in,check_out,city,cleaning_fee,collection_id,country,created_at,description,house_rules,is_instant_bookable,latitude,longitude,maximum_nights,minimum_nights,no_of_bedrooms,no_of_beds,no_of_dedicated_bathroom,no_of_guests,no_of_private_bathroom,no_of_shared_bathroom,occupancy_taxes,price_per_night,state,status,street_address,title,type,updated_at,user_id,uuid,zipcode&fields&fields[collection]=name,uuid&per_page=${this.perPage}&${url}`
+          `/?include=reviews_count,collection,media&fields[listings]=uuid,title,amenities,apt_suite,available_from,available_to,check_in,check_out,city,cleaning_fee,collection_id,country,created_at,description,house_rules,is_instant_bookable,latitude,longitude,maximum_nights,minimum_nights,no_of_bedrooms,no_of_beds,no_of_dedicated_bathroom,no_of_guests,no_of_private_bathroom,no_of_shared_bathroom,occupancy_taxes,price_per_night,state,status,street_address,title,type,updated_at,user_id,uuid,zipcode&fields&fields[collection]=name,uuid&per_page=${
+            this.perPage
+          }&${url}${this.country ? '&filter[country]=' + this.country : ''}`
       )
       .subscribe(
         (data: any) => {
