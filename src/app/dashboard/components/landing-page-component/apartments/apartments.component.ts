@@ -97,7 +97,11 @@ export class ApartmentsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.isLogin = this.authService.isLoggedIn();
 
+    this.getApartments();
+
     let apartments: any = this.service.getApartmentMessage();
+
+    console.log('apartments', apartments);
     if (apartments) {
       this.datas = apartments;
       this.datas3 = apartments;
@@ -105,7 +109,7 @@ export class ApartmentsComponent implements AfterViewInit {
       this.total = apartments?.length || 0;
       this.total2 = apartments?.length || 0;
     } else {
-      this.getApartments();
+      // this.getApartments();
     }
 
     this.clickEventSubscription = this.service
